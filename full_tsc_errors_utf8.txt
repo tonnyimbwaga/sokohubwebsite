@@ -1,0 +1,313 @@
+﻿.next/types/app/admin/analytics/page.ts(2,24): error TS2307: Cannot find module '../../../../../src/app/admin/analytics/page.js' or its corresponding type declarations.
+.next/types/app/admin/analytics/page.ts(5,29): error TS2307: Cannot find module '../../../../../src/app/admin/analytics/page.js' or its corresponding type declarations.
+.next/types/app/api/analytics/route.ts(2,24): error TS2307: Cannot find module '../../../../../src/app/api/analytics/route.js' or its corresponding type declarations.
+.next/types/app/api/analytics/route.ts(5,29): error TS2307: Cannot find module '../../../../../src/app/api/analytics/route.js' or its corresponding type declarations.
+.next/types/app/blog/page.ts(34,29): error TS2344: Type '{ searchParams: { page?: string | undefined; category?: string | undefined; }; }' does not satisfy the constraint 'PageProps'.
+  Types of property 'searchParams' are incompatible.
+    Type '{ page?: string | undefined; category?: string | undefined; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+open-next.config.ts(5,9): error TS2353: Object literal may only specify known properties, and 'buildCommand' does not exist in type 'FunctionOptions'.
+src/app/admin/blog-authors/blog-author-form.tsx(55,21): error TS2345: Argument of type '{ full_name: string; email: string | undefined; bio: string | undefined; avatar_url: string | undefined; updated_at: string; }' is not assignable to parameter of type 'never'.
+src/app/admin/blog-authors/blog-author-form.tsx(78,21): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "blog_authors", never, "POST">', gave the following error.
+    Argument of type '{ id: string; full_name: string; email: string | undefined; bio: string | undefined; avatar_url: string | undefined; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "blog_authors", never, "POST">', gave the following error.
+    Argument of type '{ id: string; full_name: string; email: string | undefined; bio: string | undefined; avatar_url: string | undefined; }' is not assignable to parameter of type 'never[]'.
+      Type '{ id: string; full_name: string; email: string | undefined; bio: string | undefined; avatar_url: string | undefined; }' is missing the following properties from type 'never[]': length, pop, push, concat, and 35 more.
+src/app/admin/blog-authors/page.tsx(3,20): error TS6133: 'useEffect' is declared but its value is never read.
+src/app/admin/blog-authors/page.tsx(26,16): error TS6133: 'setPage' is declared but its value is never read.
+src/app/admin/blog-authors/page.tsx(93,9): error TS6133: 'handleFormSuccess' is declared but its value is never read.
+src/app/admin/blog/blog-form.tsx(99,52): error TS2339: Property 'id' does not exist on type 'never'.
+src/app/admin/blog/blog-form.tsx(127,21): error TS2345: Argument of type '{ updated_at: string; title: string; slug: string; excerpt: string; content: string; featured_image?: string | undefined; meta_title?: string | undefined; meta_description?: string | undefined; status: "draft" | "published"; published_at?: string | ... 1 more ... | undefined; author_id: string; }' is not assignable to parameter of type 'never'.
+src/app/admin/blog/blog-form.tsx(132,17): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "blog_posts", never, "POST">', gave the following error.
+    Argument of type '{ id: string; created_at: string; updated_at: string; author_id: string | undefined; title: string; slug: string; excerpt: string; content: string; featured_image?: string | undefined; meta_title?: string | undefined; meta_description?: string | undefined; status: "draft" | "published"; published_at?: string | ... 1...' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "blog_posts", never, "POST">', gave the following error.
+    Object literal may only specify known properties, and 'id' does not exist in type 'never[]'.
+src/app/admin/blog/blog-form.tsx(160,19): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "blog_posts_categories", never, "POST">', gave the following error.
+    Argument of type '{ post_id: string; category_id: string; }[]' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "blog_posts_categories", never, "POST">', gave the following error.
+    Argument of type '{ post_id: string; category_id: string; }[]' is not assignable to parameter of type 'never[]'.
+      Type '{ post_id: string; category_id: string; }' is not assignable to type 'never'.
+src/app/admin/blog/blog-form.tsx(232,35): error TS2339: Property 'id' does not exist on type 'never'.
+src/app/admin/blog/blog-form.tsx(232,53): error TS2339: Property 'id' does not exist on type 'never'.
+src/app/admin/blog/blog-form.tsx(233,25): error TS2339: Property 'full_name' does not exist on type 'never'.
+src/app/admin/blog/blog-form.tsx(365,34): error TS2339: Property 'id' does not exist on type 'never'.
+src/app/admin/blog/blog-form.tsx(368,33): error TS2339: Property 'id' does not exist on type 'never'.
+src/app/admin/blog/blog-form.tsx(372,31): error TS2339: Property 'name' does not exist on type 'never'.
+src/app/admin/categories/page.tsx(6,1): error TS6133: 'Heading' is declared but its value is never read.
+src/app/admin/categories/page.tsx(81,31): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "categories", never, "POST">', gave the following error.
+    Argument of type '{ name: string; slug: string; description: string; image_url: string; meta_title: string; meta_description: string; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "categories", never, "POST">', gave the following error.
+    Object literal may only specify known properties, and 'name' does not exist in type 'never[]'.
+src/app/admin/categories/page.tsx(120,17): error TS2345: Argument of type '{ name: string; slug: string; description: string | null; image_url: string | null; meta_title: string | undefined; meta_description: string | undefined; }' is not assignable to parameter of type 'never'.
+src/app/admin/deals/page.tsx(111,19): error TS2339: Property 'compare_at_price' does not exist on type 'never'.
+src/app/admin/deals/page.tsx(111,47): error TS2339: Property 'price' does not exist on type 'never'.
+src/app/admin/deals/page.tsx(112,25): error TS2339: Property 'compare_at_price' does not exist on type 'never'.
+src/app/admin/deals/page.tsx(112,52): error TS2339: Property 'price' does not exist on type 'never'.
+src/app/admin/deals/page.tsx(113,25): error TS2339: Property 'compare_at_price' does not exist on type 'never'.
+src/app/admin/deals/page.tsx(118,11): error TS2698: Spread types may only be created from object types.
+src/app/admin/deals/page.tsx(139,17): error TS2345: Argument of type '{ is_deal: boolean; deal_order: number | null | undefined; }' is not assignable to parameter of type 'never'.
+src/app/admin/deals/page.tsx(153,71): error TS2345: Argument of type '{ updates: { id: string; deal_order: number; }[]; }' is not assignable to parameter of type 'undefined'.
+src/app/admin/deals/page.tsx(162,21): error TS2345: Argument of type '{ deal_order: number; }' is not assignable to parameter of type 'never'.
+src/app/admin/featured/page.tsx(103,17): error TS2345: Argument of type '{ is_featured: boolean; featured_order: number | null | undefined; }' is not assignable to parameter of type 'never'.
+src/app/admin/featured/page.tsx(119,44): error TS2345: Argument of type '{ featured_order: number; }' is not assignable to parameter of type 'never'.
+src/app/admin/featured/page.tsx(136,47): error TS2345: Argument of type 'Product | undefined' is not assignable to parameter of type 'Product'.
+  Type 'undefined' is not assignable to type 'Product'.
+src/app/admin/orders/[id]/page.tsx(35,7): error TS6133: 'truncateTitle' is declared but its value is never read.
+src/app/admin/orders/[id]/page.tsx(44,24): error TS6133: 'setSelectedItem' is declared but its value is never read.
+src/app/admin/orders/page.tsx(163,26): error TS2339: Property 'id' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(175,54): error TS2339: Property 'id' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(178,33): error TS2339: Property 'id' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(181,41): error TS2339: Property 'created_at' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(195,36): error TS2339: Property 'id' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(196,42): error TS2339: Property 'status' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(220,30): error TS2339: Property 'customer_name' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(228,30): error TS2339: Property 'phone' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(236,30): error TS2339: Property 'delivery_zone' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(236,52): error TS2339: Property 'location' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(248,51): error TS2339: Property 'items' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(252,28): error TS2339: Property 'items' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(274,28): error TS2339: Property 'items' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(276,33): error TS2339: Property 'items' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(289,30): error TS2339: Property 'is_immediate_payment' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(290,29): error TS2339: Property 'discount_percentage' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(294,42): error TS2339: Property 'original_amount' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(297,42): error TS2339: Property 'discounted_amount' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(301,36): error TS2339: Property 'discount_percentage' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(305,38): error TS2339: Property 'total' does not exist on type 'never'.
+src/app/admin/orders/page.tsx(315,52): error TS2339: Property 'id' does not exist on type 'never'.
+src/app/admin/page.tsx(66,60): error TS2339: Property 'total' does not exist on type 'never'.
+src/app/admin/page.tsx(78,21): error TS2339: Property 'id' does not exist on type 'never'.
+src/app/admin/page.tsx(79,24): error TS2339: Property 'total' does not exist on type 'never'.
+src/app/admin/page.tsx(80,25): error TS2339: Property 'status' does not exist on type 'never'.
+src/app/admin/page.tsx(81,29): error TS2339: Property 'created_at' does not exist on type 'never'.
+src/app/admin/products/product-form.tsx(287,19): error TS2345: Argument of type '{ name: string; slug: string; description: string; price: number | null; compare_at_price: number | null | undefined; stock: number; category_id: string | null; status: "draft" | "active" | "archived"; ... 5 more ...; tags: string[] | undefined; }' is not assignable to parameter of type 'never'.
+src/app/admin/products/product-form.tsx(296,19): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "products", never, "POST">', gave the following error.
+    Argument of type '{ name: string; slug: string; description: string; price: number | null; compare_at_price: number | null | undefined; stock: number; category_id: string | null; status: "draft" | "active" | "archived"; ... 5 more ...; tags: string[] | undefined; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "products", never, "POST">', gave the following error.
+    Argument of type '{ name: string; slug: string; description: string; price: number | null; compare_at_price: number | null | undefined; stock: number; category_id: string | null; status: "draft" | "active" | "archived"; ... 5 more ...; tags: string[] | undefined; }' is not assignable to parameter of type 'never[]'.
+      Type '{ name: string; slug: string; description: string; price: number | null; compare_at_price: number | null | undefined; stock: number; category_id: string | null; status: "draft" | "active" | "archived"; ... 5 more ...; tags: string[] | undefined; }' is missing the following properties from type 'never[]': length, pop, push, concat, and 35 more.
+src/app/admin/products/product-form.tsx(301,32): error TS2339: Property 'id' does not exist on type 'never'.
+src/app/admin/products/product-form.tsx(315,11): error TS2345: Argument of type '{ p_product_id: any; p_category_ids: string[]; }' is not assignable to parameter of type 'undefined'.
+src/app/admin/products/product-form.tsx(333,11): error TS2345: Argument of type '{ p_product_id: any; p_category_ids: never[]; }' is not assignable to parameter of type 'undefined'.
+src/app/admin/trending/page.tsx(103,17): error TS2345: Argument of type '{ is_trending: boolean; trending_order: number | null | undefined; }' is not assignable to parameter of type 'never'.
+src/app/admin/trending/page.tsx(119,44): error TS2345: Argument of type '{ trending_order: number; }' is not assignable to parameter of type 'never'.
+src/app/api/admin/orders/[id]/payment-status/route.ts(17,13): error TS2345: Argument of type '{ payment_status: any; }' is not assignable to parameter of type 'never'.
+src/app/api/admin/orders/[id]/status/route.ts(3,1): error TS6133: 'NextRequest' is declared but its value is never read.
+src/app/api/admin/orders/[id]/status/route.ts(19,13): error TS2345: Argument of type '{ status: any; }' is not assignable to parameter of type 'never'.
+src/app/api/images/[...path]/route.ts(14,3): error TS6133: 'request' is declared but its value is never read.
+src/app/api/static-data/manifest/route.ts(2,1): error TS6133: 'generateStaticDataFiles' is declared but its value is never read.
+src/app/api/static-data/manifest/route.ts(7,27): error TS6133: 'request' is declared but its value is never read.
+src/app/faqs/FAQtab.tsx(6,10): error TS2305: Module '"@/data/content"' has no exported member 'faqs'.
+src/app/faqs/FAQtab.tsx(15,25): error TS7006: Parameter 'faq' implicitly has an 'any' type.
+src/app/faqs/FAQtab.tsx(32,25): error TS7006: Parameter 'faq' implicitly has an 'any' type.
+src/app/faqs/FAQtab.tsx(39,28): error TS7006: Parameter 'faqData' implicitly has an 'any' type.
+src/app/foldable-tables-for-sale-kenya/ImageGallery.tsx(131,38): error TS2532: Object is possibly 'undefined'.
+src/app/foldable-tables-for-sale-kenya/ImageGallery.tsx(132,22): error TS2532: Object is possibly 'undefined'.
+src/app/home/HomepageCategorySections.tsx(6,34): error TS6133: 'categoryName' is declared but its value is never read.
+src/app/home/SectionBestDeals.tsx(17,11): error TS6196: 'DatabaseProduct' is declared but never used.
+src/app/home/SectionBestDeals.tsx(83,15): error TS6133: 'discountPercentage' is declared but its value is never read.
+src/app/home/StaticHomepage.tsx(10,17): error TS6133: 'Suspense' is declared but its value is never read.
+src/app/order/[orderId]/page.tsx(5,1): error TS6133: 'Database' is declared but its value is never read.
+src/app/products/[productId]/ProductInfoTab.tsx(13,11): error TS2503: Cannot find namespace 'JSX'.
+src/app/products/[productId]/SectionProductHeader.tsx(18,10): error TS6133: 'PLACEHOLDER_IMAGE' is declared but its value is never read.
+src/app/products/[productId]/SectionProductInfo.tsx(10,11): error TS2503: Cannot find namespace 'JSX'.
+src/app/products/page.tsx(56,45): error TS2322: Type '{ id: string; slug: string; name: string; description: string; category: string; price: number; salePrice: number; images: string[]; ageRange: string; inStock: boolean; isNew: boolean; isFeatured: boolean; rating: number; reviews: number; sizes: { ...; }; isTrending?: undefined; } | { ...; }' is not assignable to type 'Product'.
+  Type '{ id: string; slug: string; name: string; description: string; category: string; price: number; salePrice: number; images: string[]; ageRange: string; inStock: boolean; isNew: boolean; isFeatured: boolean; rating: number; reviews: number; sizes: { ...; }; isTrending?: undefined; }' is missing the following properties from type 'Product': sku, categorySlug
+src/components/Admin/HeroSlideManager.tsx(87,17): error TS2345: Argument of type 'Partial<HeroSlide>' is not assignable to parameter of type 'never'.
+src/components/Admin/HeroSlideManager.tsx(96,31): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "hero_slides", never, "POST">', gave the following error.
+    Argument of type '{ display_order: number; id?: number | undefined; title?: string | undefined; subtitle?: string | undefined; image_url?: string | undefined; link_url?: string | undefined; button_text?: string | undefined; active?: boolean | undefined; }[]' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "hero_slides", never, "POST">', gave the following error.
+    Type '{ display_order: number; id?: number | undefined; title?: string | undefined; subtitle?: string | undefined; image_url?: string | undefined; link_url?: string | undefined; button_text?: string | undefined; active?: boolean | undefined; }' is not assignable to type 'never'.
+src/components/Admin/HeroSlideManager.tsx(130,17): error TS2345: Argument of type '{ display_order: number; }' is not assignable to parameter of type 'never'.
+src/components/AdminNotifications.tsx(38,10): error TS6133: 'subscription' is declared but its value is never read.
+src/components/BlogPost.tsx(44,29): error TS2339: Property 'meta_title' does not exist on type 'never'.
+src/components/BlogPost.tsx(44,48): error TS2339: Property 'title' does not exist on type 'never'.
+src/components/BlogPost.tsx(49,54): error TS2339: Property 'meta_description' does not exist on type 'never'.
+src/components/BlogPost.tsx(80,13): error TS2339: Property 'featured_image' does not exist on type 'never'.
+src/components/BlogPost.tsx(83,23): error TS2339: Property 'featured_image' does not exist on type 'never'.
+src/components/BlogPost.tsx(84,23): error TS2339: Property 'title' does not exist on type 'never'.
+src/components/BlogPost.tsx(90,67): error TS2339: Property 'title' does not exist on type 'never'.
+src/components/BlogPost.tsx(95,31): error TS2339: Property 'author' does not exist on type 'never'.
+src/components/BlogPost.tsx(95,47): error TS2339: Property 'author' does not exist on type 'never'.
+src/components/BlogPost.tsx(96,20): error TS2339: Property 'author' does not exist on type 'never'.
+src/components/BlogPost.tsx(97,27): error TS2339: Property 'author' does not exist on type 'never'.
+src/components/BlogPost.tsx(97,66): error TS2339: Property 'author' does not exist on type 'never'.
+src/components/BlogPost.tsx(98,21): error TS2339: Property 'author' does not exist on type 'never'.
+src/components/BlogPost.tsx(102,30): error TS2339: Property 'published_at' does not exist on type 'never'.
+src/components/BlogPost.tsx(103,17): error TS2339: Property 'published_at' does not exist on type 'never'.
+src/components/BlogPost.tsx(104,36): error TS2339: Property 'published_at' does not exist on type 'never'.
+src/components/BlogPost.tsx(111,62): error TS2339: Property 'content' does not exist on type 'never'.
+src/components/CartSideBar.tsx(11,10): error TS2305: Module '"@/data/content"' has no exported member 'shoes'.
+src/components/CartSideBar.tsx(12,15): error TS2305: Module '"@/data/types"' has no exported member 'ProductType'.
+src/components/CartSideBar.tsx(110,49): error TS7006: Parameter 'item' implicitly has an 'any' type.
+src/components/CartSideBar.tsx(154,23): error TS2339: Property 'Overlay' does not exist on type '_internal_ComponentDialog & { Panel: _internal_ComponentDialogPanel; Title: _internal_ComponentDialogTitle; Description: _internal_ComponentDialogDescription; }'.
+src/components/Filter.tsx(4,10): error TS2305: Module '"@/data/content"' has no exported member 'filters'.
+src/components/Filter.tsx(12,23): error TS7006: Parameter 'filter' implicitly has an 'any' type.
+src/components/Filter.tsx(14,26): error TS7006: Parameter 'item' implicitly has an 'any' type.
+src/components/Header/MenuBar.tsx(119,39): error TS2339: Property 'id' does not exist on type 'never'.
+src/components/Header/MenuBar.tsx(120,53): error TS2339: Property 'slug' does not exist on type 'never'.
+src/components/Header/MenuBar.tsx(124,35): error TS2339: Property 'name' does not exist on type 'never'.
+src/components/OptimizedImage.tsx(1,44): error TS6133: 'useRef' is declared but its value is never read.
+src/components/ProductCard.tsx(99,34): error TS6133: 'e' is declared but its value is never read.
+src/components/ProductGrid.tsx(97,13): error TS2739: Type 'TransformedProduct' is missing the following properties from type 'Product': categorySlug, inStock, isFeatured, rating, reviews
+src/components/PromoTag.tsx(3,10): error TS2305: Module '"@/data/content"' has no exported member 'promotionTag'.
+src/components/shared/RichTextEditor/RichTextEditor.tsx(3,38): error TS6133: 'useState' is declared but its value is never read.
+src/components/shared/RichTextEditor/RichTextEditor.tsx(3,48): error TS6133: 'useMemo' is declared but its value is never read.
+src/components/shared/RichTextEditor/RichTextEditor.tsx(19,1): error TS6133: 'uuidv4' is declared but its value is never read.
+src/components/shared/RichTextEditor/RichTextEditor.tsx(119,9): error TS6133: 'addImage' is declared but its value is never read.
+src/components/StickyAddToCartBar.tsx(26,3): error TS6133: 'selectedSize' is declared but its value is never read.
+src/components/StickyAddToCartBar.tsx(28,3): error TS6133: 'hasSizes' is declared but its value is never read.
+src/components/TopStrip/index.tsx(4,19): error TS6133: 'FaTruck' is declared but its value is never read.
+src/components/ui/calendar.tsx(54,9): error TS2353: Object literal may only specify known properties, and 'IconLeft' does not exist in type 'Partial<CustomComponents>'.
+src/components/ui/calendar.tsx(54,20): error TS7006: Parameter 'props' implicitly has an 'any' type.
+src/components/ui/calendar.tsx(55,21): error TS7006: Parameter 'props' implicitly has an 'any' type.
+src/components/ui/date-range-picker.tsx(5,10): error TS6133: 'addDays' is declared but its value is never read.
+src/components/UltraFastImage.tsx(4,3): error TS6133: 'generateResponsiveSrcSet' is declared but its value is never read.
+src/components/UltraFastImage.tsx(103,10): error TS2339: Property 'fetchPriority' does not exist on type 'HTMLLinkElement'.
+src/components/ViewAllCard.tsx(6,24): error TS6133: 'FiGrid' is declared but its value is never read.
+src/hooks/useAdminSessionTimeout.ts(56,31): error TS2339: Property 'role' does not exist on type 'never'.
+src/hooks/useOptimizedQuery.ts(2,10): error TS2724: '"@/lib/react-query"' has no exported member named 'CACHE_TIMES'. Did you mean 'CacheTime'?
+src/hooks/useOrders.ts(3,15): error TS2459: Module '"@/lib/supabase/orders"' declares 'OrderSubmissionInsert' locally, but it is not exported.
+src/hooks/useOrders.ts(30,20): error TS2339: Property 'createOrderSubmission' does not exist on type '{ getOrders: ({ page, status, }: { page?: number | undefined; status?: string | undefined; }) => Promise<{ orders: never[]; totalPages: number; totalOrders: number; }>; getOrderById: (id: string) => Promise<...>; }'.
+src/lib/dynamic-optimization.ts(11,8): error TS6133: 'StaticImageUrls' is declared but its value is never read.
+src/lib/dynamic-optimization.ts(192,3): error TS6133: 'updates' is declared but its value is never read.
+src/lib/orders.ts(66,29): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "orders", never, "POST">', gave the following error.
+    Argument of type '{ status: string; created_at: string; is_immediate_payment: boolean; discount_percentage: number; original_amount: number; discounted_amount: number; payment_status: string; payment_date: string | null; ... 11 more ...; id: string; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "orders", never, "POST">', gave the following error.
+    Object literal may only specify known properties, and 'status' does not exist in type 'never[]'.
+src/lib/orders.ts(163,15): error TS2339: Property 'id' does not exist on type 'never'.
+src/lib/orders.ts(164,26): error TS2339: Property 'customer_name' does not exist on type 'never'.
+src/lib/orders.ts(165,18): error TS2339: Property 'items' does not exist on type 'never'.
+src/lib/orders.ts(166,18): error TS2339: Property 'total' does not exist on type 'never'.
+src/lib/orders.ts(167,19): error TS2339: Property 'status' does not exist on type 'never'.
+src/lib/orders.ts(168,23): error TS2339: Property 'created_at' does not exist on type 'never'.
+src/lib/orders.ts(169,18): error TS2339: Property 'phone' does not exist on type 'never'.
+src/lib/orders.ts(170,26): error TS2339: Property 'delivery_zone' does not exist on type 'never'.
+src/lib/orders.ts(171,21): error TS2339: Property 'location' does not exist on type 'never'.
+src/lib/orders.ts(172,31): error TS2339: Property 'mpesa_phone_number' does not exist on type 'never'.
+src/lib/orders.ts(173,35): error TS2339: Property 'mpesa_transaction_code' does not exist on type 'never'.
+src/lib/orders.ts(174,33): error TS2339: Property 'is_immediate_payment' does not exist on type 'never'.
+src/lib/orders.ts(175,32): error TS2339: Property 'discount_percentage' does not exist on type 'never'.
+src/lib/orders.ts(176,28): error TS2339: Property 'original_amount' does not exist on type 'never'.
+src/lib/orders.ts(176,53): error TS2339: Property 'total' does not exist on type 'never'.
+src/lib/orders.ts(177,30): error TS2339: Property 'discounted_amount' does not exist on type 'never'.
+src/lib/orders.ts(177,57): error TS2339: Property 'total' does not exist on type 'never'.
+src/lib/orders.ts(178,27): error TS2339: Property 'payment_status' does not exist on type 'never'.
+src/lib/orders.ts(179,25): error TS2339: Property 'payment_date' does not exist on type 'never'.
+src/lib/orders.ts(180,28): error TS2339: Property 'order_confirmed' does not exist on type 'never'.
+src/lib/orders.ts(181,36): error TS2339: Property 'order_confirmation_date' does not exist on type 'never'.
+src/lib/orders.ts(189,15): error TS2345: Argument of type '{ order_confirmed: boolean; order_confirmation_date: string; }' is not assignable to parameter of type 'never'.
+src/lib/orders.ts(236,15): error TS2345: Argument of type '{ mpesa_phone_number: string | null; mpesa_transaction_code: string | null; is_immediate_payment: boolean; discount_percentage: number; original_amount: number; discounted_amount: number; payment_status: string; payment_date: string; }' is not assignable to parameter of type 'never'.
+src/lib/static-category-data.ts(93,42): error TS6133: 'directError' is declared but its value is never read.
+src/lib/static-category-data.ts(110,35): error TS2339: Property 'id' does not exist on type 'never'.
+src/lib/static-category-data.ts(120,35): error TS2339: Property 'id' does not exist on type 'never'.
+src/lib/static-data-layer.ts(228,44): error TS2339: Property 'category' does not exist on type 'never'.
+src/lib/static-data-layer.ts(229,17): error TS2339: Property 'category' does not exist on type 'never'.
+src/lib/static-data-layer.ts(230,17): error TS2339: Property 'category' does not exist on type 'never'.
+src/lib/static-data-layer.ts(232,15): error TS2339: Property 'images' does not exist on type 'never'.
+src/lib/static-data-layer.ts(232,53): error TS2339: Property 'images' does not exist on type 'never'.
+src/lib/static-data-layer.ts(246,19): error TS2339: Property 'id' does not exist on type 'never'.
+src/lib/static-data-layer.ts(247,21): error TS2339: Property 'name' does not exist on type 'never'.
+src/lib/static-data-layer.ts(248,28): error TS2339: Property 'description' does not exist on type 'never'.
+src/lib/static-data-layer.ts(249,22): error TS2339: Property 'price' does not exist on type 'never'.
+src/lib/static-data-layer.ts(250,31): error TS2339: Property 'compare_at_price' does not exist on type 'never'.
+src/lib/static-data-layer.ts(251,21): error TS2339: Property 'slug' does not exist on type 'never'.
+src/lib/static-data-layer.ts(257,27): error TS2339: Property 'images' does not exist on type 'never'.
+src/lib/static-data-layer.ts(273,27): error TS2339: Property 'id' does not exist on type 'never'.
+src/lib/static-data-layer.ts(277,28): error TS2339: Property 'id' does not exist on type 'never'.
+src/lib/static-data-layer.ts(280,17): error TS2339: Property 'is_featured' does not exist on type 'never'.
+src/lib/static-data-layer.ts(281,41): error TS2339: Property 'id' does not exist on type 'never'.
+src/lib/static-data-layer.ts(283,17): error TS2339: Property 'is_trending' does not exist on type 'never'.
+src/lib/static-data-layer.ts(284,41): error TS2339: Property 'id' does not exist on type 'never'.
+src/lib/static-data-layer.ts(286,17): error TS2339: Property 'compare_at_price' does not exist on type 'never'.
+src/lib/static-data-layer.ts(286,45): error TS2339: Property 'price' does not exist on type 'never'.
+src/lib/static-data-layer.ts(286,61): error TS2339: Property 'compare_at_price' does not exist on type 'never'.
+src/lib/static-data-layer.ts(287,42): error TS2339: Property 'id' does not exist on type 'never'.
+src/lib/static-data-layer.ts(291,40): error TS2339: Property 'created_at' does not exist on type 'never'.
+src/lib/static-data-layer.ts(294,44): error TS2339: Property 'id' does not exist on type 'never'.
+src/lib/static-data-layer.ts(308,55): error TS2339: Property 'id' does not exist on type 'never'.
+src/lib/static-data-layer.ts(309,19): error TS2339: Property 'is_featured' does not exist on type 'never'.
+src/lib/static-data-layer.ts(310,63): error TS2339: Property 'id' does not exist on type 'never'.
+src/lib/supabase/blog-posts.ts(135,15): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "blog_posts", never, "POST">', gave the following error.
+    Argument of type '{ id?: string | undefined; title: string; content: string; excerpt: string; featured_image?: string | null | undefined; is_published?: boolean | undefined; author_id: string; slug: string; ... 5 more ...; updated_at?: string | undefined; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "blog_posts", never, "POST">', gave the following error.
+    Argument of type '{ id?: string | undefined; title: string; content: string; excerpt: string; featured_image?: string | null | undefined; is_published?: boolean | undefined; author_id: string; slug: string; ... 5 more ...; updated_at?: string | undefined; }' is not assignable to parameter of type 'never[]'.
+      Type '{ id?: string | undefined; title: string; content: string; excerpt: string; featured_image?: string | null | undefined; is_published?: boolean | undefined; author_id: string; slug: string; ... 5 more ...; updated_at?: string | undefined; }' is missing the following properties from type 'never[]': length, pop, push, concat, and 35 more.
+src/lib/supabase/blog-posts.ts(151,15): error TS2345: Argument of type '{ id?: string | undefined; title?: string | undefined; content?: string | undefined; excerpt?: string | undefined; featured_image?: string | null | undefined; is_published?: boolean | undefined; ... 7 more ...; updated_at?: string | undefined; }' is not assignable to parameter of type 'never'.
+src/lib/supabase/categories-homepage.server.ts(114,50): error TS6133: 'directError' is declared but its value is never read.
+src/lib/supabase/categories.ts(71,35): error TS2339: Property 'id' does not exist on type 'never'.
+src/lib/supabase/categories.ts(83,25): error TS2339: Property 'product' does not exist on type 'never'.
+src/lib/supabase/categories.ts(96,7): error TS2698: Spread types may only be created from object types.
+src/lib/supabase/categories.ts(143,35): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "categories", never, "POST">', gave the following error.
+    Argument of type '{ slug: string; meta_title: string; meta_description: string; id?: string | undefined; name: string; description?: string | null | undefined; image_url?: string | null | undefined; is_active?: boolean | undefined; parent_id?: string | ... 1 more ... | undefined; metadata?: Record<...> | ... 1 more ... | undefined; c...' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "categories", never, "POST">', gave the following error.
+    Object literal may only specify known properties, and 'slug' does not exist in type 'never[]'.
+src/lib/supabase/categories.ts(179,15): error TS2345: Argument of type '{ updated_at: string; slug?: string | undefined; meta_title?: string | undefined; meta_description?: string | undefined; id?: string | undefined; name?: string | undefined; description?: string | ... 1 more ... | undefined; ... 4 more ...; created_at?: string | undefined; }' is not assignable to parameter of type 'never'.
+src/lib/supabase/orders.ts(2,1): error TS6133: 'Database' is declared but its value is never read.
+src/lib/supabase/orders.ts(6,6): error TS6196: 'OrderSubmissionInsert' is declared but never used.
+src/lib/supabase/orders.ts(73,15): error TS2345: Argument of type '{ status: string; }' is not assignable to parameter of type 'never'.
+src/lib/supabase/product-categories.ts(33,27): error TS2339: Property 'category' does not exist on type 'never'.
+src/lib/supabase/product-categories.ts(41,35): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "product_categories", never, "POST">', gave the following error.
+    Argument of type '{ product_id: string; category_id: string; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "product_categories", never, "POST">', gave the following error.
+    Object literal may only specify known properties, and 'product_id' does not exist in type 'never[]'.
+src/lib/supabase/product-categories.ts(104,15): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "product_categories", never, "POST">', gave the following error.
+    Argument of type '{ product_id: string; category_id: string; }[]' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "product_categories", never, "POST">', gave the following error.
+    Argument of type '{ product_id: string; category_id: string; }[]' is not assignable to parameter of type 'never[]'.
+      Type '{ product_id: string; category_id: string; }' is not assignable to type 'never'.
+src/lib/supabase/product-categories.ts(154,27): error TS2339: Property 'product' does not exist on type 'never'.
+src/lib/supabase/product-queries.ts(78,41): error TS2339: Property 'category' does not exist on type 'never'.
+src/lib/supabase/product-queries.ts(79,14): error TS2339: Property 'category' does not exist on type 'never'.
+src/lib/supabase/product-queries.ts(80,14): error TS2339: Property 'category' does not exist on type 'never'.
+src/lib/supabase/product-queries.ts(86,34): error TS2339: Property 'images' does not exist on type 'never'.
+src/lib/supabase/product-queries.ts(87,21): error TS2339: Property 'stock' does not exist on type 'never'.
+src/lib/supabase/products.ts(340,15): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "products", never, "POST">', gave the following error.
+    Argument of type '{ id?: string | undefined; name: string; slug: string; description: string; price: number; compare_at_price?: number | null | undefined; cost_price?: number | null | undefined; sku?: string | null | undefined; ... 9 more ...; updated_at?: string | undefined; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "products", never, "POST">', gave the following error.
+    Argument of type '{ id?: string | undefined; name: string; slug: string; description: string; price: number; compare_at_price?: number | null | undefined; cost_price?: number | null | undefined; sku?: string | null | undefined; ... 9 more ...; updated_at?: string | undefined; }' is not assignable to parameter of type 'never[]'.
+      Type '{ id?: string | undefined; name: string; slug: string; description: string; price: number; compare_at_price?: number | null | undefined; cost_price?: number | null | undefined; sku?: string | null | undefined; ... 9 more ...; updated_at?: string | undefined; }' is missing the following properties from type 'never[]': length, pop, push, concat, and 35 more.
+src/lib/supabase/products.ts(356,15): error TS2345: Argument of type '{ id?: string | undefined; name?: string | undefined; slug?: string | undefined; description?: string | undefined; price?: number | undefined; compare_at_price?: number | null | undefined; ... 11 more ...; updated_at?: string | undefined; }' is not assignable to parameter of type 'never'.
+src/lib/supabase/products.ts(381,35): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "product_categories", never, "POST">', gave the following error.
+    Argument of type '{ product_id: string; category_id: string; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "product_categories", never, "POST">', gave the following error.
+    Object literal may only specify known properties, and 'product_id' does not exist in type 'never[]'.
+src/lib/supabase/products.ts(437,17): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "product_categories", never, "POST">', gave the following error.
+    Argument of type '{ product_id: string; category_id: string; }[]' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "product_categories", never, "POST">', gave the following error.
+    Argument of type '{ product_id: string; category_id: string; }[]' is not assignable to parameter of type 'never[]'.
+      Type '{ product_id: string; category_id: string; }' is not assignable to type 'never'.
+src/lib/supabase/products.ts(450,74): error TS2345: Argument of type '{ product_id: string; }' is not assignable to parameter of type 'undefined'.
+src/lib/supabase/query-utils.ts(30,10): error TS2707: Generic type 'PostgrestFilterBuilder<ClientOptions, Schema, Row, Result$1, RelationName, Relationships, Method>' requires between 4 and 7 type arguments.
+src/lib/supabase/query-utils.ts(32,4): error TS2707: Generic type 'PostgrestTransformBuilder<ClientOptions, Schema, Row, Result$1, RelationName, Relationships, Method>' requires between 4 and 7 type arguments.
+src/lib/supabase/query-utils.ts(59,10): error TS2707: Generic type 'PostgrestFilterBuilder<ClientOptions, Schema, Row, Result$1, RelationName, Relationships, Method>' requires between 4 and 7 type arguments.
+src/lib/supabase/query-utils.ts(62,4): error TS2707: Generic type 'PostgrestFilterBuilder<ClientOptions, Schema, Row, Result$1, RelationName, Relationships, Method>' requires between 4 and 7 type arguments.
+src/proxy.ts(26,30): error TS6133: 'options' is declared but its value is never read.
+src/utils/product-images.ts(8,7): error TS6133: 'IMAGE_CONFIG' is declared but its value is never read.
+src/utils/product-images.ts(20,11): error TS6196: 'ImageOptions' is declared but never used.
+src/utils/product-images.ts(77,5): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+src/utils/product-images.ts(98,3): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+src/utils/product-images.ts(160,10): error TS2339: Property 'fetchPriority' does not exist on type 'HTMLLinkElement'.
+src/utils/product-images.ts(219,32): error TS6133: 'images' is declared but its value is never read.
+src/utils/product-images.ts(219,45): error TS6133: 'productName' is declared but its value is never read.
+src/utils/request-optimization.ts(187,17): error TS6133: 'key' is declared but its value is never read.
+src/utils/sanitizeHTML.ts(31,45): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Object literal may only specify known properties, but 'mathml' does not exist in type 'UseProfilesConfig'. Did you mean to write 'mathMl'?
+src/utils/static-image-generator.ts(20,7): error TS6133: 'IMAGE_VARIANTS' is declared but its value is never read.
+src/utils/static-image-generator.ts(149,3): error TS6133: 'context' is declared but its value is never read.
