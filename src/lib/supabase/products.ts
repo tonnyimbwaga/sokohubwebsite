@@ -34,7 +34,8 @@ export const productQueries = {
     maxPrice,
     sort = "newest",
     viewMode = "full",
-  }: GetProductsParams = {}) => {
+  }: GetProductsParams = {}, providedSupabase?: any) => {
+    const client = providedSupabase || supabase;
     const selectFull = `
       id,
       name,
@@ -66,7 +67,7 @@ export const productQueries = {
       tags
     `;
 
-    let query = supabase
+    let query = client
       .from("products")
       .select(viewMode === "card" ? selectCard : selectFull, { count: "exact" })
       .eq("is_published", true)
@@ -130,8 +131,9 @@ export const productQueries = {
   },
 
   // Get a single product by slug
-  getProductBySlug: async (slug: string) => {
-    const { data: product, error } = await supabase
+  getProductBySlug: async (slug: string, providedSupabase?: any) => {
+    const client = providedSupabase || supabase;
+    const { data: product, error } = await client
       .from("products")
       .select(
         `
@@ -167,8 +169,9 @@ export const productQueries = {
   },
 
   // Get new arrivals (most recent products)
-  getNewArrivals: async (limit = 8) => {
-    const { data: products, error } = await supabase
+  getNewArrivals: async (limit = 8, providedSupabase?: any) => {
+    const client = providedSupabase || supabase;
+    const { data: products, error } = await client
       .from("products")
       .select(
         `
@@ -203,14 +206,9 @@ export const productQueries = {
   },
 
   // Get products on sale/deals - Automated by discount
-  getDeals: async (limit = 8) => {
-    // We select products where compare_at_price > price
-    // Note: PostgREST doesn't support complex calculations in ORDER BY easily via the JS client
-    // for calculated columns unless defined in the view or using raw SQL.
-    // However, we can sort by compare_at_price DESC as a proxy or fetch and sort in memory if limit is small.
-    // Given Supabase free tier, let's keep it simple: fetch products marked as deals or with compare_at_price.
-
-    const { data: products, error } = await supabase
+  getDeals: async (limit = 8, providedSupabase?: any) => {
+    const client = providedSupabase || supabase;
+    const { data: products, error } = await client
       .from("products")
       .select(
         `
@@ -251,8 +249,9 @@ export const productQueries = {
   },
 
   // Get trending products
-  getTrendingProducts: async (limit = 8) => {
-    const { data: products, error } = await supabase
+  getTrendingProducts: async (limit = 8, providedSupabase?: any) => {
+    const client = providedSupabase || supabase;
+    const { data: products, error } = await client
       .from("products")
       .select(
         `
@@ -290,8 +289,9 @@ export const productQueries = {
   },
 
   // Search products
-  searchProducts: async (query: string, limit = 10) => {
-    const { data: products, error } = await supabase
+  searchProducts: async (query: string, limit = 10, providedSupabase?: any) => {
+    const client = providedSupabase || supabase;
+    const { data: products, error } = await client
       .from("products")
       .select(
         `

@@ -109,7 +109,7 @@ export default function ProductsPage() {
           images,
           sizes,
           tags,
-          category:categories(id, name),
+          category:categories!products_category_id_fkey(id, name),
           product_categories(category_id, categories(id, name))
         `,
         )
@@ -288,13 +288,12 @@ export default function ProductsPage() {
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
                       <span
-                        className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
-                          product.status === "active"
+                        className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${product.status === "active"
                             ? "bg-emerald-100 text-emerald-800"
                             : product.status === "draft"
-                            ? "bg-slate-100 text-slate-800"
-                            : "bg-red-100 text-red-800"
-                        }`}
+                              ? "bg-slate-100 text-slate-800"
+                              : "bg-red-100 text-red-800"
+                          }`}
                       >
                         {product.status}
                       </span>
@@ -338,25 +337,25 @@ export default function ProductsPage() {
                 product={
                   selectedProduct
                     ? {
-                        ...selectedProduct,
-                        slug:
-                          selectedProduct.slug ||
-                          generateSlug(selectedProduct.name),
-                        category_ids: selectedProduct.category_ids || [],
-                        compare_at_price:
-                          selectedProduct.compare_at_price || null,
-                        images: Array.isArray(selectedProduct.images)
-                          ? (selectedProduct.images as any[]).map((img) => ({
-                              web_image_url:
-                                img.web_image_url || img.webp_url || "",
-                              feed_image_url:
-                                img.feed_image_url || img.feed_url || "",
-                              alt: img.alt || "",
-                            }))
-                          : [],
-                        sizes: selectedProduct.sizes || [],
-                        tags: selectedProduct.tags || [],
-                      }
+                      ...selectedProduct,
+                      slug:
+                        selectedProduct.slug ||
+                        generateSlug(selectedProduct.name),
+                      category_ids: selectedProduct.category_ids || [],
+                      compare_at_price:
+                        selectedProduct.compare_at_price || null,
+                      images: Array.isArray(selectedProduct.images)
+                        ? (selectedProduct.images as any[]).map((img) => ({
+                          web_image_url:
+                            img.web_image_url || img.webp_url || "",
+                          feed_image_url:
+                            img.feed_image_url || img.feed_url || "",
+                          alt: img.alt || "",
+                        }))
+                        : [],
+                      sizes: selectedProduct.sizes || [],
+                      tags: selectedProduct.tags || [],
+                    }
                     : undefined
                 }
                 onClose={() => {
@@ -420,11 +419,10 @@ export default function ProductsPage() {
                     <button
                       key={pageNum}
                       onClick={() => setPage(pageNum)}
-                      className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold transition-all duration-200 ${
-                        pageNum === page
+                      className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold transition-all duration-200 ${pageNum === page
                           ? "z-10 bg-slate-900 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
                           : "text-slate-900 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus:z-20 focus:outline-offset-0"
-                      }`}
+                        }`}
                     >
                       {pageNum}
                     </button>

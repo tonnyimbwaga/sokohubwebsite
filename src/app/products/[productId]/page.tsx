@@ -20,7 +20,7 @@ export async function generateMetadata({
   const supabase = await createClient();
   const { data: product, error: productError } = await supabase
     .from("products")
-    .select("*, category:category_id(name, slug)")
+    .select("*, category:categories!products_category_id_fkey(name, slug)")
     .eq("status", "active")
     .eq("slug", slug)
     .single() as { data: any | null, error: any };

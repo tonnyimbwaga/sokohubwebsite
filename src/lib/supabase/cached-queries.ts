@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { productQueries } from "./products";
+import { getAdminClient } from "./admin";
 
 /**
  * Intelligent Caching Layer for Supabase Products
@@ -12,8 +13,9 @@ import { productQueries } from "./products";
 
 export const getCachedNewArrivals = unstable_cache(
     async (limit = 8) => {
+        const adminClient = getAdminClient();
         console.log("🔥 [Cache Miss] Fetching fresh New Arrivals from DB");
-        return productQueries.getNewArrivals(limit);
+        return productQueries.getNewArrivals(limit, adminClient);
     },
     ["new-arrivals"],
     {
@@ -24,8 +26,9 @@ export const getCachedNewArrivals = unstable_cache(
 
 export const getCachedFeaturedProducts = unstable_cache(
     async (limit = 8) => {
+        const adminClient = getAdminClient();
         console.log("🔥 [Cache Miss] Fetching fresh Featured Products from DB");
-        return productQueries.getFeaturedProducts(limit);
+        return productQueries.getProducts({ featured: true, limit: limit as any } as any, adminClient);
     },
     ["featured-products"],
     {
@@ -36,8 +39,9 @@ export const getCachedFeaturedProducts = unstable_cache(
 
 export const getCachedDeals = unstable_cache(
     async (limit = 8) => {
+        const adminClient = getAdminClient();
         console.log("🔥 [Cache Miss] Fetching fresh Deals from DB");
-        return productQueries.getDeals(limit);
+        return productQueries.getDeals(limit, adminClient);
     },
     ["product-deals"],
     {
@@ -48,8 +52,9 @@ export const getCachedDeals = unstable_cache(
 
 export const getCachedTrendingProducts = unstable_cache(
     async (limit = 8) => {
+        const adminClient = getAdminClient();
         console.log("🔥 [Cache Miss] Fetching fresh Trending Products from DB");
-        return productQueries.getTrendingProducts(limit);
+        return productQueries.getTrendingProducts(limit, adminClient);
     },
     ["trending-products"],
     {
@@ -60,8 +65,9 @@ export const getCachedTrendingProducts = unstable_cache(
 
 export const getCachedProductBySlug = (slug: string) => unstable_cache(
     async () => {
+        const adminClient = getAdminClient();
         console.log(`🔥 [Cache Miss] Fetching fresh product: ${slug}`);
-        return productQueries.getProductBySlug(slug);
+        return productQueries.getProductBySlug(slug, adminClient);
     },
     [`product-${slug}`],
     {
@@ -72,8 +78,9 @@ export const getCachedProductBySlug = (slug: string) => unstable_cache(
 
 export const getCachedProducts = (params: any) => unstable_cache(
     async () => {
+        const adminClient = getAdminClient();
         console.log("🔥 [Cache Miss] Fetching products with params:", params);
-        return productQueries.getProducts(params);
+        return productQueries.getProducts(params, adminClient);
     },
     [`products-list-${JSON.stringify(params)}`],
     {
@@ -84,8 +91,8 @@ export const getCachedProducts = (params: any) => unstable_cache(
 
 export const getCachedCategories = unstable_cache(
     async () => {
-        const { supabase } = await import("./client");
-        const { data } = await supabase.from("categories").select("name, slug, id").eq("is_active", true);
+        const adminClient = getAdminClient() || (await import("./client")).supabase;
+        const { data } = await adminClient.from("categories").select("name, slug, id").eq("is_active", true);
         return data || [];
     },
     ["categories-list"],
