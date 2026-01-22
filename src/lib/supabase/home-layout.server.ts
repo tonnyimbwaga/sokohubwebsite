@@ -1,9 +1,13 @@
-import { createClient } from "./server";
+import { createClient } from "@supabase/supabase-js";
 import { unstable_cache } from "next/cache";
 
 export const getHomeLayout = unstable_cache(
     async () => {
-        const supabase = await createClient();
+        // Use a direct client without cookies for cached data
+        const supabase = createClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL!,
+            process.env.SUPABASE_SERVICE_ROLE_KEY!
+        );
         const { data, error } = await supabase
             .from("home_layout")
             .select("*")
@@ -26,7 +30,11 @@ export const getHomeLayout = unstable_cache(
 
 export const getHeroSlides = unstable_cache(
     async () => {
-        const supabase = await createClient();
+        // Use a direct client without cookies for cached data
+        const supabase = createClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL!,
+            process.env.SUPABASE_SERVICE_ROLE_KEY!
+        );
         const { data, error } = await supabase
             .from("hero_slides")
             .select("*")
