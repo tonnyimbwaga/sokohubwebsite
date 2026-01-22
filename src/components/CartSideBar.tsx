@@ -57,7 +57,7 @@ const CartSideBar: React.FC<CartSideBarProps> = () => {
                   {category}
                 </span>
                 <div className="flex items-center gap-1">
-                  <MdStar className="text-yellow-400" />
+                  <MdStar className="text-emerald-500" />
                   <span className="text-sm">{rating}</span>
                 </div>
               </div>

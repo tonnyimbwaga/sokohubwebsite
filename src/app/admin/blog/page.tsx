@@ -261,11 +261,10 @@ export default function BlogPage() {
                   </td>
                   <td className="whitespace-nowrap px-6 py-4">
                     <span
-                      className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${
-                        post.status === "published"
+                      className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${post.status === "published"
                           ? "bg-green-100 text-green-800"
-                          : "bg-yellow-100 text-yellow-800"
-                      }`}
+                          : "bg-slate-100 text-slate-800"
+                        }`}
                     >
                       {post.status}
                     </span>
@@ -346,11 +345,10 @@ export default function BlogPage() {
                     <button
                       key={pageNum}
                       onClick={() => setPage(pageNum)}
-                      className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
-                        pageNum === page
+                      className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${pageNum === page
                           ? "z-10 bg-primary text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                           : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-                      }`}
+                        }`}
                     >
                       {pageNum}
                     </button>

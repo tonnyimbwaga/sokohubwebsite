@@ -3,9 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --primary-color: #FEEE00;
-  --primary-dark: #E6D700;
-  --secondary-color: #fdc021;
+  --primary-color: #1E293B;
+  /* Slate 800 */
+  --primary-dark: #0F172A;
+  /* Slate 900 */
+  --secondary-color: #10B981;
+  /* Emerald 500 */
 }
 
 html {
@@ -100,7 +103,7 @@ html {
 }
 
 .loader .circle {
-  --color: #fd5545;
+  --color: #10B981;
   --dim: 1.2rem;
   width: var(--dim);
   height: var(--dim);

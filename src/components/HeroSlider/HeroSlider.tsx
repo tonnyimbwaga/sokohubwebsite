@@ -72,7 +72,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
           <BsFire className="animate-pulse" /> HOT DEALS
         </motion.div>
         <motion.div
-          className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-xl flex items-center gap-1"
+          className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-xl flex items-center gap-1"
           animate={{ y: [0, -5, 0] }}
           transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
         >
@@ -85,11 +85,11 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         style={{
-          boxShadow: '0 0 60px rgba(254, 238, 0, 0.3), 0 20px 40px rgba(0,0,0,0.2)'
+          boxShadow: '0 0 60px rgba(16, 185, 129, 0.1), 0 20px 40px rgba(0,0,0,0.2)'
         }}
       >
         {/* Animated gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-transparent to-purple-600/20 z-10 pointer-events-none animate-pulse" />
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/10 via-transparent to-slate-600/10 z-10 pointer-events-none animate-pulse" />
 
         {/* Background images */}
         {slides.map((slide, index) => (
@@ -130,7 +130,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
             >
               {/* Badge above title */}
               <motion.div
-                className="inline-flex items-center gap-2 bg-primary text-black px-6 py-2 rounded-full font-bold text-sm shadow-lg"
+                className="inline-flex items-center gap-2 bg-secondary text-white px-6 py-2 rounded-full font-bold text-sm shadow-lg"
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
@@ -140,7 +140,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
               </motion.div>
 
               <h2 className="text-white text-2xl md:text-6xl font-black mb-2 md:mb-4 leading-tight tracking-tight drop-shadow-2xl">
-                <span className="bg-gradient-to-r from-primary via-yellow-300 to-primary bg-clip-text text-transparent animate-glow">
+                <span className="bg-gradient-to-r from-white via-emerald-200 to-white bg-clip-text text-transparent animate-glow">
                   {slides[currentIndex]?.title}
                 </span>
               </h2>
@@ -154,15 +154,15 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
               <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
                 <a
                   href={slides[currentIndex]?.link_url}
-                  className="group relative inline-flex items-center gap-2 bg-primary text-black px-8 py-4 rounded-full text-base md:text-xl font-black transition-all duration-300 hover:scale-110 shadow-2xl hover:shadow-primary/50 overflow-hidden"
+                  className="group relative inline-flex items-center gap-2 bg-emerald-500 text-white px-8 py-4 rounded-full text-base md:text-xl font-black transition-all duration-300 hover:scale-110 shadow-2xl hover:shadow-emerald-500/50 overflow-hidden"
                 >
-                  <span className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <span className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                   <span className="relative z-10">{slides[currentIndex]?.button_text}</span>
                   <BsLightningFill className="relative z-10 group-hover:animate-wiggle" />
                 </a>
 
-                <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm text-black px-6 py-3 rounded-full font-bold shadow-lg">
-                  <FaShippingFast className="text-primary" />
+                <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm text-slate-800 px-6 py-3 rounded-full font-bold shadow-lg">
+                  <FaShippingFast className="text-emerald-500" />
                   <span className="text-sm md:text-base">FREE DELIVERY</span>
                 </div>
               </div>
@@ -173,13 +173,13 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-30 bg-primary/90 text-black p-4 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-primary shadow-xl"
+          className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-30 bg-white/90 text-slate-800 p-4 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-white shadow-xl"
         >
           <BsChevronLeft size={24} className="font-bold" />
         </button>
         <button
           onClick={nextSlide}
-          className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-30 bg-primary/90 text-black p-4 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-primary shadow-xl"
+          className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-30 bg-white/90 text-slate-800 p-4 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-white shadow-xl"
         >
           <BsChevronRight size={24} className="font-bold" />
         </button>
@@ -191,7 +191,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
             initial={{ width: "0%" }}
             animate={{ width: "100%" }}
             transition={{ duration: 4, ease: "linear" }}
-            className="h-full bg-gradient-to-r from-primary via-yellow-300 to-primary shadow-lg shadow-primary/50"
+            className="h-full bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-400 shadow-lg shadow-emerald-500/50"
           />
         </div>
 
@@ -209,7 +209,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
           className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg"
           whileHover={{ scale: 1.05 }}
         >
-          <FaStar className="text-yellow-300" /> 5-Star Rated
+          <FaStar className="text-white" /> 5-Star Rated
         </motion.div>
         <motion.div
           className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg"

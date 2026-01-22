@@ -81,13 +81,13 @@ const SectionHeader = () => {
               onChange={handleInput}
               onKeyDown={handleKeyDown}
               placeholder="Search for products..."
-              className="rounded-l-md border border-gray-300 px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="rounded-l-md border border-gray-300 px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               onFocus={() => search && setShowDropdown(true)}
               onBlur={() => setTimeout(() => setShowDropdown(false), 120)}
             />
             <button
               onClick={handleIconClick}
-              className="rounded-r-md bg-primary px-4 py-2 text-white hover:bg-primary/90"
+              className="rounded-r-md bg-emerald-600 px-4 py-2 text-white hover:bg-emerald-700"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

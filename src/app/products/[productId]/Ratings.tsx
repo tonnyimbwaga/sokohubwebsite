@@ -51,7 +51,7 @@ const Ratings: FC<RatingsProps> = ({ rating, reviews }) => {
           {ratingDetails.map((ratingItem) => (
             <div key={ratingItem.title} className="flex items-center gap-2">
               <div className="flex items-center gap-1 font-medium">
-                <MdStar className="text-yellow-400" />
+                <MdStar className="text-emerald-500" />
                 {ratingItem.title}
               </div>
               <ProgressBar value={ratingItem.value} />

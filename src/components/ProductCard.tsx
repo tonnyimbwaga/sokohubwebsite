@@ -149,7 +149,7 @@ const ProductCard = ({
         tabIndex={0}
         aria-label={`View details for ${product.name}`}
         onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") handleCardClick(e as any);
+          if (e.key === "Enter" || e.key === " ") handleCardClick();
         }}
       >
         {/* Loading overlay when navigating */}
@@ -190,19 +190,19 @@ const ProductCard = ({
                 >
                   <path
                     d="M14 3C14 3 10 6 10 9.5C10 11.5 11 13 14 13C17 13 18 11.5 18 9.5C18 6 14 3 14 3Z"
-                    fill="#FDF000"
+                    fill="#10B981"
                   />
                   <path
                     d="M14 3C14 3 18 6 18 9.5C18 11.5 17 13 14 13C11 13 10 11.5 10 9.5C10 6 14 3 14 3Z"
-                    fill="#FEEE00"
+                    fill="#059669"
                   />
                   <path
                     d="M14 5C14 5 8 9 8 13C8 16.5 11 19 14 19C17 19 20 16.5 20 13C20 9 14 5 14 5Z"
-                    fill="#FDF000"
+                    fill="#10B981"
                   />
                   <path
                     d="M14 5C20 9 20 13 20 13C20 16.5 17 19 14 19C17 19 20 16.5 20 13C20 9 14 5 14 5Z"
-                    fill="#FEEE00"
+                    fill="#059669"
                     fillOpacity="0.8"
                   />
                 </svg>
@@ -278,7 +278,7 @@ const ProductCard = ({
                     : "hover:shadow-md active:translate-y-[1px]"
                   }
                   ${addCartStatus === "success"
-                    ? "bg-green-500 text-white"
+                    ? "bg-emerald-600 text-white"
                     : "bg-primary text-white"
                   }
                   disabled:opacity-60 disabled:cursor-not-allowed disabled:active:translate-y-0`}

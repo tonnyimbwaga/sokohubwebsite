@@ -40,3 +40,14 @@ export const categories: Category[] = [
     image: "/images/categories/creative.jpg",
   },
 ];
+export const headerSection = {
+  title: "Premium Toys for Kids",
+  heading: "Quality & Fun in Every Box",
+  description: "Discover a wide range of educational and creative toys for children of all ages.",
+  image: "/images/hero/hero-kids.jpg",
+};
+
+export const newsletter = {
+  heading: "Join Our Newsletter",
+  description: "Get updates on new arrivals and exclusive deals.",
+};

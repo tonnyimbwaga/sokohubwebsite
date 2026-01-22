@@ -106,9 +106,9 @@ const MainNav = () => {
 
   return (
     <>
-      <div className="bg-primary py-2.5 px-4 text-center overflow-hidden whitespace-nowrap border-b border-primary-dark/10">
-        <p className="text-sm font-bold text-slate-900 tracking-wide animate-pulse inline-flex items-center gap-2">
-          <span className="bg-slate-900 rounded-full px-2.5 py-0.5 text-[10px] uppercase text-white font-black">Flash</span>
+      <div className="bg-emerald-50 py-2.5 px-4 text-center overflow-hidden whitespace-nowrap border-b border-emerald-100">
+        <p className="text-sm font-bold text-emerald-900 tracking-wide inline-flex items-center gap-2">
+          <span className="bg-emerald-600 rounded-full px-2.5 py-0.5 text-[10px] uppercase text-white font-black">Flash</span>
           ⚡ Cash on Delivery / Payment after delivery available in Nairobi! ⚡
         </p>
       </div>
@@ -166,7 +166,7 @@ const MainNav = () => {
             <AnimatePresence>
               {itemCount > 0 && (
                 <motion.span
-                  className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-medium text-white"
+                  className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-secondary text-xs font-medium text-white shadow-sm"
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0 }}
