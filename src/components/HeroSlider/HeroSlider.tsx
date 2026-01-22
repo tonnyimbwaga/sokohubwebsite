@@ -6,6 +6,7 @@ import { BsChevronLeft, BsChevronRight, BsLightningFill, BsFire } from "react-ic
 import { FaStar, FaShippingFast } from "react-icons/fa";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import Link from "next/link";
 import { getProductImageUrl } from "@/utils/product-images";
 
 interface HeroSlide {
@@ -64,20 +65,26 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
     <div className="relative w-full mx-auto overflow-visible group mt-2 mb-4 md:mt-4 md:mb-8">
       {/* Floating badges */}
       <div className="absolute -top-4 left-4 z-50 flex gap-2 animate-slide-up">
-        <motion.div
-          className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-xl flex items-center gap-1"
-          animate={{ y: [0, -5, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <BsFire className="animate-pulse" /> HOT DEALS
-        </motion.div>
-        <motion.div
-          className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-xl flex items-center gap-1"
-          animate={{ y: [0, -5, 0] }}
-          transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-        >
-          <BsLightningFill /> FLASH SALE
-        </motion.div>
+        <Link href="/deals">
+          <motion.div
+            className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-xl flex items-center gap-1 cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+            animate={{ y: [0, -5, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <BsFire className="animate-pulse" /> HOT DEALS
+          </motion.div>
+        </Link>
+        <Link href="/products">
+          <motion.div
+            className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-xl flex items-center gap-1 cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+            animate={{ y: [0, -5, 0] }}
+            transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+          >
+            <BsLightningFill /> TRENDING
+          </motion.div>
+        </Link>
       </div>
 
       <div

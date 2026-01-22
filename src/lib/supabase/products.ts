@@ -51,7 +51,7 @@ export const productQueries = {
       images,
       is_published,
       created_at,
-      category:categories!products_category_id_fkey(name, slug),
+      category:categories!products_category_id_fkey!inner(name, slug),
       tags
     `;
 
@@ -63,7 +63,7 @@ export const productQueries = {
       images,
       is_featured,
       is_trending,
-      category:categories!products_category_id_fkey(name, slug),
+      category:categories!products_category_id_fkey!inner(name, slug),
       tags
     `;
 

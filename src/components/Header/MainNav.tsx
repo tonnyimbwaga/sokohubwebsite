@@ -106,12 +106,6 @@ const MainNav = () => {
 
   return (
     <>
-      <div className="bg-emerald-50 py-2.5 px-4 text-center overflow-hidden whitespace-nowrap border-b border-emerald-100">
-        <p className="text-sm font-bold text-emerald-900 tracking-wide inline-flex items-center gap-2">
-          <span className="bg-emerald-600 rounded-full px-2.5 py-0.5 text-[10px] uppercase text-white font-black">Flash</span>
-          ⚡ Cash on Delivery / Payment after delivery available in Nairobi! ⚡
-        </p>
-      </div>
       <div className="main-layout flex items-center justify-between py-4 sm:py-6 lg:py-8 mx-auto">
         {/* Left: Mobile menu */}
         <div className="flex-1 lg:hidden">
@@ -122,11 +116,16 @@ const MainNav = () => {
         <div className="flex flex-1 flex-col lg:flex-row items-center justify-center gap-1 sm:gap-2">
           <Link
             href="/"
-            className="text-lg sm:text-xl lg:text-2xl font-bold text-primary tracking-normal text-center lg:text-left whitespace-nowrap"
+            className="flex items-center"
           >
-            <span className="tracking-tight sm:tracking-normal">
-              {siteConfig.name}
-            </span>
+            <Image
+              src="/images/logo.png"
+              alt={siteConfig.name}
+              width={150}
+              height={50}
+              className="h-8 sm:h-10 lg:h-12 w-auto object-contain"
+              priority
+            />
           </Link>
           <div className="hidden lg:block w-full max-w-lg px-4">
             <div className="relative">
