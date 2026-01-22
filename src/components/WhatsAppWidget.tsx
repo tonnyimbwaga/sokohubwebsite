@@ -6,22 +6,36 @@ import { FaWhatsapp, FaTimes, FaRegPaperPlane } from "react-icons/fa";
 import { siteConfig } from "@/config/site";
 
 export default function WhatsAppWidget() {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true); // Auto-open by default
     const [isHovered, setIsHovered] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [message, setMessage] = useState("");
+    const [isMobile, setIsMobile] = useState(false);
 
     const phoneNumber = siteConfig.contact.whatsapp || "254707874828";
     // Clean phone number for URL
     const cleanPhone = phoneNumber.replace(/\D/g, "");
 
     useEffect(() => {
-        // Show widget after a short delay
+        // Check if mobile
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
+        // Show widget after a short delay (only on desktop)
         const timer = setTimeout(() => {
-            setIsVisible(true);
+            if (window.innerWidth >= 768) {
+                setIsVisible(true);
+            }
         }, 2000);
 
-        return () => clearTimeout(timer);
+        return () => {
+            clearTimeout(timer);
+            window.removeEventListener('resize', checkMobile);
+        };
     }, []);
 
     const handleSendMessage = () => {
@@ -39,7 +53,7 @@ export default function WhatsAppWidget() {
         }
     };
 
-    if (!isVisible) return null;
+    if (!isVisible || isMobile) return null;
 
     return (
         <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 pointer-events-none">
@@ -53,12 +67,21 @@ export default function WhatsAppWidget() {
                         className="w-80 bg-white rounded-2xl shadow-2xl overflow-hidden pointer-events-auto border border-gray-100"
                     >
                         {/* Header */}
-                        <div className="bg-[#25D366] p-4 flex items-center justify-between text-white">
+                        <div className="bg-gradient-to-r from-[#25D366] to-[#128C7E] p-4 flex items-center justify-between text-white shadow-lg">
                             <div className="flex items-center gap-3">
-                                <FaWhatsapp className="text-3xl" />
+                                <div className="relative">
+                                    <FaWhatsapp className="text-3xl animate-pulse" />
+                                    <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300 opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-3 w-3 bg-green-400"></span>
+                                    </span>
+                                </div>
                                 <div>
                                     <h3 className="font-bold text-lg">Sokohub Chat</h3>
-                                    <p className="text-xs opacity-90">Typically replies instanly</p>
+                                    <p className="text-xs opacity-90 flex items-center gap-1">
+                                        <span className="inline-block w-2 h-2 bg-green-300 rounded-full animate-pulse"></span>
+                                        Online now
+                                    </p>
                                 </div>
                             </div>
                             <button

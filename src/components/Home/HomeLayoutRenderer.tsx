@@ -1,6 +1,7 @@
 import React from "react";
 import HeroSlider from "@/components/HeroSlider/HeroSlider";
 import CategoryCircles from "./CategoryCircles";
+import CategoryScroll from "./CategoryScroll";
 import GridBanners from "./GridBanners";
 import { getHomeLayout, getHeroSlides } from "@/lib/supabase/home-layout.server";
 import { serverCategoryQueries } from "@/lib/supabase/categories.server";
@@ -33,6 +34,7 @@ export default async function HomeLayoutRenderer() {
         return (
             <div className="space-y-8">
                 <HeroSlider slides={heroSlides as any} />
+                <CategoryScroll categories={categories as any} />
                 <CategoryCircles categories={categories as any} />
                 <div className="px-4">
                     <SectionNewArrivals />
@@ -48,7 +50,12 @@ export default async function HomeLayoutRenderer() {
             {layout.map((section: any) => {
                 switch (section.type) {
                     case "hero":
-                        return <HeroSlider key={section.id} slides={heroSlides as any} />;
+                        return (
+                            <React.Fragment key={section.id}>
+                                <HeroSlider slides={heroSlides as any} />
+                                <CategoryScroll categories={categories as any} />
+                            </React.Fragment>
+                        );
 
                     case "category_circles":
                         return <CategoryCircles key={section.id} categories={categories as any} />;

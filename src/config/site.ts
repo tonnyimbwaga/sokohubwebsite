@@ -35,8 +35,8 @@ export const siteConfig = {
         metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID || "",
     },
     theme: {
-        primaryColor: "#3b82f6",
-        secondaryColor: "#fdc021",
+        primaryColor: "#FEEE00",
+        secondaryColor: "#000000",
         fontFamily: "Karla, sans-serif",
     },
     categories: [

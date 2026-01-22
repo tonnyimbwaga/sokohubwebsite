@@ -91,7 +91,7 @@ export default function RootLayout({
         />
         <link
           rel="preconnect"
-          href="https://tafojbtftmihrheeyoky.supabase.co"
+          href="https://rmgtdipwxieqlqkxyohv.supabase.co"
           crossOrigin="anonymous"
         />
         {/* Preload critical font example (edit href as needed) */}

@@ -59,11 +59,10 @@ const ProductGrid = ({
             <Link
               key={number}
               href={`/category/${categorySlug}?page=${number}`}
-              className={`px-4 py-2 text-sm font-medium border rounded-md ${
-                currentPage === number
+              className={`px-4 py-2 text-sm font-medium border rounded-md ${currentPage === number
                   ? "bg-primary text-white border-primary"
                   : "text-gray-700 bg-white border-gray-300 hover:bg-gray-50"
-              }`}
+                }`}
             >
               {number}
             </Link>
@@ -87,9 +86,8 @@ const ProductGrid = ({
   return (
     <div>
       <div
-        className={`grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 ${
-          isCategoryPage ? "xl:grid-cols-4" : "xl:grid-cols-4"
-        } gap-4 sm:gap-6`}
+        className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 ${isCategoryPage ? "xl:grid-cols-5" : "xl:grid-cols-5"
+          } gap-3 sm:gap-4`}
       >
         {products.map((product, index) => (
           <ProductCard
@@ -100,7 +98,7 @@ const ProductGrid = ({
               (!currentPage || currentPage === 1) &&
               index < ITEMS_TO_PRIORITIZE
             }
-            // Add any other props ProductCard might need from the grid context
+          // Add any other props ProductCard might need from the grid context
           />
         ))}
       </div>

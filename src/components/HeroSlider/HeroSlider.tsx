@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { motion, AnimatePresence } from "framer-motion";
+import { BsChevronLeft, BsChevronRight, BsLightningFill, BsFire } from "react-icons/bs";
+import { FaStar, FaShippingFast } from "react-icons/fa";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { getProductImageUrl } from "@/utils/product-images";
@@ -33,7 +34,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
     if (!isPaused) {
       timer = setInterval(() => {
         nextSlide();
-      }, 3500);
+      }, 4000);
     }
 
     return () => {
@@ -60,19 +61,42 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
   }
 
   return (
-    <div className="relative w-[97vw] max-w-[1600px] mx-auto md:rounded-2xl overflow-hidden group shadow-lg mt-4 mb-6 md:mt-8 md:mb-12">
+    <div className="relative w-full mx-auto overflow-visible group mt-2 mb-4 md:mt-4 md:mb-8">
+      {/* Floating badges */}
+      <div className="absolute -top-4 left-4 z-50 flex gap-2 animate-slide-up">
+        <motion.div
+          className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-xl flex items-center gap-1"
+          animate={{ y: [0, -5, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <BsFire className="animate-pulse" /> HOT DEALS
+        </motion.div>
+        <motion.div
+          className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-xl flex items-center gap-1"
+          animate={{ y: [0, -5, 0] }}
+          transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+        >
+          <BsLightningFill /> FLASH SALE
+        </motion.div>
+      </div>
+
       <div
-        className="relative w-full h-[260px] sm:h-[340px] md:h-[440px] bg-[#f8f9fa]"
+        className="relative w-full h-[320px] sm:h-[420px] md:h-[520px] rounded-3xl overflow-hidden shadow-2xl"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
+        style={{
+          boxShadow: '0 0 60px rgba(254, 238, 0, 0.3), 0 20px 40px rgba(0,0,0,0.2)'
+        }}
       >
-        {/* Unified background image and overlay */}
+        {/* Animated gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-transparent to-purple-600/20 z-10 pointer-events-none animate-pulse" />
+
+        {/* Background images */}
         {slides.map((slide, index) => (
           <div
             key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-500 ${
-              index === currentIndex ? "opacity-100" : "opacity-0"
-            }`}
+            className={`absolute inset-0 transition-all duration-700 ${index === currentIndex ? "opacity-100 scale-100" : "opacity-0 scale-110"
+              }`}
           >
             <Image
               src={getProductImageUrl(slide.image_url)}
@@ -81,61 +105,124 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
               className="object-cover"
               priority={index === 0}
               loading={index === 0 ? "eager" : "lazy"}
-              quality={75}
+              quality={85}
               sizes="100vw"
             />
+            {/* Dark overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
           </div>
         ))}
-        {/* Full-slide link */}
-        <a
-          href={slides[currentIndex]?.link_url}
-          className="absolute inset-0 z-10 block"
-          aria-label={slides[currentIndex]?.button_text || "Visit slide"}
-        />
+
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-float z-5" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-float z-5" style={{ animationDelay: '1s' }} />
+
+        {/* Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center h-full z-20 px-4 text-center">
-          <h2 className="text-gray-900 text-xl md:text-5xl font-bold mb-2 md:mb-3 leading-tight tracking-tight opacity-90 drop-shadow-none">
-            {slides[currentIndex]?.title}
-          </h2>
-          {slides[currentIndex]?.subtitle && (
-            <p className="text-gray-700 text-sm md:text-xl mb-2 md:mb-3 opacity-90">
-              {slides[currentIndex]?.subtitle}
-            </p>
-          )}
-          <a
-            href={slides[currentIndex]?.link_url}
-            className="inline-block bg-primary text-white px-6 py-2 rounded-full text-base md:text-lg font-semibold transition-all duration-300 hover:bg-black hover:scale-105 shadow-lg hover:shadow-xl transform hover:-translate-y-1 mt-1 z-30"
-          >
-            {slides[currentIndex]?.button_text}
-          </a>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="space-y-4"
+            >
+              {/* Badge above title */}
+              <motion.div
+                className="inline-flex items-center gap-2 bg-primary text-black px-6 py-2 rounded-full font-bold text-sm shadow-lg"
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <FaStar className="animate-spin" style={{ animationDuration: '3s' }} />
+                EXCLUSIVE OFFER
+                <FaStar className="animate-spin" style={{ animationDuration: '3s' }} />
+              </motion.div>
+
+              <h2 className="text-white text-2xl md:text-6xl font-black mb-2 md:mb-4 leading-tight tracking-tight drop-shadow-2xl">
+                <span className="bg-gradient-to-r from-primary via-yellow-300 to-primary bg-clip-text text-transparent animate-glow">
+                  {slides[currentIndex]?.title}
+                </span>
+              </h2>
+
+              {slides[currentIndex]?.subtitle && (
+                <p className="text-white text-base md:text-2xl mb-2 md:mb-4 font-semibold drop-shadow-lg">
+                  {slides[currentIndex]?.subtitle}
+                </p>
+              )}
+
+              <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
+                <a
+                  href={slides[currentIndex]?.link_url}
+                  className="group relative inline-flex items-center gap-2 bg-primary text-black px-8 py-4 rounded-full text-base md:text-xl font-black transition-all duration-300 hover:scale-110 shadow-2xl hover:shadow-primary/50 overflow-hidden"
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <span className="relative z-10">{slides[currentIndex]?.button_text}</span>
+                  <BsLightningFill className="relative z-10 group-hover:animate-wiggle" />
+                </a>
+
+                <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm text-black px-6 py-3 rounded-full font-bold shadow-lg">
+                  <FaShippingFast className="text-primary" />
+                  <span className="text-sm md:text-base">FREE DELIVERY</span>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
-        {/* Navigation Arrows (hidden on mobile) */}
+
+        {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-black/20 text-white p-3 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/40"
+          className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-30 bg-primary/90 text-black p-4 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-primary shadow-xl"
         >
-          <BsChevronLeft size={20} />
+          <BsChevronLeft size={24} className="font-bold" />
         </button>
         <button
           onClick={nextSlide}
-          className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-black/20 text-white p-3 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/40"
+          className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-30 bg-primary/90 text-black p-4 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-primary shadow-xl"
         >
-          <BsChevronRight size={20} />
+          <BsChevronRight size={24} className="font-bold" />
         </button>
-        {/* Progress bar */}
-        <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-200">
+
+        {/* Animated progress bar */}
+        <div className="absolute bottom-0 left-0 w-full h-2 bg-black/30 z-30">
           <motion.div
+            key={currentIndex}
             initial={{ width: "0%" }}
             animate={{ width: "100%" }}
-            transition={{ duration: 5, ease: "linear", repeat: Infinity }}
-            className="h-full bg-primary/30"
+            transition={{ duration: 4, ease: "linear" }}
+            className="h-full bg-gradient-to-r from-primary via-yellow-300 to-primary shadow-lg shadow-primary/50"
           />
         </div>
+
         {/* Dots navigation */}
         <SlideNavigation
           slides={slides}
           currentSlide={currentIndex}
           onSlideChange={goToSlide}
         />
+      </div>
+
+      {/* Floating trust badges below hero */}
+      <div className="flex flex-wrap justify-center gap-3 mt-6 px-4">
+        <motion.div
+          className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg"
+          whileHover={{ scale: 1.05 }}
+        >
+          <FaStar className="text-yellow-300" /> 5-Star Rated
+        </motion.div>
+        <motion.div
+          className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg"
+          whileHover={{ scale: 1.05 }}
+        >
+          <FaShippingFast /> Fast Delivery
+        </motion.div>
+        <motion.div
+          className="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg"
+          whileHover={{ scale: 1.05 }}
+        >
+          <BsLightningFill /> 24/7 Support
+        </motion.div>
       </div>
     </div>
   );
