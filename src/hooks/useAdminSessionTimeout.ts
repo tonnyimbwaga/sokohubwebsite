@@ -46,14 +46,10 @@ export function useAdminSessionTimeout() {
         return false;
       }
 
-      // Check if user is admin (only check once every 30 minutes to reduce DB calls)
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", session.user.id)
-        .single();
+      // Check if user is admin from metadata
+      const role = session.user.user_metadata?.role;
 
-      if (!profile || profile.role !== "admin") {
+      if (role !== "admin") {
         router.push("/login?error=not_admin");
         return false;
       }

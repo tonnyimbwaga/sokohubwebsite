@@ -41,29 +41,10 @@ export function useAuth(): AuthState {
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session);
       if (session?.user) {
-        const { data: profileData, error: profileError } = await supabase
-          .from("profiles")
-          .select("role")
-          .eq("id", session.user.id)
-          .single();
-
-        if (profileError || !profileData) {
-          console.error(
-            "Profile fetch error or no profile found:",
-            profileError?.message,
-          );
-          // If profile doesn't exist or fails to load, assign a default
-          // This allows login to proceed. A subsequent process could prompt for profile completion.
-          setProfile({ role: "customer" });
-          setError(
-            profileError
-              ? "Failed to fetch user profile."
-              : "User profile not found.",
-          );
-        } else {
-          setProfile(profileData as { role: AuthRole });
-          setError(null);
-        }
+        // Extract role from user_metadata instead of profiles table
+        const role = (session.user.user_metadata?.role as AuthRole) || "customer";
+        setProfile({ role });
+        setError(null);
       } else {
         // User is logged out
         setProfile(null);

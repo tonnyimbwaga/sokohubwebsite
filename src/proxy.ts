@@ -50,15 +50,11 @@ export async function proxy(request: NextRequest) {
   }
 
   if (user && isAuthPage) {
-    // Check if user is admin before redirecting to admin
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("role")
-      .eq("id", user.id)
-      .single();
+    // Check if user is admin from metadata before redirecting
+    const role = user.user_metadata?.role;
 
     const url = request.nextUrl.clone();
-    if (profile?.role === "admin") {
+    if (role === "admin") {
       url.pathname = "/admin";
     } else {
       url.pathname = "/"; // Redirect regular users to home page
