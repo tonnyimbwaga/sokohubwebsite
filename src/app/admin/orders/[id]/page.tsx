@@ -1,12 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase/client";
 import Link from "next/link";
 import StatusSelect from "@/components/Admin/StatusSelect";
-import OrderItemDetails from "@/components/Admin/OrderItemDetails";
 import { FiCopy } from "react-icons/fi";
 import { toast } from "react-hot-toast";
 
@@ -41,14 +39,8 @@ const truncateTitle = (title: string, limit: number = 6) => {
 };
 
 export default function OrderDetailsPage() {
-  const [selectedItem, setSelectedItem] = useState<any>(null);
-  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const params = useParams();
   const id = typeof params?.id === "string" ? params.id : null;
-
-  const closeDetails = () => {
-    setIsDetailsOpen(false);
-  };
 
   // Function to copy order details
   const copyOrderDetails = async () => {
@@ -59,9 +51,8 @@ export default function OrderDetailsPage() {
       const itemsText =
         order.items
           ?.map((item: any) => {
-            const productUrl = `https://toto.co.ke/products/${
-              item.slug || "product"
-            }`;
+            const productUrl = `https://sokohubkenya.com/products/${item.slug || "product"
+              }`;
             return `• ${item.name} (${item.quantity}x) - ${productUrl}`;
           })
           .join("\n") || "No items";
@@ -142,13 +133,6 @@ ${itemsText}`;
     );
   }
 
-  const truncateTitle = (title: string, limit: number = 6) => {
-    const words = title.split(" ");
-    if (words.length > limit) {
-      return words.slice(0, limit).join(" ") + "...";
-    }
-    return title;
-  };
 
   return (
     <div className="p-4 sm:p-6">
@@ -190,16 +174,15 @@ ${itemsText}`;
               {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
             </span>
             <span
-              className={`px-3 py-1 text-xs font-medium rounded-full ${
-                order.payment_status === "paid"
-                  ? "bg-green-100 text-green-800"
-                  : "bg-yellow-100 text-yellow-800"
-              }`}
+              className={`px-3 py-1 text-xs font-medium rounded-full ${order.payment_status === "paid"
+                ? "bg-green-100 text-green-800"
+                : "bg-yellow-100 text-yellow-800"
+                }`}
             >
               {order.payment_status
                 ? `${order.payment_status
-                    .charAt(0)
-                    .toUpperCase()}${order.payment_status.slice(1)}`
+                  .charAt(0)
+                  .toUpperCase()}${order.payment_status.slice(1)}`
                 : "Pending"}
             </span>
           </div>
@@ -306,8 +289,8 @@ ${itemsText}`;
                   </dt>
                   <dd className="mt-1 text-lg font-semibold text-gray-900">
                     {order.is_immediate_payment &&
-                    order.discount_percentage &&
-                    order.discount_percentage > 0 ? (
+                      order.discount_percentage &&
+                      order.discount_percentage > 0 ? (
                       <div className="flex items-baseline space-x-2">
                         <span className="line-through text-gray-500 text-base">
                           KES {order.original_amount?.toFixed(2)}
@@ -605,12 +588,6 @@ ${itemsText}`;
         </div>
       </div>
 
-      {/* Order Item Details Modal */}
-      <OrderItemDetails
-        isOpen={isDetailsOpen}
-        onClose={closeDetails}
-        item={selectedItem}
-      />
     </div>
   );
 }

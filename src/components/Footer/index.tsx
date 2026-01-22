@@ -22,7 +22,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a
-                href="https://facebook.com/tototoyskenya"
+                href="https://facebook.com/sokohubkenya"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-white"
@@ -31,7 +31,7 @@ const Footer = () => {
                 <FaFacebook size={20} />
               </a>
               <a
-                href="https://x.com/tototoyskenya"
+                href="https://x.com/sokohubkenya"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-white"
@@ -40,7 +40,7 @@ const Footer = () => {
                 <FaTwitter size={20} />
               </a>
               <a
-                href="https://instagram.com/tototoyskenya"
+                href="https://instagram.com/sokohubkenya"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-white"
@@ -49,7 +49,7 @@ const Footer = () => {
                 <FaInstagram size={20} />
               </a>
               <a
-                href="https://tiktok.com/@tototoyskenya"
+                href="https://tiktok.com/@sokohubkenya"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-white"

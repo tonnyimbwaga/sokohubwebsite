@@ -37,15 +37,15 @@ export const siteConfig = {
     theme: {
         primaryColor: "#FEEE00",
         secondaryColor: "#000000",
-        fontFamily: "Karla, sans-serif",
+        fontFamily: "Inter, sans-serif",
     },
     categories: [
-        { id: "cat_1", name: "Electronics", slug: "electronics" },
-        { id: "cat_2", name: "Fashion", slug: "fashion" },
-        { id: "cat_3", name: "Home & Garden", slug: "home-kitchen" },
-        { id: "cat_4", name: "Beauty & Health", slug: "beauty-health" },
-        { id: "cat_5", name: "Toys & Kids", slug: "toys-kids" },
-        { id: "cat_6", name: "Sports", slug: "sports" },
+        { id: "cat_1", name: "Educational Toys", slug: "educational" },
+        { id: "cat_2", name: "Outdoor Play", slug: "outdoor" },
+        { id: "cat_3", name: "Arts & Crafts", slug: "creative" },
+        { id: "cat_4", name: "Skates & Scooters", slug: "skates" },
+        { id: "cat_5", name: "Games & Puzzles", slug: "games" },
+        { id: "cat_6", name: "Others", slug: "other" },
     ]
 };
 

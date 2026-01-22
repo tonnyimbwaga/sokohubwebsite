@@ -1,0 +1,12 @@
+{
+  "id": "4d93028c-2b5d-4cba-852c-1260a1a1bc33",
+  "name": "Camping",
+  "slug": "camping",
+  "description": "Essential camping gear, tents, and outdoor survival equipment.",
+  "image_url": null,
+  "is_active": true,
+  "parent_id": null,
+  "metadata": null,
+  "created_at": "2026-01-22T00:54:19.329272+00:00",
+  "updated_at": "2026-01-22T00:54:19.329272+00:00"
+}

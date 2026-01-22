@@ -4,11 +4,12 @@
 
 :root {
   --primary-color: #FEEE00;
+  --primary-dark: #E6D700;
   --secondary-color: #fdc021;
 }
 
 html {
-  font-family: 'Karla', sans-serif;
+  font-family: 'Inter', var(--font-inter), sans-serif;
 }
 
 body {
@@ -23,36 +24,45 @@ html {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  padding-right: 1rem/* 16px */;
-  padding-left: 1rem/* 16px */;
+  padding-right: 1rem
+    /* 16px */
+  ;
+  padding-left: 1rem
+    /* 16px */
+  ;
 }
+
 @media (min-width: 640px) {
   .container {
-      max-width: 640px;
+    max-width: 640px;
   }
 }
+
 @media (min-width: 768px) {
   .container {
-      max-width: 768px;
+    max-width: 768px;
   }
 }
+
 @media (min-width: 1024px) {
   .container {
-      max-width: 1024px;
+    max-width: 1024px;
   }
 }
+
 @media (min-width: 1280px) {
   .container {
-      max-width: 1280px;
-      padding-right: 40px;
-      padding-left: 40px;
+    max-width: 1280px;
+    padding-right: 40px;
+    padding-left: 40px;
   }
 }
+
 @media (min-width: 1536px) {
   .container {
-      max-width: 1536px;
-      padding-right: 70px;
-      padding-left: 70px;
+    max-width: 1536px;
+    padding-right: 70px;
+    padding-left: 70px;
   }
 }
 
@@ -124,19 +134,23 @@ html {
     transform: scale(1) rotate(0);
   }
 
-  20%, 25% {
+  20%,
+  25% {
     transform: scale(1.3) rotate(90deg);
   }
 
-  45%, 50% {
+  45%,
+  50% {
     transform: scale(1) rotate(180deg);
   }
 
-  70%, 75% {
+  70%,
+  75% {
     transform: scale(1.3) rotate(270deg);
   }
 
-  95%, 100% {
+  95%,
+  100% {
     transform: scale(1) rotate(360deg);
   }
 }
@@ -145,6 +159,7 @@ html {
   0% {
     background-position: -200% 0;
   }
+
   100% {
     background-position: 200% 0;
   }
@@ -161,30 +176,49 @@ html {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .hiddenScrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
-/* Force Karla font for product description prose */
-.prose.product-description, .prose.product-description * {
-  font-family: 'Karla', Arial, sans-serif !important;
+/* Force Inter font for product description prose */
+.prose.product-description,
+.prose.product-description * {
+  font-family: 'Inter', var(--font-inter), Arial, sans-serif !important;
   font-weight: 400;
 }
 
 /* Custom slow spin for loading icons */
 @keyframes spin-slow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
+
 .animate-spin-slow {
   animation: spin-slow 1.5s linear infinite;
 }
 
 /* Custom bounce for loading icons */
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); animation-timing-function: cubic-bezier(0.8,0,1,1); }
-  50% { transform: translateY(-12px); animation-timing-function: cubic-bezier(0,0,0.2,1); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+
+  50% {
+    transform: translateY(-12px);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
 }
+
 .animate-bounce {
   animation: bounce 1s infinite;
 }
@@ -223,7 +257,7 @@ html {
 
 .product-card-hover:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 
+  box-shadow:
     0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04),
     0 0 0 1px rgba(59, 130, 246, 0.1);
@@ -233,7 +267,7 @@ html {
 @media (max-width: 768px) {
   .product-card-hover:hover {
     transform: translateY(-2px) scale(1.01);
-    box-shadow: 
+    box-shadow:
       0 10px 15px -3px rgba(0, 0, 0, 0.08),
       0 4px 6px -2px rgba(0, 0, 0, 0.03);
   }
@@ -241,21 +275,21 @@ html {
 
 /* Conversion-optimized shadows */
 .card-shadow {
-  box-shadow: 
+  box-shadow:
     0 1px 3px 0 rgba(0, 0, 0, 0.1),
     0 1px 2px 0 rgba(0, 0, 0, 0.06);
   transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-shadow:hover {
-  box-shadow: 
+  box-shadow:
     0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 /* Main content area shadows for ecommerce layout */
 .main-content-shadow {
-  box-shadow: 
+  box-shadow:
     0 0 0 1px rgba(0, 0, 0, 0.02),
     0 2px 4px -1px rgba(0, 0, 0, 0.06),
     0 4px 8px -2px rgba(0, 0, 0, 0.04);
@@ -265,7 +299,7 @@ html {
 
 /* Section container with soft shadows */
 .section-container {
-  box-shadow: 
+  box-shadow:
     0 1px 3px 0 rgba(0, 0, 0, 0.04),
     0 0 0 1px rgba(0, 0, 0, 0.02);
   background: rgba(255, 255, 255, 0.98);
@@ -274,7 +308,7 @@ html {
 }
 
 .section-container:hover {
-  box-shadow: 
+  box-shadow:
     0 4px 12px -2px rgba(0, 0, 0, 0.08),
     0 0 0 1px rgba(0, 0, 0, 0.03);
   transform: translateY(-1px);
@@ -284,14 +318,14 @@ html {
 @media (max-width: 768px) {
   .section-container {
     border-radius: 12px;
-    box-shadow: 
+    box-shadow:
       0 1px 2px 0 rgba(0, 0, 0, 0.03),
       0 0 0 1px rgba(0, 0, 0, 0.01);
   }
-  
+
   .section-container:hover {
     transform: none;
-    box-shadow: 
+    box-shadow:
       0 2px 4px -1px rgba(0, 0, 0, 0.04),
       0 0 0 1px rgba(0, 0, 0, 0.02);
   }
@@ -299,7 +333,7 @@ html {
 
 /* Category carousel shadow */
 .category-carousel-shadow {
-  box-shadow: 
+  box-shadow:
     0 2px 8px -1px rgba(0, 0, 0, 0.08),
     0 0 0 1px rgba(0, 0, 0, 0.02),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
@@ -312,7 +346,7 @@ html {
 @media (max-width: 768px) {
   .category-carousel-shadow {
     border-radius: 12px;
-    box-shadow: 
+    box-shadow:
       0 1px 3px 0 rgba(0, 0, 0, 0.04),
       0 0 0 1px rgba(0, 0, 0, 0.01);
     backdrop-filter: blur(8px);
@@ -390,6 +424,7 @@ html {
 }
 
 @media (max-width: 1480px) {
+
   .content-with-sidebars::before,
   .content-with-sidebars::after {
     display: none;
@@ -410,13 +445,13 @@ html {
     max-width: calc(50% - 8px);
     flex-shrink: 0;
   }
-  
+
   .mobile-carousel-container {
     gap: 16px;
     padding: 0 16px;
     scroll-padding: 16px;
   }
-  
+
   /* Override desktop min-width for mobile */
   .mobile-product-card .min-w-\[280px\] {
     min-width: 100% !important;
@@ -430,7 +465,7 @@ html {
     min-width: calc(33.333% - 11px);
     max-width: calc(33.333% - 11px);
   }
-  
+
   .mobile-carousel-container {
     gap: 16px;
     padding: 0 20px;
@@ -439,27 +474,28 @@ html {
 
 /* Mobile-specific layout improvements */
 @media (max-width: 768px) {
+
   /* Reduce spacing between sections */
-  .space-y-8 > * + * {
+  .space-y-8>*+* {
     margin-top: 1.5rem !important;
   }
-  
+
   /* Reduce section padding */
   .section-container {
     padding: 1rem !important;
   }
-  
+
   /* Reduce category carousel padding */
   .category-carousel-shadow {
     padding: 1rem !important;
     margin: 0 !important;
   }
-  
+
   /* Reduce main content spacing */
   .mb-8 {
     margin-bottom: 1.5rem !important;
   }
-  
+
   /* Optimize page padding */
   .px-4 {
     padding-left: 0.75rem !important;
@@ -473,7 +509,7 @@ html {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
   }
-  
+
   /* Reduce header vertical padding */
   .py-8 {
     padding-top: 1rem !important;
@@ -487,6 +523,7 @@ html {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -499,24 +536,26 @@ html {
 
 /* Mobile touch improvements */
 @media (max-width: 768px) {
+
   /* Larger touch targets */
-  button, .cursor-pointer {
+  button,
+  .cursor-pointer {
     min-height: 44px;
     min-width: 44px;
   }
-  
+
   /* Improved scroll performance */
   .overflow-x-auto {
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
   }
-  
+
   /* Reduce motion for mobile users */
   @media (prefers-reduced-motion: reduce) {
     .product-card-hover:hover {
       transform: none;
     }
-    
+
     .section-container:hover {
       transform: none;
     }
@@ -525,6 +564,7 @@ html {
 
 /* Mobile: Remove containers on mobile for full-bleed layout */
 @media (max-width: 640px) {
+
   /* Layout wrappers */
   .main-layout,
   .content-with-sidebars,
@@ -561,7 +601,7 @@ html {
   .category-carousel-shadow .container {
     padding: 0 !important;
   }
-  
+
   .category-carousel-shadow .no-scrollbar {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
@@ -607,7 +647,7 @@ html {
     opacity: 0;
     animation: swipe-hint 3s ease-in-out infinite;
   }
-  
+
   .swipe-indicator:hover::before {
     animation: none;
     opacity: 0;
@@ -615,9 +655,21 @@ html {
 }
 
 @keyframes swipe-hint {
-  0%, 90% { opacity: 0; }
-  5%, 15% { opacity: 0.6; }
-  20%, 85% { opacity: 0; }
+
+  0%,
+  90% {
+    opacity: 0;
+  }
+
+  5%,
+  15% {
+    opacity: 0.6;
+  }
+
+  20%,
+  85% {
+    opacity: 0;
+  }
 }
 
 /* Subtle scroll shadows for containers */
@@ -664,4 +716,26 @@ html {
   .swipe-indicator::after {
     opacity: 0.3;
   }
+}
+
+/* Button Refinements */
+.btn-primary,
+button[class*="bg-primary"],
+a[class*="bg-primary"] {
+  background-color: var(--primary-color);
+  transition: all 0.2s ease;
+}
+
+/* Tasteful darker yellow for white text buttons or hover states */
+.btn-primary.text-white,
+button[class*="bg-primary"].text-white,
+a[class*="bg-primary"].text-white {
+  background-color: var(--primary-dark);
+}
+
+.btn-primary:hover,
+button[class*="bg-primary"]:hover,
+a[class*="bg-primary"]:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
 }

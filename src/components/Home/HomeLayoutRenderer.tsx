@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import HeroSlider from "@/components/HeroSlider/HeroSlider";
 import CategoryCircles from "./CategoryCircles";
 import CategoryScroll from "./CategoryScroll";
@@ -37,8 +37,12 @@ export default async function HomeLayoutRenderer() {
                 <CategoryScroll categories={categories as any} />
                 <CategoryCircles categories={categories as any} />
                 <div className="px-4">
-                    <SectionNewArrivals />
-                    <SectionBestDeals />
+                    <Suspense fallback={<div className="h-64 animate-pulse bg-gray-100 rounded-lg" />}>
+                        <SectionNewArrivals />
+                    </Suspense>
+                    <Suspense fallback={<div className="h-64 animate-pulse bg-gray-100 rounded-lg" />}>
+                        <SectionBestDeals />
+                    </Suspense>
                 </div>
                 <HomepageCategorySections />
             </div>
@@ -69,14 +73,18 @@ export default async function HomeLayoutRenderer() {
                         if (section.metadata?.source === "new_arrivals") {
                             return (
                                 <div key={section.id} className="px-4 py-8 md:py-16">
-                                    <SectionNewArrivals />
+                                    <Suspense fallback={<div className="h-64 animate-pulse bg-gray-100 rounded-lg" />}>
+                                        <SectionNewArrivals />
+                                    </Suspense>
                                 </div>
                             );
                         }
                         if (section.metadata?.source === "best_deals") {
                             return (
                                 <div key={section.id} className="px-4 py-8 md:py-16">
-                                    <SectionBestDeals />
+                                    <Suspense fallback={<div className="h-64 animate-pulse bg-gray-100 rounded-lg" />}>
+                                        <SectionBestDeals />
+                                    </Suspense>
                                 </div>
                             );
                         }

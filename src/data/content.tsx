@@ -1,5 +1,7 @@
 import { FiMail, FiPhone } from "react-icons/fi";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "../config/site";
+// No data here anymore - this file is a placeholder for dynamic data.
+// Static data is now generated in public/api/products and public/data/homepage.json
 
 import type { BlogType, NavItemType, Product } from "./types";
 
@@ -83,98 +85,11 @@ export const NavLinks: NavItemType[] = [
 // TODO: Replace with actual product images
 const placeholder = "/images/placeholder.png";
 
-export const categories = [
-  {
-    id: "skates",
-    name: "Skates",
-    description: "High-quality skates for kids of all ages",
-    image: "/images/categories/skates.jpg",
-  },
-  {
-    id: "tricycles",
-    name: "Tricycles",
-    description: "Safe and fun tricycles for toddlers",
-    image: "/images/categories/tricycles.jpg",
-  },
-  {
-    id: "bicycles",
-    name: "Bicycles",
-    description: "Quality bikes for kids of all ages",
-    image: "/images/categories/bicycles.jpg",
-  },
-  {
-    id: "scooters",
-    name: "Scooters",
-    description: "Fun and safe scooters for kids",
-    image: "/images/categories/scooters.jpg",
-  },
-  {
-    id: "toys",
-    name: "Toys",
-    description: "Educational and fun toys for children",
-    image: "/images/categories/toys.jpg",
-  },
-  {
-    id: "games",
-    name: "Games",
-    description: "Engaging games for all ages",
-    image: "/images/categories/games.jpg",
-  },
-  {
-    id: "other",
-    name: "Other",
-    description: "More amazing products for kids",
-    image: "/images/categories/other.jpg",
-  },
-];
-
-export const products: Product[] = [
-  {
-    id: "adjustable-inline-skates",
-    slug: "adjustable-inline-skates",
-    sku: "SKU-SKATES-001",
-    categorySlug: "skates",
-    name: "Adjustable Inline Skates",
-    description: "Comfortable inline skates that grow with your child",
-    category: "skates",
-    price: 4999,
-    salePrice: 3999,
-    images: [{ url: placeholder, alt: "Adjustable Inline Skates" }],
-    ageRange: "6-8",
-    inStock: true,
-    isFeatured: true,
-    rating: 4.5,
-    reviews: 12,
-    sizes: [
-      { value: "EU 32-35", label: "EU 32-35", price: 3999, inStock: true },
-      { value: "EU 36-39", label: "EU 36-39", price: 3999, inStock: true },
-    ],
-  },
-  {
-    id: "deluxe-tricycle",
-    slug: "deluxe-tricycle",
-    sku: "SKU-TRIKE-001",
-    categorySlug: "tricycles",
-    name: "Deluxe 4-in-1 Tricycle",
-    description: "Convertible tricycle that grows with your toddler",
-    category: "tricycles",
-    price: 7999,
-    salePrice: 6999,
-    images: [{ url: placeholder, alt: "Deluxe 4-in-1 Tricycle" }],
-    ageRange: "2-4",
-    inStock: true,
-    isFeatured: true,
-    rating: 4.8,
-    reviews: 25,
-    sizes: [
-      { value: "Stage 1", label: "Stage 1", price: 6999, inStock: true },
-    ],
-  },
-];
-
-export const featuredProducts: Product[] = products.filter((p) => p.isFeatured);
-export const newArrivals: Product[] = products;
-export const trendingProducts: Product[] = products;
+export const categories: any[] = [];
+export const products: Product[] = [];
+export const featuredProducts: Product[] = [];
+export const newArrivals: Product[] = [];
+export const trendingProducts: Product[] = [];
 
 export const headerSection = {
   title: `Welcome to ${siteConfig.name}`,

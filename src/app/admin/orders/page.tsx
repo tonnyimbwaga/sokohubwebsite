@@ -8,12 +8,29 @@ import StatusSelect from "@/components/Admin/StatusSelect";
 import { FiCopy, FiEye, FiShoppingBag } from "react-icons/fi";
 import { toast } from "react-hot-toast";
 
+interface Order {
+  id: string;
+  customer_name: string;
+  phone: string;
+  delivery_zone: string;
+  location: string;
+  items: any[];
+  total: number;
+  status: string;
+  created_at: string;
+  is_immediate_payment: boolean;
+  discount_percentage: number;
+  original_amount: number;
+  discounted_amount: number;
+  order_confirmed: boolean;
+}
+
 export default function OrdersPage() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const perPage = 10;
 
-  const { data: orders, isLoading } = useQuery({
+  const { data: orders, isLoading } = useQuery<Order[]>({
     queryKey: ["orders", page, search],
     queryFn: async () => {
       try {
@@ -38,9 +55,7 @@ export default function OrdersPage() {
           throw error;
         }
 
-        console.log("Orders query result:", data);
-
-        return data;
+        return data as Order[];
       } catch (error) {
         console.error("Error in orders query:", error);
         throw error;
@@ -81,9 +96,8 @@ export default function OrdersPage() {
       const itemsText =
         order.items
           ?.map((item: any) => {
-            const productUrl = `https://toto.co.ke/products/${
-              item.slug || "product"
-            }`;
+            const productUrl = `https://sokohubkenya.com/products/${item.slug || "product"
+              }`;
             return `• ${item.name} (${item.quantity}x) - ${productUrl}`;
           })
           .join("\n") || "No items";
@@ -115,9 +129,8 @@ ${itemsText}`;
       0,
     );
 
-    return `${itemCount} item${
-      itemCount > 1 ? "s" : ""
-    } (${totalQuantity} total)`;
+    return `${itemCount} item${itemCount > 1 ? "s" : ""
+      } (${totalQuantity} total)`;
   };
 
   return (
@@ -287,7 +300,7 @@ ${itemsText}`;
                     </span>
                     <span className="text-lg font-bold text-slate-900">
                       {order.is_immediate_payment &&
-                      order.discount_percentage > 0 ? (
+                        order.discount_percentage > 0 ? (
                         <div className="text-right">
                           <div className="flex items-center space-x-2">
                             <span className="line-through text-slate-400 text-sm">

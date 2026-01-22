@@ -40,55 +40,22 @@ export const metadata = {
   manifest: "/site.webmanifest",
 };
 
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`scroll-smooth ${inter.variable}`}>
       <head>
-        {/* Preload self-hosted Karla fonts for optimal performance */}
-        <link
-          rel="preload"
-          as="font"
-          href="/fonts/karla-latin-400-normal.woff2"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          as="font"
-          href="/fonts/karla-latin-700-normal.woff2"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        {/* Load self-hosted Karla font CSS */}
-        <style
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{
-            __html: `
-            @font-face {
-              font-family: 'Karla';
-              font-style: normal;
-              font-weight: 400;
-              font-display: swap;
-              src: url('/fonts/karla-latin-400-normal.woff2') format('woff2'),
-                   url('/fonts/karla-latin-400-normal.woff') format('woff');
-              unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-            }
-            @font-face {
-              font-family: 'Karla';
-              font-style: normal;
-              font-weight: 700;
-              font-display: swap;
-              src: url('/fonts/karla-latin-700-normal.woff2') format('woff2'),
-                   url('/fonts/karla-latin-700-normal.woff') format('woff');
-              unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-            }
-          `,
-          }}
-        />
         <link
           rel="preconnect"
           href="https://rmgtdipwxieqlqkxyohv.supabase.co"

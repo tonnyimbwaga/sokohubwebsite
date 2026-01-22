@@ -1,0 +1,12 @@
+{
+  "id": "ccab0837-43c8-4c9e-9292-3a0f5b63dbde",
+  "name": "Health & Beauty",
+  "slug": "health-beauty",
+  "description": "Premium skincare, makeup, fragrances, and personal care products.",
+  "image_url": null,
+  "is_active": true,
+  "parent_id": null,
+  "metadata": null,
+  "created_at": "2026-01-22T00:54:19.329272+00:00",
+  "updated_at": "2026-01-22T00:54:19.329272+00:00"
+}

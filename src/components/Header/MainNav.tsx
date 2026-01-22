@@ -106,9 +106,9 @@ const MainNav = () => {
 
   return (
     <>
-      <div className="bg-slate-900 py-2.5 px-4 text-center overflow-hidden whitespace-nowrap">
-        <p className="text-sm font-bold text-white tracking-wide animate-pulse inline-flex items-center gap-2">
-          <span className="bg-primary rounded-full px-2.5 py-0.5 text-[10px] uppercase">Flash</span>
+      <div className="bg-primary py-2.5 px-4 text-center overflow-hidden whitespace-nowrap border-b border-primary-dark/10">
+        <p className="text-sm font-bold text-slate-900 tracking-wide animate-pulse inline-flex items-center gap-2">
+          <span className="bg-slate-900 rounded-full px-2.5 py-0.5 text-[10px] uppercase text-white font-black">Flash</span>
           ⚡ Cash on Delivery / Payment after delivery available in Nairobi! ⚡
         </p>
       </div>

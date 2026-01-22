@@ -83,7 +83,9 @@ export async function GET() {
   return NextResponse.json(products, {
     status: 200,
     headers: {
-      "Cache-Control": "public, s-maxage=3600, max-age=300, stale-while-revalidate=86400",
+      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+      "Pragma": "no-cache",
+      "Expires": "0",
     },
   });
 }

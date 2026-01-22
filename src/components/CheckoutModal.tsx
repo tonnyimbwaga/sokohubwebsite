@@ -208,11 +208,10 @@ const CheckoutModal = ({ isOpen, onClose, items, total }: Props) => {
                   {[1, 2, 3, 4].map((i) => (
                     <div
                       key={i}
-                      className={`z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 ${
-                        i <= step
+                      className={`z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 ${i <= step
                           ? "border-primary bg-primary text-white"
                           : "border-gray-300 bg-white"
-                      }`}
+                        }`}
                     >
                       {i}
                     </div>
@@ -437,7 +436,7 @@ const CheckoutModal = ({ isOpen, onClose, items, total }: Props) => {
                             </p>
                             <p>
                               5. Enter Account Number:{" "}
-                              <span className="font-semibold">TOTO</span>
+                              <span className="font-semibold">SOKOHUB</span>
                             </p>
                             <p>
                               6. Enter Amount:{" "}

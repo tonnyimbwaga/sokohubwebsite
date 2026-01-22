@@ -1,4 +1,4 @@
-# Google Analytics 4 Setup for Toto Toys & Fun
+# Google Analytics 4 Setup for Sokohub Kenya
 
 ## Environment Variables Required
 
