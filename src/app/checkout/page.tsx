@@ -719,7 +719,7 @@ const CheckoutPage: React.FC = () => {
               <div className="bg-primary bg-opacity-10 rounded-full p-5 mb-5 inline-block">
                 <SolidCheckCircleIcon className="w-16 h-16 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold text-primary-dark mb-3">
+              <h3 className="text-3xl font-bold text-gray-900 mb-3">
                 Loading Cart...
               </h3>
               <p className="text-gray-600 mb-6 text-base">
@@ -813,7 +813,7 @@ const CheckoutPage: React.FC = () => {
                   className={`w-full sm:w-auto rounded-lg shadow-md hover:shadow-lg !py-3 !px-6 text-base order-1 sm:order-2 flex-grow disabled:cursor-not-allowed font-karla ${
                     isLoading
                       ? "bg-gray-400"
-                      : "bg-primary hover:bg-primary-dark text-white"
+                      : "bg-primary hover:bg-primary/90 text-white"
                   } disabled:bg-gray-300 disabled:text-gray-500`}
                 >
                   {isLoading ? (
@@ -879,7 +879,7 @@ const CheckoutPage: React.FC = () => {
                 >
                   <SolidCheckCircleIcon className="w-16 h-16 text-primary" />
                 </motion.div>
-                <h3 className="text-3xl font-bold text-primary-dark mb-3">
+                <h3 className="text-3xl font-bold text-gray-900 mb-3">
                   Order Placed Successfully!
                 </h3>
                 <p className="text-gray-600 mb-6 text-base">
@@ -890,7 +890,7 @@ const CheckoutPage: React.FC = () => {
                   type="button"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-75 transition-all duration-150 ease-in-out font-karla"
+                  className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-75 transition-all duration-150 ease-in-out font-karla"
                   onClick={() => {
                     setOrderPlaced(false);
                     router.replace("/");

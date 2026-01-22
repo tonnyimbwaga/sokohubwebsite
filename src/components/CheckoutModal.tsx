@@ -502,7 +502,7 @@ const CheckoutModal = ({ isOpen, onClose, items, total }: Props) => {
                 {step < 4 && !loading && (
                   <button
                     onClick={() => handleNext()}
-                    className="ml-auto flex items-center gap-2 rounded-lg bg-primary px-6 py-2 font-semibold text-white hover:bg-primary-dark"
+                    className="ml-auto flex items-center gap-2 rounded-lg bg-primary px-6 py-2 font-semibold text-white hover:bg-primary/90"
                   >
                     Next
                     <FaArrowRight />

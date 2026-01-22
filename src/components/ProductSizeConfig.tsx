@@ -131,7 +131,7 @@ const ProductSizeConfig: FC<ProductSizeConfigProps> = ({
         </select>
         <button
           onClick={addDefaultSizes}
-          className="bg-primary text-white px-6 py-3 rounded-lg font-semibold shadow-sm hover:bg-primary-dark transition whitespace-nowrap w-full sm:w-auto"
+          className="bg-primary text-white px-6 py-3 rounded-lg font-semibold shadow-sm hover:bg-primary/90 transition whitespace-nowrap w-full sm:w-auto"
           type="button"
         >
           Add Default Sizes
@@ -159,7 +159,7 @@ const ProductSizeConfig: FC<ProductSizeConfigProps> = ({
         />
         <button
           onClick={addSize}
-          className="bg-primary text-white px-6 py-3 rounded-lg font-semibold shadow-sm hover:bg-primary-dark transition whitespace-nowrap w-full sm:w-auto"
+          className="bg-primary text-white px-6 py-3 rounded-lg font-semibold shadow-sm hover:bg-primary/90 transition whitespace-nowrap w-full sm:w-auto"
           type="button"
         >
           Add Size

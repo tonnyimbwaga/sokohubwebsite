@@ -62,7 +62,7 @@ const CategorySection: React.FC<{ category: StaticCategory }> = ({
       <h2 className="text-2xl font-bold text-gray-900">{category.name}</h2>
       <Link
         href={`/category/${category.slug}`}
-        className="text-primary hover:text-primary-dark font-medium"
+        className="text-primary hover:text-gray-900 font-medium"
       >
         View All ({category.productCount})
       </Link>

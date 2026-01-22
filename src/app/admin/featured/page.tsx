@@ -169,7 +169,7 @@ export default function FeaturedProductsPage() {
         <h1 className="text-2xl font-bold">Featured Products</h1>
         <button
           onClick={() => setShowSearch(!showSearch)}
-          className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark"
+          className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90"
         >
           {showSearch ? "Hide Search" : "Add Products"}
         </button>

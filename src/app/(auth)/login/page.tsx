@@ -53,16 +53,7 @@ export default function LoginPage() {
         required
         style={{ padding: 8, borderRadius: 4, border: "1px solid #ccc" }}
       />
-      <button
-        type="submit"
-        style={{
-          padding: 10,
-          borderRadius: 4,
-          background: "#38b2ac",
-          color: "white",
-          border: "none",
-        }}
-      >
+      <button type="submit" className="mt-2 rounded-md bg-primary px-4 py-2 text-sm font-semibold text-black hover:bg-primary/90">
         Sign In
       </button>
       {error && <div style={{ color: "red" }}>{error}</div>}

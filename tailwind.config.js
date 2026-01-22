@@ -16,11 +16,10 @@ module.exports = {
     },
     extend: {
       colors: {
-        primary: '#59B5B5',
-        'primary-light': '#7AC5C5',
-        'primary-dark': '#488F8F',
-        secondary: '#000000',
-        gray: '#F7F7F7',
+        // Keep these in sync with `tailwind.config.ts` (CSS variable-driven theme).
+        // This prevents accidental hardcoded teal usage when tooling loads this config.
+        primary: 'var(--primary-color)',
+        secondary: 'var(--secondary-color)',
       },
       container: {
         center: true,

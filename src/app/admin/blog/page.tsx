@@ -279,7 +279,7 @@ export default function BlogPage() {
                     <div className="flex space-x-3">
                       <button
                         onClick={() => handleEdit(post)}
-                        className="text-primary hover:text-primary-dark"
+                        className="text-primary hover:text-gray-900"
                       >
                         <FiEdit2 className="h-5 w-5" />
                       </button>
