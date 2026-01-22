@@ -1,0 +1,47 @@
+{
+  "id": "6e8b5fbd-a9f1-4369-8185-c518c23e5dee",
+  "name": "Wooden Doll House",
+  "description": "<p>This is a doll house made of wood</p>",
+  "price": 12850,
+  "compareAtPrice": null,
+  "slug": "wooden-doll-house",
+  "category": "Other",
+  "categorySlug": "other",
+  "images": {
+    "primary": {
+      "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+      "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+      "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+      "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+      "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+      "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+      "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+      "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+      "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+      "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg"
+    },
+    "srcSet": {
+      "srcSet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg 320w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg 640w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg 800w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg 1200w",
+      "srcSetAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg 320w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg 640w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg 800w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg 1200w",
+      "sizes": "(max-width: 640px) 320px, (max-width: 1024px) 640px, (max-width: 1280px) 800px, 1200px"
+    },
+    "gallery": [
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4960ee81-55d3-42b6-8b83-11ac9e9eb8f9.jpg"
+      }
+    ]
+  },
+  "metadata": {
+    "lastModified": "2025-06-09T17:40:40.675023+00:00",
+    "etag": "\"6e8b5fbd-a9f1-4369-8185-c518c23e5dee-1749490840675\""
+  }
+}

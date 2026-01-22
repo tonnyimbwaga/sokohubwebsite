@@ -1,0 +1,59 @@
+{
+  "id": "2bcd084a-755a-43c8-a2bf-36e93781605e",
+  "name": "Inflatable Swimming Pool + Free Pump",
+  "description": "<p>Inflatable Swimming Pool + Free Pump for Kids in Kenya</p>",
+  "price": 7499,
+  "compareAtPrice": null,
+  "slug": "inflatable-swimming-pool-free-pump-kids-kenya",
+  "category": "Other",
+  "categorySlug": "other",
+  "images": {
+    "primary": {
+      "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+      "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+      "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+      "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+      "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+      "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+      "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+      "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+      "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+      "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp"
+    },
+    "srcSet": {
+      "srcSet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp 320w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp 640w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp 800w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp 1200w",
+      "srcSetAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp 320w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp 640w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp 800w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp 1200w",
+      "sizes": "(max-width: 640px) 320px, (max-width: 1024px) 640px, (max-width: 1280px) 800px, 1200px"
+    },
+    "gallery": [
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/1c4fc63e-760e-460b-a209-b1cc5e3655de.webp"
+      },
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/bac8f96b-2411-411b-9ad8-4d1f6815451b.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/bac8f96b-2411-411b-9ad8-4d1f6815451b.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/bac8f96b-2411-411b-9ad8-4d1f6815451b.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/bac8f96b-2411-411b-9ad8-4d1f6815451b.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/bac8f96b-2411-411b-9ad8-4d1f6815451b.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/bac8f96b-2411-411b-9ad8-4d1f6815451b.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/bac8f96b-2411-411b-9ad8-4d1f6815451b.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/bac8f96b-2411-411b-9ad8-4d1f6815451b.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/bac8f96b-2411-411b-9ad8-4d1f6815451b.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/bac8f96b-2411-411b-9ad8-4d1f6815451b.webp"
+      }
+    ]
+  },
+  "metadata": {
+    "lastModified": "2025-08-01T03:43:14.543197+00:00",
+    "etag": "\"2bcd084a-755a-43c8-a2bf-36e93781605e-1754019794543\""
+  }
+}

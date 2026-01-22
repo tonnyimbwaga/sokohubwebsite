@@ -1,0 +1,47 @@
+{
+  "id": "fdccab88-3c40-4e09-bf70-7c051b6b9272",
+  "name": "Red Ride-On Car for Kids",
+  "description": "This is a great ride-on electric car that your kid will love.&nbsp;",
+  "price": 32899,
+  "compareAtPrice": 44500,
+  "slug": "red-ride-on-car-for-kids-kenya",
+  "category": "Outdoors Play",
+  "categorySlug": "outdoors-play",
+  "images": {
+    "primary": {
+      "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+      "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+      "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+      "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+      "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+      "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+      "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+      "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+      "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+      "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg"
+    },
+    "srcSet": {
+      "srcSet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg 320w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg 640w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg 800w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg 1200w",
+      "srcSetAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg 320w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg 640w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg 800w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg 1200w",
+      "sizes": "(max-width: 640px) 320px, (max-width: 1024px) 640px, (max-width: 1280px) 800px, 1200px"
+    },
+    "gallery": [
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/c30e71ef-3f3f-43a6-bbe9-a7655e87101c.jpg"
+      }
+    ]
+  },
+  "metadata": {
+    "lastModified": "2025-06-28T09:54:51.357166+00:00",
+    "etag": "\"fdccab88-3c40-4e09-bf70-7c051b6b9272-1751104491357\""
+  }
+}

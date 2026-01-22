@@ -1,0 +1,59 @@
+{
+  "id": "1611129f-4e07-43cb-9f36-e5a267ce9893",
+  "name": "Heavy Duty Clothes Rack, Double Rods Clothing Racks for Hanging Clothes, Garment Rack with 4 Tier Closet Shelves & 4 Hooks for Clothing Storage",
+  "description": "<p>Metallic Clothing Rack - Black and White Color Options</p>",
+  "price": 6500,
+  "compareAtPrice": null,
+  "slug": "clothes-rack-double-rods-clothes-hanger-shelves-storage-in-kenya",
+  "category": "Other",
+  "categorySlug": "other",
+  "images": {
+    "primary": {
+      "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+      "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+      "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+      "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+      "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+      "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+      "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+      "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+      "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+      "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp"
+    },
+    "srcSet": {
+      "srcSet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp 320w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp 640w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp 800w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp 1200w",
+      "srcSetAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp 320w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp 640w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp 800w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp 1200w",
+      "sizes": "(max-width: 640px) 320px, (max-width: 1024px) 640px, (max-width: 1280px) 800px, 1200px"
+    },
+    "gallery": [
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e672dd4e-3558-4c8f-89a9-c37a7f235a92.webp"
+      },
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47fc4803-8113-4e77-9356-c11438bc57a4.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47fc4803-8113-4e77-9356-c11438bc57a4.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47fc4803-8113-4e77-9356-c11438bc57a4.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47fc4803-8113-4e77-9356-c11438bc57a4.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47fc4803-8113-4e77-9356-c11438bc57a4.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47fc4803-8113-4e77-9356-c11438bc57a4.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47fc4803-8113-4e77-9356-c11438bc57a4.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47fc4803-8113-4e77-9356-c11438bc57a4.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47fc4803-8113-4e77-9356-c11438bc57a4.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47fc4803-8113-4e77-9356-c11438bc57a4.webp"
+      }
+    ]
+  },
+  "metadata": {
+    "lastModified": "2025-08-04T05:05:06.605358+00:00",
+    "etag": "\"1611129f-4e07-43cb-9f36-e5a267ce9893-1754283906605\""
+  }
+}

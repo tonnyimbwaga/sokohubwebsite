@@ -1,0 +1,131 @@
+{
+  "id": "7c93cee2-6a0c-4f20-99f1-8f0a5a9f78f4",
+  "name": "Bicycles for Kids - Size 12 BMX  Bikes ( Plus Free Helmet) - Pink, Red, Blue & Green Children's Bikes ",
+  "description": "Best BMX bikes in Kenya for kids aged 2 yrs to 4 yrs - size 12 bicycles in Kenya",
+  "price": 7299,
+  "compareAtPrice": 7700,
+  "slug": "bicycles-for-kids-size-12-bikes-kenya",
+  "category": "Bicycles",
+  "categorySlug": "bicycles",
+  "images": {
+    "primary": {
+      "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+      "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+      "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+      "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+      "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+      "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+      "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+      "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+      "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+      "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp"
+    },
+    "srcSet": {
+      "srcSet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp 320w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp 640w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp 800w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp 1200w",
+      "srcSetAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp 320w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp 640w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp 800w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp 1200w",
+      "sizes": "(max-width: 640px) 320px, (max-width: 1024px) 640px, (max-width: 1280px) 800px, 1200px"
+    },
+    "gallery": [
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/6a536aaa-2817-4862-9127-1b45b6f63f42.webp"
+      },
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9c60462a-44c4-4b1e-ba92-112668044cf1.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9c60462a-44c4-4b1e-ba92-112668044cf1.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9c60462a-44c4-4b1e-ba92-112668044cf1.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9c60462a-44c4-4b1e-ba92-112668044cf1.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9c60462a-44c4-4b1e-ba92-112668044cf1.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9c60462a-44c4-4b1e-ba92-112668044cf1.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9c60462a-44c4-4b1e-ba92-112668044cf1.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9c60462a-44c4-4b1e-ba92-112668044cf1.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9c60462a-44c4-4b1e-ba92-112668044cf1.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9c60462a-44c4-4b1e-ba92-112668044cf1.webp"
+      },
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/80a571d6-2611-431d-9bc1-fd9466420e99.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/80a571d6-2611-431d-9bc1-fd9466420e99.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/80a571d6-2611-431d-9bc1-fd9466420e99.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/80a571d6-2611-431d-9bc1-fd9466420e99.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/80a571d6-2611-431d-9bc1-fd9466420e99.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/80a571d6-2611-431d-9bc1-fd9466420e99.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/80a571d6-2611-431d-9bc1-fd9466420e99.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/80a571d6-2611-431d-9bc1-fd9466420e99.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/80a571d6-2611-431d-9bc1-fd9466420e99.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/80a571d6-2611-431d-9bc1-fd9466420e99.webp"
+      },
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2187f89-397c-40fd-8095-8bbde39931f3.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2187f89-397c-40fd-8095-8bbde39931f3.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2187f89-397c-40fd-8095-8bbde39931f3.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2187f89-397c-40fd-8095-8bbde39931f3.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2187f89-397c-40fd-8095-8bbde39931f3.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2187f89-397c-40fd-8095-8bbde39931f3.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2187f89-397c-40fd-8095-8bbde39931f3.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2187f89-397c-40fd-8095-8bbde39931f3.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2187f89-397c-40fd-8095-8bbde39931f3.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2187f89-397c-40fd-8095-8bbde39931f3.webp"
+      },
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/642386c5-ecaf-4eca-9777-c651d54108a1.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/642386c5-ecaf-4eca-9777-c651d54108a1.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/642386c5-ecaf-4eca-9777-c651d54108a1.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/642386c5-ecaf-4eca-9777-c651d54108a1.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/642386c5-ecaf-4eca-9777-c651d54108a1.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/642386c5-ecaf-4eca-9777-c651d54108a1.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/642386c5-ecaf-4eca-9777-c651d54108a1.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/642386c5-ecaf-4eca-9777-c651d54108a1.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/642386c5-ecaf-4eca-9777-c651d54108a1.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/642386c5-ecaf-4eca-9777-c651d54108a1.webp"
+      },
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9abe540b-c1f4-4a71-a7b3-c2548af4b650.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9abe540b-c1f4-4a71-a7b3-c2548af4b650.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9abe540b-c1f4-4a71-a7b3-c2548af4b650.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9abe540b-c1f4-4a71-a7b3-c2548af4b650.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9abe540b-c1f4-4a71-a7b3-c2548af4b650.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9abe540b-c1f4-4a71-a7b3-c2548af4b650.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9abe540b-c1f4-4a71-a7b3-c2548af4b650.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9abe540b-c1f4-4a71-a7b3-c2548af4b650.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9abe540b-c1f4-4a71-a7b3-c2548af4b650.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/9abe540b-c1f4-4a71-a7b3-c2548af4b650.webp"
+      },
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2d16943-e8c2-4b40-bfae-d35a40f97c17.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2d16943-e8c2-4b40-bfae-d35a40f97c17.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2d16943-e8c2-4b40-bfae-d35a40f97c17.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2d16943-e8c2-4b40-bfae-d35a40f97c17.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2d16943-e8c2-4b40-bfae-d35a40f97c17.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2d16943-e8c2-4b40-bfae-d35a40f97c17.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2d16943-e8c2-4b40-bfae-d35a40f97c17.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2d16943-e8c2-4b40-bfae-d35a40f97c17.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2d16943-e8c2-4b40-bfae-d35a40f97c17.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/e2d16943-e8c2-4b40-bfae-d35a40f97c17.webp"
+      },
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4255c0a7-d6dd-463e-a424-fb5b3c631dac.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4255c0a7-d6dd-463e-a424-fb5b3c631dac.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4255c0a7-d6dd-463e-a424-fb5b3c631dac.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4255c0a7-d6dd-463e-a424-fb5b3c631dac.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4255c0a7-d6dd-463e-a424-fb5b3c631dac.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4255c0a7-d6dd-463e-a424-fb5b3c631dac.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4255c0a7-d6dd-463e-a424-fb5b3c631dac.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4255c0a7-d6dd-463e-a424-fb5b3c631dac.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4255c0a7-d6dd-463e-a424-fb5b3c631dac.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/4255c0a7-d6dd-463e-a424-fb5b3c631dac.webp"
+      }
+    ]
+  },
+  "metadata": {
+    "lastModified": "2025-12-13T13:40:19.109535+00:00",
+    "etag": "\"7c93cee2-6a0c-4f20-99f1-8f0a5a9f78f4-1765633219109\""
+  }
+}

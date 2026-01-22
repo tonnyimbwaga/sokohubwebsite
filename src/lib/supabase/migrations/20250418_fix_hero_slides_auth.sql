@@ -1,0 +1,1 @@
+npm install @tiptap/extension-typographynpm install @tiptap/extension-typography

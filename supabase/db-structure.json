@@ -1,0 +1,74 @@
+{
+  "tables": {
+    "products": {
+      "columns": [
+        {"name": "id", "type": "uuid", "nullable": false, "default": "uuid_generate_v4()"},
+        {"name": "name", "type": "text", "nullable": false},
+        {"name": "slug", "type": "text", "nullable": false},
+        {"name": "description", "type": "text", "nullable": false},
+        {"name": "price", "type": "numeric", "nullable": false},
+        {"name": "compare_at_price", "type": "numeric", "nullable": true},
+        {"name": "stock", "type": "integer", "nullable": false, "default": "0"},
+        {"name": "status", "type": "product_status", "nullable": true, "default": "'draft'::product_status"},
+        {"name": "is_featured", "type": "boolean", "nullable": true, "default": "false"},
+        {"name": "is_trending", "type": "boolean", "nullable": true, "default": "false"},
+        {"name": "is_deal", "type": "boolean", "nullable": true, "default": "false"},
+        {"name": "category_id", "type": "uuid", "nullable": true},
+        {"name": "images", "type": "jsonb", "nullable": true, "default": "'[]'::jsonb"},
+        {"name": "created_at", "type": "timestamp with time zone", "nullable": true, "default": "now()"},
+        {"name": "updated_at", "type": "timestamp with time zone", "nullable": true, "default": "now()"}
+      ],
+      "enums": {
+        "product_status": ["draft", "active", "archived"]
+      }
+    },
+    "categories": {
+      "columns": [
+        {"name": "id", "type": "uuid", "nullable": false, "default": "uuid_generate_v4()"},
+        {"name": "name", "type": "text", "nullable": false},
+        {"name": "slug", "type": "text", "nullable": false},
+        {"name": "description", "type": "text", "nullable": true},
+        {"name": "image_url", "type": "text", "nullable": true},
+        {"name": "is_active", "type": "boolean", "nullable": true, "default": "true"},
+        {"name": "created_at", "type": "timestamp with time zone", "nullable": true, "default": "now()"},
+        {"name": "updated_at", "type": "timestamp with time zone", "nullable": true, "default": "now()"}
+      ]
+    },
+    "blog_categories": {
+      "columns": [
+        {"name": "id", "type": "uuid", "nullable": false, "default": "uuid_generate_v4()"},
+        {"name": "name", "type": "text", "nullable": false},
+        {"name": "slug", "type": "text", "nullable": false},
+        {"name": "description", "type": "text", "nullable": true},
+        {"name": "created_at", "type": "timestamp with time zone", "nullable": true, "default": "now()"},
+        {"name": "updated_at", "type": "timestamp with time zone", "nullable": true, "default": "now()"}
+      ]
+    },
+    "blog_posts": {
+      "columns": [
+        {"name": "id", "type": "uuid", "nullable": false, "default": "uuid_generate_v4()"},
+        {"name": "title", "type": "text", "nullable": false},
+        {"name": "slug", "type": "text", "nullable": false},
+        {"name": "content", "type": "text", "nullable": false},
+        {"name": "excerpt", "type": "text", "nullable": true},
+        {"name": "author_id", "type": "uuid", "nullable": true},
+        {"name": "status", "type": "post_status", "nullable": true, "default": "'draft'::post_status"},
+        {"name": "featured_image", "type": "text", "nullable": true},
+        {"name": "published_at", "type": "timestamp with time zone", "nullable": true},
+        {"name": "metadata", "type": "jsonb", "nullable": true, "default": "'{}'::jsonb"},
+        {"name": "created_at", "type": "timestamp with time zone", "nullable": true, "default": "now()"},
+        {"name": "updated_at", "type": "timestamp with time zone", "nullable": true, "default": "now()"}
+      ],
+      "enums": {
+        "post_status": ["draft", "published", "archived"]
+      }
+    },
+    "blog_posts_categories": {
+      "columns": [
+        {"name": "post_id", "type": "uuid", "nullable": false},
+        {"name": "category_id", "type": "uuid", "nullable": false},
+        {"name": "created_at", "type": "timestamp with time zone", "nullable": true, "default": "now()"}
+      ]
+    }
+  }
+}

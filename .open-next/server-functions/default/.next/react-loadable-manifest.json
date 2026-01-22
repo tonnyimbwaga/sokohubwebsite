@@ -1,0 +1,88 @@
+{
+  "..\\node_modules\\@supabase\\auth-js\\dist\\module\\lib\\helpers.js -> @supabase/node-fetch": {
+    "id": 92410,
+    "files": []
+  },
+  "..\\node_modules\\@supabase\\functions-js\\dist\\module\\helper.js -> @supabase/node-fetch": {
+    "id": 92410,
+    "files": []
+  },
+  "..\\node_modules\\@supabase\\realtime-js\\dist\\module\\RealtimeClient.js -> @supabase/node-fetch": {
+    "id": 92410,
+    "files": []
+  },
+  "..\\node_modules\\@supabase\\storage-js\\dist\\module\\lib\\helpers.js -> @supabase/node-fetch": {
+    "id": 92410,
+    "files": []
+  },
+  "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_app": {
+    "id": 90472,
+    "files": [
+      "static/chunks/472.04a8725c923ee78b.js"
+    ]
+  },
+  "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_error": {
+    "id": 99341,
+    "files": [
+      "static/chunks/9341.f0fae3856362c97a.js"
+    ]
+  },
+  "app\\admin\\blog-authors\\page.tsx -> ./blog-author-form": {
+    "id": 67558,
+    "files": [
+      "static/chunks/3579-3679c8138ea65744.js",
+      "static/chunks/7375-9ec4cc9b205d600e.js",
+      "static/chunks/2177-ef4abb3f95c8e1b3.js",
+      "static/chunks/7558.d20cfd1dbd094284.js"
+    ]
+  },
+  "app\\admin\\blog\\page.tsx -> ./blog-form": {
+    "id": 46123,
+    "files": [
+      "static/chunks/70e0d97a.02a5d7cadbf8f182.js",
+      "static/chunks/54a60aa6.61b848c87c054177.js",
+      "static/chunks/7375-9ec4cc9b205d600e.js",
+      "static/chunks/2177-ef4abb3f95c8e1b3.js",
+      "static/chunks/3683.93b3ce49098ffe5c.js",
+      "static/chunks/6123.741dababaa81c3a0.js"
+    ]
+  },
+  "app\\admin\\hero-slides\\page.tsx -> @/components/Admin/HeroSlideManager": {
+    "id": 88684,
+    "files": [
+      "static/chunks/f8025e75-706e936bb07e06a2.js",
+      "static/chunks/eeac573e.bb52f6dc2120f6e6.js",
+      "static/chunks/4982-dbc8e50c3d10c00b.js",
+      "static/chunks/3063-86b9d6d9321f1e1c.js",
+      "static/chunks/7375-9ec4cc9b205d600e.js",
+      "static/chunks/3980.2570312c9c9fc403.js",
+      "static/chunks/8684.264dc6bc9fb1e85a.js"
+    ]
+  },
+  "app\\products\\[productId]\\SectionProductHeader.tsx -> @/components/SizeButton": {
+    "id": 74279,
+    "files": [
+      "static/chunks/4279.84d80914bf309095.js"
+    ]
+  },
+  "components\\HeroSliderClient.tsx -> ./HeroSlider/HeroSlider": {
+    "id": 59309,
+    "files": [
+      "static/chunks/0e762574.e757ca578a046b90.js",
+      "static/chunks/9309.4fd0e93a08a1a843.js"
+    ]
+  },
+  "components\\HeroSlider\\HeroSlider.tsx -> ./SlideNavigation": {
+    "id": 91759,
+    "files": [
+      "static/chunks/370b0802.e017aa50578e6d27.js",
+      "static/chunks/1759.496cf266f795e074.js"
+    ]
+  },
+  "components\\RootLayoutClient.tsx -> ./ThirdPartyScripts": {
+    "id": 11150,
+    "files": [
+      "static/chunks/1150.46fe41f38a5f8f38.js"
+    ]
+  }
+}

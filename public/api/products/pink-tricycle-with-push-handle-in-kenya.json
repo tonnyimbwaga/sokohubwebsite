@@ -1,0 +1,59 @@
+{
+  "id": "bda15161-a293-4927-8b2a-86faf92cd959",
+  "name": "Pink Tricycle with Push Handle",
+  "description": "This is a blue tricycle with a convenient-to-use push handle for toddlers/babies in Kenya.",
+  "price": 4899,
+  "compareAtPrice": null,
+  "slug": "pink-tricycle-with-push-handle-in-kenya",
+  "category": "Tricycles",
+  "categorySlug": "tricycles",
+  "images": {
+    "primary": {
+      "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+      "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+      "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+      "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+      "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+      "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+      "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+      "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+      "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+      "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp"
+    },
+    "srcSet": {
+      "srcSet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp 320w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp 640w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp 800w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp 1200w",
+      "srcSetAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp 320w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp 640w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp 800w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp 1200w",
+      "sizes": "(max-width: 640px) 320px, (max-width: 1024px) 640px, (max-width: 1280px) 800px, 1200px"
+    },
+    "gallery": [
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/63488bdf-9b00-4527-8a03-d9a5895f868c.webp"
+      },
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/b1767bc7-4d53-4303-a118-7b8bd435299c.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/b1767bc7-4d53-4303-a118-7b8bd435299c.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/b1767bc7-4d53-4303-a118-7b8bd435299c.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/b1767bc7-4d53-4303-a118-7b8bd435299c.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/b1767bc7-4d53-4303-a118-7b8bd435299c.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/b1767bc7-4d53-4303-a118-7b8bd435299c.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/b1767bc7-4d53-4303-a118-7b8bd435299c.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/b1767bc7-4d53-4303-a118-7b8bd435299c.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/b1767bc7-4d53-4303-a118-7b8bd435299c.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/b1767bc7-4d53-4303-a118-7b8bd435299c.webp"
+      }
+    ]
+  },
+  "metadata": {
+    "lastModified": "2025-08-22T11:41:51.006232+00:00",
+    "etag": "\"bda15161-a293-4927-8b2a-86faf92cd959-1755862911006\""
+  }
+}

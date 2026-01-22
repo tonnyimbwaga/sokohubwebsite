@@ -1,0 +1,21 @@
+{
+  "id": "139fc886-b8b8-4c25-af25-829a9cb7081e",
+  "name": "Skates",
+  "slug": "skates",
+  "productIds": [
+    "22b6baf6-5eaf-46ee-9272-8c67112a617e",
+    "008bb293-95a8-45cd-b4a2-6210b089f663",
+    "3ac50ff5-fd11-41f4-a451-2aedd0a08227",
+    "8feb2b8c-3791-471d-8a01-282c78d3d825",
+    "d7295bd7-74f4-48a6-a8e8-0340dd58d06a",
+    "b82f6a50-6a1f-460d-8004-ebee698abd46",
+    "78a289f2-3e7f-4232-801c-29889ee15749",
+    "ee4580c6-3a90-49fd-8a4d-db4a2e290c85",
+    "7fce185c-5c45-468f-8f31-8e2c53bef4b5",
+    "74f89552-0a4f-4a87-96cb-7dc77508b05c"
+  ],
+  "featuredProducts": [
+    "8feb2b8c-3791-471d-8a01-282c78d3d825",
+    "ee4580c6-3a90-49fd-8a4d-db4a2e290c85"
+  ]
+}

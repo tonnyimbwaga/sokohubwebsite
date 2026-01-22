@@ -1,0 +1,59 @@
+{
+  "id": "9d0d043a-e0e2-4e2b-bbb1-a90e2519bd32",
+  "name": "Blue BMX Bicycle for Kids (Sizes 12, 16 & 20)",
+  "description": "<p>Blue BMX Bikes for Children in Kenya. \n<br>Bike Size Guide in Kenya: \n<br>\n<br>12 --  2 yrs to 4 yrs\n<br>\n<br>16 -- 4 yrs to 8 yrs\n<br>\n<br>20 --  8 yrs to 10 yrs</p>",
+  "price": 6999,
+  "compareAtPrice": null,
+  "slug": "bmx-bike-for-kids-kenya-blue",
+  "category": "Bicycles",
+  "categorySlug": "bicycles",
+  "images": {
+    "primary": {
+      "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+      "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+      "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+      "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+      "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+      "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+      "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+      "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+      "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+      "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp"
+    },
+    "srcSet": {
+      "srcSet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp 320w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp 640w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp 800w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp 1200w",
+      "srcSetAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp 320w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp 640w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp 800w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp 1200w",
+      "sizes": "(max-width: 640px) 320px, (max-width: 1024px) 640px, (max-width: 1280px) 800px, 1200px"
+    },
+    "gallery": [
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/d8030c1e-2095-472b-80db-bc1771f54750.webp"
+      },
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47d805b1-2833-4d56-bdb9-8389f5a76529.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47d805b1-2833-4d56-bdb9-8389f5a76529.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47d805b1-2833-4d56-bdb9-8389f5a76529.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47d805b1-2833-4d56-bdb9-8389f5a76529.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47d805b1-2833-4d56-bdb9-8389f5a76529.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47d805b1-2833-4d56-bdb9-8389f5a76529.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47d805b1-2833-4d56-bdb9-8389f5a76529.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47d805b1-2833-4d56-bdb9-8389f5a76529.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47d805b1-2833-4d56-bdb9-8389f5a76529.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/47d805b1-2833-4d56-bdb9-8389f5a76529.webp"
+      }
+    ]
+  },
+  "metadata": {
+    "lastModified": "2025-08-04T06:10:09.518368+00:00",
+    "etag": "\"9d0d043a-e0e2-4e2b-bbb1-a90e2519bd32-1754287809518\""
+  }
+}

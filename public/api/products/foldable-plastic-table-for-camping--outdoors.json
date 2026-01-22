@@ -1,0 +1,59 @@
+{
+  "id": "5d179b57-b25a-49b3-8d91-83cd782e1d5c",
+  "name": "Foldable Plastic Table for Camping & Outdoors",
+  "description": "Foldable table in Kenya",
+  "price": 9850,
+  "compareAtPrice": null,
+  "slug": "foldable-plastic-table-for-camping--outdoors",
+  "category": "Foldable Tables",
+  "categorySlug": "foldable-tables",
+  "images": {
+    "primary": {
+      "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+      "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+      "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+      "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+      "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+      "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+      "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+      "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+      "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+      "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp"
+    },
+    "srcSet": {
+      "srcSet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp 320w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp 640w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp 800w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp 1200w",
+      "srcSetAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp 320w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp 640w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp 800w, https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp 1200w",
+      "sizes": "(max-width: 640px) 320px, (max-width: 1024px) 640px, (max-width: 1280px) 800px, 1200px"
+    },
+    "gallery": [
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/3e41dd88-644e-4614-8539-701dcd3486d2.webp"
+      },
+      {
+        "mobile": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/ae338c77-af2e-4d17-bc1b-12e23b73c66b.webp",
+        "mobileAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/ae338c77-af2e-4d17-bc1b-12e23b73c66b.webp",
+        "tablet": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/ae338c77-af2e-4d17-bc1b-12e23b73c66b.webp",
+        "tabletAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/ae338c77-af2e-4d17-bc1b-12e23b73c66b.webp",
+        "desktop": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/ae338c77-af2e-4d17-bc1b-12e23b73c66b.webp",
+        "desktopAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/ae338c77-af2e-4d17-bc1b-12e23b73c66b.webp",
+        "thumb": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/ae338c77-af2e-4d17-bc1b-12e23b73c66b.webp",
+        "hero": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/ae338c77-af2e-4d17-bc1b-12e23b73c66b.webp",
+        "heroAvif": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/ae338c77-af2e-4d17-bc1b-12e23b73c66b.webp",
+        "original": "https://tafojbtftmihrheeyoky.supabase.co/storage/v1/object/public/product-images/ae338c77-af2e-4d17-bc1b-12e23b73c66b.webp"
+      }
+    ]
+  },
+  "metadata": {
+    "lastModified": "2025-08-22T09:33:53.174129+00:00",
+    "etag": "\"5d179b57-b25a-49b3-8d91-83cd782e1d5c-1755855233174\""
+  }
+}
