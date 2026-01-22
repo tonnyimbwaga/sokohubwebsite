@@ -232,6 +232,20 @@ export interface Database {
           updated_at?: string;
         };
       };
+      product_categories: {
+        Row: {
+          product_id: string;
+          category_id: string;
+        };
+        Insert: {
+          product_id: string;
+          category_id: string;
+        };
+        Update: {
+          product_id?: string;
+          category_id?: string;
+        };
+      };
     };
     Views: {
       [_ in never]: never;

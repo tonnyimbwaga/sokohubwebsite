@@ -349,17 +349,7 @@ export const newsletter = {
     "Subscribe to receive updates on new arrivals, special offers, and expert tips delivered straight to your inbox.",
 };
 
-export const shoeSizes = [
-  "EU36",
-  "EU37",
-  "EU38",
-  "EU39",
-  "EU40",
-  "EU41",
-  "EU42",
-  "EU43",
-  "EU44",
-];
+// Legacy shoe data removed. Store now uses dynamic categories.
 
 export const note =
   " Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae, est eum magnam doloremque, at adipisci debitis, similique dolores ipsa unde necessitatibus vero quibusdam nostrum numquam!";

@@ -14,6 +14,9 @@ export interface GetProductsParams {
   trending?: boolean;
   search?: string;
   tag?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  sort?: "price-asc" | "price-desc" | "newest";
   viewMode?: "card" | "full";
 }
 
@@ -27,6 +30,9 @@ export const productQueries = {
     trending,
     search,
     tag,
+    minPrice,
+    maxPrice,
+    sort = "newest",
     viewMode = "full",
   }: GetProductsParams = {}) => {
     const selectFull = `
@@ -38,14 +44,13 @@ export const productQueries = {
       status,
       is_featured,
       is_trending,
-      is_deal,
       sku,
       slug,
       category_id,
       images,
       is_published,
       created_at,
-      category:categories(name, slug),
+      category:categories!products_category_id_fkey(name, slug),
       tags
     `;
 
@@ -57,8 +62,7 @@ export const productQueries = {
       images,
       is_featured,
       is_trending,
-      is_deal,
-      category:categories(name, slug),
+      category:categories!products_category_id_fkey(name, slug),
       tags
     `;
 
@@ -70,19 +74,36 @@ export const productQueries = {
 
     // Apply filters
     if (categorySlug) {
-      query = query.eq("categories.slug", categorySlug);
+      // Filter by the joined category table slug
+      query = query.eq("category.slug" as any, categorySlug);
     }
     if (featured) {
       query = query.eq("is_featured", true);
     }
     if (deals) {
-      query = query.eq("is_deal", true);
+      query = query.gt("compare_at_price", 0).not("compare_at_price", "is", null);
     }
     if (trending) {
       query = query.eq("is_trending", true);
     }
     if (search) {
-      query = query.textSearch("name", search);
+      query = query.ilike("name", `%${search}%`);
+    }
+
+    if (minPrice !== undefined) {
+      query = query.gte("price", minPrice);
+    }
+    if (maxPrice !== undefined) {
+      query = query.lte("price", maxPrice);
+    }
+
+    // Apply sorting
+    if (sort === "price-asc") {
+      query = query.order("price", { ascending: true });
+    } else if (sort === "price-desc") {
+      query = query.order("price", { ascending: false });
+    } else {
+      query = query.order("created_at", { ascending: false });
     }
 
     // Filter by tag if provided
@@ -122,14 +143,13 @@ export const productQueries = {
         status,
         is_featured,
         is_trending,
-        is_deal,
         sku,
         slug,
         category_id,
         images,
         is_published,
         created_at,
-        category:categories(name, slug),
+        category:categories!products_category_id_fkey(name, slug),
         categories:product_categories(
           category:categories(id, name, slug)
         )
@@ -156,21 +176,18 @@ export const productQueries = {
         name,
         description,
         price,
+        compare_at_price,
         stock,
         status,
         is_featured,
         is_trending,
-        is_deal,
         sku,
         slug,
         category_id,
         images,
         is_published,
         created_at,
-        category:categories(name, slug),
-        categories:product_categories(
-          category:categories(id, name, slug)
-        )
+        category:categories!products_category_id_fkey(name, slug)
       `,
       )
       .eq("is_published", true)
@@ -185,48 +202,14 @@ export const productQueries = {
     return products;
   },
 
-  // Get featured products
-  getFeaturedProducts: async (limit = 8) => {
-    const { data: products, error } = await supabase
-      .from("products")
-      .select(
-        `
-        id,
-        name,
-        description,
-        price,
-        stock,
-        status,
-        is_featured,
-        is_trending,
-        is_deal,
-        sku,
-        slug,
-        category_id,
-        images,
-        is_published,
-        created_at,
-        category:categories(name, slug),
-        categories:product_categories(
-          category:categories(id, name, slug)
-        )
-      `,
-      )
-      .eq("is_published", true)
-      .eq("is_featured", true)
-      .order("created_at", { ascending: false })
-      .limit(limit);
-
-    if (error) {
-      console.error("Error fetching featured products:", error);
-      throw error;
-    }
-
-    return products;
-  },
-
-  // Get products on sale/deals
+  // Get products on sale/deals - Automated by discount
   getDeals: async (limit = 8) => {
+    // We select products where compare_at_price > price
+    // Note: PostgREST doesn't support complex calculations in ORDER BY easily via the JS client
+    // for calculated columns unless defined in the view or using raw SQL.
+    // However, we can sort by compare_at_price DESC as a proxy or fetch and sort in memory if limit is small.
+    // Given Supabase free tier, let's keep it simple: fetch products marked as deals or with compare_at_price.
+
     const { data: products, error } = await supabase
       .from("products")
       .select(
@@ -235,26 +218,24 @@ export const productQueries = {
         name,
         description,
         price,
+        compare_at_price,
         stock,
         status,
         is_featured,
         is_trending,
-        is_deal,
         sku,
         slug,
         category_id,
         images,
         is_published,
         created_at,
-        category:categories(name, slug),
-        categories:product_categories(
-          category:categories(id, name, slug)
-        )
+        category:categories!products_category_id_fkey(name, slug)
       `,
       )
       .eq("is_published", true)
-      .eq("is_deal", true)
-      .order("created_at", { ascending: false })
+      .gt("compare_at_price", 0) // Ensure there's a comparison price
+      .not("compare_at_price", "is", null)
+      .order("compare_at_price", { ascending: false })
       .limit(limit);
 
     if (error) {
@@ -262,7 +243,11 @@ export const productQueries = {
       throw error;
     }
 
-    return products;
+    return (products || []).sort((a: any, b: any) => {
+      const discA = a.compare_at_price ? (a.compare_at_price - a.price) / a.compare_at_price : 0;
+      const discB = b.compare_at_price ? (b.compare_at_price - b.price) / b.compare_at_price : 0;
+      return discB - discA;
+    }) as any;
   },
 
   // Get trending products
@@ -279,14 +264,13 @@ export const productQueries = {
         status,
         is_featured,
         is_trending,
-        is_deal,
         sku,
         slug,
         category_id,
         images,
         is_published,
         created_at,
-        category:categories(name, slug),
+        category:categories!products_category_id_fkey(name, slug),
         categories:product_categories(
           category:categories(id, name, slug)
         )
@@ -316,7 +300,7 @@ export const productQueries = {
         price,
         slug,
         images,
-        category:categories(name, slug)
+        category:categories!products_category_id_fkey(name, slug)
       `,
       )
       .eq("is_published", true)
@@ -337,7 +321,7 @@ export const productMutations = {
   createProduct: async (product: ProductInsert) => {
     const { data, error } = await supabase
       .from("products")
-      .insert(product)
+      .insert(product as any)
       .select()
       .single();
 
@@ -353,7 +337,7 @@ export const productMutations = {
   updateProduct: async (id: string, updates: ProductUpdate) => {
     const { data, error } = await supabase
       .from("products")
-      .update(updates)
+      .update(updates as any)
       .eq("id", id)
       .select()
       .single();
@@ -378,8 +362,7 @@ export const productMutations = {
 
   // Add a product to a category
   addProductToCategory: async (productId: string, categoryId: string) => {
-    const { data, error } = await supabase
-      .from("product_categories")
+    const { data, error } = await (supabase.from("product_categories") as any)
       .insert({ product_id: productId, category_id: categoryId })
       .select()
       .single();
@@ -432,8 +415,7 @@ export const productMutations = {
         category_id: categoryId,
       }));
 
-      const { error: insertError } = await supabase
-        .from("product_categories")
+      const { error: insertError } = await (supabase.from("product_categories") as any)
         .insert(categoryEntries);
 
       if (insertError) {

@@ -35,7 +35,7 @@ const SectionMoreProducts = ({ currentProduct }: Props) => {
             slug,
             category_id,
             images,
-            categories:categories(name, slug)
+            categories:categories!products_category_id_fkey(name, slug)
           `,
           )
           .eq("status", "active")
@@ -53,10 +53,10 @@ const SectionMoreProducts = ({ currentProduct }: Props) => {
           const discountPercentage =
             product.compare_at_price && product.compare_at_price > product.price
               ? Math.round(
-                  ((product.compare_at_price - product.price) /
-                    product.compare_at_price) *
-                    100,
-                )
+                ((product.compare_at_price - product.price) /
+                  product.compare_at_price) *
+                100,
+              )
               : undefined;
 
           return {
@@ -66,7 +66,7 @@ const SectionMoreProducts = ({ currentProduct }: Props) => {
             price: product.compare_at_price || product.price, // Show original price
             salePrice:
               product.compare_at_price &&
-              product.compare_at_price > product.price
+                product.compare_at_price > product.price
                 ? product.price
                 : undefined, // Show sale price if applicable
             images:

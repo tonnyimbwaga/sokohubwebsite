@@ -16,6 +16,7 @@ interface DatabaseProduct {
   name: string;
   description: string;
   price: number;
+  compare_at_price: number | null;
   stock: number;
   status: string;
   is_featured: boolean;
@@ -41,32 +42,43 @@ export interface CategoryData {
 export const transformProduct = (
   product: DatabaseProduct,
   category: CategoryData,
-): Product => ({
-  id: product.id,
-  name: product.name,
-  description: product.description,
-  price: product.price,
-  salePrice: undefined,
-  images:
-    Array.isArray(product.images) && product.images.length > 0
-      ? [{ url: getProductImageUrl(product.images[0]) }]
-      : [{ url: "/images/placeholder.png" }],
-  sku: product.sku,
-  slug: product.slug || product.sku.toLowerCase(),
-  category: category.name,
-  categorySlug: category.slug,
-  ageRange: "",
-  inStock: product.stock > 0,
-  isFeatured: product.is_featured || false,
-  rating: 5,
-  reviews: 0,
-  sizes: [
-    { value: "0-2", label: "0-2 years", price: product.price, inStock: true },
-    { value: "2-4", label: "2-4 years", price: product.price, inStock: true },
-    { value: "4-6", label: "4-6 years", price: product.price, inStock: true },
-    { value: "6+", label: "6+ years", price: product.price, inStock: true },
-  ],
-});
+): Product => {
+  const discountPercentage =
+    product.compare_at_price && product.compare_at_price > product.price
+      ? Math.round(((product.compare_at_price - product.price) / product.compare_at_price) * 100)
+      : 0;
+
+  return {
+    id: product.id,
+    name: product.name,
+    description: product.description,
+    price: product.price,
+    salePrice: product.compare_at_price && product.compare_at_price > product.price ? product.price : undefined,
+    // Note: In our current UI, 'price' is the amount displayed. 
+    // If it's a sale, we might want to show compare_at_price as the crossed out one.
+    // The Product type has discountPercentage and salePrice.
+    discountPercentage: discountPercentage > 0 ? discountPercentage : undefined,
+    images:
+      Array.isArray(product.images) && product.images.length > 0
+        ? [{ url: getProductImageUrl(product.images[0]) }]
+        : [{ url: "/images/placeholder.png" }],
+    sku: product.sku,
+    slug: product.slug || product.sku.toLowerCase(),
+    category: category.name,
+    categorySlug: category.slug,
+    ageRange: "",
+    inStock: product.stock > 0,
+    isFeatured: product.is_featured || false,
+    rating: 5,
+    reviews: 0,
+    sizes: [
+      { value: "0-2", label: "0-2 years", price: product.price, inStock: true },
+      { value: "2-4", label: "2-4 years", price: product.price, inStock: true },
+      { value: "4-6", label: "4-6 years", price: product.price, inStock: true },
+      { value: "6+", label: "6+ years", price: product.price, inStock: true },
+    ],
+  };
+};
 
 // Client-side function to fetch category products
 export const fetchCategoryProducts = async (
@@ -90,7 +102,7 @@ export const fetchCategoryProducts = async (
     }
 
     // Get products directly using category_id field (primary relationship)
-    const { data: directProducts, error: directError } = await supabase
+    const { data: directProducts } = await supabase
       .from("products")
       .select(
         `

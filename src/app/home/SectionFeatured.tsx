@@ -99,7 +99,7 @@ const fetchFeatured = async (): Promise<Product[]> => {
       slug,
       category_id,
       images,
-      categories:categories(name, slug)
+      categories:categories!products_category_id_fkey(name, slug)
     `,
     )
     .eq("status", "active")
