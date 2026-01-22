@@ -213,22 +213,8 @@ CREATE POLICY "Products are viewable by everyone when published"
 
 CREATE POLICY "Products are editable by authenticated admin users"
     ON products FOR ALL
-    USING (
-        auth.role() = 'authenticated' 
-        AND EXISTS (
-            SELECT 1 FROM profiles 
-            WHERE profiles.id = auth.uid() 
-            AND profiles.role = 'admin'
-        )
-    )
-    WITH CHECK (
-        auth.role() = 'authenticated' 
-        AND EXISTS (
-            SELECT 1 FROM profiles 
-            WHERE profiles.id = auth.uid() 
-            AND profiles.role = 'admin'
-        )
-    );
+    USING (is_admin(auth.uid()))
+    WITH CHECK (is_admin(auth.uid()));
 
 -- Create policies for categories
 CREATE POLICY "Categories are viewable by everyone when active"
@@ -237,22 +223,8 @@ CREATE POLICY "Categories are viewable by everyone when active"
 
 CREATE POLICY "Categories are editable by authenticated admin users"
     ON categories FOR ALL
-    USING (
-        auth.role() = 'authenticated' 
-        AND EXISTS (
-            SELECT 1 FROM profiles 
-            WHERE profiles.id = auth.uid() 
-            AND profiles.role = 'admin'
-        )
-    )
-    WITH CHECK (
-        auth.role() = 'authenticated' 
-        AND EXISTS (
-            SELECT 1 FROM profiles 
-            WHERE profiles.id = auth.uid() 
-            AND profiles.role = 'admin'
-        )
-    );
+    USING (is_admin(auth.uid()))
+    WITH CHECK (is_admin(auth.uid()));
 
 -- Create policies for blog posts
 CREATE POLICY "Blog posts are viewable by everyone when published"
@@ -261,22 +233,8 @@ CREATE POLICY "Blog posts are viewable by everyone when published"
 
 CREATE POLICY "Blog posts are editable by authenticated admin users"
     ON blog_posts FOR ALL
-    USING (
-        auth.role() = 'authenticated' 
-        AND EXISTS (
-            SELECT 1 FROM profiles 
-            WHERE profiles.id = auth.uid() 
-            AND profiles.role = 'admin'
-        )
-    )
-    WITH CHECK (
-        auth.role() = 'authenticated' 
-        AND EXISTS (
-            SELECT 1 FROM profiles 
-            WHERE profiles.id = auth.uid() 
-            AND profiles.role = 'admin'
-        )
-    );
+    USING (is_admin(auth.uid()))
+    WITH CHECK (is_admin(auth.uid()));
 
 -- Create policies for order submissions
 CREATE POLICY "Orders can be created by anyone"
@@ -285,52 +243,30 @@ CREATE POLICY "Orders can be created by anyone"
 
 CREATE POLICY "Orders are viewable by authenticated admin users"
     ON order_submissions FOR SELECT
-    USING (
-        auth.role() = 'authenticated' 
-        AND EXISTS (
-            SELECT 1 FROM profiles 
-            WHERE profiles.id = auth.uid() 
-            AND profiles.role = 'admin'
-        )
-    );
+    USING (is_admin(auth.uid()));
 
 CREATE POLICY "Orders are editable by authenticated admin users"
     ON order_submissions FOR UPDATE
-    USING (
-        auth.role() = 'authenticated' 
-        AND EXISTS (
-            SELECT 1 FROM profiles 
-            WHERE profiles.id = auth.uid() 
-            AND profiles.role = 'admin'
-        )
-    )
-    WITH CHECK (
-        auth.role() = 'authenticated' 
-        AND EXISTS (
-            SELECT 1 FROM profiles 
-            WHERE profiles.id = auth.uid() 
-            AND profiles.role = 'admin'
-        )
-    );
+    USING (is_admin(auth.uid()))
+    WITH CHECK (is_admin(auth.uid()));
 
 -- Create policies for profiles
 CREATE POLICY "Profiles are viewable by authenticated users"
     ON profiles FOR SELECT
-    USING (auth.role() = 'authenticated');
+    USING (
+        auth.uid() = id 
+        OR is_admin(auth.uid())
+    );
 
 CREATE POLICY "Users can update their own profile"
     ON profiles FOR UPDATE
-    USING (auth.uid() = id)
+    USING (
+        auth.uid() = id 
+        OR is_admin(auth.uid())
+    )
     WITH CHECK (
-        auth.uid() = id
-        AND (
-            NEW.role = OLD.role  -- Prevent users from changing their own role
-            OR EXISTS (
-                SELECT 1 FROM profiles 
-                WHERE profiles.id = auth.uid() 
-                AND profiles.role = 'admin'
-            )
-        )
+        auth.uid() = id 
+        OR is_admin(auth.uid())
     );
 
 -- Create function for full-text search with pagination

@@ -35,7 +35,7 @@ export default async function HomeLayoutRenderer() {
             <div className="space-y-8">
                 <HeroSlider slides={heroSlides as any} />
                 <CategoryScroll categories={categories as any} />
-                <CategoryCircles categories={categories as any} />
+                {/* <CategoryCircles categories={categories as any} /> */}
                 <div className="px-4">
                     <Suspense fallback={<div className="h-64 animate-pulse bg-gray-100 rounded-lg" />}>
                         <SectionNewArrivals />
@@ -62,7 +62,7 @@ export default async function HomeLayoutRenderer() {
                         );
 
                     case "category_circles":
-                        return <CategoryCircles key={section.id} categories={categories as any} />;
+                        return null; // <CategoryCircles key={section.id} categories={categories as any} />;
 
                     case "grid_banners":
                         // Usually we'd fetch specific banners for this section, 

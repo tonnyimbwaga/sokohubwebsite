@@ -89,6 +89,8 @@ export default async function HomepageCategorySections() {
     return (
       <div className="space-y-4 sm:space-y-8">
         {categoryData.map(({ category, totalCount, products }) => {
+          if (products.length === 0) return null;
+
           console.log(
             "Rendering category section:",
             category.name,
