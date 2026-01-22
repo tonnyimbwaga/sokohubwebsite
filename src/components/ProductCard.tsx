@@ -96,7 +96,7 @@ const ProductCard = ({
     }, 2000);
   };
 
-  const handleCardClick = async (e: React.MouseEvent) => {
+  const handleCardClick = async () => {
     if (isNavigating) return;
     setIsNavigating(true);
 
@@ -190,19 +190,19 @@ const ProductCard = ({
                 >
                   <path
                     d="M14 3C14 3 10 6 10 9.5C10 11.5 11 13 14 13C17 13 18 11.5 18 9.5C18 6 14 3 14 3Z"
-                    fill="#76D7D7"
+                    fill="#FDF000"
                   />
                   <path
                     d="M14 3C14 3 18 6 18 9.5C18 11.5 17 13 14 13C11 13 10 11.5 10 9.5C10 6 14 3 14 3Z"
-                    fill="#59B5B5"
+                    fill="#FEEE00"
                   />
                   <path
                     d="M14 5C14 5 8 9 8 13C8 16.5 11 19 14 19C17 19 20 16.5 20 13C20 9 14 5 14 5Z"
-                    fill="#76D7D7"
+                    fill="#FDF000"
                   />
                   <path
                     d="M14 5C20 9 20 13 20 13C20 16.5 17 19 14 19C17 19 20 16.5 20 13C20 9 14 5 14 5Z"
-                    fill="#59B5B5"
+                    fill="#FEEE00"
                     fillOpacity="0.8"
                   />
                 </svg>
@@ -243,8 +243,8 @@ const ProductCard = ({
                   </span>
                   <span
                     className={`text-sm line-through ${className?.includes("best-deals-card")
-                        ? "text-gray-300/70"
-                        : "text-gray-500"
+                      ? "text-gray-300/70"
+                      : "text-gray-500"
                       }`}
                   >
                     KSh {product.price.toLocaleString()}

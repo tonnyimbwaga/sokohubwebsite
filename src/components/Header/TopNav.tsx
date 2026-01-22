@@ -1,9 +1,12 @@
 import React from "react";
 import { FaMoneyBillWave, FaPhoneAlt } from "react-icons/fa";
+import { siteConfig } from "@/config/site";
 
 const TopNav = () => {
+  const whatsappNumber = siteConfig.contact.whatsapp.replace(/\D/g, "");
+
   return (
-    <div className="bg-primary py-2 text-white">
+    <div className="bg-primary py-2 text-black">
       <div className="container flex items-center justify-center text-sm space-x-4">
         <span className="hidden sm:flex items-center gap-1">
           <FaMoneyBillWave className="inline-block" />
@@ -14,12 +17,12 @@ const TopNav = () => {
           <span className="ml-1">
             WhatsApp or Call to Order:
             <a
-              href="https://wa.me/254756161300"
-              className="underline hover:text-gray-200 ml-1"
+              href={`https://wa.me/${whatsappNumber}`}
+              className="underline hover:text-gray-800 ml-1"
               target="_blank"
               rel="noopener noreferrer"
             >
-              0756 161 300
+              {siteConfig.contact.phone}
             </a>
           </span>
         </span>

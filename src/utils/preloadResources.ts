@@ -4,7 +4,7 @@ export function preloadResources() {
 
   // DNS prefetch for external resources
   const domains = [
-    "tafojbtftmihrheeyoky.supabase.co",
+    "rmgtdipwxieqlqkxyohv.supabase.co",
     "www.googletagmanager.com",
   ];
 

@@ -39,8 +39,7 @@ export interface StaticImageUrls {
  */
 export function generateStaticImageUrls(imageId: string): StaticImageUrls {
   const baseUrl =
-    process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    "https://tafojbtftmihrheeyoky.supabase.co";
+    process.env.NEXT_PUBLIC_SUPABASE_URL;
   const bucket =
     process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET || "product-images";
 
