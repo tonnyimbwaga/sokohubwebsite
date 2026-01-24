@@ -150,7 +150,10 @@ const SupabaseImageUpload: React.FC<SupabaseImageUploadProps> = ({
             );
 
             const sanitizedName = sanitizeFilename(file.name);
-            const fullPath = path ? `${path.replace(/\/$/, "")}/${sanitizedName}` : sanitizedName;
+
+            // Normalize path: if it starts with the bucket name followed by a slash, remove it to avoid doubling in Storage
+            let normalizedPath = path.replace(new RegExp(`^${bucket}/`), "");
+            const fullPath = normalizedPath ? `${normalizedPath.replace(/\/$/, "")}/${sanitizedName}` : sanitizedName;
 
             const { error: uploadError } = await supabase.storage
               .from(bucket)
@@ -164,10 +167,12 @@ const SupabaseImageUpload: React.FC<SupabaseImageUploadProps> = ({
               throw uploadError;
             }
 
+            // Return path including bucket name so utilities correctly identify the bucket
+            const dbValue = `${bucket}/${fullPath}`;
             setUploadProgress(100);
-            onChange(fullPath);
+            onChange(dbValue);
             // Immediately update preview so user sees the image without reload
-            setPreviewUrl(getPublicUrlFromValue(fullPath));
+            setPreviewUrl(getPublicUrlFromValue(dbValue));
             break;
           } catch (error) {
             uploadAttemptError = error as Error;

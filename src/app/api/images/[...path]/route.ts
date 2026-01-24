@@ -11,16 +11,23 @@ export const revalidate = 31536000; // 1 year
 // This also makes the proxy faster as it doesn't need to invoke a Supabase client.
 
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: Promise<{ path: string[] }> },
 ) {
   const { path } = await params;
   const imagePath = path.join("/");
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const defaultBucket =
+    process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET || "product-images";
+
+  if (!supabaseUrl) {
+    return new Response("Supabase URL not configured", { status: 500 });
+  }
+
   // Detect bucket from path or fallback to default
   const knownBuckets = ["product-images", "categories", "hero-slides", "blog"];
-  let finalBucket = bucketName;
+  let finalBucket: string = defaultBucket;
   let finalPath = imagePath;
 
   if (path.length > 1 && knownBuckets.includes(path[0])) {

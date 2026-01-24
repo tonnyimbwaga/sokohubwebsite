@@ -4,11 +4,6 @@ import {
   FiActivity,
   FiSettings,
   FiPackage,
-  FiPlus,
-  FiEdit,
-  FiTrash2,
-  FiImage,
-  FiGrid,
 } from "react-icons/fi";
 import { useCallback, useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
@@ -87,14 +82,14 @@ export default function CategoriesPage() {
     setLoading(true);
 
     try {
-      const { error } = await (supabase.from("categories").insert({
+      const { error } = await supabase.from("categories").insert({
         name: newCategory.name,
         slug: createSlug(newCategory.name),
         description: newCategory.description,
         image_url: newCategory.image_url,
         meta_title: newCategory.meta_title,
         meta_description: newCategory.meta_description,
-      } as any) as any);
+      });
 
       if (error) throw error;
 
@@ -124,7 +119,7 @@ export default function CategoriesPage() {
     setLoading(true);
 
     try {
-      const { error } = await (((supabase
+      const { error } = await supabase
         .from("categories")
         .update({
           name: editingCategory.name,
@@ -258,7 +253,7 @@ export default function CategoriesPage() {
                           : newCategory.image_url
                       }
                       bucket="categories"
-                      path={`categories/${editingCategory?.slug || createSlug(newCategory.name)}`}
+                      path={`${editingCategory?.slug || createSlug(newCategory.name)}`}
                     />
                   </div>
                 </div>

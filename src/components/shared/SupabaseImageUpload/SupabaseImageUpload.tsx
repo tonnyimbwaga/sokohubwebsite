@@ -125,7 +125,11 @@ export const SupabaseImageUpload = ({
             if (uploadJpegError) throw uploadJpegError;
 
             setUploadProgress(100);
-            onComplete({ webp: webpFileName, original: jpegFileName });
+            // Return paths including bucket name so utilities correctly identify the bucket
+            onComplete({
+              webp: `${bucket}/${webpFileName}`,
+              original: `${bucket}/${jpegFileName}`
+            });
 
             if (index < files.length - 1) {
               setUploadProgress(0);

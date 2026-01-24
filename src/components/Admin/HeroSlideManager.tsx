@@ -286,12 +286,10 @@ export default function HeroSlideManager() {
                     >
                       <div className="flex items-center gap-4">
                         <div className="relative w-16 h-16">
-                          <Image
+                          <img
                             src={getProductImageUrl(slide.image_url)}
                             alt={slide.title}
-                            fill
-                            className="object-cover rounded"
-                            sizes="64px"
+                            className="w-full h-full object-cover rounded"
                           />
                         </div>
                         <div>
