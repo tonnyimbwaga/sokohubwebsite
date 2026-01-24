@@ -119,7 +119,7 @@ export default function CategoriesPage() {
     setLoading(true);
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase
         .from("categories")
         .update({
           name: editingCategory.name,
@@ -129,7 +129,7 @@ export default function CategoriesPage() {
           meta_title: editingCategory.meta_title,
           meta_description: editingCategory.meta_description,
         } as any)
-        .eq("id", editingCategory.id) as any) as any) as any);
+        .eq("id", editingCategory.id) as any);
 
       if (error) throw error;
 
