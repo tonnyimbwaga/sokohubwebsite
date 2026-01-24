@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 
 import ProductForm, { ImageInfo } from "./product-form";
+import BulkUpload from "./BulkUpload";
 import { toast } from "react-hot-toast";
 import { getProductImageUrl } from "@/utils/product-images";
 
@@ -58,6 +59,7 @@ export default function ProductsPage() {
   const [search, setSearch] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [showBulkUpload, setShowBulkUpload] = useState(false);
   const perPage = 10;
   const supabase = createClient();
 
@@ -185,7 +187,13 @@ export default function ProductsPage() {
             Manage your product catalog and inventory
           </p>
         </div>
-        <div className="mt-4 sm:mt-0">
+        <div className="mt-4 sm:mt-0 flex gap-3">
+          <button
+            onClick={() => setShowBulkUpload(!showBulkUpload)}
+            className="inline-flex items-center px-4 py-2.5 rounded-2xl bg-white border border-slate-200 text-slate-900 font-semibold hover:bg-slate-50 transition-all duration-200 shadow-md"
+          >
+            {showBulkUpload ? "Hide Bulk Upload" : "Bulk Upload"}
+          </button>
           <button
             onClick={() => setIsFormOpen(true)}
             className="inline-flex items-center px-4 py-2.5 rounded-2xl bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-all duration-200 shadow-lg hover:shadow-xl"
@@ -194,6 +202,13 @@ export default function ProductsPage() {
           </button>
         </div>
       </div>
+
+      {showBulkUpload && (
+        <BulkUpload onSuccess={() => {
+          setShowBulkUpload(false);
+          window.location.reload();
+        }} />
+      )}
 
       {/* Search and Filters */}
       <div className="flex flex-col sm:flex-row gap-4">

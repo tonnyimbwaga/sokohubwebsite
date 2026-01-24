@@ -159,14 +159,14 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
               )}
 
               <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
-                <a
-                  href={slides[currentIndex]?.link_url}
+                <Link
+                  href="/products"
                   className="group relative inline-flex items-center gap-2 bg-purple-600 text-white px-8 py-4 rounded-full text-base md:text-xl font-black transition-all duration-300 hover:scale-110 shadow-2xl hover:shadow-purple-500/50 overflow-hidden"
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-purple-400 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                   <span className="relative z-10">{slides[currentIndex]?.button_text}</span>
                   <BsLightningFill className="relative z-10 group-hover:animate-wiggle" />
-                </a>
+                </Link>
 
                 <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm text-slate-800 px-6 py-3 rounded-full font-bold shadow-lg">
                   <FaShippingFast className="text-purple-500" />

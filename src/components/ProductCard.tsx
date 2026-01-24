@@ -32,13 +32,20 @@ const ProductCard = ({
 
   const imageUrl = getProductImageUrl(product.images?.[0]);
 
-  // Extract image ID for ultra-fast loading
+  // Extract image path relative to the bucket for ultra-fast loading
   const getImageId = (url: string) => {
-    const match = url.match(/\/([^\/\?]+)(\?|$)/);
-    return match ? match[1] : "";
+    if (!url || url.includes("placeholder")) return "";
+    // If it's a Supabase storage URL, extract the path after the 'public/product-images/' or similar bucket segment
+    const bucket = process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET || "product-images";
+    const bucketSegment = `/public/${bucket}/`;
+    if (url.includes(bucketSegment)) {
+      return url.split(bucketSegment)[1].split("?")[0];
+    }
+    // Fallback: if it's already a relative path or something else
+    return url.split("?")[0];
   };
 
-  const imageId = getImageId(imageUrl) || "placeholder";
+  const imageId = getImageId(imageUrl) || (product.images?.[0] as string) || "placeholder";
 
   const [addCartStatus, setAddCartStatus] = useState<
     "idle" | "loading" | "success"

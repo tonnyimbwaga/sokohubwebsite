@@ -45,7 +45,23 @@ export function generateStaticImageUrls(imageId: string): StaticImageUrls {
 
   // Use direct Supabase storage URLs - Cloudflare will optimize via Next.js
   const cdnBaseUrl = `${baseUrl}/storage/v1/object/public/${bucket}`;
-  const originalUrl = `${cdnBaseUrl}/${imageId}`;
+
+  // Safety check: if imageId is already a full URL, return it
+  if (imageId.startsWith("http")) return {
+    mobile: imageId,
+    mobileAvif: imageId,
+    tablet: imageId,
+    tabletAvif: imageId,
+    desktop: imageId,
+    desktopAvif: imageId,
+    thumb: imageId,
+    hero: imageId,
+    heroAvif: imageId,
+    original: imageId,
+  };
+
+  const cleanImageId = imageId.startsWith("/") ? imageId.substring(1) : imageId;
+  const originalUrl = `${cdnBaseUrl}/${cleanImageId}`;
 
   return {
     mobile: originalUrl,
