@@ -176,11 +176,11 @@ export default function CategoriesPage() {
   };
 
   const handleImageUpload = (url: string) => {
-    const bucketPath = `categories/${url}`;
+    // The url returned from SupabaseImageUpload is already the full path (e.g. "categories/slug/image.png")
     if (editingCategory) {
-      setEditingCategory({ ...editingCategory, image_url: bucketPath });
+      setEditingCategory({ ...editingCategory, image_url: url });
     } else {
-      setNewCategory({ ...newCategory, image_url: bucketPath });
+      setNewCategory({ ...newCategory, image_url: url });
     }
   };
 

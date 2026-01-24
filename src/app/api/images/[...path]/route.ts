@@ -18,15 +18,18 @@ export async function GET(
   const imagePath = path.join("/");
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const bucketName =
-    process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET || "product-images";
+  // Detect bucket from path or fallback to default
+  const knownBuckets = ["product-images", "categories", "hero-slides", "blog"];
+  let finalBucket = bucketName;
+  let finalPath = imagePath;
 
-  if (!supabaseUrl) {
-    return new Response("Supabase URL not configured", { status: 500 });
+  if (path.length > 1 && knownBuckets.includes(path[0])) {
+    finalBucket = path[0];
+    finalPath = path.slice(1).join("/");
   }
 
   // Manually construct the public URL, which is the standard and safe way.
-  const imageUrl = `${supabaseUrl}/storage/v1/object/public/${bucketName}/${imagePath}`;
+  const imageUrl = `${supabaseUrl}/storage/v1/object/public/${finalBucket}/${finalPath}`;
 
   try {
     const imageResponse = await fetch(imageUrl, {

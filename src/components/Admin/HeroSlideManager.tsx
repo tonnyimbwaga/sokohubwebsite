@@ -76,8 +76,8 @@ export default function HeroSlideManager() {
   };
 
   const handleImageUpload = (url: string) => {
-    const bucketPath = `hero-slides/${url}`;
-    setFormData((prev) => ({ ...prev, image_url: bucketPath }));
+    // The url from SupabaseImageUpload already includes the folder structure
+    setFormData((prev) => ({ ...prev, image_url: url }));
   };
 
   async function handleSaveSlide(slide: Partial<HeroSlide>) {
@@ -303,9 +303,8 @@ export default function HeroSlideManager() {
                       </div>
                       <div className="flex items-center gap-2">
                         <span
-                          className={`w-2 h-2 rounded-full ${
-                            slide.active ? "bg-green-500" : "bg-gray-300"
-                          }`}
+                          className={`w-2 h-2 rounded-full ${slide.active ? "bg-green-500" : "bg-gray-300"
+                            }`}
                         />
                         <button
                           onClick={() => handleEdit(slide.id)}
