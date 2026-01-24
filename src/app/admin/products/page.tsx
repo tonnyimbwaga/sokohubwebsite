@@ -178,7 +178,7 @@ export default function ProductsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-900 to-purple-700 bg-clip-text text-transparent">
             Products
           </h1>
           <p className="mt-2 text-slate-600">
@@ -289,10 +289,10 @@ export default function ProductsPage() {
                     <td className="whitespace-nowrap px-6 py-4">
                       <span
                         className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${product.status === "active"
-                            ? "bg-emerald-100 text-emerald-800"
-                            : product.status === "draft"
-                              ? "bg-slate-100 text-slate-800"
-                              : "bg-red-100 text-red-800"
+                          ? "bg-purple-100 text-purple-800"
+                          : product.status === "draft"
+                            ? "bg-slate-100 text-slate-800"
+                            : "bg-red-100 text-red-800"
                           }`}
                       >
                         {product.status}
@@ -420,8 +420,8 @@ export default function ProductsPage() {
                       key={pageNum}
                       onClick={() => setPage(pageNum)}
                       className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold transition-all duration-200 ${pageNum === page
-                          ? "z-10 bg-slate-900 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
-                          : "text-slate-900 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus:z-20 focus:outline-offset-0"
+                        ? "z-10 bg-slate-900 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
+                        : "text-slate-900 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus:z-20 focus:outline-offset-0"
                         }`}
                     >
                       {pageNum}

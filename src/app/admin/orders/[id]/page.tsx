@@ -164,7 +164,7 @@ ${itemsText}`;
           <div className="flex items-center space-x-3">
             <button
               onClick={copyOrderDetails}
-              className="flex items-center space-x-2 px-4 py-2 bg-emerald-600 text-white rounded-2xl hover:bg-emerald-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl"
+              className="flex items-center space-x-2 px-4 py-2 bg-purple-600 text-white rounded-2xl hover:bg-purple-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl"
               title="Copy order details"
             >
               <FiCopy className="h-4 w-4" />

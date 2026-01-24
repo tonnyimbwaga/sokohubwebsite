@@ -74,7 +74,7 @@ export default function StaticHomepageLayout() {
 
       {/* Performance indicator (development only) */}
       {process.env.NODE_ENV === "development" && (
-        <div className="fixed bottom-4 right-4 bg-emerald-500 text-white px-3 py-2 rounded-lg text-sm font-bold shadow-lg z-50">
+        <div className="fixed bottom-4 right-4 bg-purple-600 text-white px-3 py-2 rounded-lg text-sm font-bold shadow-lg z-50">
           🚀 SOKOHUB DYNAMIC MODE
         </div>
       )}

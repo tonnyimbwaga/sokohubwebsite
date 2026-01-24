@@ -306,11 +306,11 @@ ${itemsText}`;
                             <span className="line-through text-slate-400 text-sm">
                               KES {order.original_amount?.toFixed(2)}
                             </span>
-                            <span className="text-emerald-600">
+                            <span className="text-purple-600">
                               KES {order.discounted_amount?.toFixed(2)}
                             </span>
                           </div>
-                          <span className="text-xs text-emerald-600 bg-emerald-100 px-2 py-1 rounded-full">
+                          <span className="text-xs text-purple-600 bg-purple-100 px-2 py-1 rounded-full">
                             {order.discount_percentage}% off
                           </span>
                         </div>
@@ -333,7 +333,7 @@ ${itemsText}`;
                     </Link>
                     <button
                       onClick={() => copyOrderDetails(order)}
-                      className="flex items-center justify-center space-x-2 px-4 py-2.5 bg-emerald-600 text-white rounded-2xl hover:bg-emerald-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl"
+                      className="flex items-center justify-center space-x-2 px-4 py-2.5 bg-purple-600 text-white rounded-2xl hover:bg-purple-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl"
                       title="Copy order details"
                     >
                       <FiCopy className="h-4 w-4" />

@@ -42,7 +42,7 @@ const BrandCard: FC<BrandCardProps> = ({
               {brandName} <PiSealCheckFill className="text-blue-600" />
             </h3>
             <div className="flex items-center gap-1">
-              <MdStar className="text-emerald-500" />
+              <MdStar className="text-purple-500" />
               <p className="text-sm">
                 {rating}{" "}
                 <span className="text-neutral-500">{`(${reviews} Reviews)`}</span>

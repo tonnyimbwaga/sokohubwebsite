@@ -147,9 +147,8 @@ const DataCard = ({
               {columns.map((col: any, index: number) => (
                 <th
                   key={`header-${col.key || index}`}
-                  className={`px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${
-                    col.align === "right" ? "text-right" : ""
-                  }`}
+                  className={`px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${col.align === "right" ? "text-right" : ""
+                    }`}
                 >
                   {col.header}
                 </th>
@@ -165,13 +164,11 @@ const DataCard = ({
                 {columns.map((col: any, colIndex: number) => (
                   <td
                     key={`col-${colIndex}-${col.key}`}
-                    className={`px-4 sm:px-6 py-3 sm:py-4 text-sm ${
-                      col.align === "right" ? "text-right" : ""
-                    } ${
-                      colIndex === 0
+                    className={`px-4 sm:px-6 py-3 sm:py-4 text-sm ${col.align === "right" ? "text-right" : ""
+                      } ${colIndex === 0
                         ? "font-medium text-gray-900"
                         : "text-gray-600"
-                    }`}
+                      }`}
                   >
                     {col.render
                       ? col.render(row[col.key], row)
@@ -331,9 +328,9 @@ export default function AnalyticsPage() {
               title="Total Users"
               value={overviewStats.totalUsers}
               loading={isLoadingOverview}
-              gradient="from-green-50 to-emerald-50"
-              iconColor="text-green-600"
-              iconBg="bg-green-100"
+              gradient="from-purple-50 to-pink-50"
+              iconColor="text-purple-600"
+              iconBg="bg-purple-100"
             />
             <MetricCard
               icon={FiEye}
@@ -558,9 +555,9 @@ export default function AnalyticsPage() {
                     <span className="font-medium text-gray-900">
                       {date?.from && date?.to
                         ? `${format(date.from, "MMM dd")} - ${format(
-                            date.to,
-                            "MMM dd",
-                          )}`
+                          date.to,
+                          "MMM dd",
+                        )}`
                         : "Select dates"}
                     </span>
                   </div>

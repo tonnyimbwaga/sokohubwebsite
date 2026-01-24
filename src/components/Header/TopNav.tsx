@@ -10,7 +10,7 @@ const TopNav = () => {
       <div className="container flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
         <div className="flex items-center gap-4">
           <span className="flex items-center gap-1.5 text-slate-300">
-            <FaMoneyBillWave className="text-emerald-400" />
+            <FaMoneyBillWave className="text-pink-400" />
             <span className="hidden xs:inline">Payment After Delivery Available</span>
             <span className="xs:hidden">Payment After Delivery</span>
           </span>
@@ -24,7 +24,7 @@ const TopNav = () => {
           <span className="hidden md:inline text-slate-400">WhatsApp or Call to Order:</span>
           <a
             href={`https://wa.me/${whatsappNumber}`}
-            className="group relative flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-1.5 rounded-full font-black tracking-wider transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-emerald-900/20"
+            className="group relative flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white px-4 py-1.5 rounded-full font-black tracking-wider transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-purple-900/20"
             target="_blank"
             rel="noopener noreferrer"
           >

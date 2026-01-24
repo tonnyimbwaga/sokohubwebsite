@@ -116,7 +116,7 @@ export default function AdminDashboard({ initialStats }: AdminDashboardProps) {
             icon={FiPackage}
             title="Active Products"
             value={initialStats.total_products}
-            gradient="from-emerald-600 to-emerald-700"
+            gradient="from-purple-600 to-purple-700"
             iconColor="text-white"
             iconBg="bg-white/20"
           />
@@ -189,7 +189,7 @@ export default function AdminDashboard({ initialStats }: AdminDashboardProps) {
                         className={`px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded-full shadow-sm
                         ${order.status === "pending" ? "bg-amber-100 text-amber-700" : ""}
                         ${order.status === "processing" ? "bg-indigo-100 text-indigo-700" : ""}
-                        ${order.status === "completed" ? "bg-emerald-100 text-emerald-700" : ""}
+                        ${order.status === "completed" ? "bg-purple-100 text-purple-700" : ""}
                         ${order.status === "cancelled" ? "bg-rose-100 text-rose-700" : ""}
                       `}
                       >
@@ -237,8 +237,8 @@ export default function AdminDashboard({ initialStats }: AdminDashboardProps) {
                   href="/admin/settings"
                   className="flex items-center gap-4 p-4 rounded-3xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all hover:translate-x-2"
                 >
-                  <div className="h-10 w-10 rounded-2xl bg-emerald-500/20 flex items-center justify-center">
-                    <FiSettings className="h-5 w-5 text-emerald-400" />
+                  <div className="h-10 w-10 rounded-2xl bg-purple-500/20 flex items-center justify-center">
+                    <FiSettings className="h-5 w-5 text-purple-400" />
                   </div>
                   <span className="text-sm font-bold text-white">Configuration</span>
                 </Link>

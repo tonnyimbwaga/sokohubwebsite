@@ -47,8 +47,8 @@ const config: Config = {
           '50%': { transform: 'translateY(-20px)' },
         },
         'glow': {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(16, 185, 129, 0.5)' },
-          '50%': { boxShadow: '0 0 40px rgba(16, 185, 129, 0.8)' },
+          '0%, 100%': { boxShadow: '0 0 20px rgba(147, 51, 234, 0.5)' },
+          '50%': { boxShadow: '0 0 40px rgba(147, 51, 234, 0.8)' },
         },
         'wiggle': {
           '0%, 100%': { transform: 'rotate(-3deg)' },

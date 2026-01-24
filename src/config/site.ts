@@ -36,7 +36,7 @@ export const siteConfig = {
     },
     theme: {
         primaryColor: "#1E293B",
-        secondaryColor: "#10B981",
+        secondaryColor: "#9333ea",
         fontFamily: "Inter, sans-serif",
     },
     categories: [

@@ -36,7 +36,7 @@ const StaticProductCard: React.FC<{ product: StaticProduct }> = ({
         </div>
       )}
       {product.isFeatured && (
-        <div className="absolute top-2 right-2 bg-emerald-500 text-white text-xs px-2 py-1 rounded-full font-medium">
+        <div className="absolute top-2 right-2 bg-purple-500 text-white text-xs px-2 py-1 rounded-full font-medium">
           Featured
         </div>
       )}

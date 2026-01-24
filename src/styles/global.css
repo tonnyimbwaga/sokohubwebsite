@@ -7,8 +7,8 @@
   /* Slate 800 */
   --primary-dark: #0F172A;
   /* Slate 900 */
-  --secondary-color: #10B981;
-  /* Emerald 500 */
+  --secondary-color: #9333ea;
+  /* Purple 600 */
 }
 
 html {
@@ -103,7 +103,7 @@ html {
 }
 
 .loader .circle {
-  --color: #10B981;
+  --color: #9333ea;
   --dim: 1.2rem;
   width: var(--dim);
   height: var(--dim);
