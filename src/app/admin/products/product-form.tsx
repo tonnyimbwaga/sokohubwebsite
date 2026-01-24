@@ -302,13 +302,6 @@ export default function ProductForm({
       }
 
       // Update product categories using RPC
-      console.log(
-        "Updating product categories for product:",
-        productId,
-        "with categories:",
-        data.category_ids,
-      );
-
       if (data.category_ids && data.category_ids.length > 0) {
         const { error: rpcError } = await (supabase.rpc(
           "update_product_categories",
@@ -323,8 +316,6 @@ export default function ProductForm({
           throw new Error(
             `Failed to update product categories: ${rpcError.message}`,
           );
-        } else {
-          console.log("Successfully updated product categories");
         }
       } else {
         // If no categories selected, clear all categories for this product
@@ -341,8 +332,6 @@ export default function ProductForm({
           throw new Error(
             `Failed to clear product categories: ${rpcError.message}`,
           );
-        } else {
-          console.log("Successfully cleared product categories");
         }
       }
 

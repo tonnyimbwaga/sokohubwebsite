@@ -6,7 +6,7 @@ const TopNav = () => {
   const whatsappNumber = siteConfig.contact.whatsapp.replace(/\D/g, "");
 
   return (
-    <div className="bg-slate-900 py-2 text-white">
+    <div className="bg-purple-950 py-2 text-white">
       <div className="container flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
         <div className="flex items-center gap-4">
           <span className="flex items-center gap-1.5 text-slate-300">

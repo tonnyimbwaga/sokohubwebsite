@@ -77,7 +77,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
         </Link>
         <Link href="/products">
           <motion.div
-            className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-xl flex items-center gap-1 cursor-pointer"
+            className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-xl flex items-center gap-1 cursor-pointer"
             whileHover={{ scale: 1.05 }}
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
@@ -213,7 +213,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
       {/* Floating trust badges below hero */}
       <div className="flex flex-wrap justify-center gap-3 mt-6 px-4">
         <motion.div
-          className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg"
+          className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg"
           whileHover={{ scale: 1.05 }}
         >
           <FaStar className="text-white" /> 5-Star Rated
