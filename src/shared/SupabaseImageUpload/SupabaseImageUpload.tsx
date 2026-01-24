@@ -37,25 +37,16 @@ const SupabaseImageUpload: React.FC<SupabaseImageUploadProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-  // Helper that converts a raw filename (or already-absolute path) into a full public URL
+  // Helper that converts a raw filename (or already-absolute path) into a proxy URL
   const getPublicUrlFromValue = useCallback(
     (val: string | null | undefined): string | null => {
       if (!val) return null;
       if (/^https?:\/\//i.test(val)) return val; // already absolute
 
-      const supabaseBaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-      if (!supabaseBaseUrl) return null;
-
-      // If the incoming value already contains a '/'
-      // we assume it already embeds the bucket name, e.g. "categories/uuid.webp".
-      if (val.includes("/")) {
-        return `${supabaseBaseUrl}/storage/v1/object/public/${val}`;
-      }
-
-      // Otherwise we treat it as bare filename in the currently configured bucket
-      return `${supabaseBaseUrl}/storage/v1/object/public/${bucket}/${val}`;
+      // Use our unified proxy for consistent rendering and caching
+      return `/api/images/${val.startsWith("/") ? val.substring(1) : val}`;
     },
-    [bucket],
+    [],
   );
 
   // Whenever the incoming value changes, update preview URL
@@ -235,13 +226,19 @@ const SupabaseImageUpload: React.FC<SupabaseImageUploadProps> = ({
           </div>
         )}
         {previewUrl && (
-          <div className="absolute inset-0 w-full h-full">
+          <div className="absolute inset-0 w-full h-full rounded-[28px] overflow-hidden group">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={previewUrl}
               alt="Upload"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
+            {/* Hover overlay */}
+            <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <div className="bg-white/20 backdrop-blur-md px-6 py-2 rounded-full border border-white/30 text-white font-bold text-sm">
+                Change Cover
+              </div>
+            </div>
           </div>
         )}
       </label>
