@@ -9,7 +9,6 @@ import {
   Draggable,
   DropResult,
 } from "@hello-pangea/dnd";
-import Image from "next/image";
 import { getProductImageUrl } from "@/utils/product-images";
 
 interface HeroSlide {

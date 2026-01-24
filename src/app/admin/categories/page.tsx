@@ -4,6 +4,7 @@ import {
   FiActivity,
   FiSettings,
   FiPackage,
+  FiGrid,
 } from "react-icons/fi";
 import { useCallback, useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
