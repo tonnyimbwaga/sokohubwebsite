@@ -63,6 +63,10 @@ function extractImageUrl(imageData: any): string | null {
 
 // Optimized image URL generator with reduced processing
 export function getProductImageUrl(imageObj: any): string {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+  const bucket =
+    process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET || "product-images";
+
   if (!imageObj) return "/images/placeholder.png";
 
   // If it's a string, handle as direct URL or local image
@@ -79,8 +83,14 @@ export function getProductImageUrl(imageObj: any): string {
     // 2. Local public folder reference
     if (url.startsWith("/images/")) return url;
 
-    // 3. For Supabase images, use our unified proxy for better caching and path handling
-    return `/api/images/${url.startsWith("/") ? url.substring(1) : url}`;
+    // 3. If the string already contains a slash we assume the first segment is the bucket name,
+    //    e.g. "categories/uuid.webp" or "hero-slides/image.jpg".
+    if (url.includes("/")) {
+      return `${supabaseUrl || ""}/storage/v1/object/public/${url.startsWith("/") ? url.substring(1) : url}`;
+    }
+
+    // 4. Bare UUID or filename – default bucket
+    return `${supabaseUrl || ""}/storage/v1/object/public/${bucket || "product-images"}/${url}`;
   }
 
   // If it's an object, extract the first valid URL property
@@ -90,7 +100,11 @@ export function getProductImageUrl(imageObj: any): string {
   if (imagePath.startsWith("http")) return imagePath;
   if (imagePath.startsWith("/images/")) return imagePath;
 
-  return `/api/images/${imagePath.startsWith("/") ? imagePath.substring(1) : imagePath}`;
+  if (imagePath.includes("/")) {
+    return `${supabaseUrl || ""}/storage/v1/object/public/${imagePath.startsWith("/") ? imagePath.substring(1) : imagePath}`;
+  }
+
+  return `${supabaseUrl || ""}/storage/v1/object/public/${bucket || "product-images"}/${imagePath}`;
 }
 
 // Optimized function for getting multiple image sizes

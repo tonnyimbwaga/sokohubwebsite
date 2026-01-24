@@ -37,16 +37,24 @@ const SupabaseImageUpload: React.FC<SupabaseImageUploadProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-  // Helper that converts a raw filename (or already-absolute path) into a proxy URL
+  // Helper that converts a raw filename (or already-absolute path) into a full public URL
   const getPublicUrlFromValue = useCallback(
     (val: string | null | undefined): string | null => {
       if (!val) return null;
       if (/^https?:\/\//i.test(val)) return val; // already absolute
 
-      // Use our unified proxy for consistent rendering and caching
-      return `/api/images/${val.startsWith("/") ? val.substring(1) : val}`;
+      const supabaseBaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+      if (!supabaseBaseUrl) return null;
+
+      // If the incoming value already contains a '/'
+      if (val.includes("/")) {
+        return `${supabaseBaseUrl}/storage/v1/object/public/${val.startsWith("/") ? val.substring(1) : val}`;
+      }
+
+      // Otherwise we treat it as bare filename in the currently configured bucket
+      return `${supabaseBaseUrl}/storage/v1/object/public/${bucket}/${val}`;
     },
-    [],
+    [bucket],
   );
 
   // Whenever the incoming value changes, update preview URL
