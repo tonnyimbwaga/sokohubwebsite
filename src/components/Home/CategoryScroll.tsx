@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { getProductImageUrl } from "@/utils/product-images";
 
 interface Category {
     id: string;
@@ -56,7 +56,7 @@ export default function CategoryScroll({ categories }: CategoryScrollProps) {
 
     const getCategoryImage = (category: Category) => {
         if (category.image_url) {
-            return category.image_url;
+            return getProductImageUrl(category.image_url);
         }
         // Fallback placeholder
         return `https://ui-avatars.com/api/?name=${encodeURIComponent(category.name)}&size=200&background=FEEE00&color=000`;

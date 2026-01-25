@@ -311,7 +311,7 @@ const SectionProductHeader = ({ product }: Props) => {
                 >
                   <button
                     onClick={() => handleActionClick("buyNow")}
-                    className="flex w-full items-center justify-center gap-2 rounded-lg border-2 border-primary bg-transparent py-[10px] px-4 font-semibold text-primary transition-all duration-150 hover:bg-primary/10 disabled:opacity-60 disabled:cursor-not-allowed disabled:border-gray-300 disabled:text-gray-400 disabled:hover:bg-transparent"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg border-2 border-slate-900 bg-transparent py-[10px] px-4 font-bold text-slate-900 transition-all duration-150 hover:bg-slate-900 hover:text-white disabled:opacity-60 disabled:cursor-not-allowed disabled:border-gray-300 disabled:text-gray-400 disabled:hover:bg-transparent"
                     disabled={!product.inStock || (hasSizes && !selectedSize)}
                   >
                     Buy Now

@@ -723,22 +723,22 @@ html {
 
 /* Button Refinements */
 .btn-primary,
-button[class*="bg-primary"],
-a[class*="bg-primary"] {
+button.bg-primary,
+a.bg-primary {
   background-color: var(--primary-color);
   transition: all 0.2s ease;
 }
 
 /* Tasteful darker yellow for white text buttons or hover states */
 .btn-primary.text-white,
-button[class*="bg-primary"].text-white,
-a[class*="bg-primary"].text-white {
+button.bg-primary.text-white,
+a.bg-primary.text-white {
   background-color: var(--primary-dark);
 }
 
 .btn-primary:hover,
-button[class*="bg-primary"]:hover,
-a[class*="bg-primary"]:hover {
+button.bg-primary:hover,
+a.bg-primary:hover {
   background-color: var(--primary-dark);
   transform: translateY(-1px);
 }
