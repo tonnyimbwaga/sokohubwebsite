@@ -4,20 +4,7 @@ export const PLACEHOLDER_IMAGE = "/images/placeholder.png";
 // Image URLs are not cached in-memory here. Rely on browser, Next.js, and Supabase/CDN caching for optimal performance.
 // Ensure your Supabase bucket is public and has long-lived cache headers (e.g., Cache-Control: public, max-age=31536000, immutable)
 
-// Optimized image configuration for Workers
-const IMAGE_CONFIG = {
-  // Use smaller default sizes for mobile-first approach
-  defaultWidth: 400,
-  defaultHeight: 400,
-  // Quality settings optimized for file size
-  quality: 75,
-  // Supported formats in order of preference
-  formats: ["webp", "avif", "jpg"] as const,
-  // Lazy loading threshold
-  lazyThreshold: 2000, // 2KB threshold for lazy loading
-} as const;
-
-interface ImageOptions {
+interface _ImageOptions {
   width?: number;
   height?: number;
   quality?: number;
@@ -69,6 +56,8 @@ export function getProductImageUrl(imageObj: any): string {
 
   if (!imageObj) return "/images/placeholder.png";
 
+  const knownBuckets = ["product-images", "categories", "hero-slides", "blog"];
+
   // If it's a string, handle as direct URL or local image
   if (typeof imageObj === "string") {
     let url = imageObj.trim();
@@ -83,28 +72,39 @@ export function getProductImageUrl(imageObj: any): string {
     // 2. Local public folder reference
     if (url.startsWith("/images/")) return url;
 
-    // 3. If the string already contains a slash we assume the first segment is the bucket name,
-    //    e.g. "categories/uuid.webp" or "hero-slides/image.jpg".
-    if (url.includes("/")) {
-      return `${supabaseUrl || ""}/storage/v1/object/public/${url.startsWith("/") ? url.substring(1) : url}`;
+    // 3. Remove redundant prefixes like "product-images/product-images/"
+    for (const b of knownBuckets) {
+      const doublePrefix = `${b}/${b}/`;
+      if (url.startsWith(doublePrefix)) {
+        url = url.substring(b.length + 1);
+        break;
+      }
     }
 
-    // 4. Bare UUID or filename – default bucket
-    return `${supabaseUrl || ""}/storage/v1/object/public/${bucket || "product-images"}/${url}`;
+    // 4. Resolve the path and bucket
+    let finalBucket = bucket;
+    let finalPath = url;
+
+    // Remove leading slash if present
+    const cleanUrl = url.startsWith("/") ? url.substring(1) : url;
+    const parts = cleanUrl.split("/");
+
+    if (parts.length > 1 && knownBuckets.includes(parts[0])) {
+      finalBucket = parts[0];
+      finalPath = parts.slice(1).join("/");
+    } else {
+      finalPath = cleanUrl;
+    }
+
+    return `${supabaseUrl || ""}/storage/v1/object/public/${finalBucket}/${finalPath}`;
   }
 
   // If it's an object, extract the first valid URL property
   let imagePath = extractImageUrl(imageObj) || "";
   if (!imagePath) return "/images/placeholder.png";
-  imagePath = imagePath.split("?")[0];
-  if (imagePath.startsWith("http")) return imagePath;
-  if (imagePath.startsWith("/images/")) return imagePath;
 
-  if (imagePath.includes("/")) {
-    return `${supabaseUrl || ""}/storage/v1/object/public/${imagePath.startsWith("/") ? imagePath.substring(1) : imagePath}`;
-  }
-
-  return `${supabaseUrl || ""}/storage/v1/object/public/${bucket || "product-images"}/${imagePath}`;
+  // Recursively call for the extracted string path to use the same logic
+  return getProductImageUrl(imagePath);
 }
 
 // Optimized function for getting multiple image sizes
@@ -204,17 +204,8 @@ export function getFeedImageUrl(imageObj: any): string {
 }
 
 // Debug helper to log image data structure (disabled in production)
-export function debugImageData(images: any, productName?: string): void {
+export function debugImageData(_images: any, _productName?: string): void {
   // Debug logging disabled to reduce console noise
-  // if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-  //   console.log(`Image data for ${productName || 'product'}:`, {
-  //     images,
-  //     type: typeof images,
-  //     isArray: Array.isArray(images),
-  //     length: Array.isArray(images) ? images.length : 'N/A',
-  //     firstItem: Array.isArray(images) && images.length > 0 ? images[0] : null
-  //   });
-  // }
 }
 
 // Helper to get product images from product_image_versions table

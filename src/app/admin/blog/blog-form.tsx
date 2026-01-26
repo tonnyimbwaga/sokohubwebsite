@@ -109,7 +109,8 @@ export default function BlogPostForm({
   }, [watchTitle, setValue, post?.slug]);
 
   const handleImageUpload = (urls: { webp: string; original: string }) => {
-    const bucketPath = `blog/${urls.webp}`;
+    // urls.webp already includes the "blog/" bucket prefix
+    const bucketPath = urls.webp;
     setFeaturedImage(bucketPath);
     setValue("featured_image", bucketPath);
   };
@@ -123,19 +124,19 @@ export default function BlogPostForm({
       // First, save the blog post
       const { error } = post?.id
         ? await supabase
-            .from("blog_posts")
-            .update({
-              ...postData,
-              updated_at: new Date().toISOString(),
-            })
-            .eq("id", post.id)
-        : await supabase.from("blog_posts").insert({
+          .from("blog_posts")
+          .update({
             ...postData,
-            id: postId,
-            created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
-            author_id: (await supabase.auth.getUser()).data.user?.id,
-          });
+          })
+          .eq("id", post.id)
+        : await supabase.from("blog_posts").insert({
+          ...postData,
+          id: postId,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          author_id: (await supabase.auth.getUser()).data.user?.id,
+        });
 
       if (error) throw error;
 
@@ -420,8 +421,8 @@ export default function BlogPostForm({
             : typeof mutation.error === "object" &&
               mutation.error !== null &&
               "message" in mutation.error
-            ? String((mutation.error as any).message)
-            : String(mutation.error ?? "Unknown error")}
+              ? String((mutation.error as any).message)
+              : String(mutation.error ?? "Unknown error")}
         </p>
       )}
     </form>

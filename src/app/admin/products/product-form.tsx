@@ -232,9 +232,11 @@ export default function ProductForm({
     webp: string;
     original: string;
   }) => {
+    // urls.webp and urls.original already include the bucket prefix (e.g. "product-images/...")
+    // so we store them as-is to the database.
     const newImage: ImageInfo = {
-      web_image_url: `product-images/${urls.webp}`,
-      feed_image_url: `product-images/${urls.original}`,
+      web_image_url: urls.webp,
+      feed_image_url: urls.original,
       alt: "",
     };
     const updatedImages = [...uploadedImages, newImage];
