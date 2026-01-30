@@ -321,7 +321,7 @@ const SectionProductHeader = ({ product }: Props) => {
                             : "border-slate-200 bg-white hover:border-slate-300 shadow-sm"
                             } ${!color.available ? "opacity-40 grayscale cursor-not-allowed" : "cursor-pointer"}`}
                         >
-                          <div className="flex items-center gap-2 px-3 py-1">
+                          <div className={`flex items-center gap-2 ${color.value ? "px-3 py-1" : "px-4 py-2"}`}>
                             {color.value && (
                               <div
                                 className="w-5 h-5 rounded-full border border-gray-200"
@@ -501,7 +501,7 @@ const SectionProductHeader = ({ product }: Props) => {
                           : "border-slate-200 bg-white hover:border-slate-300 shadow-sm"
                           } ${!color.available ? "opacity-40 grayscale cursor-not-allowed" : "cursor-pointer"}`}
                       >
-                        <div className="flex items-center gap-2 px-3 py-1">
+                        <div className={`flex items-center gap-2 ${color.value ? "px-3 py-1" : "px-4 py-2"}`}>
                           {color.value && (
                             <div
                               className="w-5 h-5 rounded-full border border-gray-200"

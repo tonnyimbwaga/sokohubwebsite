@@ -32,7 +32,7 @@ const ProductColorConfig: FC<ProductColorConfigProps> = ({
 
         const newColorObj: Color = {
             label: newColorLabel,
-            value: newColorValue || newColorLabel, // Fallback value to label if empty
+            value: newColorValue, // Don't fallback to label, keep it empty if not provided
             price: price || 0,
             available: true,
         };
@@ -71,16 +71,7 @@ const ProductColorConfig: FC<ProductColorConfigProps> = ({
                         type="text"
                         value={newColorLabel}
                         onChange={(e) => setNewColorLabel(e.target.value)}
-                        placeholder="Color Name (e.g. Ocean Blue)"
-                        className="rounded-lg border p-3 text-base w-full"
-                    />
-                </div>
-                <div className="w-full sm:w-40">
-                    <input
-                        type="text"
-                        value={newColorValue}
-                        onChange={(e) => setNewColorValue(e.target.value)}
-                        placeholder="Hex/CSS (optional)"
+                        placeholder="Color Name (e.g. Blue, White, Crimson)"
                         className="rounded-lg border p-3 text-base w-full"
                     />
                 </div>
@@ -90,7 +81,7 @@ const ProductColorConfig: FC<ProductColorConfigProps> = ({
                             type="number"
                             value={price}
                             onChange={(e) => setPrice(Number(e.target.value))}
-                            placeholder="Price"
+                            placeholder="Extra Price (optional)"
                             className="rounded-lg border p-3 text-base font-mono text-right w-full"
                             min={0}
                         />
@@ -101,7 +92,7 @@ const ProductColorConfig: FC<ProductColorConfigProps> = ({
                     className="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold shadow-sm hover:bg-indigo-700 transition whitespace-nowrap w-full sm:w-auto"
                     type="button"
                 >
-                    Add Color
+                    Add Option
                 </button>
             </div>
 
@@ -112,12 +103,7 @@ const ProductColorConfig: FC<ProductColorConfigProps> = ({
                         key={index}
                         className="rounded-xl border shadow-sm bg-white p-4 flex flex-col gap-3 hover:border-indigo-200 transition-colors"
                     >
-                        <div className="flex gap-4 items-center">
-                            {/* Simple color preview circle */}
-                            <div
-                                className="w-10 h-10 rounded-full border border-gray-200 shadow-inner flex-shrink-0"
-                                style={{ backgroundColor: color.value || 'transparent' }}
-                            />
+                        <div className="flex gap-4 items-start">
                             <div className="flex-1">
                                 <input
                                     type="text"
@@ -125,17 +111,26 @@ const ProductColorConfig: FC<ProductColorConfigProps> = ({
                                     onChange={(e) =>
                                         updateColorField(index, "label", e.target.value)
                                     }
-                                    className="font-bold text-gray-900 border-none p-0 focus:ring-0 w-full"
+                                    placeholder="Color Label"
+                                    className="font-bold text-gray-900 border-none p-0 focus:ring-0 w-full text-lg mb-1"
                                 />
-                                <input
-                                    type="text"
-                                    value={color.value}
-                                    onChange={(e) =>
-                                        updateColorField(index, "value", e.target.value)
-                                    }
-                                    className="text-xs text-gray-500 border-none p-0 focus:ring-0 w-full"
-                                    placeholder="CSS Color Value"
-                                />
+                                <div className="flex items-center gap-2">
+                                    <input
+                                        type="text"
+                                        value={color.value}
+                                        onChange={(e) =>
+                                            updateColorField(index, "value", e.target.value)
+                                        }
+                                        className="text-xs text-gray-400 border border-gray-100 rounded px-1.5 py-0.5 focus:ring-0 w-32"
+                                        placeholder="Hex/CSS (optional)"
+                                    />
+                                    {color.value && (
+                                        <div
+                                            className="w-4 h-4 rounded-full border border-gray-200"
+                                            style={{ backgroundColor: color.value }}
+                                        />
+                                    )}
+                                </div>
                             </div>
                             <button
                                 onClick={() => removeColor(index)}
