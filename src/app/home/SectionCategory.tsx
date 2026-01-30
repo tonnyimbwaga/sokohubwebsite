@@ -31,7 +31,7 @@ const SectionCategory = ({
         title={categoryName}
         description={
           description ||
-          `Discover amazing ${categoryName.toLowerCase()} for kids`
+          `Discover amazing ${categoryName.toLowerCase()}`
         }
       />
       <div className="mt-8">

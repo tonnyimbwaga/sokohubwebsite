@@ -42,6 +42,8 @@ export interface ProductFormData {
   images: ImageInfo[];
   sizes?: Size[];
   tags?: string[];
+  colors?: string[];
+  options?: Record<string, string>;
 }
 
 interface Category {
@@ -112,6 +114,8 @@ export default function ProductForm({
       product?.category_ids && product.category_ids.length > 0
         ? product.category_ids
         : [], // Additional categories from junction table
+    colors: product?.colors || [],
+    options: product?.options || {},
   };
 
   console.log(
@@ -278,6 +282,8 @@ export default function ProductForm({
         images: data.images,
         sizes: data.sizes,
         tags: data.tags,
+        colors: data.colors,
+        options: data.options,
       };
 
       let productId;
@@ -744,6 +750,166 @@ export default function ProductForm({
           />
         </section>
         <hr className="my-6 border-gray-200" />
+
+        {/* Variants & Options */}
+        <section>
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">Variants & Options</h3>
+
+          {/* Colors */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Available Colors
+            </label>
+            <Controller
+              name="colors"
+              control={control}
+              defaultValue={[]}
+              render={({ field }) => (
+                <div className="space-y-3">
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="Add a color (e.g. Red, Blue, Green)..."
+                      className="block w-full border border-gray-300 rounded-lg px-4 py-3 text-base"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          const val = e.currentTarget.value.trim();
+                          if (val && !field.value?.includes(val)) {
+                            field.onChange([...(field.value || []), val]);
+                            e.currentTarget.value = '';
+                          }
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {field.value?.map((color, index) => (
+                      <span
+                        key={index}
+                        className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800"
+                      >
+                        {color}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newColors = [...(field.value || [])];
+                            newColors.splice(index, 1);
+                            field.onChange(newColors);
+                          }}
+                          className="ml-2 text-indigo-600 hover:text-indigo-900 focus:outline-none"
+                        >
+                          ×
+                        </button>
+                      </span>
+                    ))}
+                    {(!field.value || field.value.length === 0) && (
+                      <span className="text-gray-400 text-sm">No colors added yet. Type above and press Enter.</span>
+                    )}
+                  </div>
+                </div>
+              )}
+            />
+          </div>
+
+          {/* Other Options */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Other Attributes / Specifications
+            </label>
+            <p className="text-xs text-gray-500 mb-3">Add key-value pairs for other product attributes (e.g., Material: Cotton, Pattern: Striped)</p>
+            <Controller
+              name="options"
+              control={control}
+              defaultValue={{}}
+              render={({ field }) => {
+                const options = field.value || {};
+                const [newKey, setNewKey] = useState("");
+                const [newValue, setNewValue] = useState("");
+
+                const addOption = () => {
+                  if (newKey.trim() && newValue.trim()) {
+                    field.onChange({
+                      ...options,
+                      [newKey.trim()]: newValue.trim()
+                    });
+                    setNewKey("");
+                    setNewValue("");
+                  }
+                };
+
+                return (
+                  <div className="space-y-4">
+                    <div className="flex gap-2 items-start">
+                      <div className="flex-1">
+                        <input
+                          type="text"
+                          value={newKey}
+                          onChange={(e) => setNewKey(e.target.value)}
+                          placeholder="Attribute Name (e.g. Material)"
+                          className="block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <input
+                          type="text"
+                          value={newValue}
+                          onChange={(e) => setNewValue(e.target.value)}
+                          placeholder="Value (e.g. 100% Cotton)"
+                          className="block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              e.preventDefault();
+                              addOption();
+                            }
+                          }}
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        onClick={addOption}
+                        className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm font-medium transition-colors"
+                      >
+                        Add
+                      </button>
+                    </div>
+
+                    <div className="bg-gray-50 rounded-xl border border-gray-200 p-4 space-y-2">
+                      {Object.entries(options).length > 0 ? (
+                        Object.entries(options).map(([key, value]) => (
+                          <div key={key} className="flex items-center justify-between p-2 bg-white rounded-lg border border-gray-100 shadow-sm">
+                            <div className="flex gap-2">
+                              <span className="font-semibold text-gray-700">{key}:</span>
+                              <span className="text-gray-600">{value as React.ReactNode}</span>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const newOptions = { ...options };
+                                delete newOptions[key];
+                                field.onChange(newOptions);
+                              }}
+                              className="text-red-400 hover:text-red-600 p-1"
+                            >
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                              </svg>
+                            </button>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="text-center text-gray-400 text-sm py-2">
+                          No attributes added yet.
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              }}
+            />
+          </div>
+        </section>
+
         {/* Organization */}
         <section>
           <h3 className="text-lg font-semibold text-gray-800 mb-4">

@@ -49,6 +49,9 @@ export const productQueries = {
       slug,
       category_id,
       images,
+
+      colors,
+      options,
       is_published,
       created_at,
       category:categories!products_category_id_fkey!inner(name, slug),
@@ -149,6 +152,9 @@ export const productQueries = {
         slug,
         category_id,
         images,
+
+        colors,
+        options,
         is_published,
         created_at,
         category:categories!products_category_id_fkey(name, slug),
