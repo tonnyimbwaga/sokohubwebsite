@@ -30,8 +30,14 @@ const SectionCategory = ({
       <SectionHeading
         title={categoryName}
         description={
-          description ||
-          `Discover amazing ${categoryName.toLowerCase()}`
+          (() => {
+            if (!description) {
+              return `Discover amazing ${categoryName.toLowerCase()}`;
+            }
+            // Match the first sentence including punctuation and trailing space
+            const match = description.match(/^.*?[.!?](?:\s|$)/);
+            return match ? match[0].trim() : description;
+          })()
         }
       />
       <div className="mt-8">

@@ -39,7 +39,8 @@ export const categoryQueries = {
         slug,
         description,
         image_url,
-        is_active
+        is_active,
+        metadata
       `,
       )
       .eq("slug", slug)
@@ -79,11 +80,11 @@ export const categoryQueries = {
     // Extract products from the nested structure using the type guard
     const mappedProducts = productsData
       ? productsData.map((item) => {
-          if (isItemWithProduct(item)) {
-            return item.product; // item.product is ProductInCategory | null
-          }
-          return null;
-        })
+        if (isItemWithProduct(item)) {
+          return item.product; // item.product is ProductInCategory | null
+        }
+        return null;
+      })
       : [];
 
     // Filter out null products and assert the type for the final array
@@ -108,7 +109,8 @@ export const categoryQueries = {
         slug,
         description,
         image_url,
-        is_active
+        is_active,
+        metadata
       `,
       )
       .eq("is_active", true)
@@ -145,8 +147,10 @@ export const categoryQueries = {
       .insert({
         ...category,
         slug,
-        meta_title: metaTitle,
-        meta_description: metaDescription,
+        metadata: {
+          meta_title: metaTitle,
+          meta_description: metaDescription,
+        },
       })
       .select(
         `
@@ -180,10 +184,12 @@ export const categoryQueries = {
         ...updates,
         ...(updates.name
           ? {
-              slug,
+            slug,
+            metadata: {
               meta_title: updates.name,
               meta_description: updates.description || updates.name,
-            }
+            },
+          }
           : {}),
         updated_at: new Date().toISOString(),
       })

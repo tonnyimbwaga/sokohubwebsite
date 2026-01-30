@@ -24,6 +24,7 @@ interface Category {
   created_at: string;
   meta_title?: string;
   meta_description?: string;
+  metadata?: any;
 }
 
 export default function CategoriesPage() {
@@ -46,7 +47,12 @@ export default function CategoriesPage() {
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      setCategories((data as any) || []);
+      const formattedData = (data as any[] || []).map(cat => ({
+        ...cat,
+        meta_title: cat.metadata?.meta_title || "",
+        meta_description: cat.metadata?.meta_description || "",
+      }));
+      setCategories(formattedData);
     } catch (error) {
       toast.error("Error loading categories");
       console.error("Error:", error);
@@ -83,16 +89,24 @@ export default function CategoriesPage() {
     setLoading(true);
 
     try {
-      const { error } = await supabase.from("categories").insert({
+      const payload = {
         name: newCategory.name,
         slug: createSlug(newCategory.name),
-        description: newCategory.description,
-        image_url: newCategory.image_url,
-        meta_title: newCategory.meta_title,
-        meta_description: newCategory.meta_description,
-      });
+        description: newCategory.description || null,
+        image_url: newCategory.image_url || null,
+        metadata: {
+          meta_title: newCategory.meta_title,
+          meta_description: newCategory.meta_description,
+        },
+      };
 
-      if (error) throw error;
+      console.log("Creating Category with payload:", payload);
+      const { error } = await supabase.from("categories").insert(payload as any);
+
+      if (error) {
+        console.error("Supabase Error detail:", error);
+        throw error;
+      }
 
       toast.success("Category created successfully");
       setNewCategory({
@@ -120,19 +134,27 @@ export default function CategoriesPage() {
     setLoading(true);
 
     try {
-      const { error } = await (supabase
-        .from("categories")
-        .update({
-          name: editingCategory.name,
-          slug: createSlug(editingCategory.name),
-          description: editingCategory.description,
-          image_url: editingCategory.image_url,
+      const payload = {
+        name: editingCategory.name,
+        slug: createSlug(editingCategory.name),
+        description: editingCategory.description || null,
+        image_url: editingCategory.image_url || null,
+        metadata: {
           meta_title: editingCategory.meta_title,
           meta_description: editingCategory.meta_description,
-        } as any)
+        },
+      };
+
+      console.log("Updating Category with payload:", payload);
+      const { error } = await (supabase
+        .from("categories")
+        .update(payload as any)
         .eq("id", editingCategory.id) as any);
 
-      if (error) throw error;
+      if (error) {
+        console.error("Supabase Error detail:", error);
+        throw error;
+      }
 
       toast.success("Category updated successfully");
       setEditingCategory(null);
@@ -168,7 +190,11 @@ export default function CategoriesPage() {
   };
 
   const handleEdit = (category: Category) => {
-    setEditingCategory(category);
+    setEditingCategory({
+      ...category,
+      meta_title: category.meta_title || (category as any).metadata?.meta_title || "",
+      meta_description: category.meta_description || (category as any).metadata?.meta_description || "",
+    });
   };
 
   const handleImageUpload = (url: string) => {

@@ -24,12 +24,9 @@ interface DatabaseProduct {
   sku: string;
   slug: string;
   category_id: string;
-  images: Array<{
-    web_image_url?: string;
-    feed_image_url?: string;
-    url?: string;
-    alt?: string;
-  }>;
+  compare_at_price?: number | null;
+  cost_price?: number | null;
+  images: Json;
 }
 
 // Server-side Supabase client with service role
@@ -74,7 +71,7 @@ export const getHomepageCategoryData = unstable_cache(
       // Get all active categories
       const { data: allCategories, error: categoriesError } = await supabase
         .from("categories")
-        .select("id, name, slug, image_url")
+        .select("id, name, slug, description, image_url, metadata")
         .eq("is_active", true);
 
       if (categoriesError || !allCategories) {
@@ -119,6 +116,8 @@ export const getHomepageCategoryData = unstable_cache(
               name,
               description,
               price,
+              compare_at_price,
+              cost_price,
               stock,
               status,
               is_featured,
@@ -135,8 +134,7 @@ export const getHomepageCategoryData = unstable_cache(
               .limit(7); // Limit to 7 products for homepage display
 
             console.log(
-              `Category ${category.slug}: Found ${
-                directProducts?.length || 0
+              `Category ${category.slug}: Found ${directProducts?.length || 0
               } direct products`,
             );
 
@@ -147,8 +145,7 @@ export const getHomepageCategoryData = unstable_cache(
               .eq("category_id", category.id);
 
             console.log(
-              `Category ${category.slug}: Found ${
-                productIds?.length || 0
+              `Category ${category.slug}: Found ${productIds?.length || 0
               } junction table product IDs`,
             );
 
@@ -163,6 +160,8 @@ export const getHomepageCategoryData = unstable_cache(
                 name,
                 description,
                 price,
+                compare_at_price,
+                cost_price,
                 stock,
                 status,
                 is_featured,
