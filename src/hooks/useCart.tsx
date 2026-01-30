@@ -17,10 +17,10 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType>({
   items: [],
-  addToCart: () => {},
-  removeFromCart: () => {},
-  updateQuantity: () => {},
-  clearCart: () => {},
+  addToCart: () => { },
+  removeFromCart: () => { },
+  updateQuantity: () => { },
+  clearCart: () => { },
   total: 0,
   itemCount: 0,
   isCartLoading: true, // Ensure isCartLoading has a default value
@@ -63,12 +63,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setItems((currentItems) => {
       const existingItem = currentItems.find(
         (item) =>
-          item.id === newItem.id && item.selectedSize === newItem.selectedSize,
+          item.id === newItem.id &&
+          item.selectedSize === newItem.selectedSize &&
+          item.selectedColor?.label === newItem.selectedColor?.label,
       );
 
       if (existingItem) {
         return currentItems.map((item) =>
-          item.id === newItem.id && item.selectedSize === newItem.selectedSize
+          item.id === newItem.id &&
+            item.selectedSize === newItem.selectedSize &&
+            item.selectedColor?.label === newItem.selectedColor?.label
             ? { ...item, quantity: item.quantity + newItem.quantity }
             : item,
         );

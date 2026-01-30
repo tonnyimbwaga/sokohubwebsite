@@ -46,6 +46,13 @@ export interface ProductImage {
   alt?: string;
 }
 
+export interface Color {
+  label: string;
+  value: string;
+  price: number;
+  available: boolean;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -71,6 +78,7 @@ export interface Product {
     price: number;
     inStock: boolean;
   }[];
+  colors?: Color[];
 }
 
 export interface ProductCategory {
@@ -90,7 +98,7 @@ export interface ProductCategory {
 export interface CartItem extends Product {
   quantity: number;
   selectedSize?: string;
-  selectedColor?: string;
+  selectedColor?: Color;
   giftWrap?: boolean;
   personalizedMessage?: string;
 }

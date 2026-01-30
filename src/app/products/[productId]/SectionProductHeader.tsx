@@ -13,9 +13,9 @@ import type { Size } from "@/components/SizeButton";
 import { useCart } from "@/hooks/useCart";
 import OptimizedImage from "@/components/OptimizedImage";
 import ButtonPrimary from "@/shared/Button/ButtonPrimary";
-import { Product } from "@/data/types";
+import { Product, Color } from "@/data/types";
 import Link from "next/link";
-import { PLACEHOLDER_IMAGE, getProductImageUrl } from "@/utils/product-images";
+import { getProductImageUrl } from "@/utils/product-images";
 import { trackAddToCart } from "@/lib/fpixel";
 import StickyAddToCartBar from "@/components/StickyAddToCartBar";
 import { toast } from "sonner";
@@ -29,10 +29,14 @@ const SectionProductHeader = ({ product }: Props) => {
   const { addToCart } = useCart();
   const router = useRouter();
   const [selectedSize, setSelectedSize] = useState<Size | undefined>(undefined);
+  const [selectedColor, setSelectedColor] = useState<Color | undefined>(
+    undefined,
+  );
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [showSizeWarning, setShowSizeWarning] = useState(false);
+  const [showColorWarning, setShowColorWarning] = useState(false);
 
   const [isStickyBarVisible, setIsStickyBarVisible] = useState(false);
   const addToCartButtonRef = useRef<HTMLDivElement>(null);
@@ -54,6 +58,13 @@ const SectionProductHeader = ({ product }: Props) => {
       setShowSizeWarning(false);
     }
   }, [selectedSize]);
+
+  // Reset color warning when color is selected
+  useEffect(() => {
+    if (selectedColor) {
+      setShowColorWarning(false);
+    }
+  }, [selectedColor]);
 
   useEffect(() => {
     const mainAddToCartButton = addToCartButtonRef.current;
@@ -90,26 +101,48 @@ const SectionProductHeader = ({ product }: Props) => {
 
   // Combined handler for Add to Cart and Buy Now
   const handleActionClick = (action: "addToCart" | "buyNow") => {
+    const hasColors = Array.isArray(product.colors) && product.colors.length > 0;
+
     // Check if size selection is required and missing
     if (hasSizes && !selectedSize) {
       setShowSizeWarning(true);
       return; // Stop processing
     }
 
+    // Check if color selection is required and missing
+    if (hasColors && !selectedColor) {
+      setShowColorWarning(true);
+      return; // Stop processing
+    }
+
+    // Calculate final price based on selection
+    const finalPrice = selectedSize?.price || (selectedColor?.price ? (product.price + selectedColor.price) : product.price);
+
     // Proceed with the action
-    const itemToAdd = { ...product, quantity: 1, size: selectedSize?.value };
+    const itemToAdd = {
+      ...product,
+      price: finalPrice,
+      quantity: 1,
+      selectedSize: selectedSize?.value,
+      selectedColor: selectedColor
+    };
     addToCart(itemToAdd);
     trackAddToCart({
       content_ids: [String(product.id)],
       content_name: product.name,
       content_type: "product",
-      value: selectedSize?.price || product.salePrice || product.price,
+      value: (selectedSize?.price || (selectedColor?.price ? (product.price + selectedColor.price) : product.price)),
       currency: "KES",
     });
 
-    const successMessage = selectedSize?.value
-      ? `${product.name} (Size: ${selectedSize.label}) added to cart!`
-      : `${product.name} added to cart!`;
+    let successMessage = `${product.name} added to cart!`;
+    if (selectedSize?.value && selectedColor?.label) {
+      successMessage = `${product.name} (Size: ${selectedSize.label}, Color: ${selectedColor.label}) added to cart!`;
+    } else if (selectedSize?.value) {
+      successMessage = `${product.name} (Size: ${selectedSize.label}) added to cart!`;
+    } else if (selectedColor?.label) {
+      successMessage = `${product.name} (Color: ${selectedColor.label}) added to cart!`;
+    }
     toast.success(successMessage);
 
     if (window.navigator && window.navigator.vibrate) {
@@ -124,7 +157,10 @@ const SectionProductHeader = ({ product }: Props) => {
   const handleWhatsAppOrder = () => {
     const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "254700000000";
     const productUrl = `${window.location.origin}/products/${product.slug}`;
-    const message = `Hello, I'm interested in ordering: *${product.name}*\nURL: ${productUrl}${selectedSize ? `\nSize: *${selectedSize.label}*` : ""}`;
+    let message = `Hello, I'm interested in ordering: *${product.name}*\nURL: ${productUrl}`;
+    if (selectedSize) message += `\nSize: *${selectedSize.label}*`;
+    if (selectedColor) message += `\nColor: *${selectedColor.label}*`;
+
     const encMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${whatsappNumber}?text=${encMessage}`, "_blank");
   };
@@ -240,36 +276,87 @@ const SectionProductHeader = ({ product }: Props) => {
                 <h1 className="text-2xl font-bold mb-2">{product.name}</h1>
                 <div className="mb-4 flex items-center space-x-4">
                   <span className="text-2xl font-bold text-primary">
-                    {hasSizes
-                      ? selectedSize
-                        ? `KES ${selectedSize.price.toLocaleString()}`
-                        : `From KES ${lowestSizePrice.toLocaleString()}`
-                      : `KES ${product.price.toLocaleString()}`}
+                    {(() => {
+                      if (hasSizes && selectedSize) return `KES ${selectedSize.price.toLocaleString()}`;
+                      if (product.colors && product.colors.length > 0 && selectedColor && selectedColor.price > 0) {
+                        return `KES ${selectedColor.price.toLocaleString()}`;
+                      }
+                      if (hasSizes) return `From KES ${lowestSizePrice.toLocaleString()}`;
+                      return `KES ${product.price.toLocaleString()}`;
+                    })()}
                   </span>
-                  {/* Only show compare price if no sizes */}
-                  {!hasSizes && product.salePrice && (
+                  {/* Only show compare price if no sizes and no specific color price */}
+                  {!hasSizes && !selectedColor?.price && product.salePrice && (
                     <span className="text-lg text-gray-500 line-through">
                       KES {product.salePrice.toLocaleString()}
                     </span>
                   )}
                 </div>
-                {/* Size Selection */}
+
+                {/* Color Selection (Mobile) */}
+                {product.colors && product.colors.length > 0 && (
+                  <motion.div
+                    className={`mb-4 p-4 rounded-xl border-2 transition-all ${showColorWarning ? "border-red-500 bg-red-50" : "border-transparent bg-slate-50/50"
+                      }`}
+                    animate={showColorWarning ? { x: [-3, 3, -3, 3, 0] } : { x: 0 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 15, duration: 0.4 }}
+                  >
+                    <h3 className="text-base font-semibold mb-3 flex items-center justify-between">
+                      <span>Select Color</span>
+                      {selectedColor && (
+                        <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                          {selectedColor.label}
+                        </span>
+                      )}
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {product.colors.map((color: Color, index: number) => (
+                        <button
+                          key={index}
+                          onClick={() => setSelectedColor(color)}
+                          disabled={!color.available}
+                          title={color.label}
+                          className={`group relative flex items-center justify-center rounded-xl p-1 transition-all duration-200 border-2 ${selectedColor?.label === color.label
+                            ? "border-primary bg-primary/5 shadow-md scale-105"
+                            : "border-slate-200 bg-white hover:border-slate-300 shadow-sm"
+                            } ${!color.available ? "opacity-40 grayscale cursor-not-allowed" : "cursor-pointer"}`}
+                        >
+                          <div className="flex items-center gap-2 px-3 py-1">
+                            {color.value && (
+                              <div
+                                className="w-5 h-5 rounded-full border border-gray-200"
+                                style={{ backgroundColor: color.value }}
+                              />
+                            )}
+                            <span className={`text-sm font-bold ${selectedColor?.label === color.label ? "text-primary" : "text-slate-700"
+                              }`}>
+                              {color.label}
+                            </span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                    {showColorWarning && (
+                      <p className="text-xs text-red-500 mt-2 font-medium">Please select a color to continue</p>
+                    )}
+                  </motion.div>
+                )}
+
+                {/* Size Selection (Mobile) */}
                 {hasSizes && (
                   <motion.div
-                    className={`rounded-md ${showSizeWarning ? "ring-2 ring-red-500 ring-offset-1" : ""
+                    className={`mb-4 p-4 rounded-xl border-2 transition-all ${showSizeWarning ? "border-red-500 bg-red-50" : "border-transparent bg-slate-50/50"
                       }`}
-                    animate={
-                      showSizeWarning ? { x: [-3, 3, -3, 3, 0] } : { x: 0 }
-                    }
-                    transition={{
-                      type: "spring",
-                      stiffness: 500,
-                      damping: 15,
-                      duration: 0.4,
-                    }}
+                    animate={showSizeWarning ? { x: [-3, 3, -3, 3, 0] } : { x: 0 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 15, duration: 0.4 }}
                   >
-                    <h3 className="text-base font-semibold mb-2">
-                      Select Size
+                    <h3 className="text-base font-semibold mb-3 flex items-center justify-between">
+                      <span>Select Size</span>
+                      {selectedSize && (
+                        <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                          {selectedSize.label}
+                        </span>
+                      )}
                     </h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {product.sizes?.map((size: Size) => (
@@ -282,10 +369,8 @@ const SectionProductHeader = ({ product }: Props) => {
                         />
                       ))}
                     </div>
-                    {!selectedSize && (
-                      <p className="text-sm text-gray-500 mt-2">
-                        Please select a size to continue
-                      </p>
+                    {showSizeWarning && (
+                      <p className="text-xs text-red-500 mt-2 font-medium">Please select a size to continue</p>
                     )}
                   </motion.div>
                 )}
@@ -369,39 +454,96 @@ const SectionProductHeader = ({ product }: Props) => {
           {/* Product Info Card - desktop only */}
           <div className="mt-8 lg:mt-0 lg:w-[40%] lg:pl-8 xl:pl-12 hidden lg:flex justify-center">
             <div className="w-full max-w-md bg-white/95 rounded-2xl shadow-[0_8px_25px_rgb(0,0,0,0.08)] p-6 flex flex-col gap-4">
-              <h1 className="text-2xl font-bold mb-2">{product.name}</h1>
+              {/* Price Display */}
               <div className="mb-4 flex items-center space-x-4">
                 <span className="text-2xl font-bold text-primary">
-                  {hasSizes
-                    ? selectedSize
-                      ? `KES ${selectedSize.price.toLocaleString()}`
-                      : `From KES ${lowestSizePrice.toLocaleString()}`
-                    : `KES ${product.price.toLocaleString()}`}
+                  {(() => {
+                    if (hasSizes && selectedSize) return `KES ${selectedSize.price.toLocaleString()}`;
+                    if (product.colors && product.colors.length > 0 && selectedColor && selectedColor.price > 0) {
+                      return `KES ${((product.price || 0) + selectedColor.price).toLocaleString()}`;
+                    }
+                    if (hasSizes) return `From KES ${lowestSizePrice.toLocaleString()}`;
+                    return `KES ${(product.price || 0).toLocaleString()}`;
+                  })()}
                 </span>
-                {/* Only show compare price if no sizes */}
-                {!hasSizes && product.salePrice && (
+                {!hasSizes && !selectedColor?.price && product.salePrice && (
                   <span className="text-lg text-gray-500 line-through">
                     KES {product.salePrice.toLocaleString()}
                   </span>
                 )}
               </div>
-              {/* Size Selection */}
+
+              {/* Color Selection (Desktop) */}
+              {product.colors && product.colors.length > 0 && (
+                <motion.div
+                  className={`mb-6 p-4 rounded-xl border-2 transition-all ${showColorWarning ? "border-red-500 bg-red-50" : "border-transparent bg-slate-50/50"
+                    }`}
+                  animate={showColorWarning ? { x: [-3, 3, -3, 3, 0] } : { x: 0 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 15, duration: 0.4 }}
+                >
+                  <h3 className="text-base font-semibold mb-3 flex items-center justify-between">
+                    <span>Select Color</span>
+                    {selectedColor && (
+                      <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                        {selectedColor.label}
+                      </span>
+                    )}
+                  </h3>
+                  <div className="flex flex-wrap gap-3">
+                    {product.colors.map((color: Color, index: number) => (
+                      <button
+                        key={index}
+                        onClick={() => setSelectedColor(color)}
+                        disabled={!color.available}
+                        title={color.label}
+                        className={`group relative flex items-center justify-center rounded-xl p-1 transition-all duration-200 border-2 ${selectedColor?.label === color.label
+                          ? "border-primary bg-primary/5 shadow-md scale-105"
+                          : "border-slate-200 bg-white hover:border-slate-300 shadow-sm"
+                          } ${!color.available ? "opacity-40 grayscale cursor-not-allowed" : "cursor-pointer"}`}
+                      >
+                        <div className="flex items-center gap-2 px-3 py-1">
+                          {color.value && (
+                            <div
+                              className="w-5 h-5 rounded-full border border-gray-200"
+                              style={{ backgroundColor: color.value }}
+                            />
+                          )}
+                          <span className={`text-sm font-bold ${selectedColor?.label === color.label ? "text-primary" : "text-slate-700"
+                            }`}>
+                            {color.label}
+                          </span>
+                          {color.price > 0 && (
+                            <span className="text-[10px] font-medium text-slate-400 bg-slate-100 px-1 rounded ml-1">
+                              +KES {color.price.toLocaleString()}
+                            </span>
+                          )}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                  {showColorWarning && (
+                    <p className="text-xs text-red-500 mt-2 font-medium">Please select a color to continue</p>
+                  )}
+                </motion.div>
+              )}
+
+              {/* Size Selection (Desktop) */}
               {hasSizes && (
                 <motion.div
-                  className={`rounded-md ${showSizeWarning ? "ring-2 ring-red-500 ring-offset-1" : ""
+                  className={`mb-6 p-4 rounded-xl border-2 transition-all ${showSizeWarning ? "border-red-500 bg-red-50" : "border-transparent bg-slate-50/50"
                     }`}
-                  animate={
-                    showSizeWarning ? { x: [-3, 3, -3, 3, 0] } : { x: 0 }
-                  }
-                  transition={{
-                    type: "spring",
-                    stiffness: 500,
-                    damping: 15,
-                    duration: 0.4,
-                  }}
+                  animate={showSizeWarning ? { x: [-3, 3, -3, 3, 0] } : { x: 0 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 15, duration: 0.4 }}
                 >
-                  <h3 className="text-base font-semibold mb-2">Select Size</h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  <h3 className="text-base font-semibold mb-3 flex items-center justify-between">
+                    <span>Select Size</span>
+                    {selectedSize && (
+                      <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                        {selectedSize.label}
+                      </span>
+                    )}
+                  </h3>
+                  <div className="grid grid-cols-3 gap-2">
                     {product.sizes?.map((size: Size) => (
                       <SizeButton
                         key={size.value}
@@ -412,10 +554,8 @@ const SectionProductHeader = ({ product }: Props) => {
                       />
                     ))}
                   </div>
-                  {!selectedSize && (
-                    <p className="text-sm text-gray-500 mt-2">
-                      Please select a size to continue
-                    </p>
+                  {showSizeWarning && (
+                    <p className="text-xs text-red-500 mt-2 font-medium">Please select a size to continue</p>
                   )}
                 </motion.div>
               )}

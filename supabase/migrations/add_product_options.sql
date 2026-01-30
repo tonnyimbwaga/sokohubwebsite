@@ -2,9 +2,9 @@
 
 DO $$ 
 BEGIN
-    -- Add colors column
+    -- Add colors column as JSONB
     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'products' AND column_name = 'colors') THEN
-        ALTER TABLE products ADD COLUMN colors TEXT[];
+        ALTER TABLE products ADD COLUMN colors JSONB DEFAULT '[]'::jsonb;
     END IF;
 
     -- Add options column

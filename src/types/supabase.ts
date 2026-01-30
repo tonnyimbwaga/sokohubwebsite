@@ -36,7 +36,7 @@ export interface Database {
           is_deal: boolean | null;
           sizes: Json | null;
           tags: Json | null;
-          colors: string[] | null;
+          colors: Json | null;
           options: Json | null;
         };
         Insert: {
@@ -65,7 +65,7 @@ export interface Database {
           is_deal?: boolean | null;
           sizes?: Json | null;
           tags?: Json | null;
-          colors?: string[] | null;
+          colors?: Json | null;
           options?: Json | null;
         };
         Update: {
@@ -94,7 +94,7 @@ export interface Database {
           is_deal?: boolean | null;
           sizes?: Json | null;
           tags?: Json | null;
-          colors?: string[] | null;
+          colors?: Json | null;
           options?: Json | null;
         };
       };

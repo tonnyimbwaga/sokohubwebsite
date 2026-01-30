@@ -17,6 +17,7 @@ const SimpleRichTextEditor = dynamic(
 );
 
 import ProductSizeConfig, { Size } from "@/components/ProductSizeConfig";
+import ProductColorConfig, { Color } from "@/components/ProductColorConfig";
 import Image from "next/image";
 import { getProductImageUrl } from "@/utils/product-images";
 
@@ -42,7 +43,7 @@ export interface ProductFormData {
   images: ImageInfo[];
   sizes?: Size[];
   tags?: string[];
-  colors?: string[];
+  colors?: Color[];
   options?: Record<string, string>;
 }
 
@@ -77,7 +78,11 @@ export default function ProductForm({
   const [productSizes, setProductSizes] = useState<Size[]>(
     product?.sizes || [],
   );
+  const [productColors, setProductColors] = useState<Color[]>(
+    Array.isArray(product?.colors) ? (product.colors as any) : [],
+  );
   const [useSizePricing, setUseSizePricing] = useState<boolean>(false);
+  const [useColorPricing, setUseColorPricing] = useState<boolean>(false);
 
   const queryClient = useQueryClient();
 
@@ -422,6 +427,7 @@ export default function ProductForm({
       {
         ...data,
         sizes: useSizePricing ? productSizes : [], // Only save sizes if using size pricing
+        colors: productColors, // Save the interactive color variants
       },
       {
         onSettled: () => {
@@ -756,59 +762,31 @@ export default function ProductForm({
           <h3 className="text-lg font-semibold text-gray-800 mb-4">Variants & Options</h3>
 
           {/* Colors */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Available Colors
-            </label>
-            <Controller
-              name="colors"
-              control={control}
-              defaultValue={[]}
-              render={({ field }) => (
-                <div className="space-y-3">
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      placeholder="Add a color (e.g. Red, Blue, Green)..."
-                      className="block w-full border border-gray-300 rounded-lg px-4 py-3 text-base"
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                          e.preventDefault();
-                          const val = e.currentTarget.value.trim();
-                          if (val && !field.value?.includes(val)) {
-                            field.onChange([...(field.value || []), val]);
-                            e.currentTarget.value = '';
-                          }
-                        }
-                      }}
-                    />
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {field.value?.map((color, index) => (
-                      <span
-                        key={index}
-                        className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800"
-                      >
-                        {color}
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const newColors = [...(field.value || [])];
-                            newColors.splice(index, 1);
-                            field.onChange(newColors);
-                          }}
-                          className="ml-2 text-indigo-600 hover:text-indigo-900 focus:outline-none"
-                        >
-                          ×
-                        </button>
-                      </span>
-                    ))}
-                    {(!field.value || field.value.length === 0) && (
-                      <span className="text-gray-400 text-sm">No colors added yet. Type above and press Enter.</span>
-                    )}
-                  </div>
-                </div>
-              )}
+          <div className="mb-8 p-6 bg-slate-50/50 rounded-2xl border border-slate-100">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <label className="block text-base font-bold text-slate-800">
+                  Color Variants
+                </label>
+                <p className="text-xs text-slate-500 mt-1">Add beautiful color options for your customers to select.</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  id="useColorPricing"
+                  checked={useColorPricing}
+                  onChange={(e) => setUseColorPricing(e.target.checked)}
+                  className="w-5 h-5 rounded-md border-slate-300 text-indigo-600 focus:ring-indigo-500 transition-all cursor-pointer"
+                />
+                <label htmlFor="useColorPricing" className="text-sm font-semibold text-slate-600 cursor-pointer">
+                  Custom Pricing
+                </label>
+              </div>
+            </div>
+            <ProductColorConfig
+              initialColors={productColors}
+              onChange={setProductColors}
+              useColorPricing={useColorPricing}
             />
           </div>
 
