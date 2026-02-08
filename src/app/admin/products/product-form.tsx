@@ -78,9 +78,23 @@ export default function ProductForm({
   const [productSizes, setProductSizes] = useState<Size[]>(
     product?.sizes || [],
   );
+
+  // Wrapper to sync productSizes with form field
+  const handleSizesChange = (newSizes: Size[]) => {
+    console.log("[SIZE CHANGE] New sizes:", newSizes);
+    setProductSizes(newSizes);
+    setValue("sizes", newSizes); // Sync with form
+  };
   const [productColors, setProductColors] = useState<Color[]>(
     Array.isArray(product?.colors) ? (product.colors as any) : [],
   );
+
+  // Wrapper to sync productColors with form field
+  const handleColorsChange = (newColors: Color[]) => {
+    console.log("[COLOR CHANGE] New colors:", newColors);
+    setProductColors(newColors);
+    setValue("colors", newColors); // Sync with form
+  };
   const [useSizePricing, setUseSizePricing] = useState<boolean>(false);
   const [useColorPricing, setUseColorPricing] = useState<boolean>(false);
   const [newOptionKey, setNewOptionKey] = useState("");
@@ -273,6 +287,10 @@ export default function ProductForm({
 
   const mutation = useMutation({
     mutationFn: async (data: ProductFormData) => {
+      console.log("[MUTATION] Starting mutation with data:", data);
+      console.log("[MUTATION] Colors being saved:", data.colors);
+      console.log("[MUTATION] Options being saved:", data.options);
+
       // Prepare the product data
       const productData = {
         name: data.name,
@@ -292,6 +310,9 @@ export default function ProductForm({
         colors: data.colors,
         options: data.options,
       };
+
+      console.log("[MUTATION] Product data prepared for Supabase:", productData);
+      console.log("[MUTATION] Colors in productData:", productData.colors);
 
       let productId;
 
@@ -419,9 +440,11 @@ export default function ProductForm({
       }
     }
 
-    console.log("Form submission - category_ids:", data.category_ids);
-    console.log("Form submission - full data:", data);
-    console.log("Form submission - useSizePricing:", useSizePricing);
+    console.log("[FORM SUBMIT] category_ids:", data.category_ids);
+    console.log("[FORM SUBMIT] full data:", data);
+    console.log("[FORM SUBMIT] useSizePricing:", useSizePricing);
+    console.log("[FORM SUBMIT] productColors state:", productColors);
+    console.log("[FORM SUBMIT] data.colors:", data.colors);
 
     setIsSubmitting(true);
     setSubmitError(null);
@@ -753,7 +776,7 @@ export default function ProductForm({
           )}
           <ProductSizeConfig
             initialSizes={productSizes}
-            onChange={setProductSizes}
+            onChange={handleSizesChange}
             useSizePricing={useSizePricing}
           />
         </section>
@@ -787,7 +810,7 @@ export default function ProductForm({
             </div>
             <ProductColorConfig
               initialColors={productColors}
-              onChange={setProductColors}
+              onChange={handleColorsChange}
               useColorPricing={useColorPricing}
             />
           </div>
