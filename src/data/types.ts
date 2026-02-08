@@ -79,6 +79,7 @@ export interface Product {
     inStock: boolean;
   }[];
   colors?: Color[];
+  options?: Record<string, any>;
 }
 
 export interface ProductCategory {

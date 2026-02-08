@@ -25,7 +25,7 @@ const ProductColorConfig: FC<ProductColorConfigProps> = ({
 
     // Sync with initialColors if they change (e.g. from parent re-fetch)
     useEffect(() => {
-        if (initialColors && initialColors.length > 0 && colors.length === 0) {
+        if (initialColors) {
             setColors(initialColors);
         }
     }, [initialColors]);

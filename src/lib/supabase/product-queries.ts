@@ -56,12 +56,15 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
         name,
         description,
         price,
+        compare_at_price,
         stock,
         sku,
         slug,
         category_id,
         images,
         sizes,
+        colors,
+        options,
         category:category_id(name, slug)
       `,
       )
@@ -75,16 +78,17 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
       return null;
     }
 
-    const category = Array.isArray(data.category)
-      ? data.category[0]
-      : data.category;
+    const result = data as any;
+    const category = Array.isArray(result.category)
+      ? result.category[0]
+      : result.category;
 
     return {
-      ...(data as unknown as Product),
+      ...(result as unknown as Product),
       category: category?.name || "",
       categorySlug: category?.slug || "",
-      images: processImages(data.images),
-      inStock: data.stock > 0,
+      images: processImages(result.images),
+      inStock: result.stock > 0,
     };
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -251,9 +255,9 @@ async function fetchProducts({
       error:
         error instanceof Error
           ? {
-              message: error.message,
-              stack: error.stack,
-            }
+            message: error.message,
+            stack: error.stack,
+          }
           : error,
       timestamp: new Date().toISOString(),
       queryParams: { eq, neq, limit },

@@ -20,7 +20,7 @@ export async function generateMetadata({
   const supabase = await createClient();
   const { data: product, error: productError } = await supabase
     .from("products")
-    .select("*, category:categories!products_category_id_fkey(name, slug)")
+    .select("id, name, description, price, compare_at_price, stock, sku, slug, images, sizes, colors, options, category:categories!products_category_id_fkey(name, slug)")
     .eq("status", "active")
     .eq("slug", slug)
     .single() as { data: any | null, error: any };
@@ -60,7 +60,7 @@ export default async function SingleProductPage({
   // 1. Fetch the main product
   const { data: product, error: productError } = await supabase
     .from("products")
-    .select("*, category:category_id(name, slug)")
+    .select("id, name, description, price, compare_at_price, stock, sku, slug, images, sizes, colors, options, category:category_id(name, slug)")
     .eq("slug", slug)
     .single() as { data: any | null, error: any };
 

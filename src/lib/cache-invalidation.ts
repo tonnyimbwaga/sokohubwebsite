@@ -1,3 +1,5 @@
+import { revalidatePath, revalidateTag } from "next/cache";
+
 /**
  * Cache Invalidation System
  *
@@ -29,36 +31,23 @@ export async function invalidateHomepageCache(): Promise<CacheInvalidationResult
   };
 
   try {
-    // Step 1: Trigger Next.js revalidation (this is the most important part)
-    console.log("🔄 Triggering Next.js revalidation...");
+    // Step 1: Trigger Next.js revalidation directly (Server-side only)
+    console.log("🔄 Performing direct Next.js revalidation...");
 
-    if (process.env.NEXT_PUBLIC_SITE_URL) {
-      try {
-        const revalidateResponse = await fetch(
-          `${process.env.NEXT_PUBLIC_SITE_URL}/api/revalidate`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              tags: ["homepage", "categories", "products"],
-            }),
-          },
-        );
+    try {
+      // Revalidate main components/pages
+      revalidateTag("homepage", "max");
+      revalidateTag("categories", "max");
+      revalidateTag("products", "max");
 
-        if (revalidateResponse.ok) {
-          console.log("✅ Next.js revalidation triggered successfully");
-          result.operations.revalidation = true;
-        } else {
-          const errorText = await revalidateResponse.text();
-          console.warn("⚠️ Next.js revalidation failed:", errorText);
-        }
-      } catch (error) {
-        console.warn("⚠️ Next.js revalidation error:", error);
-      }
-    } else {
-      console.warn("⚠️ NEXT_PUBLIC_SITE_URL not set, skipping revalidation");
+      // Also revalidate key paths
+      revalidatePath("/", "layout");
+      revalidatePath("/products", "layout");
+
+      console.log("✅ Next.js revalidation completed successfully");
+      result.operations.revalidation = true;
+    } catch (error) {
+      console.warn("⚠️ Next.js revalidation error:", error);
     }
 
     // Step 2: Purge Cloudflare cache (if credentials are available)
@@ -129,36 +118,18 @@ export async function invalidateCategoryCache(
   console.log(`🔄 Invalidating cache for category: ${categorySlug}`);
 
   try {
-    if (!process.env.NEXT_PUBLIC_SITE_URL) {
-      throw new Error("NEXT_PUBLIC_SITE_URL not set");
-    }
+    revalidateTag(`category-${categorySlug}`, "max");
+    revalidateTag("categories", "max");
+    revalidatePath(`/category/${categorySlug}`, "page");
 
-    const revalidateResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/revalidate`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          tags: [`category-${categorySlug}`, "categories"],
-        }),
+    console.log(`✅ Category ${categorySlug} cache invalidated successfully`);
+    return {
+      success: true,
+      operations: {
+        revalidation: true,
+        cloudflare: false,
       },
-    );
-
-    if (revalidateResponse.ok) {
-      console.log(`✅ Category ${categorySlug} cache invalidated successfully`);
-      return {
-        success: true,
-        operations: {
-          revalidation: true,
-          cloudflare: false,
-        },
-      };
-    } else {
-      const errorText = await revalidateResponse.text();
-      throw new Error(`Revalidation failed: ${errorText}`);
-    }
+    };
   } catch (error) {
     console.error(
       `❌ Failed to invalidate category ${categorySlug} cache:`,

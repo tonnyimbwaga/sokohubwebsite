@@ -57,7 +57,7 @@ const ProductSizeConfig: FC<ProductSizeConfigProps> = ({
 
   // Sync with initialSizes if they change (e.g. from parent re-fetch)
   useEffect(() => {
-    if (initialSizes && initialSizes.length > 0 && sizes.length === 0) {
+    if (initialSizes) {
       setSizes(initialSizes);
     }
   }, [initialSizes]);

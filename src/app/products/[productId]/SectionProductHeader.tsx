@@ -457,6 +457,22 @@ const SectionProductHeader = ({ product }: Props) => {
                   </button>
                 )}
               </div>
+              {/* Mobile: Product info for attributes/options */}
+              {product.options && Object.entries(product.options).length > 0 && (
+                <div className="block lg:hidden w-full mt-4">
+                  <div className="w-full bg-white/95 rounded-2xl shadow-[0_8px_25px_rgb(0,0,0,0.08)] p-6">
+                    <h3 className="text-lg font-semibold mb-4">Specifications</h3>
+                    <div className="space-y-3">
+                      {Object.entries(product.options).map(([key, value]) => (
+                        <div key={key} className="flex justify-between items-center py-2 border-b border-slate-50 last:border-0">
+                          <span className="text-sm font-medium text-slate-500">{key}</span>
+                          <span className="text-sm font-bold text-slate-900">{value as string}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -619,6 +635,21 @@ const SectionProductHeader = ({ product }: Props) => {
             </div>
           </div>
         </div>
+        {/* Product Options / attributes (e.g. Material) */}
+        {product.options && Object.entries(product.options).length > 0 && (
+          <div className="mt-8 w-full max-w-5xl mx-auto bg-white/95 rounded-2xl shadow-[0_8px_25px_rgb(0,0,0,0.08)] p-6">
+            <h3 className="text-lg font-semibold mb-4">Product Specifications</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {Object.entries(product.options).map(([key, value]) => (
+                <div key={key} className="flex flex-col p-3 bg-slate-50 rounded-xl border border-slate-100">
+                  <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{key}</span>
+                  <span className="text-sm font-bold text-slate-800 mt-1">{value as string}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Product Description Card - desktop only, now below the main flex row */}
         <div className="mt-8 hidden lg:block w-full">
           <div className="w-full max-w-5xl mx-auto bg-white/95 rounded-2xl shadow-[0_8px_25px_rgb(0,0,0,0.08)] p-6">
