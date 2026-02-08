@@ -308,18 +308,16 @@ const SectionProductHeader = ({ product }: Props) => {
 
                 {/* Color Selection (Mobile) */}
                 {product.colors && product.colors.length > 0 && (
-                  <motion.div
-                    className={`mb-4 p-4 rounded-2xl border-2 transition-all duration-300 ${showColorWarning ? "border-red-500 bg-red-50/50" : "border-slate-100 bg-slate-50/30"
+                  <div
+                    className={`mb-6 p-5 rounded-3xl border-2 transition-all duration-300 ${showColorWarning ? "border-red-500 bg-red-50" : "border-slate-100 bg-white"
                       }`}
-                    animate={showColorWarning ? { x: [-3, 3, -3, 3, 0] } : { x: 0 }}
-                    transition={{ type: "spring", stiffness: 500, damping: 15, duration: 0.4 }}
                   >
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-base font-bold text-slate-900">
+                    <div className="flex items-center justify-between mb-5">
+                      <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
                         Pick a Color
                       </h3>
                       {selectedColor && (
-                        <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100 animate-in fade-in slide-in-from-right-2">
+                        <span className="text-xs font-black text-slate-900 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
                           {selectedColor.label}
                         </span>
                       )}
@@ -327,61 +325,53 @@ const SectionProductHeader = ({ product }: Props) => {
                     <div className="flex flex-wrap gap-3">
                       {product.colors.map((color: Color, index: number) => {
                         const isAvailable = color.available !== false;
-                        const isSelected = selectedColor?.label === color.label;
+                        const isSelected = selectedColor && selectedColor.label === color.label;
 
                         return (
                           <button
                             key={index}
+                            type="button"
                             onClick={() => isAvailable && setSelectedColor(color)}
                             disabled={!isAvailable}
-                            title={color.label}
-                            className={`group relative flex items-center justify-center rounded-xl transition-all duration-300 ${isSelected
-                              ? "ring-2 ring-primary ring-offset-2 scale-110 z-10"
-                              : "hover:scale-105 active:scale-95"
+                            className={`group relative flex items-center gap-3 px-4 py-2.5 rounded-2xl border-2 transition-all duration-200 ${isSelected
+                              ? "bg-primary border-primary text-white shadow-lg ring-2 ring-primary/20 scale-105"
+                              : "bg-white border-slate-200 text-slate-900 hover:border-slate-300 hover:bg-slate-50"
                               } ${!isAvailable ? "opacity-30 grayscale cursor-not-allowed" : "cursor-pointer"}`}
                           >
-                            <div className={`flex items-center gap-2 rounded-lg py-1.5 px-3 border-2 transition-all ${isSelected
-                              ? "bg-primary border-primary text-white shadow-lg"
-                              : "bg-white border-slate-200 text-slate-700 hover:border-primary/30"
-                              }`}>
+                            <div className="flex items-center gap-2.5">
                               {color.value && (
                                 <div
-                                  className={`w-4 h-4 rounded-full border shadow-inner ${isSelected ? "border-white/50" : "border-slate-200"}`}
+                                  className={`w-5 h-5 rounded-full border shadow-sm transition-transform group-hover:scale-110 ${isSelected ? "border-white/40" : "border-slate-200"}`}
                                   style={{ backgroundColor: color.value }}
                                 />
                               )}
-                              <span className="text-sm font-bold truncate max-w-[120px]">
+                              <span className="text-sm font-bold whitespace-nowrap">
                                 {color.label}
                               </span>
-                              {color.price > 0 && (
-                                <span className={`text-[10px] font-black px-1.5 rounded-md ${isSelected ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500"}`}>
-                                  +KES {color.price.toLocaleString()}
-                                </span>
+                              {isSelected && (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white animate-in zoom-in" viewBox="0 0 20 20" fill="currentColor">
+                                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                </svg>
                               )}
                             </div>
-                            {isSelected && (
-                              <motion.div
-                                layoutId="color-indicator"
-                                className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-white rounded-full flex items-center justify-center shadow-md border border-white"
-                              >
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-2.5 w-2.5" viewBox="0 0 20 20" fill="currentColor">
-                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                              </motion.div>
+                            {color.price > 0 && (
+                              <span className={`text-[10px] font-black px-1.5 py-0.5 rounded-md ${isSelected ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500"}`}>
+                                +KES {color.price.toLocaleString()}
+                              </span>
                             )}
                           </button>
                         );
                       })}
                     </div>
                     {showColorWarning && (
-                      <p className="text-xs text-red-500 mt-3 font-bold flex items-center gap-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                      <p className="text-xs text-red-600 mt-4 font-bold flex items-center gap-1.5 animate-bounce">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                           <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                         </svg>
-                        Please pick a color
+                        Please select a color
                       </p>
                     )}
-                  </motion.div>
+                  </div>
                 )}
 
                 {/* Size Selection (Mobile) */}
@@ -545,80 +535,70 @@ const SectionProductHeader = ({ product }: Props) => {
 
               {/* Color Selection (Desktop) */}
               {product.colors && product.colors.length > 0 && (
-                <motion.div
-                  className={`mb-6 p-4 rounded-2xl border-2 transition-all duration-300 ${showColorWarning ? "border-red-500 bg-red-50/50" : "border-slate-100 bg-slate-50/30"
+                <div
+                  className={`mb-8 p-5 rounded-3xl border-2 transition-all duration-300 ${showColorWarning ? "border-red-500 bg-red-50" : "border-slate-100 bg-white"
                     }`}
-                  animate={showColorWarning ? { x: [-3, 3, -3, 3, 0] } : { x: 0 }}
-                  transition={{ type: "spring", stiffness: 500, damping: 15, duration: 0.4 }}
                 >
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-5">
                     <h3 className="text-base font-bold text-slate-900">
                       Pick a Color
                     </h3>
                     {selectedColor && (
-                      <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100 animate-in fade-in slide-in-from-right-2">
+                      <span className="text-xs font-black text-slate-900 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
                         {selectedColor.label}
                       </span>
                     )}
                   </div>
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-4">
                     {product.colors.map((color: Color, index: number) => {
                       const isAvailable = color.available !== false;
-                      const isSelected = selectedColor?.label === color.label;
+                      const isSelected = selectedColor && selectedColor.label === color.label;
 
                       return (
                         <button
                           key={index}
+                          type="button"
                           onClick={() => isAvailable && setSelectedColor(color)}
                           disabled={!isAvailable}
-                          title={color.label}
-                          className={`group relative flex items-center justify-center rounded-xl transition-all duration-300 ${isSelected
-                            ? "ring-2 ring-primary ring-offset-2 scale-110 z-10"
-                            : "hover:scale-105 active:scale-95"
+                          className={`group relative flex items-center gap-3 px-5 py-3 rounded-2xl border-2 transition-all duration-200 ${isSelected
+                              ? "bg-primary border-primary text-white shadow-lg ring-2 ring-primary/20 scale-105"
+                              : "bg-white border-slate-200 text-slate-900 hover:border-slate-300 hover:bg-slate-50"
                             } ${!isAvailable ? "opacity-30 grayscale cursor-not-allowed" : "cursor-pointer"}`}
                         >
-                          <div className={`flex items-center gap-2 rounded-lg py-1.5 px-3 border-2 transition-all ${isSelected
-                            ? "bg-primary border-primary text-white shadow-lg"
-                            : "bg-white border-slate-200 text-slate-700 hover:border-primary/30"
-                            }`}>
+                          <div className="flex items-center gap-2.5">
                             {color.value && (
                               <div
-                                className={`w-4 h-4 rounded-full border shadow-inner ${isSelected ? "border-white/50" : "border-slate-200"}`}
+                                className={`w-6 h-6 rounded-full border shadow-sm transition-transform group-hover:scale-110 ${isSelected ? "border-white/40" : "border-slate-200"}`}
                                 style={{ backgroundColor: color.value }}
                               />
                             )}
-                            <span className="text-sm font-bold truncate max-w-[120px]">
+                            <span className="text-sm font-bold whitespace-nowrap">
                               {color.label}
                             </span>
-                            {color.price > 0 && (
-                              <span className={`text-[10px] font-black px-1.5 rounded-md ${isSelected ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500"}`}>
-                                +KES {color.price.toLocaleString()}
-                              </span>
+                            {isSelected && (
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white animate-in zoom-in" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                              </svg>
                             )}
                           </div>
-                          {isSelected && (
-                            <motion.div
-                              layoutId="color-indicator-desktop"
-                              className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-white rounded-full flex items-center justify-center shadow-md border border-white"
-                            >
-                              <svg xmlns="http://www.w3.org/2000/svg" className="h-2.5 w-2.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                              </svg>
-                            </motion.div>
+                          {color.price > 0 && (
+                            <span className={`text-[10px] font-black px-1.5 py-0.5 rounded-md ${isSelected ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500"}`}>
+                              +KES {color.price.toLocaleString()}
+                            </span>
                           )}
                         </button>
                       );
                     })}
                   </div>
                   {showColorWarning && (
-                    <p className="text-xs text-red-500 mt-3 font-bold flex items-center gap-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                    <p className="text-xs text-red-600 mt-4 font-bold flex items-center gap-1.5 animate-bounce">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                       </svg>
                       Please pick a color
                     </p>
                   )}
-                </motion.div>
+                </div>
               )}
 
               {/* Size Selection (Desktop) */}
