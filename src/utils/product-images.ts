@@ -4,6 +4,8 @@ export const PLACEHOLDER_IMAGE = "/images/placeholder.png";
 // Image URLs are not cached in-memory here. Rely on browser, Next.js, and Supabase/CDN caching for optimal performance.
 // Ensure your Supabase bucket is public and has long-lived cache headers (e.g., Cache-Control: public, max-age=31536000, immutable)
 
+// Unused but kept for reference
+/*
 interface _ImageOptions {
   width?: number;
   height?: number;
@@ -12,6 +14,7 @@ interface _ImageOptions {
   resize?: "cover" | "contain" | "fill";
   cacheKey?: string;
 }
+*/
 
 // Helper function to extract image URL from various image object formats
 function extractImageUrl(imageData: any): string | null {
@@ -48,11 +51,18 @@ function extractImageUrl(imageData: any): string | null {
   return null;
 }
 
-// Optimized image URL generator with reduced processing
-export function getProductImageUrl(imageObj: any): string {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-  const bucket =
-    process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET || "product-images";
+// Optimized image URL generator with Supabase Image Transformation support
+export function getProductImageUrl(
+  imageObj: any,
+  options: {
+    width?: number;
+    quality?: number;
+    resize?: "cover" | "contain" | "fill"
+  } = {}
+): string {
+  const supabaseUrl: string = (process.env.NEXT_PUBLIC_SUPABASE_URL as string) || "";
+  const bucket: string =
+    (process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET as string) || "product-images";
 
   if (!imageObj) return "/images/placeholder.png";
 
@@ -60,10 +70,10 @@ export function getProductImageUrl(imageObj: any): string {
 
   // If it's a string, handle as direct URL or local image
   if (typeof imageObj === "string") {
-    let url = imageObj.trim();
+    let url: string = imageObj.trim();
     if (!url) return "/images/placeholder.png";
 
-    // Strip query params
+    // Strip query params (will re-add them if needed for transformation)
     url = url.split("?")[0];
 
     // 1. Already absolute (http / https)
@@ -96,15 +106,29 @@ export function getProductImageUrl(imageObj: any): string {
       finalPath = cleanUrl;
     }
 
-    return `${supabaseUrl || ""}/storage/v1/object/public/${finalBucket}/${finalPath}`;
+    // Base URL for the image
+    let finalUrl = `${supabaseUrl}/storage/v1/object/public/${finalBucket}/${finalPath}`;
+
+    // Apply Supabase transformations if options are provided
+    const params = new URLSearchParams();
+    if (options.width) params.append("width", options.width.toString());
+    if (options.quality) params.append("quality", options.quality.toString());
+    if (options.resize) params.append("resize", options.resize);
+
+    if (params.toString()) {
+      // Supabase image transformation format: /storage/v1/render/image/public/bucket/path?width=...
+      finalUrl = `${supabaseUrl}/storage/v1/render/image/public/${finalBucket}/${finalPath}?${params.toString()}`;
+    }
+
+    return finalUrl;
   }
 
   // If it's an object, extract the first valid URL property
-  let imagePath = extractImageUrl(imageObj) || "";
+  const imagePath = extractImageUrl(imageObj);
   if (!imagePath) return "/images/placeholder.png";
 
   // Recursively call for the extracted string path to use the same logic
-  return getProductImageUrl(imagePath);
+  return getProductImageUrl(imagePath, options);
 }
 
 // Optimized function for getting multiple image sizes
@@ -120,19 +144,19 @@ export function getResponsiveImageUrls(
   }
 
   return sizes.map((width) => ({
-    url: getProductImageUrl(imageObj),
+    url: getProductImageUrl(imageObj, { width, quality: 80 }),
     width,
   }));
 }
 
 // Optimized function for hero/banner images
 export function getHeroImageUrl(imageObj: any): string {
-  return getProductImageUrl(imageObj);
+  return getProductImageUrl(imageObj, { width: 1280, quality: 85 });
 }
 
 // Optimized function for thumbnail images
 export function getThumbnailImageUrl(imageObj: any): string {
-  return getProductImageUrl(imageObj);
+  return getProductImageUrl(imageObj, { width: 400, quality: 80 });
 }
 
 // Preload critical images (use sparingly)

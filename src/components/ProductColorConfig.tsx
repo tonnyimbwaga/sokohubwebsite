@@ -23,31 +23,42 @@ const ProductColorConfig: FC<ProductColorConfigProps> = ({
     const [newColorValue, setNewColorValue] = useState("");
     const [price, setPrice] = useState<number>(0);
 
+    // Sync with initialColors if they change (e.g. from parent re-fetch)
     useEffect(() => {
-        onChange?.(colors);
-    }, [colors, onChange]);
+        if (initialColors && initialColors.length > 0 && colors.length === 0) {
+            setColors(initialColors);
+        }
+    }, [initialColors]);
+
+    // Use a separate effect for parent updates to avoid infinite loops if possible,
+    // but the best way is to only call it when local state changes.
+    const updateParent = (updatedColors: Color[]) => {
+        setColors(updatedColors);
+        onChange?.(updatedColors);
+    };
+
 
     const addColor = () => {
         if (!newColorLabel.trim()) return;
 
         const newColorObj: Color = {
             label: newColorLabel,
-            value: newColorValue, // Don't fallback to label, keep it empty if not provided
+            value: newColorValue,
             price: price || 0,
             available: true,
         };
 
-        setColors([...colors, newColorObj]);
+        const updatedColors = [...colors, newColorObj];
+        updateParent(updatedColors);
         setNewColorLabel("");
         setNewColorValue("");
         setPrice(0);
-        onChange?.([...colors, newColorObj]);
     };
+
 
     const removeColor = (index: number) => {
         const updatedColors = colors.filter((_, i) => i !== index);
-        setColors(updatedColors);
-        onChange?.(updatedColors);
+        updateParent(updatedColors);
     };
 
     const updateColorField = (
@@ -58,8 +69,7 @@ const ProductColorConfig: FC<ProductColorConfigProps> = ({
         const updatedColors = colors.map((color, i) =>
             i === index ? { ...color, [field]: newValue } : color,
         );
-        setColors(updatedColors);
-        onChange?.(updatedColors);
+        updateParent(updatedColors);
     };
 
     return (

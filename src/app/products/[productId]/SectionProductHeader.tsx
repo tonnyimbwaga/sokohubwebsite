@@ -116,24 +116,33 @@ const SectionProductHeader = ({ product }: Props) => {
     }
 
     // Calculate final price based on selection
-    const finalPrice = selectedSize?.price || (selectedColor?.price ? (product.price + selectedColor.price) : product.price);
+    let finalPrice = product.price || 0;
+    if (hasSizes && selectedSize) {
+      finalPrice = selectedSize.price;
+    } else if (hasColors && selectedColor) {
+      // If color has an extra price, add it to base price (or use color price if it's meant to be absolute)
+      // Usually color pricing is an offset, but let's check current logic
+      finalPrice = selectedColor.price > 0 ? (product.price + selectedColor.price) : product.price;
+    }
 
     // Proceed with the action
     const itemToAdd = {
       ...product,
       price: finalPrice,
       quantity: 1,
-      selectedSize: selectedSize?.value,
-      selectedColor: selectedColor
+      selectedSize: selectedSize?.label || selectedSize?.value,
+      selectedColor: selectedColor,
+      images: product.images // Ensure images are explicitly passed
     };
     addToCart(itemToAdd);
     trackAddToCart({
       content_ids: [String(product.id)],
       content_name: product.name,
       content_type: "product",
-      value: (selectedSize?.price || (selectedColor?.price ? (product.price + selectedColor.price) : product.price)),
+      value: finalPrice,
       currency: "KES",
     });
+
 
     let successMessage = `${product.name} added to cart!`;
     if (selectedSize?.value && selectedColor?.label) {

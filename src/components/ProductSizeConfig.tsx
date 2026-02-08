@@ -55,9 +55,18 @@ const ProductSizeConfig: FC<ProductSizeConfigProps> = ({
   const [newSize, setNewSize] = useState("");
   const [price, setPrice] = useState<number>(0);
 
+  // Sync with initialSizes if they change (e.g. from parent re-fetch)
   useEffect(() => {
-    onChange?.(sizes);
-  }, [sizes, onChange]);
+    if (initialSizes && initialSizes.length > 0 && sizes.length === 0) {
+      setSizes(initialSizes);
+    }
+  }, [initialSizes]);
+
+  const updateParent = (updatedSizes: Size[]) => {
+    setSizes(updatedSizes);
+    onChange?.(updatedSizes);
+  };
+
 
   const addSize = () => {
     if (!newSize.trim() || !price || price <= 0) return;
@@ -68,16 +77,15 @@ const ProductSizeConfig: FC<ProductSizeConfigProps> = ({
       price,
       available: true,
     };
-    setSizes([...sizes, newSizeObj]);
+    const updatedSizes = [...sizes, newSizeObj];
+    updateParent(updatedSizes);
     setNewSize("");
     setPrice(0);
-    onChange?.([...sizes, newSizeObj]);
   };
 
   const removeSize = (index: number) => {
     const updatedSizes = sizes.filter((_, i) => i !== index);
-    setSizes(updatedSizes);
-    onChange?.(updatedSizes);
+    updateParent(updatedSizes);
   };
 
   const addDefaultSizes = () => {
@@ -90,8 +98,7 @@ const ProductSizeConfig: FC<ProductSizeConfigProps> = ({
         available: true,
       }),
     );
-    setSizes(defaultSizesList);
-    onChange?.(defaultSizesList);
+    updateParent(defaultSizesList);
   };
 
   const updateSizeField = (
@@ -102,8 +109,7 @@ const ProductSizeConfig: FC<ProductSizeConfigProps> = ({
     const updatedSizes = sizes.map((size, i) =>
       i === index ? { ...size, [field]: newValue } : size,
     );
-    setSizes(updatedSizes);
-    onChange?.(updatedSizes);
+    updateParent(updatedSizes);
   };
 
   return (
@@ -217,9 +223,8 @@ const ProductSizeConfig: FC<ProductSizeConfigProps> = ({
                     updateSizeField(index, "price", Number(e.target.value))
                   }
                   placeholder="Price"
-                  className={`rounded border p-2 text-lg font-mono w-full ${
-                    !useSizePricing ? "bg-gray-100 text-gray-500" : ""
-                  }`}
+                  className={`rounded border p-2 text-lg font-mono w-full ${!useSizePricing ? "bg-gray-100 text-gray-500" : ""
+                    }`}
                   min={0}
                   required
                   disabled={!useSizePricing}
@@ -236,11 +241,10 @@ const ProductSizeConfig: FC<ProductSizeConfigProps> = ({
                   onClick={() =>
                     updateSizeField(index, "available", !size.available)
                   }
-                  className={`px-3 py-2 rounded ${
-                    size.available
-                      ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700"
-                  }`}
+                  className={`px-3 py-2 rounded ${size.available
+                    ? "bg-green-100 text-green-700"
+                    : "bg-red-100 text-red-700"
+                    }`}
                   type="button"
                   title={
                     size.available ? "Mark as unavailable" : "Mark as available"

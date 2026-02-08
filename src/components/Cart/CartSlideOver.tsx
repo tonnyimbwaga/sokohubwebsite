@@ -85,14 +85,14 @@ export default function CartSlideOver({ isOpen, onClose }: Props) {
                                   >
                                     <div className="relative h-20 w-20 sm:h-24 sm:w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100 shadow-sm hover:shadow transition-shadow duration-200 self-center sm:self-start">
                                       <Image
-                                        src={getProductImageUrl(
-                                          item.images?.[0],
-                                        )}
+                                        src={getProductImageUrl(item.images?.[0], { width: 120, quality: 75 })}
                                         alt={item.name}
-                                        className="h-full w-full object-cover object-center"
-                                        width={96}
-                                        height={96}
+                                        className="h-full w-full object-contain p-1"
+                                        width={120}
+                                        height={120}
+                                        unoptimized={true} // Add unoptimized to bypass Next.js image optimization if needed for dynamic Supabase URLs
                                       />
+
                                     </div>
 
                                     <div className="ml-0 sm:ml-4 flex flex-1 flex-col gap-2">
@@ -114,11 +114,26 @@ export default function CartSlideOver({ isOpen, onClose }: Props) {
                                             ).toLocaleString()}
                                           </p>
                                         </div>
-                                        {item.selectedSize && (
-                                          <p className="mt-1 text-xs sm:text-sm text-gray-500">
-                                            Size: {item.selectedSize}
-                                          </p>
-                                        )}
+                                        <div className="flex flex-col gap-1 mt-1">
+                                          {item.selectedSize && (
+                                            <p className="text-xs sm:text-sm text-gray-500">
+                                              Size: <span className="font-medium text-gray-700">{item.selectedSize}</span>
+                                            </p>
+                                          )}
+                                          {item.selectedColor && (
+                                            <p className="text-xs sm:text-sm text-gray-500 flex items-center gap-1.5">
+                                              Color: <span className="font-medium text-gray-700">{item.selectedColor.label}</span>
+                                              {item.selectedColor.value && (
+                                                <span
+                                                  className="w-3 h-3 rounded-full border border-gray-200"
+                                                  style={{ backgroundColor: item.selectedColor.value }}
+                                                  title={item.selectedColor.label}
+                                                />
+                                              )}
+                                            </p>
+                                          )}
+                                        </div>
+
                                       </div>
                                       <div className="flex flex-1 items-center sm:items-end justify-between text-xs sm:text-sm">
                                         <div className="flex items-center gap-1 sm:gap-2">

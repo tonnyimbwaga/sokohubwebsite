@@ -50,7 +50,7 @@ export async function GET(_req: Request) {
   const { data: products, error: productsError } = await supabase
     .from("products")
     .select(
-      `id, name, description, price, compare_at_price, stock, status, slug, google_product_category, images, sizes, category_id`,
+      `id, name, description, price, compare_at_price, stock, status, slug, google_product_category, images, sizes, colors, category_id`,
     )
     .eq("status", "active") as { data: any[] | null, error: any };
 
@@ -265,83 +265,31 @@ export async function GET(_req: Request) {
         }T23:59+03:00`
         : null;
 
-      // Handle sizes if they exist in the product.sizes JSONB field
-      const productSizes =
-        product.sizes && Array.isArray(product.sizes) ? product.sizes : [];
+      // Handle variants (Sizes & Colors)
+      const productSizes = Array.isArray(product.sizes) ? product.sizes : [];
+      const productColors = Array.isArray(product.colors) ? product.colors : [];
 
-      if (productSizes.length > 0) {
-        // Create separate items for each size
-        return productSizes.map((size: any) => {
-          const sizeLabel =
-            typeof size === "string" ? size : size.name || size.size || "";
-          return `
-      <item>
-        <g:id>${escapeXml(product.id)}-${escapeXml(
-            sizeLabel.replace(/\s+/g, "-"),
-          )}</g:id>
-        <g:item_group_id>${escapeXml(product.id)}</g:item_group_id>
-        <g:title>${escapeXml(product.name)}</g:title>
-        <g:description>${escapeXml(cleanDescription)}</g:description>
-        <g:link>${escapeXml(productLink)}</g:link>
-        <g:image_link>${escapeXml(
-            imageUrls[0] || `${SITE_URL}/images/placeholder.png`,
-          )}</g:image_link>
-        ${imageUrls
-              .slice(1, 11)
-              .map(
-                (url: string) =>
-                  `<g:additional_image_link>${escapeXml(
-                    url,
-                  )}</g:additional_image_link>`,
-              )
-              .join("\n")}
-        <g:availability>${availability}</g:availability>
-        <g:price>${feedPrice.toFixed(2)} KES</g:price>
-        ${feedSalePrice !== null
-              ? `<g:sale_price>${feedSalePrice.toFixed(2)} KES</g:sale_price>`
-              : ""
-            }
-        ${saleEffectiveDate
-              ? `<g:sale_price_effective_date>${saleEffectiveDate}</g:sale_price_effective_date>`
-              : ""
-            }
-        <g:condition>new</g:condition>
-        <g:brand>${escapeXml(siteConfig.name)}</g:brand>
-        <g:size>${escapeXml(sizeLabel)}</g:size>
-        <g:shipping>
-          <g:country>KE</g:country>
-          <g:service>Standard</g:service>
-          <g:price>0 KES</g:price>
-        </g:shipping>
-        <g:mpn>${escapeXml(product.id)}</g:mpn>
-        ${googleCategory
-              ? `<g:google_product_category>${escapeXml(
-                googleCategory,
-              )}</g:google_product_category>`
-              : ""
-            }
-        ${productStoreCategoryName
-              ? `<g:product_type>${escapeXml(
-                productStoreCategoryName,
-              )}</g:product_type>`
-              : ""
-            }
-        ${productStoreCategoryName
-              ? `<g:custom_label_0>${escapeXml(
-                productStoreCategoryName,
-              )}</g:custom_label_0>`
-              : ""
-            }
-        <g:adult>no</g:adult>
-        <g:identifier_exists>no</g:identifier_exists>
-      </item>`;
-        });
-      } else {
-        // Single product without size variants
+      // Helper to format a single item
+      const formatItem = (variantIdSuffix: string, variantSize?: string, variantColor?: any) => {
+        // Note: size prices usually override, color prices are usually offsets.
+        // But for feed, we'll try to be consistent with the frontend logic.
+
+        let finalFeedPrice = feedPrice;
+        let finalFeedSalePrice = feedSalePrice;
+
+        if (variantSize && typeof variantSize === 'object' && (variantSize as any).price > 0) {
+          finalFeedPrice = (variantSize as any).price;
+          finalFeedSalePrice = null; // Simplification: sale prices usually apply to the base
+        } else if (variantColor?.price > 0) {
+          finalFeedPrice = product.price + variantColor.price;
+          finalFeedSalePrice = null;
+        }
+
         return `
       <item>
-        <g:id>${escapeXml(product.id)}</g:id>
-        <g:title>${escapeXml(product.name)}</g:title>
+        <g:id>${escapeXml(product.id)}${variantIdSuffix}</g:id>
+        <g:item_group_id>${escapeXml(product.id)}</g:item_group_id>
+        <g:title>${escapeXml(product.name)}${variantSize ? ` - ${variantSize}` : ""}${variantColor ? ` - ${variantColor.label}` : ""}</g:title>
         <g:description>${escapeXml(cleanDescription)}</g:description>
         <g:link>${escapeXml(productLink)}</g:link>
         <g:image_link>${escapeXml(
@@ -357,9 +305,9 @@ export async function GET(_req: Request) {
             )
             .join("\n")}
         <g:availability>${availability}</g:availability>
-        <g:price>${feedPrice.toFixed(2)} KES</g:price>
-        ${feedSalePrice !== null
-            ? `<g:sale_price>${feedSalePrice.toFixed(2)} KES</g:sale_price>`
+        <g:price>${finalFeedPrice.toFixed(2)} KES</g:price>
+        ${finalFeedSalePrice !== null
+            ? `<g:sale_price>${finalFeedSalePrice.toFixed(2)} KES</g:sale_price>`
             : ""
           }
         ${saleEffectiveDate
@@ -367,35 +315,49 @@ export async function GET(_req: Request) {
             : ""
           }
         <g:condition>new</g:condition>
+
         <g:brand>${escapeXml(siteConfig.name)}</g:brand>
+        ${variantSize ? `<g:size>${escapeXml(typeof variantSize === 'string' ? variantSize : (variantSize as any).label || (variantSize as any).value)}</g:size>` : ""}
+        ${variantColor ? `<g:color>${escapeXml(variantColor.label)}</g:color>` : ""}
         <g:shipping>
           <g:country>KE</g:country>
           <g:service>Standard</g:service>
           <g:price>0 KES</g:price>
         </g:shipping>
         <g:mpn>${escapeXml(product.id)}</g:mpn>
-        ${googleCategory
-            ? `<g:google_product_category>${escapeXml(
-              googleCategory,
-            )}</g:google_product_category>`
-            : ""
-          }
-        ${productStoreCategoryName
-            ? `<g:product_type>${escapeXml(
-              productStoreCategoryName,
-            )}</g:product_type>`
-            : ""
-          }
-        ${productStoreCategoryName
-            ? `<g:custom_label_0>${escapeXml(
-              productStoreCategoryName,
-            )}</g:custom_label_0>`
-            : ""
-          }
+        ${googleCategory ? `<g:google_product_category>${escapeXml(googleCategory)}</g:google_product_category>` : ""}
+        ${productStoreCategoryName ? `<g:product_type>${escapeXml(productStoreCategoryName)}</g:product_type>` : ""}
         <g:adult>no</g:adult>
         <g:identifier_exists>no</g:identifier_exists>
       </item>`;
+      };
+
+      // Generation logic
+      if (productSizes.length > 0 && productColors.length > 0) {
+        // Combinations
+        return productSizes.flatMap((size: any) =>
+          productColors.map((color: any) => {
+            const sizeLabel = typeof size === 'string' ? size : size.label || size.value;
+            const suffix = `-${sizeLabel.replace(/\s+/g, "-")}-${color.label.replace(/\s+/g, "-")}`;
+            return formatItem(suffix, size, color);
+          })
+        );
+      } else if (productSizes.length > 0) {
+        // Sizes only
+        return productSizes.map((size: any) => {
+          const sizeLabel = typeof size === 'string' ? size : size.label || size.value;
+          return formatItem(`-${sizeLabel.replace(/\s+/g, "-")}`, size);
+        });
+      } else if (productColors.length > 0) {
+        // Colors only
+        return productColors.map((color: any) => {
+          return formatItem(`-${color.label.replace(/\s+/g, "-")}`, undefined, color);
+        });
+      } else {
+        // No variants
+        return formatItem("");
       }
+
     })
     .join("\n");
 

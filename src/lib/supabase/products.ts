@@ -183,7 +183,6 @@ export const productQueries = {
         `
         id,
         name,
-        description,
         price,
         compare_at_price,
         stock,
@@ -220,7 +219,6 @@ export const productQueries = {
         `
         id,
         name,
-        description,
         price,
         compare_at_price,
         stock,
@@ -263,7 +261,6 @@ export const productQueries = {
         `
         id,
         name,
-        description,
         price,
         stock,
         status,
