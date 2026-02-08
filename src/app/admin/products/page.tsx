@@ -112,6 +112,8 @@ export default function ProductsPage() {
           slug,
           images,
           sizes,
+          colors,
+          options,
           tags,
           category:categories!products_category_id_fkey(id, name),
           product_categories(category_id, categories(id, name))

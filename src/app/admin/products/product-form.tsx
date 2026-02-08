@@ -83,6 +83,8 @@ export default function ProductForm({
   );
   const [useSizePricing, setUseSizePricing] = useState<boolean>(false);
   const [useColorPricing, setUseColorPricing] = useState<boolean>(false);
+  const [newOptionKey, setNewOptionKey] = useState("");
+  const [newOptionValue, setNewOptionValue] = useState("");
 
   const queryClient = useQueryClient();
 
@@ -802,17 +804,15 @@ export default function ProductForm({
               defaultValue={{}}
               render={({ field }) => {
                 const options = field.value || {};
-                const [newKey, setNewKey] = useState("");
-                const [newValue, setNewValue] = useState("");
 
                 const addOption = () => {
-                  if (newKey.trim() && newValue.trim()) {
+                  if (newOptionKey.trim() && newOptionValue.trim()) {
                     field.onChange({
                       ...options,
-                      [newKey.trim()]: newValue.trim()
+                      [newOptionKey.trim()]: newOptionValue.trim()
                     });
-                    setNewKey("");
-                    setNewValue("");
+                    setNewOptionKey("");
+                    setNewOptionValue("");
                   }
                 };
 
@@ -822,8 +822,8 @@ export default function ProductForm({
                       <div className="flex-1">
                         <input
                           type="text"
-                          value={newKey}
-                          onChange={(e) => setNewKey(e.target.value)}
+                          value={newOptionKey}
+                          onChange={(e) => setNewOptionKey(e.target.value)}
                           placeholder="Attribute Name (e.g. Material)"
                           className="block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
                         />
@@ -831,8 +831,8 @@ export default function ProductForm({
                       <div className="flex-1">
                         <input
                           type="text"
-                          value={newValue}
-                          onChange={(e) => setNewValue(e.target.value)}
+                          value={newOptionValue}
+                          onChange={(e) => setNewOptionValue(e.target.value)}
                           placeholder="Value (e.g. 100% Cotton)"
                           className="block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
                           onKeyDown={(e) => {
