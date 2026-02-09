@@ -76,9 +76,8 @@ export interface Product {
     value: string;
     label: string;
     price: number;
-    inStock: boolean;
+    available?: boolean;
   }[];
-  colors?: Color[];
   options?: Record<string, any>;
 }
 
@@ -99,7 +98,6 @@ export interface ProductCategory {
 export interface CartItem extends Product {
   quantity: number;
   selectedSize?: string;
-  selectedColor?: Color;
   giftWrap?: boolean;
   personalizedMessage?: string;
 }

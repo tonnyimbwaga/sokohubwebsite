@@ -16,8 +16,7 @@ const SimpleRichTextEditor = dynamic(
   },
 );
 
-import ProductSizeConfig, { Size } from "@/components/ProductSizeConfig";
-import ProductColorConfig, { Color } from "@/components/ProductColorConfig";
+import ProductVariantConfig, { Variant } from "@/components/ProductVariantConfig";
 import Image from "next/image";
 import { getProductImageUrl } from "@/utils/product-images";
 
@@ -41,9 +40,8 @@ export interface ProductFormData {
   is_trending: boolean;
   is_deal: boolean;
   images: ImageInfo[];
-  sizes?: Size[];
+  sizes?: Variant[];
   tags?: string[];
-  colors?: Color[];
   options?: Record<string, string>;
 }
 
@@ -75,28 +73,18 @@ export default function ProductForm({
   const [uploadedImages, setUploadedImages] = useState<ImageInfo[]>(
     product?.images || [],
   );
-  const [productSizes, setProductSizes] = useState<Size[]>(
+  const [productSizes, setProductSizes] = useState<Variant[]>(
     product?.sizes || [],
   );
 
   // Wrapper to sync productSizes with form field
-  const handleSizesChange = (newSizes: Size[]) => {
-    console.log("[SIZE CHANGE] New sizes:", newSizes);
+  const handleSizesChange = (newSizes: Variant[]) => {
+    console.log("[VARIANT CHANGE] New variants:", newSizes);
     setProductSizes(newSizes);
     setValue("sizes", newSizes); // Sync with form
   };
-  const [productColors, setProductColors] = useState<Color[]>(
-    Array.isArray(product?.colors) ? (product.colors as any) : [],
-  );
 
-  // Wrapper to sync productColors with form field
-  const handleColorsChange = (newColors: Color[]) => {
-    console.log("[COLOR CHANGE] New colors:", newColors);
-    setProductColors(newColors);
-    setValue("colors", newColors); // Sync with form
-  };
-  const [useSizePricing, setUseSizePricing] = useState<boolean>(false);
-  const [useColorPricing, setUseColorPricing] = useState<boolean>(false);
+  const [useSizePricing, setUseSizePricing] = useState<boolean>(true);
   const [newOptionKey, setNewOptionKey] = useState("");
   const [newOptionValue, setNewOptionValue] = useState("");
 
@@ -762,58 +750,30 @@ export default function ProductForm({
           </div>
         </section>
         <hr className="my-6 border-gray-200" />
-        {/* Sizes */}
+        {/* Product Variants */}
         <section>
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Sizes</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">Product Variants</h3>
           {useSizePricing && (
-            <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="text-sm text-blue-700">
-                <strong>Size-based pricing enabled:</strong> Set individual
-                prices for each size below. The base price field above is
-                disabled when using size pricing.
+            <div className="mb-4 p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+              <p className="text-sm text-indigo-700">
+                <strong>Variant pricing enabled:</strong> Set absolute
+                prices for each variant below. The base price field above is
+                used as a fallback or starting point.
               </p>
             </div>
           )}
-          <ProductSizeConfig
-            initialSizes={productSizes}
+          <ProductVariantConfig
+            initialVariants={productSizes}
             onChange={handleSizesChange}
-            useSizePricing={useSizePricing}
+            title="Manage Variants"
+            placeholder="e.g. Red, XL, or 42"
           />
         </section>
         <hr className="my-6 border-gray-200" />
 
-        {/* Variants & Options */}
+        {/* Options */}
         <section>
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Variants & Options</h3>
-
-          {/* Colors */}
-          <div className="mb-8 p-6 bg-slate-50/50 rounded-2xl border border-slate-100">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <label className="block text-base font-bold text-slate-800">
-                  Color Variants
-                </label>
-                <p className="text-xs text-slate-500 mt-1">Add beautiful color options for your customers to select.</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <input
-                  type="checkbox"
-                  id="useColorPricing"
-                  checked={useColorPricing}
-                  onChange={(e) => setUseColorPricing(e.target.checked)}
-                  className="w-5 h-5 rounded-md border-slate-300 text-indigo-600 focus:ring-indigo-500 transition-all cursor-pointer"
-                />
-                <label htmlFor="useColorPricing" className="text-sm font-semibold text-slate-600 cursor-pointer">
-                  Custom Pricing
-                </label>
-              </div>
-            </div>
-            <ProductColorConfig
-              initialColors={productColors}
-              onChange={handleColorsChange}
-              useColorPricing={useColorPricing}
-            />
-          </div>
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">Specifications</h3>
 
           {/* Other Options */}
           <div>
