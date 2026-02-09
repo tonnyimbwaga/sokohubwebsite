@@ -593,6 +593,8 @@ const SectionProductHeader = ({ product }: Props) => {
                           "teal": "#008080",
                         };
 
+                        if (!c.label) return null;
+
                         const normalizedLabel = c.label.toLowerCase().trim();
                         return colorMap[normalizedLabel] || null;
                       };
