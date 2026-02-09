@@ -123,7 +123,6 @@ export default function ProductForm({
       product?.category_ids && product.category_ids.length > 0
         ? product.category_ids
         : [], // Additional categories from junction table
-    colors: product?.colors || [],
     options: product?.options || {},
   };
 
@@ -276,7 +275,6 @@ export default function ProductForm({
   const mutation = useMutation({
     mutationFn: async (data: ProductFormData) => {
       console.log("[MUTATION] Starting mutation with data:", data);
-      console.log("[MUTATION] Colors being saved:", data.colors);
       console.log("[MUTATION] Options being saved:", data.options);
 
       // Prepare the product data
@@ -295,12 +293,10 @@ export default function ProductForm({
         images: data.images,
         sizes: data.sizes,
         tags: data.tags,
-        colors: data.colors,
         options: data.options,
       };
 
       console.log("[MUTATION] Product data prepared for Supabase:", productData);
-      console.log("[MUTATION] Colors in productData:", productData.colors);
 
       let productId;
 
@@ -431,8 +427,6 @@ export default function ProductForm({
     console.log("[FORM SUBMIT] category_ids:", data.category_ids);
     console.log("[FORM SUBMIT] full data:", data);
     console.log("[FORM SUBMIT] useSizePricing:", useSizePricing);
-    console.log("[FORM SUBMIT] productColors state:", productColors);
-    console.log("[FORM SUBMIT] data.colors:", data.colors);
 
     setIsSubmitting(true);
     setSubmitError(null);
@@ -440,7 +434,6 @@ export default function ProductForm({
       {
         ...data,
         sizes: useSizePricing ? productSizes : [], // Only save sizes if using size pricing
-        colors: productColors, // Save the interactive color variants
       },
       {
         onSettled: () => {

@@ -50,7 +50,7 @@ export async function GET(_req: Request) {
   const { data: products, error: productsError } = await supabase
     .from("products")
     .select(
-      `id, name, description, price, compare_at_price, stock, status, slug, google_product_category, images, sizes, colors, category_id`,
+      `id, name, description, price, compare_at_price, stock, status, slug, google_product_category, images, sizes, category_id`,
     )
     .eq("status", "active") as { data: any[] | null, error: any };
 
@@ -265,9 +265,8 @@ export async function GET(_req: Request) {
         }T23:59+03:00`
         : null;
 
-      // Handle variants (Sizes & Colors)
+      // Handle variants (Sizes)
       const productSizes = Array.isArray(product.sizes) ? product.sizes : [];
-      const productColors = Array.isArray(product.colors) ? product.colors : [];
 
       // Helper to format a single item
       const formatItem = (variantIdSuffix: string, variantSize?: string, variantColor?: any) => {
@@ -333,25 +332,11 @@ export async function GET(_req: Request) {
       };
 
       // Generation logic
-      if (productSizes.length > 0 && productColors.length > 0) {
-        // Combinations
-        return productSizes.flatMap((size: any) =>
-          productColors.map((color: any) => {
-            const sizeLabel = typeof size === 'string' ? size : size.label || size.value;
-            const suffix = `-${sizeLabel.replace(/\s+/g, "-")}-${color.label.replace(/\s+/g, "-")}`;
-            return formatItem(suffix, size, color);
-          })
-        );
-      } else if (productSizes.length > 0) {
-        // Sizes only
+      if (productSizes.length > 0) {
+        // Variants
         return productSizes.map((size: any) => {
           const sizeLabel = typeof size === 'string' ? size : size.label || size.value;
           return formatItem(`-${sizeLabel.replace(/\s+/g, "-")}`, size);
-        });
-      } else if (productColors.length > 0) {
-        // Colors only
-        return productColors.map((color: any) => {
-          return formatItem(`-${color.label.replace(/\s+/g, "-")}`, undefined, color);
         });
       } else {
         // No variants

@@ -120,18 +120,6 @@ export default function CartSlideOver({ isOpen, onClose }: Props) {
                                               Size: <span className="font-medium text-gray-700">{item.selectedSize}</span>
                                             </p>
                                           )}
-                                          {item.selectedColor && (
-                                            <p className="text-xs sm:text-sm text-gray-500 flex items-center gap-1.5">
-                                              Color: <span className="font-medium text-gray-700">{item.selectedColor.label}</span>
-                                              {item.selectedColor.value && (
-                                                <span
-                                                  className="w-3 h-3 rounded-full border border-gray-200"
-                                                  style={{ backgroundColor: item.selectedColor.value }}
-                                                  title={item.selectedColor.label}
-                                                />
-                                              )}
-                                            </p>
-                                          )}
                                         </div>
 
                                       </div>

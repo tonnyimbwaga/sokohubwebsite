@@ -46,12 +46,7 @@ export interface ProductImage {
   alt?: string;
 }
 
-export interface Color {
-  label: string;
-  value: string;
-  price: number;
-  available: boolean;
-}
+
 
 export interface Product {
   id: string;

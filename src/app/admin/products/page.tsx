@@ -37,7 +37,6 @@ interface Product {
   created_at: string;
   slug?: string;
   compare_at_price?: number | null;
-  colors?: any[];
   options?: Record<string, any>;
   images?: (string | ImageInfo)[];
   sizes?: Size[];
@@ -112,7 +111,6 @@ export default function ProductsPage() {
           slug,
           images,
           sizes,
-          colors,
           options,
           tags,
           category:categories!products_category_id_fkey(id, name),
@@ -373,7 +371,6 @@ export default function ProductsPage() {
                         }))
                         : [],
                       sizes: selectedProduct.sizes || [],
-                      colors: (selectedProduct as any).colors || [],
                       options: (selectedProduct as any).options || {},
                       tags: selectedProduct.tags || [],
                     }

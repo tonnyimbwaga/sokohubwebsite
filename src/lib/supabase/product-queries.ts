@@ -63,7 +63,6 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
         category_id,
         images,
         sizes,
-        colors,
         options,
         category:category_id(name, slug)
       `,

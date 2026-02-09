@@ -64,15 +64,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       const existingItem = currentItems.find(
         (item) =>
           item.id === newItem.id &&
-          item.selectedSize === newItem.selectedSize &&
-          item.selectedColor?.label === newItem.selectedColor?.label,
+          item.selectedSize === newItem.selectedSize,
       );
 
       if (existingItem) {
         return currentItems.map((item) =>
           item.id === newItem.id &&
-            item.selectedSize === newItem.selectedSize &&
-            item.selectedColor?.label === newItem.selectedColor?.label
+            item.selectedSize === newItem.selectedSize
             ? { ...item, quantity: item.quantity + newItem.quantity }
             : item,
         );
