@@ -566,6 +566,40 @@ const SectionProductHeader = ({ product }: Props) => {
                       const isAvailable = color.available !== false;
                       const isSelected = selectedColor?.label === color.label;
 
+                      // Helper to get color value (either explicit hex or mapped from name)
+                      const getColorValue = (c: Color) => {
+                        if (c.value && c.value.trim() !== "") return c.value;
+
+                        // Fallback mapping for common color names
+                        const colorMap: Record<string, string> = {
+                          "white": "#FFFFFF",
+                          "black": "#000000",
+                          "red": "#FF0000",
+                          "blue": "#0000FF",
+                          "green": "#008000",
+                          "yellow": "#FFFF00",
+                          "orange": "#FFA500",
+                          "purple": "#800080",
+                          "pink": "#FFC0CB",
+                          "navy": "#000080",
+                          "gray": "#808080",
+                          "grey": "#808080",
+                          "beige": "#F5F5DC",
+                          "brown": "#A52A2A",
+                          "gold": "#FFD700",
+                          "silver": "#C0C0C0",
+                          "maroon": "#800000",
+                          "olive": "#808000",
+                          "teal": "#008080",
+                        };
+
+                        const normalizedLabel = c.label.toLowerCase().trim();
+                        return colorMap[normalizedLabel] || null;
+                      };
+
+                      const displayColor = getColorValue(color);
+                      const isWhite = displayColor?.toLowerCase() === "#ffffff" || displayColor?.toLowerCase() === "white";
+
                       return (
                         <button
                           key={index}
@@ -577,31 +611,38 @@ const SectionProductHeader = ({ product }: Props) => {
                             : "hover:scale-105 active:scale-95"
                             } ${!isAvailable ? "opacity-30 grayscale cursor-not-allowed" : "cursor-pointer"}`}
                         >
-                          <div className={`flex items-center gap-2 rounded-lg py-1.5 px-3 border-2 transition-all ${isSelected
+                          <div className={`flex items-center gap-2 rounded-lg py-1.5 px-3 border-2 transition-all min-w-[3.5rem] justify-center ${isSelected
                             ? "bg-primary border-primary text-white shadow-lg"
                             : "bg-white border-slate-200 text-slate-700 hover:border-primary/30"
                             }`}>
-                            {color.value && (
+                            {displayColor ? (
                               <div
-                                className={`w-4 h-4 rounded-full border shadow-inner ${isSelected ? "border-white/50" : "border-slate-200"}`}
-                                style={{ backgroundColor: color.value }}
+                                className={`w-5 h-5 rounded-full shadow-sm flex-shrink-0 ${isWhite ? "border border-slate-300" : "border border-black/5"}`}
+                                style={{ backgroundColor: displayColor }}
                               />
+                            ) : (
+                              // Fallback icon for colors without hex/mapping
+                              <div className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center">
+                                <span className="text-[10px] font-bold text-slate-500 text-center leading-none" title="No color preview">?</span>
+                              </div>
                             )}
-                            <span className="text-sm font-bold truncate max-w-[120px]">
+
+                            <span className={`text-sm font-bold truncate max-w-[100px]`}>
                               {color.label}
                             </span>
+
                             {color.price > 0 && (
                               <span className={`text-[10px] font-black px-1.5 rounded-md ${isSelected ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500"}`}>
-                                +KES {color.price.toLocaleString()}
+                                +{color.price}
                               </span>
                             )}
                           </div>
                           {isSelected && (
                             <motion.div
                               layoutId="color-indicator-desktop"
-                              className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-white rounded-full flex items-center justify-center shadow-md border border-white"
+                              className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-green-500 text-white rounded-full flex items-center justify-center shadow-md border-2 border-white z-20"
                             >
-                              <svg xmlns="http://www.w3.org/2000/svg" className="h-2.5 w-2.5" viewBox="0 0 20 20" fill="currentColor">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                               </svg>
                             </motion.div>

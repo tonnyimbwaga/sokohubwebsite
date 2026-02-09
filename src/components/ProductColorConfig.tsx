@@ -13,6 +13,21 @@ interface ProductColorConfigProps {
     useColorPricing?: boolean;
 }
 
+const PRESET_COLORS = [
+    { label: "White", value: "#FFFFFF" },
+    { label: "Black", value: "#000000" },
+    { label: "Red", value: "#FF0000" },
+    { label: "Blue", value: "#0000FF" },
+    { label: "Green", value: "#008000" },
+    { label: "Yellow", value: "#FFFF00" },
+    { label: "Orange", value: "#FFA500" },
+    { label: "Purple", value: "#800080" },
+    { label: "Pink", value: "#FFC0CB" },
+    { label: "Navy", value: "#000080" },
+    { label: "Gray", value: "#808080" },
+    { label: "Beige", value: "#F5F5DC" },
+];
+
 const ProductColorConfig: FC<ProductColorConfigProps> = ({
     initialColors = [],
     onChange,
@@ -20,7 +35,7 @@ const ProductColorConfig: FC<ProductColorConfigProps> = ({
 }) => {
     const [colors, setColors] = useState<Color[]>(initialColors);
     const [newColorLabel, setNewColorLabel] = useState("");
-    const [newColorValue, setNewColorValue] = useState("");
+    const [newColorValue, setNewColorValue] = useState(""); // Stores hex
     const [price, setPrice] = useState<number>(0);
 
     // Sync with initialColors if they change (e.g. from parent re-fetch)
@@ -30,31 +45,35 @@ const ProductColorConfig: FC<ProductColorConfigProps> = ({
         }
     }, [initialColors]);
 
-    // Use a separate effect for parent updates to avoid infinite loops if possible,
-    // but the best way is to only call it when local state changes.
     const updateParent = (updatedColors: Color[]) => {
         setColors(updatedColors);
         onChange?.(updatedColors);
     };
 
-
     const addColor = () => {
-        if (!newColorLabel.trim()) return;
+        if (!newColorLabel.trim() && !newColorValue) return;
+
+        // If no value picked but label exists, try to find a match or default to black? 
+        // Or just let it be empty value? User wants visual picker, so value should be present.
+        // For custom colors without hex, we might generate a random one or rely on label? 
+        // No, best to require value for a "visual" picker flow, or default to #000000.
+        const colorValue = newColorValue || "#000000";
 
         const newColorObj: Color = {
-            label: newColorLabel,
-            value: newColorValue,
+            label: newColorLabel || "Custom Color",
+            value: colorValue,
             price: price || 0,
             available: true,
         };
 
         const updatedColors = [...colors, newColorObj];
         updateParent(updatedColors);
+
+        // Reset form
         setNewColorLabel("");
         setNewColorValue("");
         setPrice(0);
     };
-
 
     const removeColor = (index: number) => {
         const updatedColors = colors.filter((_, i) => i !== index);
@@ -72,115 +91,153 @@ const ProductColorConfig: FC<ProductColorConfigProps> = ({
         updateParent(updatedColors);
     };
 
+    const handlePresetClick = (preset: { label: string; value: string }) => {
+        setNewColorLabel(preset.label);
+        setNewColorValue(preset.value);
+    };
+
     return (
         <div className="space-y-6">
             {/* Add Color Controls */}
-            <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
-                <div className="flex-1">
-                    <input
-                        type="text"
-                        value={newColorLabel}
-                        onChange={(e) => setNewColorLabel(e.target.value)}
-                        placeholder="Color Name (e.g. Blue, White, Crimson)"
-                        className="rounded-lg border p-3 text-base w-full"
-                    />
-                </div>
-                {useColorPricing && (
-                    <div className="w-full sm:w-40">
-                        <input
-                            type="number"
-                            value={price}
-                            onChange={(e) => setPrice(Number(e.target.value))}
-                            placeholder="Extra Price (optional)"
-                            className="rounded-lg border p-3 text-base font-mono text-right w-full"
-                            min={0}
-                        />
+            <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Visual Color Picker */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Pick a Color
+                        </label>
+                        <div className="flex flex-wrap gap-2 mb-3">
+                            {PRESET_COLORS.map((preset) => (
+                                <button
+                                    key={preset.value}
+                                    type="button"
+                                    onClick={() => handlePresetClick(preset)}
+                                    className={`w-8 h-8 rounded-full border shadow-sm transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${newColorValue === preset.value ? 'ring-2 ring-offset-2 ring-indigo-500 scale-110' : 'border-gray-200'
+                                        }`}
+                                    style={{ backgroundColor: preset.value }}
+                                    title={preset.label}
+                                />
+                            ))}
+                        </div>
+
+                        <div className="flex items-center gap-3">
+                            <div className="relative">
+                                <input
+                                    type="color"
+                                    value={newColorValue || "#000000"}
+                                    onChange={(e) => setNewColorValue(e.target.value)}
+                                    className="h-10 w-20 p-0 border-0 rounded overflow-hidden cursor-pointer shadow-sm"
+                                />
+                                <div className="absolute inset-0 pointer-events-none border border-gray-200 rounded text-xs flex items-center justify-center bg-white/50 opacity-0 hover:opacity-100">
+                                    Custom
+                                </div>
+                            </div>
+                            <span className="text-sm text-gray-500 font-mono">
+                                {newColorValue || "Select a color"}
+                            </span>
+                        </div>
                     </div>
-                )}
-                <button
-                    onClick={addColor}
-                    className="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold shadow-sm hover:bg-indigo-700 transition whitespace-nowrap w-full sm:w-auto"
-                    type="button"
-                >
-                    Add Option
-                </button>
+
+                    {/* Details Input */}
+                    <div className="flex flex-col gap-3">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Color Name
+                            </label>
+                            <input
+                                type="text"
+                                value={newColorLabel}
+                                onChange={(e) => setNewColorLabel(e.target.value)}
+                                placeholder="e.g. Midnight Blue"
+                                className="rounded-lg border border-gray-300 p-2.5 text-sm w-full focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                            />
+                        </div>
+
+                        {useColorPricing && (
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Extra Price (+KES)
+                                </label>
+                                <input
+                                    type="number"
+                                    value={price}
+                                    onChange={(e) => setPrice(Number(e.target.value))}
+                                    placeholder="0"
+                                    className="rounded-lg border border-gray-300 p-2.5 text-sm font-mono w-full focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                    min={0}
+                                />
+                            </div>
+                        )}
+
+                        <div className="mt-auto pt-2">
+                            <button
+                                onClick={addColor}
+                                type="button"
+                                disabled={!newColorValue && !newColorLabel}
+                                className="w-full bg-indigo-600 text-white px-4 py-2.5 rounded-lg font-semibold shadow-sm hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
+                                </svg>
+                                Add Color Variant
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            {/* Grid Layout for added colors */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {colors.map((color, index) => (
-                    <div
-                        key={index}
-                        className="rounded-xl border shadow-sm bg-white p-4 flex flex-col gap-3 hover:border-indigo-200 transition-colors"
-                    >
-                        <div className="flex gap-4 items-start">
-                            <div className="flex-1">
-                                <input
-                                    type="text"
-                                    value={color.label}
-                                    onChange={(e) =>
-                                        updateColorField(index, "label", e.target.value)
-                                    }
-                                    placeholder="Color Label"
-                                    className="font-bold text-gray-900 border-none p-0 focus:ring-0 w-full text-lg mb-1"
-                                />
-                                <div className="flex items-center gap-2">
-                                    <input
-                                        type="text"
-                                        value={color.value}
-                                        onChange={(e) =>
-                                            updateColorField(index, "value", e.target.value)
-                                        }
-                                        className="text-xs text-gray-400 border border-gray-100 rounded px-1.5 py-0.5 focus:ring-0 w-32"
-                                        placeholder="Hex/CSS (optional)"
-                                    />
-                                    {color.value && (
-                                        <div
-                                            className="w-4 h-4 rounded-full border border-gray-200"
-                                            style={{ backgroundColor: color.value }}
-                                        />
+            {/* List of Added Colors */}
+            {colors.length > 0 && (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {colors.map((color, index) => (
+                        <div
+                            key={index}
+                            className="bg-white rounded-lg border border-gray-200 p-3 shadow-sm flex items-center gap-3 group hover:border-indigo-200 transition-colors"
+                        >
+                            <div
+                                className="w-10 h-10 rounded-full border border-gray-200 shadow-inner flex-shrink-0"
+                                style={{ backgroundColor: color.value }}
+                            />
+
+                            <div className="flex-1 min-w-0">
+                                <div className="font-medium text-gray-900 truncate">
+                                    {color.label}
+                                </div>
+                                <div className="text-xs text-gray-500 flex items-center gap-2">
+                                    <span className="font-mono">{color.value}</span>
+                                    {color.price > 0 && (
+                                        <span className="bg-green-50 text-green-700 px-1.5 py-0.5 rounded text-[10px] font-bold">
+                                            +{color.price}
+                                        </span>
+                                    )}
+                                    {!color.available && (
+                                        <span className="bg-red-50 text-red-600 px-1.5 py-0.5 rounded text-[10px]">
+                                            Out of Stock
+                                        </span>
                                     )}
                                 </div>
                             </div>
+
                             <button
                                 onClick={() => removeColor(index)}
-                                className="text-gray-400 hover:text-red-500 p-2 transition-colors"
+                                className="text-gray-400 hover:text-red-500 p-1.5 rounded-md hover:bg-red-50 transition-colors"
                                 type="button"
+                                title="Remove color"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                                    <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
                                 </svg>
                             </button>
                         </div>
+                    ))}
+                </div>
+            )}
 
-                        <div className="flex justify-between items-center mt-1 border-t pt-3">
-                            <div className="flex items-center gap-2">
-                                <input
-                                    type="checkbox"
-                                    checked={color.available}
-                                    onChange={(e) => updateColorField(index, "available", e.target.checked)}
-                                    id={`color-available-${index}`}
-                                    className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                />
-                                <label htmlFor={`color-available-${index}`} className="text-sm font-medium text-gray-700">
-                                    In Stock
-                                </label>
-                            </div>
-                            {useColorPricing && (
-                                <div className="flex items-center gap-2">
-                                    <span className="text-xs text-gray-500">Price:</span>
-                                    <input
-                                        type="number"
-                                        value={color.price}
-                                        onChange={(e) => updateColorField(index, "price", Number(e.target.value))}
-                                        className="w-24 rounded border p-1 text-sm text-right font-mono"
-                                    />
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                ))}
-            </div>
+            {colors.length === 0 && (
+                <div className="text-center py-8 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+                    <p className="text-gray-500 text-sm">No color variants added yet.</p>
+                </div>
+            )}
         </div>
     );
 };
