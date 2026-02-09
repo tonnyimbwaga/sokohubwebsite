@@ -605,13 +605,12 @@ const SectionProductHeader = ({ product }: Props) => {
                       return (
                         <button
                           key={index}
-                          onClick={() => isAvailable && setSelectedColor(color)}
-                          disabled={!isAvailable}
+                          onClick={() => setSelectedColor(color)}
                           title={color.label}
                           className={`group relative flex items-center justify-center rounded-xl transition-all duration-300 ${isSelected
                             ? "ring-2 ring-primary ring-offset-2 scale-110 z-10"
                             : "hover:scale-105 active:scale-95"
-                            } ${!isAvailable ? "opacity-30 grayscale cursor-not-allowed" : "cursor-pointer"}`}
+                            } cursor-pointer`}
                         >
                           <div className={`flex items-center gap-2 rounded-lg py-1.5 px-3 border-2 transition-all min-w-[3.5rem] justify-center ${isSelected
                             ? "bg-primary border-primary text-white shadow-lg"
