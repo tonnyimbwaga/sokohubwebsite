@@ -46,9 +46,7 @@ export async function GET(_req: Request) {
 
   const supabase = await createClient();
 
-  // Step 1: fetch active products
-  // Note: google_product_category might be missing if migration hasn't run yet, 
-  // so we handle potential errors or missing fields gracefully in logic.
+  // Fetch active products
   const { data: products, error: productsError } = await supabase
     .from("products")
     .select(
@@ -60,7 +58,7 @@ export async function GET(_req: Request) {
     console.error("Error fetching products for feed:", productsError.message);
   }
 
-  // Fallback if no products are found - return valid but empty feed
+  // Fallback if no products found
   if (!products || products.length === 0) {
     return new NextResponse(
       `<?xml version="1.0" encoding="UTF-8"?>
@@ -80,14 +78,13 @@ export async function GET(_req: Request) {
 
   const productIds = products.map((p) => p.id);
 
-  // Step 2: fetch categories (both old and many-to-many)
+  // Parallel fetch dependencies
   const [{ data: productCategories }, { data: oldCategories }, { data: imageVersions }] = await Promise.all([
     supabase.from("product_categories").select(`product_id, categories!inner(id, name, slug)`).in("product_id", productIds),
     supabase.from("categories").select("id, name, slug").in("id", products.map((p: any) => p.category_id).filter(Boolean)),
     supabase.from("product_image_versions").select("product_id, web_image_url, feed_image_url").in("product_id", productIds)
   ]);
 
-  // Create maps for efficient lookups
   const productCategoriesMap = new Map();
   if (productCategories) {
     productCategories.forEach((pc: any) => {
@@ -96,7 +93,6 @@ export async function GET(_req: Request) {
     });
   }
 
-  // Add old relationship categories
   if (oldCategories) {
     products.forEach((product) => {
       const cat = oldCategories.find((c: any) => c.id === product.category_id);
@@ -108,7 +104,6 @@ export async function GET(_req: Request) {
     });
   }
 
-  // Create image versions map: productId|web_url -> feed_url
   const imageVersionsMap = new Map();
   if (imageVersions) {
     imageVersions.forEach((v: any) => {
@@ -117,34 +112,56 @@ export async function GET(_req: Request) {
   }
 
   const getAvailability = (status: string, stock: number | null) => {
-    if (status === "active" && (stock === null || stock > 0)) {
-      return "in stock";
-    }
+    if (status === "active" && (stock === null || stock > 0)) return "in stock";
     return "out of stock";
   };
 
+  /**
+   * Generates a clean, Merchant Center compatible image URL.
+   * Ensures JPEG format and correct bucket paths.
+   */
   const getFeedImageUrls = (productId: string, imageJson: any[]): string[] => {
     if (!Array.isArray(imageJson)) return [];
 
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-    const bucket = "product-images";
+    const defaultBucket = process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET || "product-images";
+    const knownBuckets = ["product-images", "categories", "hero-slides", "blog"];
 
     const urls = imageJson
       .map((img) => {
         if (!img) return null;
-        const webPath = typeof img === "string" ? img : img.url || img.web_image_url;
-        if (!webPath) return null;
+        let rawPath = typeof img === "string" ? img : img.url || img.web_image_url;
+        if (!rawPath || typeof rawPath !== "string") return null;
 
-        // Check if we have an optimized version
-        const optimizedVersion = imageVersionsMap.get(`${productId}|${webPath}`);
-        let finalPath = optimizedVersion || webPath;
+        rawPath = rawPath.trim();
+        if (/^https?:\/\//i.test(rawPath)) return rawPath;
 
-        if (/^https?:\/\//i.test(finalPath)) return finalPath;
+        // Check for optimized version first
+        const optimizedVersion = imageVersionsMap.get(`${productId}|${rawPath}`);
 
-        // Clean up path
+        let finalBucket = defaultBucket;
+        let finalPath = optimizedVersion || rawPath;
+
+        // Clean up path and determine bucket
         if (finalPath.startsWith("/")) finalPath = finalPath.slice(1);
 
-        return `${supabaseUrl}/storage/v1/object/public/${bucket}/${finalPath}`;
+        const parts = finalPath.split("/");
+        if (parts.length > 1 && knownBuckets.includes(parts[0])) {
+          finalBucket = parts[0];
+          finalPath = parts.slice(1).join("/");
+        }
+
+        // Form the URL
+        // If it's an optimized image (ends in .jpg) or already png/jpg/gif, we use static object URL
+        // Otherwise, we use the render endpoint to force JPEG for compatibility
+        const isStandardFormat = /\.(jpe?g|png|gif)$/i.test(finalPath);
+
+        if (isStandardFormat) {
+          return `${supabaseUrl}/storage/v1/object/public/${finalBucket}/${finalPath}`;
+        } else {
+          // Force JPEG via transformation for any other formats (webp, avif, or no extension)
+          return `${supabaseUrl}/storage/v1/render/image/public/${finalBucket}/${finalPath}?format=jpg&quality=90`;
+        }
       })
       .filter(Boolean) as string[];
 
@@ -185,7 +202,6 @@ export async function GET(_req: Request) {
       const productType = categories.length > 0 ? categories[0]?.name || "" : "";
       const cleanDescription = buildMerchantDescription(product);
 
-      // Price logic
       const currentPrice = typeof product.price === "number" ? product.price : 0;
       const comparePrice = typeof product.compare_at_price === "number" ? product.compare_at_price : null;
 
@@ -196,7 +212,6 @@ export async function GET(_req: Request) {
         ? `${new Date().toISOString().split("T")[0]}T00:00+03:00/${new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0]}T23:59+03:00`
         : null;
 
-      // Variants
       const sizes = Array.isArray(product.sizes) ? product.sizes : [];
       const colors = Array.isArray(product.colors) ? product.colors : [];
 
@@ -224,17 +239,15 @@ export async function GET(_req: Request) {
           <g:service>Standard</g:service>
           <g:price>0 KES</g:price>
         </g:shipping>
-        <g:mpn>${escapeXml(product.id)}</g:mpn>
+        <g:mpn>${escapeXml(pId)}</g:mpn>
         ${googleCategory ? `<g:google_product_category>${escapeXml(googleCategory)}</g:google_product_category>` : ""}
         ${productType ? `<g:product_type>${escapeXml(productType)}</g:product_type>` : ""}
         <g:identifier_exists>no</g:identifier_exists>
       </item>`;
       };
 
-      // Generate items for all combinations of sizes and colors
       if (sizes.length > 0 || colors.length > 0) {
         const variants: string[] = [];
-
         const sizeList = sizes.length > 0 ? sizes : [null];
         const colorList = colors.length > 0 ? colors : [null];
 
@@ -251,7 +264,6 @@ export async function GET(_req: Request) {
             if (sLabel) vId += `-${sLabel.replace(/\s+/g, "-")}`;
             if (cLabel) vId += `-${cLabel.replace(/\s+/g, "-")}`;
 
-            // Variant pricing logic (simplification)
             let vPrice = basePrice;
             if (size && typeof size === 'object' && size.price > 0) vPrice = size.price;
 
@@ -286,4 +298,5 @@ ${items}
     },
   });
 }
+
 
