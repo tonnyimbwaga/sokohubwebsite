@@ -85,21 +85,23 @@ export async function GET(_req: Request) {
     supabase.from("product_image_versions").select("product_id, web_image_url, feed_image_url").in("product_id", productIds)
   ]);
 
-  const productCategoriesMap = new Map();
+  const productCategoriesMap = new Map<string, any[]>();
   if (productCategories) {
     productCategories.forEach((pc: any) => {
       if (!productCategoriesMap.has(pc.product_id)) productCategoriesMap.set(pc.product_id, []);
-      productCategoriesMap.get(pc.product_id).push(pc.categories);
+      const cats = productCategoriesMap.get(pc.product_id);
+      if (cats) cats.push(pc.categories);
     });
   }
 
   if (oldCategories) {
-    products.forEach((product) => {
-      const cat = oldCategories.find((c: any) => c.id === product.category_id);
+    products.forEach((product: any) => {
+      const cat = (oldCategories as any[])?.find((c: any) => c.id === product.category_id);
       if (cat) {
         if (!productCategoriesMap.has(product.id)) productCategoriesMap.set(product.id, []);
-        const existing = productCategoriesMap.get(product.id).find((c: any) => c.id === cat.id);
-        if (!existing) productCategoriesMap.get(product.id).push(cat);
+        const categories = productCategoriesMap.get(product.id);
+        const existing = categories ? categories.find((c: any) => c.id === (cat as any).id) : null;
+        if (!existing && categories) categories.push(cat);
       }
     });
   }
@@ -131,7 +133,7 @@ export async function GET(_req: Request) {
       .map((img) => {
         if (!img) return null;
         let rawPath = typeof img === "string" ? img : img.url || img.web_image_url;
-        if (!rawPath || typeof rawPath !== "string") return null;
+        if (!rawPath || typeof rawPath !== "string" || rawPath.includes("undefined")) return null;
 
         rawPath = rawPath.trim();
         if (/^https?:\/\//i.test(rawPath)) return rawPath;
@@ -145,6 +147,13 @@ export async function GET(_req: Request) {
         // Clean up path and determine bucket
         if (finalPath.startsWith("/")) finalPath = finalPath.slice(1);
 
+        // Remove any unintentional "bucket/bucket/" nesting
+        knownBuckets.forEach(b => {
+          if (finalPath.startsWith(`${b}/${b}/`)) {
+            finalPath = finalPath.replace(`${b}/${b}/`, `${b}/`);
+          }
+        });
+
         const parts = finalPath.split("/");
         if (parts.length > 1 && knownBuckets.includes(parts[0])) {
           finalBucket = parts[0];
@@ -152,14 +161,14 @@ export async function GET(_req: Request) {
         }
 
         // Form the URL
-        // If it's an optimized image (ends in .jpg) or already png/jpg/gif, we use static object URL
-        // Otherwise, we use the render endpoint to force JPEG for compatibility
-        const isStandardFormat = /\.(jpe?g|png|gif)$/i.test(finalPath);
+        // If it's a standard web format (including webp), use direct URL for maximum reliability
+        // WebP IS supported by Google Merchant Center. Error usually comes from render endpoint failures.
+        const isStandardFormat = /\.(jpe?g|png|gif|webp)$/i.test(finalPath);
 
         if (isStandardFormat) {
           return `${supabaseUrl}/storage/v1/object/public/${finalBucket}/${finalPath}`;
         } else {
-          // Force JPEG via transformation for any other formats (webp, avif, or no extension)
+          // Force JPEG via transformation ONLY for non-standard or missing extensions
           return `${supabaseUrl}/storage/v1/render/image/public/${finalBucket}/${finalPath}?format=jpg&quality=90`;
         }
       })
@@ -217,14 +226,23 @@ export async function GET(_req: Request) {
 
       const formatItem = (variantId: string, variantTitle: string, variantPrice: number, variantSize?: string, variantColor?: string) => {
         const pId = product.id as string;
+        // Aggressive ID shortening for Google Merchant Center (50 char limit)
+        // Use last 8 chars of product UUID + variant suffix, ensure strictly <= 50
+        const shortPid = pId.includes("-") ? pId.split("-").pop() || pId : pId.slice(-12);
+        let finalId = variantId ? `${shortPid.slice(-8)}${variantId}` : pId;
+
+        if (finalId.length > 50) {
+          finalId = finalId.slice(0, 50);
+        }
+
         return `
       <item>
-        <g:id>${escapeXml(pId)}${variantId}</g:id>
+        <g:id>${escapeXml(finalId)}</g:id>
         <g:item_group_id>${escapeXml(pId)}</g:item_group_id>
         <g:title>${escapeXml(product.name)}${variantTitle}</g:title>
         <g:description>${escapeXml(cleanDescription)}</g:description>
         <g:link>${escapeXml(productLink)}</g:link>
-        <g:image_link>${escapeXml(imageUrls[0])}</g:image_link>
+        <g:image_link>${escapeXml(imageUrls[0] || "")}</g:image_link>
         ${imageUrls.slice(1, 11).map(url => `<g:additional_image_link>${escapeXml(url)}</g:additional_image_link>`).join("\n")}
         <g:availability>${availability}</g:availability>
         <g:price>${variantPrice.toFixed(2)} KES</g:price>
@@ -239,7 +257,7 @@ export async function GET(_req: Request) {
           <g:service>Standard</g:service>
           <g:price>0 KES</g:price>
         </g:shipping>
-        <g:mpn>${escapeXml(pId)}</g:mpn>
+        <g:mpn>${escapeXml(product.id as string)}</g:mpn>
         ${googleCategory ? `<g:google_product_category>${escapeXml(googleCategory)}</g:google_product_category>` : ""}
         ${productType ? `<g:product_type>${escapeXml(productType)}</g:product_type>` : ""}
         <g:identifier_exists>no</g:identifier_exists>
