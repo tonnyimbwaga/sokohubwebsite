@@ -70,9 +70,22 @@ export default function ProductForm({
 }: ProductFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [uploadedImages, setUploadedImages] = useState<ImageInfo[]>(
-    product?.images || [],
-  );
+  const [uploadedImages, setUploadedImages] = useState<ImageInfo[]>(() => {
+    if (!product?.images) return [];
+    return product.images.map((img: any) => {
+      // If it's already the new object format, keep it
+      if (typeof img === 'object' && (img.web_image_url || img.feed_image_url)) {
+        return img;
+      }
+      // If it's a legacy string, convert it to the new format
+      const url = typeof img === 'string' ? img : (img.url || img.web_image_url || '');
+      return {
+        web_image_url: url,
+        feed_image_url: url, // Fallback to same URL, feed route handles transformation
+        alt: img.alt || ""
+      };
+    });
+  });
   const [productSizes, setProductSizes] = useState<Variant[]>(
     product?.sizes || [],
   );

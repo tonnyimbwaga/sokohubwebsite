@@ -79,10 +79,11 @@ export const SupabaseImageUpload = ({
 
             const sanitizedName = sanitizeFilename(file.name);
             const baseFolder = path ? `${path.replace(/\/$/, "")}/` : "";
+            const baseNameNoExt = sanitizedName.split('.').slice(0, -1).join('.') || sanitizedName;
 
-            webpFileName = `${baseFolder}${sanitizedName.split('.').slice(0, -1).join('.')}.webp`;
+            webpFileName = `${baseFolder}${baseNameNoExt}.webp`;
 
-            // JPEG version
+            // JPEG version - Force .jpg extension for Google Merchant Center compatibility
             optimizedJpeg = await imageCompression(file, {
               maxSizeMB: 1,
               maxWidthOrHeight: 1200,
@@ -90,14 +91,15 @@ export const SupabaseImageUpload = ({
               fileType: "image/jpeg",
               initialQuality: 0.85,
             });
-            jpegFileName = `${baseFolder}${sanitizedName}`;
+            jpegFileName = `${baseFolder}${baseNameNoExt}.jpg`;
           } catch (optErr) {
             alert("Image optimization failed. Uploading original file.");
             const sanitizedName = sanitizeFilename(file.name);
             const baseFolder = path ? `${path.replace(/\/$/, "")}/` : "";
+            const baseNameNoExt = sanitizedName.split('.').slice(0, -1).join('.') || sanitizedName;
 
-            webpFileName = `${baseFolder}${sanitizedName}.webp`;
-            jpegFileName = `${baseFolder}${sanitizedName}`;
+            webpFileName = `${baseFolder}${baseNameNoExt}.webp`;
+            jpegFileName = `${baseFolder}${baseNameNoExt}.jpg`;
           }
 
           // Simulate upload progress

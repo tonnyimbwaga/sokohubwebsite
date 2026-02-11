@@ -132,7 +132,8 @@ export async function GET(_req: Request) {
     const urls = imageJson
       .map((img) => {
         if (!img) return null;
-        let rawPath = typeof img === "string" ? img : img.url || img.web_image_url;
+        // Prioritize feed_image_url (JPEG) if it exists, fallback to url/web_image_url (WebP) or string
+        let rawPath = typeof img === "string" ? img : img.feed_image_url || img.url || img.web_image_url;
         if (!rawPath || typeof rawPath !== "string" || rawPath.includes("undefined")) return null;
 
         rawPath = rawPath.trim();
