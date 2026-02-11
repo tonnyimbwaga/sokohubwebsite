@@ -80,9 +80,9 @@ const SidebarFilters = ({ categories, activeCategory }: SidebarFiltersProps) => 
               params.delete("page");
               router.push(`/products?${params.toString()}`);
             }}
-            className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 ${!activeCategory
-              ? "bg-primary text-black shadow-md ring-2 ring-primary ring-offset-2"
-              : "bg-gray-50 text-gray-600 hover:bg-gray-100"
+            className={`flex items-center justify-between rounded-2xl px-5 py-4 text-sm font-bold transition-all duration-300 group ${!activeCategory
+              ? "bg-white text-primary border-2 border-primary shadow-[0_10px_20px_-5px_rgba(254,238,0,0.3)]"
+              : "bg-slate-50 text-slate-500 border-2 border-transparent hover:bg-white hover:border-slate-100 hover:text-slate-900"
               }`}
           >
             All Products
@@ -92,9 +92,9 @@ const SidebarFilters = ({ categories, activeCategory }: SidebarFiltersProps) => 
               key={item.id}
               type="button"
               onClick={() => handleCategoryClick(item.slug)}
-              className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 ${activeCategory === item.slug
-                ? "bg-primary text-black shadow-md ring-2 ring-primary ring-offset-2"
-                : "bg-gray-50 text-gray-600 hover:bg-gray-100"
+              className={`flex items-center justify-between rounded-2xl px-5 py-4 text-sm font-bold transition-all duration-300 group ${activeCategory === item.slug
+                ? "bg-white text-primary border-2 border-primary shadow-[0_10px_20px_-5px_rgba(254,238,0,0.3)]"
+                : "bg-slate-50 text-slate-500 border-2 border-transparent hover:bg-white hover:border-slate-100 hover:text-slate-900"
                 }`}
             >
               {item.name}

@@ -191,7 +191,7 @@ export async function generateManifestFromDatabase(): Promise<StaticDataManifest
   const { supabase } = await import("./supabase/client");
 
   // Fetch all active products with their categories
-  const { data: products, error } = await supabase
+  const { data: productsData, error } = await supabase
     .from("products")
     .select(
       `
@@ -208,7 +208,9 @@ export async function generateManifestFromDatabase(): Promise<StaticDataManifest
       category:category_id(id, name, slug)
     `,
     )
-    .eq("is_published", true);
+    .eq("status", "active");
+
+  const products = productsData as any[] | null;
 
   if (error || !products) {
     throw new Error("Failed to fetch products from database");

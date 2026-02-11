@@ -73,7 +73,7 @@ export const productQueries = {
     let query = client
       .from("products")
       .select(viewMode === "card" ? selectCard : selectFull, { count: "exact" })
-      .eq("is_published", true)
+      .eq("status", "active")
       .order("created_at", { ascending: false });
 
     // Apply filters
@@ -198,7 +198,7 @@ export const productQueries = {
         category:categories!products_category_id_fkey(name, slug)
       `,
       )
-      .eq("is_published", true)
+      .eq("status", "active")
       .order("created_at", { ascending: false })
       .limit(limit);
 
@@ -234,7 +234,7 @@ export const productQueries = {
         category:categories!products_category_id_fkey(name, slug)
       `,
       )
-      .eq("is_published", true)
+      .eq("status", "active")
       .gt("compare_at_price", 0) // Ensure there's a comparison price
       .not("compare_at_price", "is", null)
       .order("compare_at_price", { ascending: false })
@@ -278,7 +278,7 @@ export const productQueries = {
         )
       `,
       )
-      .eq("is_published", true)
+      .eq("status", "active")
       .eq("is_trending", true)
       .order("created_at", { ascending: false })
       .limit(limit);
@@ -306,7 +306,7 @@ export const productQueries = {
         category:categories!products_category_id_fkey(name, slug)
       `,
       )
-      .eq("is_published", true)
+      .eq("status", "active")
       .textSearch("search_vector", query)
       .limit(limit);
 

@@ -70,7 +70,7 @@ export const categoryQueries = {
       `,
       )
       .eq("category_id", category.id)
-      .eq("products.is_published", true);
+      .eq("products.status", "active");
 
     if (productsError) {
       console.error("Error fetching products for category:", productsError);
