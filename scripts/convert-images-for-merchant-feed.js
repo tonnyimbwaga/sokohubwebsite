@@ -45,7 +45,7 @@ async function getAllProductImages() {
       for (const img of p.images) {
         if (!img) continue;
         const imagePath = typeof img === 'string' ? img : (img.url || img.web_image_url || img.path);
-        if (imagePath && typeof imagePath === 'string' && !imagePath.includes('undefined')) {
+        if (imagePath && typeof imagePath === 'string') {
           results.push({ productId: p.id, imagePath });
         }
       }
