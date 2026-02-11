@@ -14,7 +14,6 @@ import { useCart } from "@/hooks/useCart";
 import OptimizedImage from "@/components/OptimizedImage";
 import ButtonPrimary from "@/shared/Button/ButtonPrimary";
 import { Product } from "@/data/types";
-import Link from "next/link";
 import { getProductImageUrl } from "@/utils/product-images";
 import { trackAddToCart } from "@/lib/fpixel";
 import StickyAddToCartBar from "@/components/StickyAddToCartBar";
@@ -29,7 +28,6 @@ const SectionProductHeader = ({ product }: Props) => {
   const { addToCart } = useCart();
   const router = useRouter();
   const [selectedVariant, setSelectedVariant] = useState<Variant | undefined>(undefined);
-  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [showVariantWarning, setShowVariantWarning] = useState(false);
@@ -113,7 +111,13 @@ const SectionProductHeader = ({ product }: Props) => {
 
     if (action === "addToCart") {
       addToCart(cartItem);
-      trackAddToCart(product.name, displayPriceValue, "KES");
+      trackAddToCart({
+        content_ids: [product.id],
+        content_name: product.name,
+        content_type: "product",
+        value: displayPriceValue,
+        currency: "KES",
+      });
       toast.success(`${product.name} added to cart!`, {
         description: selectedVariant ? `Variant: ${selectedVariant.label}` : undefined,
         action: {
@@ -156,25 +160,6 @@ const SectionProductHeader = ({ product }: Props) => {
                 height={800}
                 priority
               />
-              <button
-                onClick={() => setIsImageModalOpen(true)}
-                className="absolute bottom-6 right-6 p-3 bg-white/90 backdrop-blur shadow-lg rounded-2xl hover:bg-white transition-all active:scale-90"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-slate-700"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
-                  />
-                </svg>
-              </button>
             </div>
 
             {/* Thumbnail Navigation */}
@@ -185,8 +170,8 @@ const SectionProductHeader = ({ product }: Props) => {
                     key={index}
                     onClick={() => setSelectedImageIndex(index)}
                     className={`aspect-square rounded-2xl overflow-hidden border-2 transition-all p-1 bg-white shadow-sm ${selectedImageIndex === index
-                        ? "border-primary ring-4 ring-primary/10"
-                        : "border-slate-100 opacity-60 hover:opacity-100 hover:border-slate-300"
+                      ? "border-primary ring-4 ring-primary/10"
+                      : "border-slate-100 opacity-60 hover:opacity-100 hover:border-slate-300"
                       }`}
                   >
                     <OptimizedImage
@@ -260,13 +245,12 @@ const SectionProductHeader = ({ product }: Props) => {
                     {hasVariants && !selectedVariant ? "From " : ""}
                     KES {displayPriceValue.toLocaleString()}
                   </span>
-                  {!selectedVariant && product.salePrice && (
+                  {(product as any).compare_at_price && (product as any).compare_at_price > displayPriceValue && (
                     <span className="text-lg text-slate-400 line-through font-medium">
-                      KES {product.salePrice.toLocaleString()}
+                      KES {(product as any).compare_at_price.toLocaleString()}
                     </span>
                   )}
                 </div>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Inclusive of all taxes</p>
               </div>
 
               <div id="variant-selection-section" className="space-y-6 pt-4">

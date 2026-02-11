@@ -5,6 +5,7 @@ import { getCachedProducts, getCachedCategories } from "@/lib/supabase/cached-qu
 import SearchInput from "@/components/Products/SearchInput";
 import MobileFilters from "@/components/Products/MobileFilters";
 import { LuPackageSearch } from "react-icons/lu";
+import SortSelect from "@/components/Products/SortSelect";
 
 export const dynamic = "force-dynamic";
 
@@ -44,22 +45,7 @@ export default async function ProductsPage({
             <div className="w-full sm:w-80">
               <SearchInput defaultValue={queryParams.search} />
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-semibold text-neutral-500 whitespace-nowrap">Sort By:</span>
-              <select
-                defaultValue={queryParams.sort}
-                onChange={(e) => {
-                  const url = new URL(window.location.href);
-                  url.searchParams.set("sort", e.target.value);
-                  window.location.href = url.toString();
-                }}
-                className="bg-white border border-neutral-200 rounded-xl px-4 py-2 text-sm font-semibold focus:ring-2 focus:ring-purple-500 outline-none"
-              >
-                <option value="newest">Newest First</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
-              </select>
-            </div>
+            <SortSelect defaultValue={queryParams.sort} />
           </div>
         </div>
 
