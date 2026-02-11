@@ -2,7 +2,7 @@
 // Automated batch conversion and association for Google Merchant Center feed
 // Usage: node scripts/convert-images-for-merchant-feed.js
 
-require('dotenv').config({ path: '.env' });
+require('dotenv').config({ path: '.env.local' });
 
 const { createClient } = require('@supabase/supabase-js');
 const sharp = require('sharp');
@@ -37,8 +37,21 @@ async function getAllProductImages() {
     .from('products')
     .select('id, images');
   if (error) throw error;
-  // Flatten: [{productId, imagePath}]
-  return data.flatMap((p) => (Array.isArray(p.images) ? p.images.map(img => ({ productId: p.id, imagePath: typeof img === 'string' ? img : img.url })) : []));
+
+  // Flatten and filter: [{productId, imagePath}]
+  const results = [];
+  for (const p of data) {
+    if (Array.isArray(p.images)) {
+      for (const img of p.images) {
+        if (!img) continue;
+        const imagePath = typeof img === 'string' ? img : (img.url || img.web_image_url || img.path);
+        if (imagePath && typeof imagePath === 'string' && !imagePath.includes('undefined')) {
+          results.push({ productId: p.id, imagePath });
+        }
+      }
+    }
+  }
+  return results;
 }
 
 async function getFeedImagesMap() {
@@ -56,18 +69,39 @@ async function getFeedImagesMap() {
 }
 
 async function convertAndUpload({ productId, imagePath }) {
-  // Download web/original image from bucket
-  // Try both possible locations: web/{productId}/filename and just imagePath
-  let downloadPath = imagePath;
-  let { data, error } = await supabase.storage.from(BUCKET).download(downloadPath);
+  const knownBuckets = ['product-images', 'categories', 'hero-slides', 'blog'];
+  let finalBucket = BUCKET;
+  let finalPath = imagePath;
+
+  // Clean up path and determine bucket
+  if (finalPath.startsWith('/')) finalPath = finalPath.slice(1);
+
+  // Remove redundant bucket prefix if present (e.g., product-images/product-images/...)
+  knownBuckets.forEach(b => {
+    if (finalPath.startsWith(`${b}/${b}/`)) {
+      finalPath = finalPath.replace(`${b}/${b}/`, `${b}/`);
+    }
+  });
+
+  const parts = finalPath.split('/');
+  if (parts.length > 1 && knownBuckets.includes(parts[0])) {
+    finalBucket = parts[0];
+    finalPath = parts.slice(1).join('/');
+  }
+
+  // Download image
+  let { data, error } = await supabase.storage.from(finalBucket).download(finalPath);
+
   if (error || !data) {
-    // Try web/{productId}/filename
-    downloadPath = getWebImagePath(productId, imagePath);
-    ({ data, error } = await supabase.storage.from(BUCKET).download(downloadPath));
+    // Try web/{productId}/filename as a fallback
+    const fallbackPath = getWebImagePath(productId, imagePath);
+    ({ data, error } = await supabase.storage.from(BUCKET).download(fallbackPath));
+
     if (error || !data) {
-      throw new Error(`Could not download image: ${imagePath} or ${downloadPath}`);
+      throw new Error(`Could not download image at ${finalPath} (bucket: ${finalBucket}) or ${fallbackPath}`);
     }
   }
+
   const buffer = Buffer.from(await data.arrayBuffer());
   // Convert to JPEG
   const jpegBuffer = await sharp(buffer).jpeg({ quality: 90 }).toBuffer();
@@ -81,7 +115,7 @@ async function convertAndUpload({ productId, imagePath }) {
   // Upsert mapping in product_image_versions
   await supabase.from('product_image_versions').upsert({
     product_id: productId,
-    web_image_url: downloadPath,
+    web_image_url: imagePath,
     feed_image_url: feedPath,
     updated_at: new Date().toISOString(),
   });

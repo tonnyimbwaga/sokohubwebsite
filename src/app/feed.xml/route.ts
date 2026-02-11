@@ -161,14 +161,14 @@ export async function GET(_req: Request) {
         }
 
         // Form the URL
-        // If it's a standard web format (including webp), use direct URL for maximum reliability
-        // WebP IS supported by Google Merchant Center. Error usually comes from render endpoint failures.
-        const isStandardFormat = /\.(jpe?g|png|gif|webp)$/i.test(finalPath);
+        // If it's a standard web format (excluding webp for feed compatibility), use direct URL
+        // We exclude webp here because Google Merchant Center in some regions flags it as "Unsupported image type".
+        const isStandardFormat = /\.(jpe?g|png|gif)$/i.test(finalPath);
 
         if (isStandardFormat) {
           return `${supabaseUrl}/storage/v1/object/public/${finalBucket}/${finalPath}`;
         } else {
-          // Force JPEG via transformation ONLY for non-standard or missing extensions
+          // Force JPEG via transformation for webp, avif, or missing extensions
           return `${supabaseUrl}/storage/v1/render/image/public/${finalBucket}/${finalPath}?format=jpg&quality=90`;
         }
       })
