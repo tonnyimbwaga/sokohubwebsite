@@ -33,8 +33,13 @@ export default function ShippingPage() {
 
   const deliveryRates = [
     {
-      area: `All Areas in ${siteConfig.localization.country}`,
-      time: "2-5 Business Days",
+      area: "Nairobi Area",
+      time: "Within 3 Hours",
+      cost: `${siteConfig.localization.currency} 400`
+    },
+    {
+      area: "Outside Nairobi (Countrywide)",
+      time: "Within 24 Hours",
       cost: `${siteConfig.localization.currency} 400`
     },
   ];

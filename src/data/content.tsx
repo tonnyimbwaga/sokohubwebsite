@@ -415,12 +415,12 @@ export const faqsData = {
         {
           question: "How can I track my order?",
           answer:
-            "You can track your order by logging into your account and checking the order status. Additionally, a tracking number will be provided in the shipping confirmation email.",
+            "You can track your order by reaching out to our support team. We provide real-time updates as your order moves through our fast delivery network.",
         },
         {
           question: "What is the estimated delivery time for my order?",
           answer:
-            "Delivery times vary based on your location. Typically, domestic orders take 3-5 business days, while international orders may take 7-14 business days.",
+            "We offer remarkably fast delivery: within 3 hours for orders within Nairobi, and within 24 hours for orders everywhere else in Kenya.",
         },
         {
           question: "Can I change my shipping address after placing an order?",
@@ -453,9 +453,9 @@ export const faqsData = {
             "Yes, we guarantee the authenticity of all our products. We source them directly from authorized retailers and reputable suppliers.",
         },
         {
-          question: "Can I return or exchange my products if they don't fit?",
+          question: "Can I return or exchange my products?",
           answer:
-            "Yes, we have a hassle-free return policy. You can return or exchange unworn products within 30 days of receiving your order.",
+            "Returns and exchanges are strictly accepted only for items that are defective, malfunctioning, or if the wrong item was delivered. Please report any issues within 24 hours of delivery.",
         },
         {
           question: "Are the colors of the products accurate in the photos?",
@@ -525,7 +525,7 @@ export const faqsData = {
         {
           question: "Can I return products if I've used them?",
           answer:
-            "We only accept returns for unused products. Please ensure the item is in its original condition before returning.",
+            "We only accept returns for items reported as defective, malfunctioning, or incorrect within 24 hours of delivery. Items must be returned in their original packaging.",
         },
       ],
     },

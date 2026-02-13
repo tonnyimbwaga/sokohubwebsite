@@ -32,7 +32,7 @@ export default function AboutClient() {
                     <h2 className="mb-6 text-3xl font-bold text-center">Our Story</h2>
                     <div className="space-y-4 text-gray-600">
                         <p>
-                            Owned by {siteConfig.owner}, {siteConfig.name} was founded with a simple yet powerful vision: to provide quality products that bring
+                            Owned by Tonny Imbwaga, {siteConfig.name} was founded with a simple yet powerful vision: to provide quality products that bring
                             value and satisfaction to our customers while being accessible to families
                             across {siteConfig.localization.country}.
                         </p>

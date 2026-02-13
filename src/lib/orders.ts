@@ -61,6 +61,7 @@ export async function createOrder(orderData: {
       .from("orders") as any)
       .insert({
         ...orderData,
+        total: orderData.total_amount, // Ensure 'total' is also populated
         status: orderData.status || "pending",
         is_immediate_payment: isImmediatePayment,
         discount_percentage: discountPercentage,

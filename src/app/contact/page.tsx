@@ -27,8 +27,7 @@ export default function ContactPage() {
           Get in Touch
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          {siteConfig.name} is owned and operated by {siteConfig.owner}. Have a question or need assistance? We&apos;re here to help! Reach out to our
-          friendly team for personalized support.
+          {siteConfig.name} is run by a team of passionate professionals who are dedicated to ensuring Kenyans get high quality products at affordable prices, conveniently delivered to your doorstep.
         </p>
 
       </div>

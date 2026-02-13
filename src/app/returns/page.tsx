@@ -122,7 +122,7 @@ export default function ReturnsPage() {
                   Eligibility for Returns
                 </h3>
                 <p className="text-gray-600">
-                  Returns are accepted for items that are defective or improper products. Please contact us within 7 days of delivery
+                  Returns or exchanges are strictly accepted only for items that are defective, malfunctioning, or if the wrong item was delivered. Please contact us within 24 hours of delivery
                   to initiate a return request. Items must be in the same
                   condition as received and in their original packaging with
                   all accessories.
@@ -131,18 +131,18 @@ export default function ReturnsPage() {
               <div>
                 <h3 className="mb-2 text-lg font-semibold">Exchanges</h3>
                 <p className="text-gray-600">
-                  If your return is approved due to a defect or improper product, you may exchange the item for a
-                  similar product, subject to availability.
+                  If your return is approved due to a defect, malfunction, or error on our part, you may exchange the item for a
+                  replacement, subject to availability.
                 </p>
               </div>
 
               <div>
                 <h3 className="mb-2 text-lg font-semibold">Refunds</h3>
                 <p className="text-gray-600">
-                  Refunds are processed to the original payment method upon successful
-                  inspection of returned items. Processing typically takes 5-10 business days.
+                  Refunds are only processed if a replacement for a defective, malfunctioning, or wrong item is unavailable. Refunds are made to the original payment method after inspection.
                 </p>
               </div>
+
               <div>
                 <h3 className="mb-2 text-lg font-semibold">
                   Shipping Cost

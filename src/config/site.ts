@@ -1,7 +1,6 @@
 export const siteConfig = {
     name: "Sokohub Kenya",
     shortName: "Sokohub",
-    owner: "Tonny Imbwaga",
     description: "Quality products and fast delivery serving Nairobi CBD and beyond.",
     url: "https://sokohubkenya.com",
     ogImage: "https://sokohubkenya.com/og.jpg",

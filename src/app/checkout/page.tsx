@@ -94,7 +94,7 @@ const OrderSummaryComponent: React.FC<OrderSummaryProps> = ({
   cartItems,
   totalAmount,
 }) => (
-  <div className="bg-primary bg-opacity-5 p-6 md:p-8 rounded-xl shadow-lg">
+  <div className="bg-slate-50 p-6 md:p-8 rounded-xl shadow-sm border border-gray-100">
     <h2 className="text-2xl font-semibold text-gray-800 mb-6 border-b border-gray-200 pb-4">
       Order Summary
     </h2>
