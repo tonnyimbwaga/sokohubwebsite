@@ -122,19 +122,20 @@ export default function ReturnsPage() {
                   Eligibility for Returns
                 </h3>
                 <p className="text-gray-600">
-                  Returns are accepted for items that are unused, in the same
-                  condition as received, and in their original packaging with
-                  all accessories. Please contact us within 7 days of delivery
-                  to initiate a return request.
+                  Returns are accepted for items that are defective or improper products. Please contact us within 7 days of delivery
+                  to initiate a return request. Items must be in the same
+                  condition as received and in their original packaging with
+                  all accessories.
                 </p>
               </div>
               <div>
                 <h3 className="mb-2 text-lg font-semibold">Exchanges</h3>
                 <p className="text-gray-600">
-                  If your return is approved, you may exchange the item for a
+                  If your return is approved due to a defect or improper product, you may exchange the item for a
                   similar product, subject to availability.
                 </p>
               </div>
+
               <div>
                 <h3 className="mb-2 text-lg font-semibold">Refunds</h3>
                 <p className="text-gray-600">
@@ -155,9 +156,10 @@ export default function ReturnsPage() {
                 <h3 className="mb-2 text-lg font-semibold">Contact</h3>
                 <p className="text-gray-600">
                   To initiate a return or exchange, please contact our customer
-                  service team at {siteConfig.contact.email}.
+                  service team via our provided contact channels.
                 </p>
               </div>
+
             </div>
           </div>
         </div>

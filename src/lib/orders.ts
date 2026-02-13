@@ -1,5 +1,4 @@
 import { supabase } from "./supabase/client";
-import { nanoid } from "nanoid";
 
 interface OrderDetails {
   id: string;
@@ -11,8 +10,6 @@ interface OrderDetails {
   total: number;
   status: string;
   created_at: string;
-  mpesa_phone_number?: string;
-  mpesa_transaction_code?: string;
   is_immediate_payment?: boolean;
   discount_percentage?: number;
   original_amount?: number;
@@ -25,15 +22,15 @@ interface OrderDetails {
 
 export async function createOrder(orderData: {
   customer_name: string;
+  customer_email?: string | null;
+
   phone: string;
   delivery_zone: string;
   location: string;
   items: any[];
-  total: number;
+  total_amount: number;
   status?: string;
   metadata?: Record<string, any>;
-  mpesa_phone_number?: string;
-  mpesa_transaction_code?: string;
   is_immediate_payment?: boolean;
   discount_percentage?: number;
   original_amount?: number;
@@ -41,45 +38,48 @@ export async function createOrder(orderData: {
   payment_status?: string;
   order_confirmed?: boolean;
 }): Promise<{ success: boolean; orderId?: string; error?: string }> {
+
   try {
-    const orderId = nanoid(10);
     // Calculate discount if immediate payment
     const isImmediatePayment = orderData.is_immediate_payment || false;
     const discountPercentage = isImmediatePayment
       ? orderData.discount_percentage || 5
       : 0;
-    const originalAmount = orderData.total;
+    const originalAmount = orderData.total_amount;
     const discountedAmount = isImmediatePayment
       ? Number((originalAmount * (1 - discountPercentage / 100)).toFixed(2))
       : originalAmount;
 
-    // Set payment status based on immediate payment
-    const paymentStatus =
-      isImmediatePayment && orderData.mpesa_transaction_code
-        ? "paid"
-        : "pending";
+    // Set payment status based on immediate payment preference
+    const paymentStatus = orderData.payment_status || "pending";
 
     // Prepare payment date if payment is completed
     const paymentDate =
       paymentStatus === "paid" ? new Date().toISOString() : null;
 
-    const { error } = await supabase.from("orders").insert({
-      id: orderId,
-      ...orderData,
-      status: orderData.status || "pending",
-      created_at: new Date().toISOString(),
-      is_immediate_payment: isImmediatePayment,
-      discount_percentage: discountPercentage,
-      original_amount: originalAmount,
-      discounted_amount: discountedAmount,
-      payment_status: paymentStatus,
-      payment_date: paymentDate,
-      order_confirmed: orderData.order_confirmed || true,
-      order_confirmation_date: new Date().toISOString(),
-    });
+    const { data, error } = await (supabase
+      .from("orders") as any)
+      .insert({
+        ...orderData,
+        status: orderData.status || "pending",
+        is_immediate_payment: isImmediatePayment,
+        discount_percentage: discountPercentage,
+        original_amount: originalAmount,
+        discounted_amount: discountedAmount,
+        payment_status: paymentStatus,
+        payment_date: paymentDate,
+        order_confirmed: orderData.order_confirmed || false,
+        order_confirmation_date: new Date().toISOString(),
+      })
+      .select("id")
+      .single();
+
     if (error) throw error;
-    return { success: true, orderId };
+    return { success: true, orderId: data?.id };
+
   } catch (error) {
+
+
     console.error("Error creating order:", error);
     return {
       success: false,
@@ -102,8 +102,6 @@ export async function getOrder(orderId: string): Promise<OrderDetails | null> {
       total,
       status,
       created_at,
-      mpesa_phone_number,
-      mpesa_transaction_code,
       is_immediate_payment,
       discount_percentage,
       original_amount,
@@ -127,9 +125,10 @@ export async function getOrder(orderId: string): Promise<OrderDetails | null> {
 }
 
 export async function getAllOrders(): Promise<OrderDetails[]> {
-  const { data, error } = await supabase
-    .from("orders")
+  const { data, error } = await (supabase
+    .from("orders") as any)
     .select(
+
       `
       id,
       customer_name,
@@ -140,8 +139,6 @@ export async function getAllOrders(): Promise<OrderDetails[]> {
       total,
       status,
       created_at,
-      mpesa_phone_number,
-      mpesa_transaction_code,
       is_immediate_payment,
       discount_percentage,
       original_amount,
@@ -159,18 +156,16 @@ export async function getAllOrders(): Promise<OrderDetails[]> {
     return [];
   }
 
-  return (data || []).map((order) => ({
+  return (data || []).map((order: any) => ({
     id: order.id,
     customer_name: order.customer_name,
     items: order.items,
-    total: order.total,
+    total: order.total_amount || order.total,
     status: order.status,
     created_at: order.created_at,
     phone: order.phone || "",
     delivery_zone: order.delivery_zone || "",
     location: order.location || "",
-    mpesa_phone_number: order.mpesa_phone_number || "",
-    mpesa_transaction_code: order.mpesa_transaction_code || "",
     is_immediate_payment: order.is_immediate_payment || false,
     discount_percentage: order.discount_percentage || 0,
     original_amount: order.original_amount || order.total,
@@ -184,8 +179,8 @@ export async function getAllOrders(): Promise<OrderDetails[]> {
 
 export async function confirmOrder(orderId: string): Promise<boolean> {
   try {
-    const { error } = await supabase
-      .from("orders")
+    const { error } = await (supabase
+      .from("orders") as any)
       .update({
         order_confirmed: true,
         order_confirmation_date: new Date().toISOString(),
@@ -203,8 +198,6 @@ export async function confirmOrder(orderId: string): Promise<boolean> {
 export async function updatePaymentStatus(
   orderId: string,
   paymentData: {
-    mpesa_phone_number?: string;
-    mpesa_transaction_code?: string;
     is_immediate_payment?: boolean;
     payment_status?: string;
   },
@@ -231,11 +224,9 @@ export async function updatePaymentStatus(
         ? "paid"
         : paymentData.payment_status || "paid";
 
-    const { error } = await supabase
-      .from("orders")
+    const { error } = await (supabase
+      .from("orders") as any)
       .update({
-        mpesa_phone_number: paymentData.mpesa_phone_number || null,
-        mpesa_transaction_code: paymentData.mpesa_transaction_code || null,
         is_immediate_payment: isImmediatePayment,
         discount_percentage: discountPercentage,
         original_amount: originalAmount,

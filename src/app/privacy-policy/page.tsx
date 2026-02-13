@@ -65,9 +65,10 @@ export default function PrivacyPolicy() {
               <li>
                 <span className="font-semibold">Personal Information:</span>
                 <p className="text-gray-600">
-                  Name, delivery address, phone number, and email address for
+                  Name, delivery address, and phone number for
                   order processing and delivery.
                 </p>
+
               </li>
               <li>
                 <span className="font-semibold">Payment Information:</span>
@@ -135,16 +136,17 @@ export default function PrivacyPolicy() {
           <h2 className="mb-4 text-2xl font-semibold">Contact Information</h2>
           <div className="rounded-lg bg-gray-50 p-6">
             <p className="mb-4">
-              For any privacy-related concerns or to exercise your rights,
+              {siteConfig.name} is owned and operated by {siteConfig.owner}. For any privacy-related concerns or to exercise your rights,
               please contact us:
             </p>
             <ul className="space-y-2">
-              <li>Email: {siteConfig.contact.email}</li>
               <li>Phone: {siteConfig.contact.phone}</li>
               <li>Address: {siteConfig.contact.address}</li>
             </ul>
+
           </div>
         </section>
+
 
         <section>
           <h2 className="mb-4 text-2xl font-semibold">
@@ -154,8 +156,9 @@ export default function PrivacyPolicy() {
             <p className="text-gray-600">
               We may update this privacy policy from time to time to reflect
               changes in our practices or for legal reasons. We will notify you
-              of any material changes through our website or email.
+              of any material changes through our website.
             </p>
+
           </div>
         </section>
       </div>

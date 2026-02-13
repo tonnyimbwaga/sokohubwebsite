@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 
 import { siteConfig } from "@/config/site";
 
@@ -24,10 +23,10 @@ const footerData = {
       links: [
         { name: "Our Story", href: "/about" },
         { name: "Blog", href: "/blog" },
-        { name: "Careers", href: "/careers" },
         { name: "Privacy Policy", href: "/privacy-policy" },
       ],
     },
+
   ],
 };
 import Subscribe from "./Subscribe";
@@ -109,47 +108,11 @@ const Footer: React.FC = () => {
               Sitemap
             </Link>
           </div>
-          {/* Social Links */}
-          <div className="flex space-x-6">
-            {siteConfig.links.facebook && (
-              <a
-                href={siteConfig.links.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 transition-colors hover:text-gray-900"
-                aria-label="Follow us on Facebook"
-              >
-                <FaFacebook size={20} />
-              </a>
-            )}
-            {siteConfig.links.instagram && (
-              <a
-                href={siteConfig.links.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 transition-colors hover:text-gray-900"
-                aria-label="Follow us on Instagram"
-              >
-                <FaInstagram size={20} />
-              </a>
-            )}
-            {siteConfig.links.twitter && (
-              <a
-                href={siteConfig.links.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 transition-colors hover:text-gray-900"
-                aria-label="Follow us on Twitter"
-              >
-                <FaTwitter size={20} />
-              </a>
-            )}
-            {/* Added TikTok check if we add it to config later */}
-          </div>
         </div>
       </div>
     </footer>
   );
 };
+
 
 export default Footer;

@@ -35,7 +35,7 @@ export default function ShippingPage() {
     {
       area: `All Areas in ${siteConfig.localization.country}`,
       time: "2-5 Business Days",
-      cost: `${siteConfig.localization.currency} 500`
+      cost: `${siteConfig.localization.currency} 400`
     },
   ];
 
@@ -45,9 +45,7 @@ export default function ShippingPage() {
         <div>
           <h1 className="mb-6 text-4xl font-bold">Shipping Information</h1>
           <p className="mb-12 text-lg text-gray-600">
-            At {siteConfig.name}, we strive to deliver your orders quickly and
-            safely. Here's everything you need to know about our shipping
-            services.
+            At {siteConfig.name}, we provide reliable shipping services. We ship countrywide to ensure your orders reach you wherever you are.
           </p>
 
           {/* Shipping Features */}
@@ -83,7 +81,7 @@ export default function ShippingPage() {
                 <tbody>
                   {deliveryRates.map((rate, index) => (
                     <tr key={index} className="border-b">
-                      <td className="p-4">{rate.area}</td>
+                      <td className="p-4">Shipping within Nairobi</td>
                       <td className="p-4">{rate.time}</td>
                       <td className="p-4">{rate.cost}</td>
                     </tr>
@@ -98,11 +96,14 @@ export default function ShippingPage() {
             <h2 className="mb-4 text-2xl font-bold">Important Information</h2>
             <ul className="list-inside list-disc space-y-3 text-gray-600">
               <li>
+                We ship countrywide using trusted courier services to ensure reliable and safe delivery.
+              </li>
+              <li>
                 Orders are processed and shipped Monday through Friday,
                 excluding public holidays.
               </li>
               <li>
-                You will receive a tracking number once your order has been
+                You will receive updates once your order has been
                 dispatched.
               </li>
               <li>
@@ -110,14 +111,11 @@ export default function ShippingPage() {
                 weather conditions.
               </li>
               <li>
-                We use trusted courier services to ensure reliable and safe
-                delivery.
-              </li>
-              <li>
                 Standard delivery rates apply to all locations within {siteConfig.localization.country}.
               </li>
             </ul>
           </div>
+
 
           <div className="mt-12 rounded-lg bg-primary/5 p-8">
             <h2 className="mb-4 text-2xl font-bold">Need Help?</h2>
@@ -127,11 +125,11 @@ export default function ShippingPage() {
             </p>
             <ul className="space-y-2">
               <li>Phone: {siteConfig.contact.phone}</li>
-              <li>Email: {siteConfig.contact.email}</li>
               {siteConfig.contact.businessHours && (
                 <li>Business Hours: {siteConfig.contact.businessHours}</li>
               )}
             </ul>
+
           </div>
         </div>
       </div>

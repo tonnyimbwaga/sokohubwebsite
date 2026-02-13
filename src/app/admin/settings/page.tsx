@@ -66,20 +66,15 @@ export default function SettingsPage() {
   };
 
   const createDefaultSettings = async () => {
-    const defaultSettings: Settings = {
+    const defaultSettings: any = {
       site_name: siteConfig.name,
       site_description: siteConfig.description,
-      contact_email: siteConfig.contact.email,
       support_phone: siteConfig.contact.phone,
       address: siteConfig.contact.address,
-      social_media: {
-        facebook: siteConfig.links.facebook,
-        twitter: siteConfig.links.twitter,
-        instagram: siteConfig.links.instagram,
-      },
       shipping_policy: "",
       return_policy: "",
     };
+
 
     try {
       const { error } = await supabase.from("settings").insert(defaultSettings as any);
@@ -150,19 +145,6 @@ export default function SettingsPage() {
           <div className="space-y-4">
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">
-                Contact Email
-              </label>
-              <Input
-                value={settings.contact_email}
-                onChange={(e) =>
-                  setSettings({ ...settings, contact_email: e.target.value })
-                }
-                type="email"
-                className="mt-1"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
                 Support Phone
               </label>
               <Input
@@ -188,65 +170,6 @@ export default function SettingsPage() {
           </div>
         </Card>
 
-        <Card className="p-4">
-          <h2 className="text-xl font-semibold mb-4">Social Media</h2>
-          <div className="space-y-4">
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Facebook URL
-              </label>
-              <Input
-                value={settings.social_media.facebook || ""}
-                onChange={(e) =>
-                  setSettings({
-                    ...settings,
-                    social_media: {
-                      ...settings.social_media,
-                      facebook: e.target.value,
-                    },
-                  })
-                }
-                className="mt-1"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Twitter URL
-              </label>
-              <Input
-                value={settings.social_media.twitter || ""}
-                onChange={(e) =>
-                  setSettings({
-                    ...settings,
-                    social_media: {
-                      ...settings.social_media,
-                      twitter: e.target.value,
-                    },
-                  })
-                }
-                className="mt-1"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Instagram URL
-              </label>
-              <Input
-                value={settings.social_media.instagram || ""}
-                onChange={(e) =>
-                  setSettings({
-                    ...settings,
-                    social_media: {
-                      ...settings.social_media,
-                      instagram: e.target.value,
-                    },
-                  })
-                }
-                className="mt-1"
-              />
-            </div>
-          </div>
-        </Card>
 
         <Card className="p-4">
           <h2 className="text-xl font-semibold mb-4">Policies</h2>

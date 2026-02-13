@@ -32,20 +32,19 @@ export default function AboutClient() {
                     <h2 className="mb-6 text-3xl font-bold text-center">Our Story</h2>
                     <div className="space-y-4 text-gray-600">
                         <p>
-                            Founded with a simple yet powerful vision: to provide high-quality products that bring
+                            Owned by {siteConfig.owner}, {siteConfig.name} was founded with a simple yet powerful vision: to provide quality products that bring
                             value and satisfaction to our customers while being accessible to families
                             across {siteConfig.localization.country}.
                         </p>
                         <p>
-                            Our journey started with a passion for excellence. What began as a
+                            Our journey started with a dedication to reliability. What began as a
                             carefully curated collection has grown into a comprehensive range of products
                             that cater to our customers' diverse needs.
                         </p>
                         <p>
-                            Today, {siteConfig.name} is more than just a store – we're
-                            committed to enriching lives through quality. Our
-                            selection process ensures that each item not only meets
-                            international standards but also contributes to your lifestyle journey.
+                            Today, {siteConfig.name} is a trusted destination for quality. Our
+                            selection process ensures that each item meets
+                            appropriate standards and contributes to your lifestyle journey.
                         </p>
                     </div>
                 </motion.div>
@@ -62,10 +61,10 @@ export default function AboutClient() {
                         className="rounded-lg bg-white p-6 text-center shadow-md"
                     >
                         <FaHeart className="mx-auto mb-4 text-4xl text-primary" />
-                        <h3 className="mb-3 text-xl font-semibold">Quality & Excellence</h3>
+                        <h3 className="mb-3 text-xl font-semibold">Quality & Care</h3>
                         <p className="text-gray-600">
-                            We prioritize quality by carefully selecting products
-                            that meet or exceed international standards.
+                            We prioritize quality by selecting products
+                            that provide value to our customers.
                         </p>
                     </motion.div>
 
@@ -79,7 +78,7 @@ export default function AboutClient() {
                         <h3 className="mb-3 text-xl font-semibold">Customer Value</h3>
                         <p className="text-gray-600">
                             Every item in our collection is chosen for its potential to
-                            provide real value and satisfaction to our customers.
+                            provide satisfaction to our customers.
                         </p>
                     </motion.div>
 
@@ -92,7 +91,7 @@ export default function AboutClient() {
                         <FaHandshake className="mx-auto mb-4 text-4xl text-primary" />
                         <h3 className="mb-3 text-xl font-semibold">Reliability</h3>
                         <p className="text-gray-600">
-                            We're committed to being a reliable partner for families
+                            We're committed to being a reliable partner for customers
                             across {siteConfig.localization.country}.
                         </p>
                     </motion.div>
@@ -109,9 +108,9 @@ export default function AboutClient() {
                 >
                     <h2 className="mb-4 text-2xl font-bold">Our Mission</h2>
                     <p className="text-gray-600">
-                        To provide high-quality products that inspire excellence and bring joy
+                        To provide quality products that bring joy
                         to daily life while ensuring accessibility and affordability for
-                        families across {siteConfig.localization.country}.
+                        customers across {siteConfig.localization.country}.
                     </p>
                 </motion.div>
 
@@ -123,12 +122,13 @@ export default function AboutClient() {
                 >
                     <h2 className="mb-4 text-2xl font-bold">Our Vision</h2>
                     <p className="text-gray-600">
-                        To be the leading provider of quality products in {siteConfig.localization.country},
-                        recognized for our commitment to excellence, reliability, and the
+                        To be a trusted provider of quality products in {siteConfig.localization.country},
+                        recognized for our commitment to reliability and the
                         evolving needs of our customers.
                     </p>
                 </motion.div>
             </section>
+
 
             {/* Our Passion Section */}
             <section className="mb-16">

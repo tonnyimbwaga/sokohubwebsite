@@ -1,5 +1,5 @@
 import React from "react";
-import { FiFacebook, FiInstagram, FiTwitter, FiMail, FiPhone } from "react-icons/fi";
+import { FiPhone } from "react-icons/fi";
 import { siteConfig } from "@/config/site";
 import { constructMetadata } from "@/utils/seo";
 
@@ -11,13 +11,6 @@ export const metadata = constructMetadata({
 export default function ContactPage() {
   const contactInfo = [
     {
-      icon: <FiMail />,
-      title: "Email Us",
-      description: "Get in touch with our team for any inquiries or support.",
-      href: `mailto:${siteConfig.contact.email}`,
-      linkTitle: siteConfig.contact.email,
-    },
-    {
       icon: <FiPhone />,
       title: "Call Us",
       description: `Speak directly to our team during business hours (${siteConfig.contact.businessHours}).`,
@@ -26,15 +19,6 @@ export default function ContactPage() {
     },
   ];
 
-  if (siteConfig.contact.alternativeEmail) {
-    contactInfo.splice(1, 0, {
-      icon: <FiMail />,
-      title: "Alternative Email",
-      description: "You can also reach us at our secondary email address.",
-      href: `mailto:${siteConfig.contact.alternativeEmail}`,
-      linkTitle: siteConfig.contact.alternativeEmail,
-    });
-  }
 
   return (
     <div className="container mx-auto px-4 py-8 md:py-12">
@@ -43,9 +27,10 @@ export default function ContactPage() {
           Get in Touch
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Have a question or need assistance? We&apos;re here to help! Reach out to our
+          {siteConfig.name} is owned and operated by {siteConfig.owner}. Have a question or need assistance? We&apos;re here to help! Reach out to our
           friendly team for personalized support.
         </p>
+
       </div>
 
       <div className="mb-20">
@@ -74,47 +59,9 @@ export default function ContactPage() {
           ))}
         </div>
 
-        <div className="mt-20">
-          <h2 className="text-3xl font-bold mb-10 text-center">
-            Connect With Us
-          </h2>
-          <div className="flex flex-wrap gap-4 justify-center">
-            {siteConfig.links.facebook && (
-              <a
-                href={siteConfig.links.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-3 rounded-xl bg-[#1877F2] px-6 py-3.5 text-white hover:opacity-90 transition-opacity shadow-sm"
-              >
-                <FiFacebook size={20} />
-                <span className="font-semibold">Facebook</span>
-              </a>
-            )}
-            {siteConfig.links.instagram && (
-              <a
-                href={siteConfig.links.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-3 rounded-xl bg-gradient-to-tr from-[#F09433] via-[#E10098] to-[#5059E1] px-6 py-3.5 text-white hover:opacity-90 transition-opacity shadow-sm"
-              >
-                <FiInstagram size={20} />
-                <span className="font-semibold">Instagram</span>
-              </a>
-            )}
-            {siteConfig.links.twitter && (
-              <a
-                href={siteConfig.links.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-3 rounded-xl bg-[#1DA1F2] px-6 py-3.5 text-white hover:opacity-90 transition-opacity shadow-sm"
-              >
-                <FiTwitter size={20} />
-                <span className="font-semibold">Twitter</span>
-              </a>
-            )}
-          </div>
-        </div>
       </div>
     </div>
   );
 }
+
+

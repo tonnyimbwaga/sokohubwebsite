@@ -218,10 +218,10 @@ export default function TermsAndConditions() {
               us:
             </p>
             <ul className="space-y-2">
-              <li>Email: {siteConfig.contact.email}</li>
               <li>Phone: {siteConfig.contact.phone}</li>
               <li>Address: {siteConfig.contact.address}</li>
             </ul>
+
           </div>
         </section>
       </div>

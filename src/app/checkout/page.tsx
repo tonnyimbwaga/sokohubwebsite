@@ -27,6 +27,7 @@ interface OrderDetails {
   nairobiSpecificLocation?: string;
   outsideNairobiLocation?: string;
   name?: string;
+  email?: string;
   phone?: string;
   confirmPhone?: string;
   orderId?: string;
@@ -74,20 +75,10 @@ interface OrderSummaryProps {
 
 // Local helper function to extract the correct image URL from cart items
 function extractImageUrl(item: CartItem): string {
-  if (!item) return "/assets/images/logo.png";
-
-  // Try to get image from images array (standard product structure)
-  if (item.images && Array.isArray(item.images) && item.images.length > 0) {
-    const firstImage = item.images[0];
-    if (typeof firstImage === "object" && firstImage?.url)
-      return getImageUrl(firstImage.url);
-    // If firstImage is a string (though ProductImage expects {url: string}), handle for robustness if data varies
-    if (typeof firstImage === "string") return getImageUrl(firstImage);
-  }
-
-  // Fallback to a placeholder if no valid image URL is found in item.images
-  return "/assets/images/logo.png";
+  return getImageUrl(item.images?.[0] || (item as any).image);
 }
+
+
 
 // Helper function to truncate text by words
 const truncateWords = (text: string | undefined, limit: number): string => {
@@ -139,19 +130,24 @@ const OrderSummaryComponent: React.FC<OrderSummaryProps> = ({
       )}
     </div>
     {cartItems.length > 0 && (
-      <div className="mt-6 pt-6 border-t border-gray-200">
-        <div className="flex justify-between items-center text-lg font-semibold text-gray-800">
-          <span>Total</span>
+      <div className="mt-6 pt-6 border-t border-gray-200 space-y-2">
+        <div className="flex justify-between items-center text-sm text-gray-600">
+          <span>Subtotal</span>
           <span>Ksh {totalAmount.toLocaleString()}</span>
         </div>
-        <p className="text-xs text-gray-500 mt-2 text-center">
-          Note: Delivery fees are not included and will be communicated upon
-          order confirmation.
-        </p>
+        <div className="flex justify-between items-center text-sm text-gray-600">
+          <span>Shipping within Nairobi</span>
+          <span>Ksh 400</span>
+        </div>
+        <div className="flex justify-between items-center text-lg font-semibold text-gray-800 pt-2 border-t border-gray-100">
+          <span>Total</span>
+          <span>Ksh {(totalAmount + 400).toLocaleString()}</span>
+        </div>
       </div>
     )}
   </div>
 );
+
 
 const CheckoutPage: React.FC = () => {
   const router = useRouter();
@@ -249,6 +245,11 @@ const CheckoutPage: React.FC = () => {
     if (!orderDetails.name?.trim()) {
       newErrors.name = "Full name is required.";
     }
+    const emailRegex = /^\S+@\S+\.\S+$/;
+    if (orderDetails.email?.trim() && !emailRegex.test(orderDetails.email.trim())) {
+      newErrors.email = "Please enter a valid email address.";
+    }
+
     const kenyanPhoneRegex = /^(?:\+254|0)(?:1|7)\d{8}$/;
     if (!orderDetails.phone?.trim()) {
       newErrors.phone = "Phone number is required.";
@@ -266,6 +267,7 @@ const CheckoutPage: React.FC = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
 
   // Navigation functions
   // Note: These functions are used in the JSX but the linter doesn't detect it
@@ -322,17 +324,21 @@ const CheckoutPage: React.FC = () => {
       } else {
         locationDetail =
           orderDetails.outsideNairobiLocation ||
-          "Outside Nairobi (Specific location not provided)";
+          "Nationwide (Other regions selected)";
       }
+
 
       const orderDataToSave = {
         customer_name: orderDetails.name || "",
+        customer_email: orderDetails.email?.trim() || null,
+
+
         phone: orderDetails.phone || "",
         delivery_zone: orderDetails.deliveryZone || "",
         location: locationDetail,
         items: cart,
-        total: total,
-        status: "pending", // Changed from 'pending_confirmation'
+        total_amount: total,
+        status: "pending",
         payment_status: "pending",
       };
 
@@ -395,15 +401,13 @@ const CheckoutPage: React.FC = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <motion.div
                     whileTap={{ scale: 0.97 }}
-                    className={`p-4 border rounded-lg cursor-pointer transition-colors duration-200 ease-in-out flex justify-between items-center ${
-                      orderDetails.deliveryZone === "nairobi"
-                        ? "border-primary ring-2 ring-primary bg-primary/10"
-                        : "border-gray-300 hover:border-gray-400"
-                    } ${
-                      errors.deliveryZone && !orderDetails.deliveryZone
+                    className={`p-4 border rounded-lg cursor-pointer transition-colors duration-200 ease-in-out flex justify-between items-center ${orderDetails.deliveryZone === "nairobi"
+                      ? "border-primary ring-2 ring-primary bg-primary/10"
+                      : "border-gray-300 hover:border-gray-400"
+                      } ${errors.deliveryZone && !orderDetails.deliveryZone
                         ? "border-red-500 bg-red-50"
                         : ""
-                    }`}
+                      }`}
                     onClick={() =>
                       handleInputChange({
                         target: { name: "deliveryZone", value: "nairobi" },
@@ -426,15 +430,13 @@ const CheckoutPage: React.FC = () => {
                   </motion.div>
                   <motion.div
                     whileTap={{ scale: 0.97 }}
-                    className={`p-4 border rounded-lg cursor-pointer transition-colors duration-200 ease-in-out flex justify-between items-center ${
-                      orderDetails.deliveryZone === "outside"
-                        ? "border-primary ring-2 ring-primary bg-primary/10"
-                        : "border-gray-300 hover:border-gray-400"
-                    } ${
-                      errors.deliveryZone && !orderDetails.deliveryZone
+                    className={`p-4 border rounded-lg cursor-pointer transition-colors duration-200 ease-in-out flex justify-between items-center ${orderDetails.deliveryZone === "outside"
+                      ? "border-primary ring-2 ring-primary bg-primary/10"
+                      : "border-gray-300 hover:border-gray-400"
+                      } ${errors.deliveryZone && !orderDetails.deliveryZone
                         ? "border-red-500 bg-red-50"
                         : ""
-                    }`}
+                      }`}
                     onClick={() =>
                       handleInputChange({
                         target: { name: "deliveryZone", value: "outside" },
@@ -443,8 +445,9 @@ const CheckoutPage: React.FC = () => {
                   >
                     <span className="flex items-center">
                       <MapPinIcon className="w-5 h-5 mr-2 text-primary" />{" "}
-                      Outside Nairobi
+                      Other Regions (Nationwide)
                     </span>
+
                     {orderDetails.deliveryZone === "outside" && (
                       <motion.div
                         initial={{ scale: 0 }}
@@ -483,11 +486,10 @@ const CheckoutPage: React.FC = () => {
                       value={orderDetails.nairobiSpecificLocation || ""}
                       onChange={handleInputChange}
                       placeholder="Enter your exact location (e.g., street, building, landmark)"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${
-                        errors.nairobiSpecificLocation
-                          ? "border-red-500 bg-red-50"
-                          : "border-gray-300"
-                      }`}
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${errors.nairobiSpecificLocation
+                        ? "border-red-500 bg-red-50"
+                        : "border-gray-300"
+                        }`}
                     />
                     {errors.nairobiSpecificLocation && (
                       <p className="text-xs text-red-600 mt-1">
@@ -521,11 +523,10 @@ const CheckoutPage: React.FC = () => {
                     value={orderDetails.outsideNairobiLocation || ""}
                     onChange={handleInputChange}
                     placeholder="e.g., Nakuru Town, Moi Avenue"
-                    className={`w-full p-3 border rounded-lg focus:ring-2 transition-colors ${
-                      errors.outsideNairobiLocation
-                        ? "border-red-500 focus:ring-red-500 focus:border-red-500 bg-red-50"
-                        : "border-gray-300 focus:ring-primary focus:border-primary"
-                    }`}
+                    className={`w-full p-3 border rounded-lg focus:ring-2 transition-colors ${errors.outsideNairobiLocation
+                      ? "border-red-500 focus:ring-red-500 focus:border-red-500 bg-red-50"
+                      : "border-gray-300 focus:ring-primary focus:border-primary"
+                      }`}
                   />
                   {errors.outsideNairobiLocation && (
                     <p className="text-xs text-red-600 mt-1">
@@ -569,6 +570,28 @@ const CheckoutPage: React.FC = () => {
                 {errors.name && (
                   <p className="text-xs text-red-500 mt-1">{errors.name}</p>
                 )}
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mt-4"
+                >
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={orderDetails.email}
+                  onChange={handleInputChange}
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
+                  placeholder="jane@example.com (Optional)"
+
+                />
+                {errors.email && (
+                  <p className="text-xs text-red-500 mt-1">{errors.email}</p>
+                )}
+                <p className="text-xs text-gray-500 mt-1">
+                  We'll send your order receipt to this email.
+                </p>
               </div>
               <div>
                 <label
@@ -769,11 +792,10 @@ const CheckoutPage: React.FC = () => {
                 {PROGRESS_STEPS.map((stepObj, idx) => (
                   <div key={stepObj.id} className="flex-1 flex items-center">
                     <div
-                      className={`flex items-center justify-center w-10 h-10 rounded-full border-2 text-base font-bold transition-all duration-200 ${
-                        step >= stepObj.id
-                          ? "bg-primary border-primary text-white"
-                          : "bg-white border-gray-300 text-gray-400"
-                      }`}
+                      className={`flex items-center justify-center w-10 h-10 rounded-full border-2 text-base font-bold transition-all duration-200 ${step >= stepObj.id
+                        ? "bg-primary border-primary text-white"
+                        : "bg-white border-gray-300 text-gray-400"
+                        }`}
                     >
                       <stepObj.icon className="w-6 h-6" />
                     </div>
@@ -810,11 +832,10 @@ const CheckoutPage: React.FC = () => {
                   type="button"
                   onClick={handleNextStep} // This now handles 'Place Order' for the last step
                   disabled={isLoading}
-                  className={`w-full sm:w-auto rounded-lg shadow-md hover:shadow-lg !py-3 !px-6 text-base order-1 sm:order-2 flex-grow disabled:cursor-not-allowed font-karla ${
-                    isLoading
-                      ? "bg-gray-400"
-                      : "bg-primary hover:bg-primary/90 text-white"
-                  } disabled:bg-gray-300 disabled:text-gray-500`}
+                  className={`w-full sm:w-auto rounded-lg shadow-md hover:shadow-lg !py-3 !px-6 text-base order-1 sm:order-2 flex-grow disabled:cursor-not-allowed font-karla ${isLoading
+                    ? "bg-gray-400"
+                    : "bg-primary hover:bg-primary/90 text-white"
+                    } disabled:bg-gray-300 disabled:text-gray-500`}
                 >
                   {isLoading ? (
                     <span className="flex items-center justify-center">

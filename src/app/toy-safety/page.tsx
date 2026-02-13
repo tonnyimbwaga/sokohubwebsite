@@ -196,9 +196,9 @@ export default function ToySafetyPage() {
         <ul className="space-y-2 text-gray-600">
           <li>Emergency Contact: (254) 707 874 828</li>
           <li>Product Safety Hotline: (254) 707 874 828</li>
-          <li>Email: info@sokohubkenya.com</li>
         </ul>
       </div>
+
     </div>
   );
 }

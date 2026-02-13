@@ -78,7 +78,7 @@ export default function WarrantyPage() {
         <section>
           <h2 className="mb-4 text-2xl font-semibold">How to Claim</h2>
           <ol className="list-inside list-decimal space-y-2 text-gray-600">
-            <li>Contact our customer service team via email</li>
+            <li>Contact our customer service team</li>
             <li>Provide your order number and proof of purchase</li>
             <li>Describe the issue and provide photos if possible</li>
             <li>
@@ -86,6 +86,7 @@ export default function WarrantyPage() {
               repairs
             </li>
           </ol>
+
         </section>
       </div>
 
@@ -97,12 +98,12 @@ export default function WarrantyPage() {
           questions. Contact us at:
         </p>
         <ul className="mt-4 space-y-2 text-gray-600">
-          <li>Email: {siteConfig.contact.email}</li>
           <li>Phone: {siteConfig.contact.phone}</li>
           {siteConfig.contact.businessHours && (
             <li>Hours: {siteConfig.contact.businessHours}</li>
           )}
         </ul>
+
         <p className="mt-4 text-gray-600">Thank you for choosing {siteConfig.name}!</p>
       </div>
     </div>
