@@ -33,63 +33,52 @@ const SectionProductHeader = ({ product }: Props) => {
   const [showVariantWarning, setShowVariantWarning] = useState(false);
 
   const [isStickyBarVisible, setIsStickyBarVisible] = useState(false);
-  const addToCartButtonRef = useRef<HTMLDivElement>(null);
+  const desktopAddToCartRef = useRef<HTMLDivElement>(null);
+  const mobileAddToCartRef = useRef<HTMLDivElement>(null);
 
-  // Sanitize product description
-  const sanitizedDescription = product.description
-    ? sanitizeHTML(product.description)
-    : "";
+  // ... (sanitizedDescription code)
 
-  // Helper for variant logic
-  const hasVariants = Array.isArray(product.sizes) && product.sizes.length > 0;
+  // ... (displayPriceValue code)
 
-  // Calculate display price
-  // Logic: 
-  // 1. If a variant is selected, use its absolute price.
-  // 2. If no variant is selected but variants exist, show "From [Lowest Variant Price]".
-  // 3. If no variants exist, use the base product price.
-  const displayPriceValue = selectedVariant
-    ? selectedVariant.price
-    : (hasVariants
-      ? Math.min(...(product.sizes || []).map(v => v.price))
-      : product.price);
-
-  // Reset warning when variant is selected
-  useEffect(() => {
-    if (selectedVariant) {
-      setShowVariantWarning(false);
-    }
-  }, [selectedVariant]);
+  // ... (useEffect for warning)
 
   useEffect(() => {
-    const mainAddToCartButton = addToCartButtonRef.current;
-    if (!mainAddToCartButton) return;
-
     const observer = new IntersectionObserver(
-      ([entry]) => {
+      (entries) => {
+        const isMobile = window.innerWidth < 1024;
+        const entry = entries.find(e => {
+          return isMobile ? e.target === mobileAddToCartRef.current : e.target === desktopAddToCartRef.current;
+        });
+
         if (entry) {
-          setIsStickyBarVisible(
-            !entry.isIntersecting && window.innerWidth < 1024,
-          );
+          setIsStickyBarVisible(!entry.isIntersecting);
         }
       },
       { threshold: 0 },
     );
 
-    observer.observe(mainAddToCartButton);
+    if (desktopAddToCartRef.current) observer.observe(desktopAddToCartRef.current);
+    if (mobileAddToCartRef.current) observer.observe(mobileAddToCartRef.current);
 
     const handleResize = () => {
-      if (mainAddToCartButton) {
-        const rect = mainAddToCartButton.getBoundingClientRect();
-        const isOutOfView = rect.bottom < 0 || rect.top > window.innerHeight;
-        setIsStickyBarVisible(isOutOfView && window.innerWidth < 1024);
+      const isMobile = window.innerWidth < 1024;
+      const targetRef = isMobile ? mobileAddToCartRef.current : desktopAddToCartRef.current;
+
+      if (targetRef) {
+        const rect = targetRef.getBoundingClientRect();
+        // Simple check: if top is above viewport (scrolled past) or extremely far below (though usually we care about scrolled past)
+        // Actually, just relying on observer state might be safer/simpler, but observer callbak fires on resize? No.
+        // So we force a check or rely on scrolling.
+        // Let's just reset based on a manual check.
+        const isOutOfView = rect.bottom < 0;
+        setIsStickyBarVisible(isOutOfView);
       }
     };
 
     window.addEventListener("resize", handleResize);
 
     return () => {
-      observer.unobserve(mainAddToCartButton);
+      observer.disconnect();
       window.removeEventListener("resize", handleResize);
     };
   }, []);
@@ -223,6 +212,62 @@ const SectionProductHeader = ({ product }: Props) => {
                   </div>
                 </div>
               )}
+
+              {/* Mobile Action Buttons */}
+              <div className="space-y-4 pt-6" ref={mobileAddToCartRef}>
+                {/* Variant Selection for Mobile */}
+                {hasVariants && (
+                  <div className="space-y-3 mb-4">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest">Select Option</h3>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      {product.sizes?.map((variant: any) => (
+                        <VariantButton
+                          key={variant.value}
+                          variant={variant}
+                          selected={selectedVariant?.value === variant.value}
+                          onSelect={setSelectedVariant}
+                          disabled={!product.inStock}
+                        />
+                      ))}
+                    </div>
+                    {showVariantWarning && !selectedVariant && (
+                      <p className="text-xs text-red-500 font-bold bg-red-100/50 p-2 rounded-lg">
+                        Please select an option
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                <div className="flex flex-col gap-3">
+                  <ButtonPrimary
+                    className="w-full justify-center bg-primary hover:bg-black text-white font-black rounded-2xl py-4 shadow-xl uppercase tracking-widest text-sm"
+                    onClick={() => handleActionClick("addToCart")}
+                    disabled={!product.inStock}
+                  >
+                    Add to Cart
+                  </ButtonPrimary>
+
+                  <button
+                    onClick={() => handleActionClick("buyNow")}
+                    className="w-full flex items-center justify-center gap-2 rounded-2xl border-2 border-slate-200 bg-white py-4 font-black text-slate-900 hover:border-primary uppercase tracking-widest text-sm"
+                    disabled={!product.inStock}
+                  >
+                    Buy Now
+                  </button>
+
+                  <button
+                    onClick={handleWhatsAppOrder}
+                    className="w-full flex items-center justify-center gap-3 rounded-2xl bg-[#25D366] py-4 font-black text-white hover:bg-[#128C7E] shadow-lg shadow-green-200 uppercase tracking-widest text-sm"
+                  >
+                    <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.634 1.437h.005c6.558 0 11.897-5.335 11.9-11.894a11.83 11.83 0 00-3.415-8.412" />
+                    </svg>
+                    WhatsApp Us
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -302,7 +347,7 @@ const SectionProductHeader = ({ product }: Props) => {
               </div>
 
               {/* Action Buttons */}
-              <div className="space-y-3 pt-4" ref={addToCartButtonRef}>
+              <div className="space-y-3 pt-4" ref={desktopAddToCartRef}>
                 <ButtonPrimary
                   className="w-full justify-center bg-primary hover:bg-black text-white font-black rounded-2xl py-4 transition-all duration-300 shadow-xl hover:shadow-primary/25 disabled:opacity-50 uppercase tracking-widest text-sm"
                   onClick={() => handleActionClick("addToCart")}

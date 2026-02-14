@@ -1,5 +1,5 @@
 import React from "react";
-import { FiPhone } from "react-icons/fi";
+import { FiPhone, FiMail } from "react-icons/fi";
 import { siteConfig } from "@/config/site";
 import { constructMetadata } from "@/utils/seo";
 
@@ -10,6 +10,14 @@ export const metadata = constructMetadata({
 
 export default function ContactPage() {
   const contactInfo = [
+    {
+      icon: <FiMail />,
+      title: "Email Us",
+      description: "Send us an email for any inquiries.",
+      // Using generic email link, but listing specific ones in the UI below if needed, or better yet, list them in the description
+      href: `mailto:${siteConfig.contact.email}`,
+      linkTitle: siteConfig.contact.email,
+    },
     {
       icon: <FiPhone />,
       title: "Call Us",
@@ -58,6 +66,24 @@ export default function ContactPage() {
           ))}
         </div>
 
+      </div>
+
+      <div className="mt-12 text-center bg-gray-50 p-8 rounded-2xl">
+        <h3 className="text-xl font-bold mb-6">Official Department Emails</h3>
+        <div className="flex flex-col md:flex-row gap-8 justify-center text-gray-700">
+          <div className="flex flex-col items-center">
+            <span className="font-bold text-gray-900 mb-1">General Inquiries</span>
+            <a href="mailto:info@sokohubkenya.com" className="hover:text-primary transition-colors">info@sokohubkenya.com</a>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="font-bold text-gray-900 mb-1">Sales & Orders</span>
+            <a href="mailto:sales@sokohubkenya.com" className="hover:text-primary transition-colors">sales@sokohubkenya.com</a>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="font-bold text-gray-900 mb-1">Management</span>
+            <a href="mailto:tonny@sokohubkenya.com" className="hover:text-primary transition-colors">tonny@sokohubkenya.com</a>
+          </div>
+        </div>
       </div>
     </div>
   );

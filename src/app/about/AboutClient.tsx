@@ -29,7 +29,7 @@ export default function AboutClient() {
                     transition={{ delay: 0.2 }}
                     className="max-w-3xl mx-auto"
                 >
-                    <h2 className="mb-6 text-3xl font-bold text-center">Our Story</h2>
+                    <h2 className="mb-6 text-3xl font-bold text-center">About Us</h2>
                     <div className="space-y-4 text-gray-600">
                         <p>
                             Owned by Tonny Imbwaga, {siteConfig.name} was founded with a simple yet powerful vision: to provide quality products that bring

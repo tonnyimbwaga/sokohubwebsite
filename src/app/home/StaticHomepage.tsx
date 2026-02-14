@@ -7,7 +7,7 @@
  * Perfect for Cloudflare edge caching and maximum user experience.
  */
 
-import React, { Suspense } from "react";
+import React from "react";
 import { useStaticHomepageData } from "@/hooks/useStaticHomepageData";
 import type { StaticProduct, StaticCategory } from "@/lib/static-homepage-data";
 import Link from "next/link";
@@ -191,6 +191,7 @@ export default function StaticHomepage() {
           </div>
         </section>
       )}
+
     </div>
   );
 }

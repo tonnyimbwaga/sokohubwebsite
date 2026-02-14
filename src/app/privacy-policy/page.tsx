@@ -136,10 +136,11 @@ export default function PrivacyPolicy() {
           <h2 className="mb-4 text-2xl font-semibold">Contact Information</h2>
           <div className="rounded-lg bg-gray-50 p-6">
             <p className="mb-4">
-              {siteConfig.name} is owned and operated by {siteConfig.owner}. For any privacy-related concerns or to exercise your rights,
+              {siteConfig.name} is run by a dedicated team of professionals. For any privacy-related concerns or to exercise your rights,
               please contact us:
             </p>
             <ul className="space-y-2">
+              <li>Email: {siteConfig.contact.email}</li>
               <li>Phone: {siteConfig.contact.phone}</li>
               <li>Address: {siteConfig.contact.address}</li>
             </ul>
