@@ -11,8 +11,8 @@ import type { Product } from "@/data/types";
 import { getProductImageUrl } from "@/utils/product-images";
 
 const SECTION_CONTENT = {
-  title: "Trending Now",
-  description: "Discover the most popular toys this season",
+  title: "Top Selling Products",
+  description: "Discover the most popular items this season",
 } as const;
 
 interface DatabaseProduct {
@@ -191,7 +191,7 @@ const SectionTrending = () => {
   });
 
   return (
-    <div className="container">
+    <div id="top-selling" className="container scroll-mt-20">
       <SectionHeading
         title={
           <>

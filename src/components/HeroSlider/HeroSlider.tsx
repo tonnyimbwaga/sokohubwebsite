@@ -65,7 +65,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
     <div className="relative w-full mx-auto overflow-visible group mt-2 mb-4 md:mt-4 md:mb-8">
       {/* Floating badges */}
       <div className="absolute -top-4 left-4 z-50 flex gap-2 animate-slide-up">
-        <Link href="/deals">
+        <Link href="#hottest-deals" scroll={true}>
           <motion.div
             className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-xl flex items-center gap-1 cursor-pointer"
             whileHover={{ scale: 1.05 }}
@@ -75,7 +75,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
             <BsFire className="animate-pulse" /> HOT DEALS
           </motion.div>
         </Link>
-        <Link href="/products">
+        <Link href="#top-selling" scroll={true}>
           <motion.div
             className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-xl flex items-center gap-1 cursor-pointer"
             whileHover={{ scale: 1.05 }}
@@ -167,11 +167,6 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                   <span className="relative z-10">{slides[currentIndex]?.button_text}</span>
                   <BsLightningFill className="relative z-10 group-hover:animate-wiggle" />
                 </Link>
-
-                <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm text-slate-800 px-6 py-3 rounded-full font-bold shadow-lg">
-                  <FaShippingFast className="text-purple-500" />
-                  <span className="text-sm md:text-base">FREE DELIVERY</span>
-                </div>
               </div>
             </motion.div>
           </AnimatePresence>

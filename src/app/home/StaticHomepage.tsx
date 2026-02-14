@@ -99,8 +99,8 @@ const DealsSection: React.FC<{ products: StaticProduct[] }> = ({
   products,
 }) => (
   <section className="py-8 bg-red-50 rounded-lg">
-    <div className="px-6">
-      <h2 className="text-2xl font-bold text-red-900 mb-6">🔥 Best Deals</h2>
+    <div id="hottest-deals" className="px-6 scroll-mt-20">
+      <h2 className="text-2xl font-bold text-red-900 mb-6">🔥 Hottest Deals</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {products.slice(0, 6).map((product) => (
           <StaticProductCard key={product.id} product={product} />
@@ -178,10 +178,10 @@ export default function StaticHomepage() {
 
       {/* Trending Products */}
       {data.trendingProducts.length > 0 && (
-        <section className="py-8 mt-8 bg-blue-50 rounded-lg">
+        <section id="top-selling" className="py-8 mt-8 bg-blue-50 rounded-lg scroll-mt-20">
           <div className="px-6">
             <h2 className="text-2xl font-bold text-blue-900 mb-6">
-              📈 Trending Now
+              📈 Top Selling Products
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {data.trendingProducts.slice(0, 6).map((product) => (
