@@ -32,7 +32,7 @@ export default function AboutClient() {
                     <h2 className="mb-6 text-3xl font-bold text-center">About Us</h2>
                     <div className="space-y-4 text-gray-600">
                         <p>
-                            Owned by Tonny Imbwaga, {siteConfig.name} was founded with a simple yet powerful vision: to provide quality products that bring
+                            Founded by Tonny Blair Imbwaga, {siteConfig.name} was founded with a simple yet powerful vision: to provide quality products that bring
                             value and satisfaction to our customers while being accessible to families
                             across {siteConfig.localization.country}.
                         </p>
@@ -147,7 +147,7 @@ export default function AboutClient() {
                         </p>
                         <p className="text-lg text-gray-600 mb-6">
                             We understand the importance of quality, safety, and value in every
-                            product we offer. Our commitment to providing the best for our
+                            product we offer. Our commitment to providing quality products for our
                             customers in {siteConfig.localization.country} is what motivates us every day.
                         </p>
                         <p className="text-lg text-gray-600">
