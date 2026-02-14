@@ -36,11 +36,31 @@ const SectionProductHeader = ({ product }: Props) => {
   const desktopAddToCartRef = useRef<HTMLDivElement>(null);
   const mobileAddToCartRef = useRef<HTMLDivElement>(null);
 
-  // ... (sanitizedDescription code)
+  // Sanitize product description
+  const sanitizedDescription = product.description
+    ? sanitizeHTML(product.description)
+    : "";
 
-  // ... (displayPriceValue code)
+  // Helper for variant logic
+  const hasVariants = Array.isArray(product.sizes) && product.sizes.length > 0;
 
-  // ... (useEffect for warning)
+  // Calculate display price
+  // Logic: 
+  // 1. If a variant is selected, use its absolute price.
+  // 2. If no variant is selected but variants exist, show "From [Lowest Variant Price]".
+  // 3. If no variants exist, use the base product price.
+  const displayPriceValue = selectedVariant
+    ? selectedVariant.price
+    : (hasVariants
+      ? Math.min(...(product.sizes || []).map(v => v.price))
+      : product.price);
+
+  // Reset warning when variant is selected
+  useEffect(() => {
+    if (selectedVariant) {
+      setShowVariantWarning(false);
+    }
+  }, [selectedVariant]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

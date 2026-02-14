@@ -1,5 +1,5 @@
 import { siteConfig } from "@/config/site";
-import { FaFacebook, FaTwitter, FaInstagram, FaTiktok, FaLock } from "react-icons/fa";
+import { FaInstagram, FaTiktok, FaLock } from "react-icons/fa";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -15,24 +15,6 @@ const Footer = () => {
               Sokohub is Kenya&apos;s premier destination for high-quality products. We are dedicated to providing excellence through a curated selection of home and lifestyle goods delivered with speed and care.
             </p>
             <div className="flex space-x-5">
-              <a
-                href={siteConfig.links.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary transition-colors"
-                aria-label="Follow us on Facebook"
-              >
-                <FaFacebook size={20} />
-              </a>
-              <a
-                href={siteConfig.links.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary transition-colors"
-                aria-label="Follow us on Twitter"
-              >
-                <FaTwitter size={20} />
-              </a>
               <a
                 href={siteConfig.links.instagram}
                 target="_blank"

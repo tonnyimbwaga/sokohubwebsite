@@ -5,8 +5,6 @@ export const siteConfig = {
     url: "https://sokohubkenya.com",
     ogImage: "https://sokohubkenya.com/og.jpg",
     links: {
-        facebook: "https://facebook.com/sokohubkenya",
-        twitter: "https://x.com/sokohubkenya",
         instagram: "https://instagram.com/sokohubkenya",
         tiktok: "https://tiktok.com/@sokohubkenya",
     },
@@ -14,7 +12,7 @@ export const siteConfig = {
         phone: "+254 707 874 828",
         whatsapp: "+254707874828",
         email: "info@sokohubkenya.com", // sales@sokohubkenya.com, tonny@sokohubkenya.com
-        address: "Central Business District, Nairobi 00600, Kenya",
+        address: "CBD, Haile Selassie Avenue, Nairobi 00100, Kenya",
         businessHours: "Mon-Sat, 8 AM - 8 PM EAT",
     },
     localization: {
