@@ -19,7 +19,7 @@ export default async function HomeLayoutRenderer() {
             {
                 id: 1,
                 title: "Welcome to Sokohub Kenya",
-                subtitle: "The Best Deals in Nairobi CBD",
+                subtitle: "high quality products at affordable prices in kenya",
                 image_url: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=2070&auto=format&fit=crop",
                 link_url: "/products",
                 button_text: "Shop Now",

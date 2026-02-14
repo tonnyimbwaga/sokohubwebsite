@@ -135,16 +135,6 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
               transition={{ duration: 0.5 }}
               className="space-y-4"
             >
-              {/* Badge above title */}
-              <motion.div
-                className="inline-flex items-center gap-2 bg-secondary text-white px-6 py-2 rounded-full font-bold text-sm shadow-lg"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <FaStar className="animate-spin" style={{ animationDuration: '3s' }} />
-                EXCLUSIVE OFFER
-                <FaStar className="animate-spin" style={{ animationDuration: '3s' }} />
-              </motion.div>
 
               <h2 className="text-white text-2xl md:text-6xl font-black mb-2 md:mb-4 leading-tight tracking-tight drop-shadow-2xl">
                 <span className="bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent animate-glow">
@@ -211,7 +201,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
           className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg"
           whileHover={{ scale: 1.05 }}
         >
-          <FaStar className="text-white" /> 5-Star Rated
+          <FaShippingFast className="text-white" /> Countrywide Delivery
         </motion.div>
         <motion.div
           className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg"
