@@ -94,6 +94,7 @@ export async function generateMetadata(
     title: post.meta_title || post.title,
     description: post.meta_description || post.excerpt || "",
     image: imageUrl,
+    canonicalPath: `/blog/${slug}`,
   });
 }
 

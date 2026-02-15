@@ -6,11 +6,13 @@ export function constructMetadata({
     description = siteConfig.description,
     image = siteConfig.ogImage,
     noIndex = false,
+    canonicalPath,
 }: {
     title: string;
     description?: string;
     image?: string;
     noIndex?: boolean;
+    canonicalPath?: string;
 }): Metadata {
     return {
         title: siteConfig.seo.titleTemplate.replace("%s", title),
@@ -36,6 +38,11 @@ export function constructMetadata({
         },
         icons: "/favicon.ico",
         metadataBase: new URL(siteConfig.url),
+        ...(canonicalPath && {
+            alternates: {
+                canonical: canonicalPath,
+            },
+        }),
         ...(noIndex && {
             robots: {
                 index: false,

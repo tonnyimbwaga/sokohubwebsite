@@ -8,6 +8,7 @@ import { constructMetadata } from "@/utils/seo";
 export const metadata = constructMetadata({
   title: "Privacy Policy",
   description: `At ${siteConfig.name}, we take your privacy seriously. This policy outlines how we collect, use, and protect your personal information.`,
+  canonicalPath: "/privacy-policy",
 });
 
 export default function PrivacyPolicy() {

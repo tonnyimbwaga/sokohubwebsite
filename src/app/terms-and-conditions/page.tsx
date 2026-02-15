@@ -8,6 +8,7 @@ import { constructMetadata } from "@/utils/seo";
 export const metadata = constructMetadata({
   title: "Terms and Conditions",
   description: `Welcome to ${siteConfig.name}. These terms and conditions outline the rules and regulations for purchasing and using our products.`,
+  canonicalPath: "/terms-and-conditions",
 });
 
 export default function TermsAndConditions() {

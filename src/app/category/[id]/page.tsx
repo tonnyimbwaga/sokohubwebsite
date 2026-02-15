@@ -48,6 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: categoryDetails.name,
     description: categoryDetails.description || `Explore our collection of ${categoryDetails.name}`,
     image: categoryDetails.image_url || undefined,
+    canonicalPath: `/category/${id}`,
   });
 }
 

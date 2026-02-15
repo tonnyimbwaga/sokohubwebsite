@@ -28,6 +28,8 @@ export const siteConfig = {
         defaultDescription: "Shop at Sokohub Kenya for quality products. Fast delivery and reliable customer service.",
         defaultKeywords: ["sokohub", "kenya", "nairobi", "online shopping", "ecommerce", "deals"],
         locale: "en_KE",
+        twitterHandle: "@sokohubkenya",
+        creator: "@sokohubkenya", // Added creator field based on twitterHandle
         googleSiteVerification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
     },
     theme: {

@@ -6,6 +6,7 @@ import { constructMetadata } from "@/utils/seo";
 export const metadata = constructMetadata({
   title: "Contact Us",
   description: "Have a question or need assistance? We're here to help! Reach out to our friendly team for personalized support.",
+  canonicalPath: "/contact",
 });
 
 export default function ContactPage() {

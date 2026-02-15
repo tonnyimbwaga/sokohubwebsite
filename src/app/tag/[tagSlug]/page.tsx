@@ -35,6 +35,7 @@ export async function generateMetadata({
   return constructMetadata({
     title: `${formattedTag} Products`,
     description: `Discover our collection of ${formattedTag.toLowerCase()} products at ${siteConfig.name}.`,
+    canonicalPath: `/tag/${tagSlug}`,
   });
 }
 

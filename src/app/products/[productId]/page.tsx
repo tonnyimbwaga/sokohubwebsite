@@ -40,6 +40,7 @@ export async function generateMetadata({
     title: product.name,
     description: product.description,
     image: defaultImage,
+    canonicalPath: `/products/${product.slug}`,
   });
 }
 
