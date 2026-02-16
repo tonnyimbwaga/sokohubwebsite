@@ -1,165 +1,134 @@
+import React from "react";
 import { constructMetadata } from "@/utils/seo";
 import { siteConfig } from "@/config/site";
-import {
-  FaExchangeAlt,
-  FaBoxOpen,
-  FaRegClock,
-  FaShieldAlt,
-} from "react-icons/fa";
+import { FaExchangeAlt, FaBoxOpen, FaRegClock, FaShieldAlt, FaWhatsapp } from "react-icons/fa";
 
 export const metadata = constructMetadata({
-  title: "Returns & Exchanges Policy",
-  description: `Review ${siteConfig.name} official returns and exchanges policy. Returns accepted only for unused items reported within our specified conditions.`,
+  title: "Refund & Return Policy",
+  description: `Review ${siteConfig.name} official returns and refunds policy. We offer a 24-hour return window for unused items and full refunds if replacements are unavailable.`,
+  canonicalPath: "/returns",
 });
 
 export default function ReturnsPage() {
   const returnFeatures = [
     {
-      icon: <FaExchangeAlt className="h-8 w-8 text-primary" />,
+      icon: <FaExchangeAlt />,
       title: "Return Policy",
-      description:
-        "Returns accepted for unused items in original condition within our specified timeframe.",
+      description: "Returns accepted for unused items in original condition within 24 hours of delivery.",
     },
     {
-      icon: <FaBoxOpen className="h-8 w-8 text-primary" />,
+      icon: <FaBoxOpen />,
       title: "Exchange Options",
-      description:
-        "Eligible returns may be exchanged for similar items, subject to availability.",
+      description: "Eligible returns may be exchanged for similar items, subject to availability.",
     },
     {
-      icon: <FaRegClock className="h-8 w-8 text-primary" />,
-      title: "Return Process",
-      description:
-        "Contact us to initiate returns. Return shipping costs are typical responsibility of the customer.",
+      icon: <FaRegClock />,
+      title: "Quick Process",
+      description: `Contact our support via WhatsApp or Phone to initiate an immediate return.`,
     },
     {
-      icon: <FaShieldAlt className="h-8 w-8 text-primary" />,
-      title: "Item Condition",
-      description:
-        "Items must be unused, in original condition, and with all packaging and accessories.",
-    },
-  ];
-
-  const returnSteps = [
-    {
-      title: "Contact Us",
-      description:
-        "Notify our customer service team about your return request within the specified timeframe.",
-    },
-    {
-      title: "Prepare Item for Return",
-      description:
-        "Ensure the item is unused, in its original packaging, and includes all accessories.",
-    },
-    {
-      title: "Arrange Shipping",
-      description:
-        "Coordinate with our team on how to get the item back to us safely.",
-    },
-    {
-      title: "Processing",
-      description:
-        "Upon receipt and inspection, we will process your exchange or refund according to our policy.",
+      icon: <FaShieldAlt />,
+      title: "Quality Check",
+      description: "Returned items must be unused and in original packaging for approval.",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="container mx-auto px-4">
-        <div>
-          <h1 className="mb-6 text-4xl font-bold">
-            Returns & Exchanges Policy
-          </h1>
-          <p className="mb-12 text-lg text-gray-600">
-            We want to ensure you're completely satisfied with your purchase from {siteConfig.name}. If
-            you're not happy with your order, we've outlined our returns and
-            exchanges policy below.
-          </p>
-
-          {/* Return Features */}
-          <div className="mb-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {returnFeatures.map((feature, index) => (
-              <div
-                key={index}
-                className="rounded-lg bg-white p-6 shadow-md transition-transform hover:-translate-y-1"
-              >
-                <div className="mb-4">{feature.icon}</div>
-                <h3 className="mb-2 text-xl font-semibold">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </div>
-            ))}
+    <div className="main-layout py-12 md:py-24 bg-white">
+      <div className="container px-4 max-w-6xl">
+        {/* Hero Section */}
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center gap-2 bg-red-50 text-red-600 px-4 py-2 rounded-full mb-6">
+            <FaRegClock className="animate-pulse" />
+            <span className="text-xs font-black uppercase tracking-widest">Strict 24-Hour Policy</span>
           </div>
+          <h1 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight">Refund & Return Policy</h1>
+          <p className="mt-6 text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            Your satisfaction is our priority. If you're not happy with your order, we offer a streamlined 24-hour return process for our {siteConfig.name} customers.
+          </p>
+        </div>
 
-          {/* Return Process */}
-          <div className="mb-16">
-            <h2 className="mb-8 text-2xl font-bold">How to Return an Item</h2>
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-              {returnSteps.map((step, index) => (
-                <div
-                  key={index}
-                  className="relative"
-                >
-                  <div className="mb-4">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-2xl font-bold text-white">
-                      {index + 1}
-                    </span>
-                  </div>
-                  <h3 className="mb-2 text-xl font-semibold">{step.title}</h3>
-                  <p className="text-gray-600">{step.description}</p>
+        {/* Features Grid */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-24">
+          {returnFeatures.map((info, index) => (
+            <div
+              key={index}
+              className="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 transition-all hover:bg-white hover:shadow-2xl hover:shadow-red-500/5 hover:border-red-100 group"
+            >
+              <div className="mb-6 text-3xl text-primary group-hover:scale-110 transition-transform">{info.icon}</div>
+              <h3 className="mb-3 text-lg font-bold text-slate-900">{info.title}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">{info.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid lg:grid-cols-12 gap-12 mb-24">
+          {/* Main Content */}
+          <div className="lg:col-span-8 space-y-12">
+            <div>
+              <h2 className="text-3xl font-black text-slate-900 mb-6 uppercase tracking-tight">Policy Details</h2>
+              <div className="space-y-8">
+                <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
+                  <h3 className="text-xl font-bold mb-4 text-slate-800 flex items-center gap-3">
+                    <span className="h-6 w-1 bg-primary rounded-full"></span>
+                    24-Hour Return Window
+                  </h3>
+                  <p className="text-slate-600 leading-relaxed">
+                    You have exactly 24 hours to return an item from the time you received it. To be eligible, your item must be unused, in the same condition as received, and in its original packaging.
+                  </p>
                 </div>
-              ))}
+
+                <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
+                  <h3 className="text-xl font-bold mb-4 text-slate-800 flex items-center gap-3">
+                    <span className="h-6 w-1 bg-red-500 rounded-full"></span>
+                    Defective or Incorrect Items
+                  </h3>
+                  <p className="text-slate-600 leading-relaxed">
+                    If you receive a defective or incorrect item, please notify us within 24 hours. We will arrange for an immediate replacement or a full refund at no additional cost to you.
+                  </p>
+                </div>
+
+                <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
+                  <h3 className="text-xl font-bold mb-4 text-slate-800 flex items-center gap-3">
+                    <span className="h-6 w-1 bg-primary rounded-full"></span>
+                    Refund Processing
+                  </h3>
+                  <p className="text-slate-600 leading-relaxed">
+                    Once received and inspected, we will process your refund or exchange within 3-5 business days. Refunds are typically issued via M-Pesa.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Return Policy Details */}
-          <div className="rounded-lg bg-white p-8 shadow-md">
-            <h2 className="mb-4 text-2xl font-bold">
-              Return & Exchange Policy Details
-            </h2>
-            <div className="space-y-6">
-              <div>
-                <h3 className="mb-2 text-lg font-semibold">
-                  Eligibility for Returns
-                </h3>
-                <p className="text-gray-600">
-                  Returns or exchanges are strictly accepted only for items that are defective, malfunctioning, or if the wrong item was delivered. Please contact us within 24 hours of delivery
-                  to initiate a return request. Items must be in the same
-                  condition as received and in their original packaging with
-                  all accessories.
-                </p>
+          {/* Action Sidebar */}
+          <div className="lg:col-span-4 lg:sticky lg:top-24 h-fit">
+            <div className="bg-slate-900 rounded-[2.5rem] p-10 text-white shadow-2xl">
+              <h3 className="text-2xl font-black mb-6">Need to Return?</h3>
+              <p className="text-slate-400 text-sm mb-8 leading-relaxed">
+                The fastest way to initiate a return is via WhatsApp. Our team will guide you through the next steps.
+              </p>
+              <div className="space-y-4">
+                <a
+                  href={`https://wa.me/${siteConfig.contact.whatsapp}`}
+                  target="_blank"
+                  className="flex items-center justify-center gap-3 w-full bg-[#25D366] py-5 rounded-2xl font-black uppercase text-sm hover:scale-[1.02] transition-transform"
+                >
+                  <FaWhatsapp className="text-xl" />
+                  WhatsApp Now
+                </a>
+                <div className="p-4 bg-white/5 rounded-2xl border border-white/10 text-center">
+                  <span className="block text-[10px] text-slate-400 uppercase font-bold tracking-widest mb-1">Customer Support</span>
+                  <span className="font-bold">{siteConfig.contact.phone}</span>
+                </div>
               </div>
-              <div>
-                <h3 className="mb-2 text-lg font-semibold">Exchanges</h3>
-                <p className="text-gray-600">
-                  If your return is approved due to a defect, malfunction, or error on our part, you may exchange the item for a
-                  replacement, subject to availability.
-                </p>
-              </div>
+            </div>
 
-              <div>
-                <h3 className="mb-2 text-lg font-semibold">Refunds</h3>
-                <p className="text-gray-600">
-                  Refunds are only processed if a replacement for a defective, malfunctioning, or wrong item is unavailable. Refunds are made to the original payment method after inspection.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="mb-2 text-lg font-semibold">
-                  Shipping Cost
-                </h3>
-                <p className="text-gray-600">
-                  Customers are responsible for return shipping costs unless the
-                  item received was damaged or incorrect.
-                </p>
-              </div>
-              <div>
-                <h3 className="mb-2 text-lg font-semibold">Contact</h3>
-                <p className="text-gray-600">
-                  To initiate a return or exchange, please contact our customer
-                  service team via our provided contact channels.
-                </p>
-              </div>
-
+            <div className="mt-8 p-6 bg-red-50 rounded-2xl border border-red-100">
+              <p className="text-red-700 text-xs font-bold leading-relaxed">
+                <FaShieldAlt className="inline mr-2" />
+                Note: Customers are responsible for return shipping costs unless the item is defective.
+              </p>
             </div>
           </div>
         </div>

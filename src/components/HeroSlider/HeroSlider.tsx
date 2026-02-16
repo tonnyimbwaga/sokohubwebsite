@@ -72,7 +72,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            <BsFire className="animate-pulse" /> HOT DEALS
+            <BsFire className="animate-pulse" /> BEST DEALS
           </motion.div>
         </Link>
         <Link href="#top-selling" scroll={true}>
@@ -208,12 +208,6 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
           whileHover={{ scale: 1.05 }}
         >
           <FaShippingFast /> Fast Delivery
-        </motion.div>
-        <motion.div
-          className="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg"
-          whileHover={{ scale: 1.05 }}
-        >
-          <BsLightningFill /> 24/7 Support
         </motion.div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React from "react";
-import { FiPhone, FiMail } from "react-icons/fi";
+import { FiPhone, FiMail, FiMapPin, FiClock } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
 import { siteConfig } from "@/config/site";
 import { constructMetadata } from "@/utils/seo";
 
@@ -10,84 +11,102 @@ export const metadata = constructMetadata({
 });
 
 export default function ContactPage() {
-  const contactInfo = [
+  const contactMethods = [
     {
       icon: <FiMail />,
-      title: "Email Us",
-      description: "Send us an email for any inquiries.",
-      // Using generic email link, but listing specific ones in the UI below if needed, or better yet, list them in the description
+      title: "Email Support",
+      details: siteConfig.contact.email,
+      description: "Quick responses for general inquiries.",
       href: `mailto:${siteConfig.contact.email}`,
-      linkTitle: siteConfig.contact.email,
+      color: "bg-blue-50 text-blue-600"
     },
     {
       icon: <FiPhone />,
-      title: "Call Us",
-      description: `Speak directly to our team during business hours (${siteConfig.contact.businessHours}).`,
-      href: `tel:${siteConfig.contact.phone}`,
-      linkTitle: siteConfig.contact.phone,
+      title: "Phone Call",
+      details: siteConfig.contact.phone,
+      description: "Direct assistance during business hours.",
+      href: `tel:${siteConfig.contact.phone.replace(/\s+/g, '')}`,
+      color: "bg-green-50 text-green-600"
     },
+    {
+      icon: <FaWhatsapp />,
+      title: "WhatsApp",
+      details: "Instant Chat",
+      description: "Send us a message for fast support.",
+      href: `https://wa.me/${siteConfig.contact.whatsapp}`,
+      color: "bg-emerald-50 text-emerald-600"
+    }
   ];
 
-
   return (
-    <div className="container mx-auto px-4 py-8 md:py-12">
-      <div className="mb-16 mt-8 text-center">
-        <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-          Get in Touch
-        </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          {siteConfig.name} is run by a team of passionate professionals who are dedicated to ensuring Kenyans get high quality products at affordable prices, conveniently delivered to your doorstep.
-        </p>
-
-      </div>
-
-      <div className="mb-20">
-        <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
-          {contactInfo.map((info) => (
-            <div
-              key={info.title}
-              className="flex flex-col items-center p-8 rounded-2xl shadow-sm border border-gray-100 bg-white hover:shadow-md transition-shadow duration-300"
-            >
-              <div className="text-primary text-4xl mb-6 p-4 rounded-full bg-primary/5">
-                {info.icon}
+    <div className="main-layout py-12 md:py-24 bg-white">
+      <div className="container px-4 max-w-6xl">
+        {/* Header section */}
+        <div className="grid lg:grid-cols-2 gap-12 items-center mb-24">
+          <div>
+            <span className="text-xs font-black tracking-[0.3em] text-primary uppercase bg-primary/5 px-4 py-2 rounded-full mb-6 inline-block">Support Center</span>
+            <h1 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tight mb-6">Get in Touch</h1>
+            <p className="text-xl text-slate-600 leading-relaxed mb-8">
+              Whether you have a product question, need order support, or just want to say hello, we're here for you. Experience {siteConfig.name}'s premium customer service.
+            </p>
+            <div className="flex flex-wrap gap-8">
+              <div className="flex items-center gap-3">
+                <FiClock className="text-primary text-xl" />
+                <div>
+                  <span className="block text-[10px] font-black uppercase text-slate-400 tracking-widest">Available Hours</span>
+                  <span className="font-bold text-slate-900">{siteConfig.contact.businessHours}</span>
+                </div>
               </div>
-              <h2 className="text-2xl font-semibold mb-3">
-                {info.title}
-              </h2>
-              <p className="text-center text-gray-500 mb-6 flex-grow">
-                {info.description}
-              </p>
-              <a
-                className="text-lg font-medium text-primary hover:text-primary/80 transition-colors"
-                href={info.href}
-              >
-                {info.linkTitle}
-              </a>
+              <div className="flex items-center gap-3">
+                <FiMapPin className="text-primary text-xl" />
+                <div>
+                  <span className="block text-[10px] font-black uppercase text-slate-400 tracking-widest">Our Location</span>
+                  <span className="font-bold text-slate-900">{siteConfig.contact.address}</span>
+                </div>
+              </div>
             </div>
-          ))}
+          </div>
+          <div className="relative">
+            <div className="bg-primary rounded-[3rem] p-1 h-full shadow-2xl shadow-primary/20 rotate-1">
+              <div className="bg-white rounded-[2.8rem] p-8 md:p-12 rotate-[-1deg]">
+                <h3 className="text-2xl font-black mb-8 text-slate-900">Department Directory</h3>
+                <div className="space-y-6">
+                  {[
+                    { label: "General & Support", email: "info@sokohubkenya.com" },
+                    { label: "Sales & Orders", email: "sales@sokohubkenya.com" },
+                    { label: "Management", email: "tonny@sokohubkenya.com" }
+                  ].map((dept, i) => (
+                    <div key={i} className="p-4 rounded-3xl bg-slate-50 border border-slate-100 group transition-all hover:bg-white hover:shadow-xl hover:shadow-primary/5">
+                      <span className="block text-[10px] font-black uppercase text-slate-400 mb-1">{dept.label}</span>
+                      <a href={`mailto:${dept.email}`} className="font-bold text-slate-800 hover:text-primary transition-colors">{dept.email}</a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            {/* Decorative blob */}
+            <div className="absolute -top-12 -right-12 w-64 h-64 bg-primary/20 rounded-full blur-3xl -z-10"></div>
+          </div>
         </div>
 
-      </div>
-
-      <div className="mt-12 text-center bg-gray-50 p-8 rounded-2xl">
-        <h3 className="text-xl font-bold mb-6">Official Department Emails</h3>
-        <div className="flex flex-col md:flex-row gap-8 justify-center text-gray-700">
-          <div className="flex flex-col items-center">
-            <span className="font-bold text-gray-900 mb-1">General Inquiries</span>
-            <a href="mailto:info@sokohubkenya.com" className="hover:text-primary transition-colors">info@sokohubkenya.com</a>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="font-bold text-gray-900 mb-1">Sales & Orders</span>
-            <a href="mailto:sales@sokohubkenya.com" className="hover:text-primary transition-colors">sales@sokohubkenya.com</a>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="font-bold text-gray-900 mb-1">Management</span>
-            <a href="mailto:tonny@sokohubkenya.com" className="hover:text-primary transition-colors">tonny@sokohubkenya.com</a>
-          </div>
+        {/* Contact Cards */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {contactMethods.map((method, i) => (
+            <a
+              key={i}
+              href={method.href}
+              className="p-10 rounded-[3rem] bg-slate-50 border border-slate-100 transition-all hover:bg-slate-900 hover:-translate-y-2 group"
+            >
+              <div className={`w-14 h-14 ${method.color} rounded-2xl flex items-center justify-center text-2xl mb-8 group-hover:scale-110 transition-transform`}>
+                {method.icon}
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-slate-900 group-hover:text-white">{method.title}</h3>
+              <p className="text-slate-500 text-sm mb-6 group-hover:text-slate-400">{method.description}</p>
+              <span className="text-lg font-black text-primary group-hover:text-primary-light uppercase tracking-tight">{method.details}</span>
+            </a>
+          ))}
         </div>
       </div>
     </div>
   );
 }
-
-

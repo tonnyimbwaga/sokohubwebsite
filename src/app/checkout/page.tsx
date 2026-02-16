@@ -31,6 +31,7 @@ interface OrderDetails {
   phone?: string;
   confirmPhone?: string;
   orderId?: string;
+  paymentMethod?: "mpesa" | "cash_on_delivery" | "bank_transfer" | "";
 }
 
 // Re-assert OrderErrors type definition to include an optional 'general' property
@@ -65,12 +66,13 @@ const MotionWrapper: React.FC<MotionWrapperProps> = ({
 const PROGRESS_STEPS = [
   { id: 1, title: "Delivery Options", icon: MapPinIcon },
   { id: 2, title: "Contact Information", icon: UserCircleIcon },
-  { id: 3, title: "Confirm Order", icon: SolidCheckCircleIcon },
+  { id: 3, title: "Payment & Confirm", icon: SolidCheckCircleIcon },
 ];
 
 interface OrderSummaryProps {
   cartItems: CartItem[];
   totalAmount: number;
+  deliveryZone?: "nairobi" | "outside" | "";
 }
 
 // Local helper function to extract the correct image URL from cart items
@@ -93,60 +95,83 @@ const truncateWords = (text: string | undefined, limit: number): string => {
 const OrderSummaryComponent: React.FC<OrderSummaryProps> = ({
   cartItems,
   totalAmount,
-}) => (
-  <div className="bg-slate-50 p-6 md:p-8 rounded-xl shadow-sm border border-gray-100">
-    <h2 className="text-2xl font-semibold text-gray-800 mb-6 border-b border-gray-200 pb-4">
-      Order Summary
-    </h2>
-    <div className="space-y-4 max-h-[50vh] overflow-y-auto pr-2">
-      {cartItems.length > 0 ? (
-        cartItems.map((item, index) => (
-          <div
-            key={item.id || index}
-            className="flex items-center space-x-4 py-3 border-b border-gray-100 last:border-b-0"
-          >
-            <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
-              <OptimizedImage
-                src={extractImageUrl(item)}
-                alt={item.name || "Product Image"}
-                width={64}
-                height={64}
-                className="object-cover w-full h-full"
-              />
+  deliveryZone,
+}) => {
+  const isNairobi = deliveryZone === "nairobi";
+  const shippingFee = isNairobi ? 400 : 0;
+
+  return (
+    <div className="bg-slate-50 p-6 md:p-8 rounded-xl shadow-sm border border-gray-100">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-6 border-b border-gray-200 pb-4">
+        Order Summary
+      </h2>
+      <div className="space-y-4 max-h-[50vh] overflow-y-auto pr-2">
+        {cartItems.length > 0 ? (
+          cartItems.map((item, index) => (
+            <div
+              key={item.id || index}
+              className="flex items-center space-x-4 py-3 border-b border-gray-100 last:border-b-0"
+            >
+              <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                <OptimizedImage
+                  src={extractImageUrl(item)}
+                  alt={item.name || "Product Image"}
+                  width={64}
+                  height={64}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+              <div className="flex-grow">
+                <h3 className="text-sm font-medium text-gray-800">
+                  {truncateWords(item.name, 5)}
+                </h3>
+                <p className="text-xs text-gray-500">Qty: {item.quantity}</p>
+              </div>
+              <p className="text-sm font-semibold text-primary whitespace-nowrap">
+                Ksh {(item.price * (item.quantity || 1)).toLocaleString()}
+              </p>
             </div>
-            <div className="flex-grow">
-              <h3 className="text-sm font-medium text-gray-800">
-                {truncateWords(item.name, 5)}
-              </h3>
-              <p className="text-xs text-gray-500">Qty: {item.quantity}</p>
-            </div>
-            <p className="text-sm font-semibold text-primary whitespace-nowrap">
-              Ksh {(item.price * (item.quantity || 1)).toLocaleString()}
-            </p>
+          ))
+        ) : (
+          <p className="text-sm text-gray-500 py-4">Your cart is empty.</p>
+        )}
+      </div>
+      {cartItems.length > 0 && (
+        <div className="mt-6 pt-6 border-t border-gray-200 space-y-2">
+          <div className="flex justify-between items-center text-sm text-gray-600">
+            <span>Subtotal</span>
+            <span>Ksh {totalAmount.toLocaleString()}</span>
           </div>
-        ))
-      ) : (
-        <p className="text-sm text-gray-500 py-4">Your cart is empty.</p>
+          {deliveryZone && (
+            <div className="flex justify-between items-center text-sm text-gray-600">
+              <span>
+                {isNairobi
+                  ? "Nairobi Delivery Fee"
+                  : "Countrywide Delivery Fee"}
+              </span>
+              <span>
+                {isNairobi ? `Ksh ${shippingFee}` : "TBC After Order"}
+              </span>
+            </div>
+          )}
+          <div className="flex justify-between items-center text-lg font-semibold text-gray-800 pt-2 border-t border-gray-100">
+            <span>Total Order Price</span>
+            <span>Ksh {(totalAmount + shippingFee).toLocaleString()}</span>
+          </div>
+          {!isNairobi && deliveryZone === "outside" && (
+            <p className="text-[10px] text-primary mt-1 font-medium italic">
+              * Delivery fees for countrywide shipping will be confirmed by
+              phone.
+            </p>
+          )}
+          <p className="text-[10px] text-gray-400 mt-2 italic text-center">
+            * Prices include all applicable taxes and fees.
+          </p>
+        </div>
       )}
     </div>
-    {cartItems.length > 0 && (
-      <div className="mt-6 pt-6 border-t border-gray-200 space-y-2">
-        <div className="flex justify-between items-center text-sm text-gray-600">
-          <span>Subtotal</span>
-          <span>Ksh {totalAmount.toLocaleString()}</span>
-        </div>
-        <div className="flex justify-between items-center text-sm text-gray-600">
-          <span>Shipping within Nairobi</span>
-          <span>Ksh 400</span>
-        </div>
-        <div className="flex justify-between items-center text-lg font-semibold text-gray-800 pt-2 border-t border-gray-100">
-          <span>Total</span>
-          <span>Ksh {(totalAmount + 400).toLocaleString()}</span>
-        </div>
-      </div>
-    )}
-  </div>
-);
+  );
+};
 
 
 const CheckoutPage: React.FC = () => {
@@ -163,6 +188,7 @@ const CheckoutPage: React.FC = () => {
     phone: "",
     confirmPhone: "",
     orderId: undefined,
+    paymentMethod: "",
   };
   const [orderDetails, setOrderDetails] =
     useState<OrderDetails>(initialOrderDetails);
@@ -299,17 +325,24 @@ const CheckoutPage: React.FC = () => {
     const step1Errors = validateStep1(orderDetails);
     const step2Errors = validateStep2(); // Assuming validateStep2 updates errors state internally or returns them
 
-    if (Object.keys(step1Errors).length > 0 || !step2Errors) {
+    if (Object.keys(step1Errors).length > 0 || !step2Errors || !orderDetails.paymentMethod) {
+      const finalErrors = {
+        ...step1Errors,
+        ...(!orderDetails.paymentMethod ? { paymentMethod: "Please select a payment method." } : {}),
+      };
+
       setErrors((prev) => ({
         ...prev,
-        ...step1Errors,
+        ...finalErrors,
         general: "Please correct the errors before submitting.",
       }));
-      // Force user to the first step with errors if step 1 is invalid
+      // Force user to the correct step
       if (Object.keys(step1Errors).length > 0) {
         setStep(1);
       } else if (!step2Errors) {
         setStep(2);
+      } else if (!orderDetails.paymentMethod) {
+        setStep(3);
       }
       return;
     }
@@ -337,9 +370,10 @@ const CheckoutPage: React.FC = () => {
         delivery_zone: orderDetails.deliveryZone || "",
         location: locationDetail,
         items: cart,
-        total_amount: total,
+        total_amount: total + (orderDetails.deliveryZone === "nairobi" ? 400 : 0), // Shipping only for Nairobi
         status: "pending",
         payment_status: "pending",
+        payment_method: orderDetails.paymentMethod,
       };
 
       // Assuming createOrder now returns { success: boolean, orderId?: string, error?: string }
@@ -650,13 +684,72 @@ const CheckoutPage: React.FC = () => {
                 {currentStepObj.title}
               </div>
             )}
-            <p className="text-gray-700 mb-4">
-              Please review your delivery and contact information. The order
-              summary on the right shows the items in your cart.
-            </p>
-            <p className="text-gray-600 text-sm mb-6">
-              Click "Place Order" to finalize your purchase. We will contact you
-              shortly after to confirm delivery details and fees.
+            <div className="mb-8">
+              <h3 className="text-lg font-medium text-gray-700 mb-4">
+                Select Your Payment Method
+              </h3>
+              <div className="grid grid-cols-1 gap-4">
+                <motion.div
+                  whileTap={{ scale: 0.98 }}
+                  className={`p-4 border rounded-lg cursor-pointer transition-colors duration-200 flex justify-between items-center ${orderDetails.paymentMethod === "mpesa"
+                    ? "border-primary ring-2 ring-primary bg-primary/10"
+                    : "border-gray-300 hover:border-gray-400"
+                    }`}
+                  onClick={() =>
+                    handleInputChange({
+                      target: { name: "paymentMethod", value: "mpesa" },
+                    } as any)
+                  }
+                >
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-[#39B54A] rounded-md flex items-center justify-center mr-4 text-white font-bold text-xs">
+                      M-PESA
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-800">M-Pesa / Mobile Money</p>
+                      <p className="text-xs text-gray-500 font-medium font-black">Pay via Lipa na M-Pesa at Delivery (within Nairobi)</p>
+                    </div>
+                  </div>
+                  {orderDetails.paymentMethod === "mpesa" && (
+                    <CheckIcon className="w-6 h-6 text-primary" />
+                  )}
+                </motion.div>
+
+                <motion.div
+                  whileTap={{ scale: 0.98 }}
+                  className={`p-4 border rounded-lg cursor-pointer transition-colors duration-200 flex justify-between items-center ${orderDetails.paymentMethod === "cash_on_delivery"
+                    ? "border-primary ring-2 ring-primary bg-primary/10"
+                    : "border-gray-300 hover:border-gray-400"
+                    }`}
+                  onClick={() =>
+                    handleInputChange({
+                      target: { name: "paymentMethod", value: "cash_on_delivery" },
+                    } as any)
+                  }
+                >
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-gray-200 rounded-md flex items-center justify-center mr-4 text-gray-600 font-bold text-lg">
+                      <TruckIcon className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-800">Cash on Delivery</p>
+                      <p className="text-xs text-gray-500 font-medium font-black">Pay with Cash when you receive your items (within Nairobi)</p>
+                    </div>
+                  </div>
+                  {orderDetails.paymentMethod === "cash_on_delivery" && (
+                    <CheckIcon className="w-6 h-6 text-primary" />
+                  )}
+                </motion.div>
+              </div>
+              {errors.paymentMethod && (
+                <p className="text-sm text-red-500 mt-2 font-medium">
+                  {errors.paymentMethod}
+                </p>
+              )}
+            </div>
+
+            <p className="text-gray-600 text-sm mb-6 bg-blue-50 p-3 rounded-lg border border-blue-100 italic">
+              Please review your details below. Once you click "Place Order", your request will be processed and we'll fulfill it within the delivery window.
             </p>
 
             {/* Combined Card for Contact & Delivery Details */}
@@ -778,7 +871,11 @@ const CheckoutPage: React.FC = () => {
         <div className="flex flex-col md:flex-row gap-8 lg:gap-12">
           {/* Order Summary - Appears first on mobile, second (sidebar) on md+ */}
           <div className="w-full md:w-1/3 md:order-last">
-            <OrderSummaryComponent cartItems={cart} totalAmount={total} />
+            <OrderSummaryComponent
+              cartItems={cart}
+              totalAmount={total}
+              deliveryZone={orderDetails.deliveryZone}
+            />
           </div>
 
           {/* Checkout Form / Steps - Appears second on mobile, first on md+ */}

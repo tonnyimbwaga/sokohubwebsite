@@ -135,13 +135,7 @@ export async function GET() {
         priority: 0.5,
       },
       {
-        url: `${siteUrl}/terms-and-conditions`,
-        lastModified: new Date(),
-        changeFrequency: "monthly",
-        priority: 0.5,
-      },
-      {
-        url: `${siteUrl}/privacy-policy`,
+        url: `${siteUrl}/privacy-and-terms`,
         lastModified: new Date(),
         changeFrequency: "monthly",
         priority: 0.5,

@@ -203,6 +203,12 @@ const SectionProductHeader = ({ product }: Props) => {
               <h1 className="text-3xl font-black text-slate-900 leading-tight">
                 {product.name}
               </h1>
+              <div className="flex items-center gap-2">
+                <span className={`h-2.5 w-2.5 rounded-full ${product.inStock ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
+                <span className={`text-sm font-bold ${product.inStock ? 'text-green-600' : 'text-red-600'}`}>
+                  {product.inStock ? 'In Stock' : 'Out of Stock'}
+                </span>
+              </div>
               <div
                 className={`text-slate-600 leading-relaxed text-base prose prose-slate max-w-none prose-p:my-2 ${!isDescriptionExpanded && "line-clamp-3"
                   }`}
@@ -301,6 +307,30 @@ const SectionProductHeader = ({ product }: Props) => {
                 <h1 className="text-3xl font-black text-slate-900 tracking-tight leading-tight">
                   {product.name}
                 </h1>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className={`h-2 w-2 rounded-full ${product.inStock ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
+                  <span className={`text-[10px] font-black uppercase tracking-widest ${product.inStock ? 'text-green-600' : 'text-red-600'}`}>
+                    {product.inStock ? 'In Stock' : 'Out of Stock'}
+                  </span>
+                </div>
+              </div>
+
+              {/* Desktop Description */}
+              <div className="space-y-4">
+                <div
+                  className={`text-slate-600 leading-relaxed text-sm prose prose-slate max-w-none prose-p:my-2 ${!isDescriptionExpanded && "line-clamp-3"
+                    }`}
+                  dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
+                />
+                <button
+                  onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
+                  className="text-primary font-bold text-xs tracking-wide uppercase flex items-center gap-2 hover:gap-3 transition-all"
+                >
+                  {isDescriptionExpanded ? "Show Less" : "Read More"}
+                  <svg xmlns="http://www.w3.org/2000/svg" className={`h-3 w-3 transition-transform ${isDescriptionExpanded ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
               </div>
 
               {/* Price Display */}
@@ -396,7 +426,7 @@ const SectionProductHeader = ({ product }: Props) => {
               </div>
 
               {/* Delivery Info Mockup */}
-              <div className="grid grid-cols-2 gap-4 mt-2">
+              <div className="grid grid-cols-1 gap-4 mt-2">
                 <div className="flex items-center gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
                   <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
@@ -406,18 +436,7 @@ const SectionProductHeader = ({ product }: Props) => {
                   </div>
                   <div className="flex flex-col">
                     <span className="text-[10px] uppercase font-black text-slate-400 leading-tight">Delivery</span>
-                    <span className="text-xs font-bold text-slate-800">2-3 Hours</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
-                  <div className="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 4.946-3.076 9.165-7.418 10.824a1.051 1.051 0 01-.764 0C5.4 16.165 2.324 11.946 2.324 7c0-.68.056-1.35.166-2.001zm8.834 2.002a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 102 0v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-[10px] uppercase font-black text-slate-400 leading-tight">Payment</span>
-                    <span className="text-xs font-bold text-slate-800">Secured</span>
+                    <span className="text-xs font-bold text-slate-800">2 - 3 Hours in Nairobi</span>
                   </div>
                 </div>
               </div>

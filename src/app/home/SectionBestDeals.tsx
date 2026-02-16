@@ -4,7 +4,7 @@ import SectionHeading from "@/components/SectionHeading";
 import { getCachedDeals } from "@/lib/supabase/cached-queries";
 
 const SECTION_CONTENT = {
-  title: "Hottest Deals",
+  title: "Best Deals",
   description: "Save big on these amazing items",
 } as const;
 

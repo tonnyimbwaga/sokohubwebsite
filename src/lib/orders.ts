@@ -36,6 +36,7 @@ export async function createOrder(orderData: {
   original_amount?: number;
   discounted_amount?: number;
   payment_status?: string;
+  payment_method?: string;
   order_confirmed?: boolean;
 }): Promise<{ success: boolean; orderId?: string; error?: string }> {
 

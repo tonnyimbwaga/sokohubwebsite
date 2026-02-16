@@ -1,188 +1,132 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaHeart, FaStar, FaHandshake } from "react-icons/fa";
+import { FaHeart, FaStar, FaHandshake, FaBullseye, FaLightbulb } from "react-icons/fa";
 import { siteConfig } from "@/config/site";
 
 export default function AboutClient() {
     return (
-        <div className="container mx-auto px-4 py-8 md:py-12">
+        <div className="main-layout bg-white py-12 md:py-24">
             {/* Hero Section */}
-            <div className="mb-16 text-center">
-                <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mb-6 text-4xl font-bold md:text-5xl"
-                >
-                    About {siteConfig.name}
-                </motion.h1>
-                <p className="mx-auto max-w-2xl text-lg text-gray-600">
-                    {siteConfig.description}
-                </p>
+            <div className="container px-4 max-w-6xl mb-24">
+                <div className="text-center">
+                    <motion.span
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-xs font-black tracking-[0.3em] text-primary uppercase bg-primary/5 px-4 py-2 rounded-full mb-8 inline-block"
+                    >
+                        Our Journey
+                    </motion.span>
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="mb-8 text-5xl md:text-7xl font-black text-slate-900 tracking-tight"
+                    >
+                        About {siteConfig.name}
+                    </motion.h1>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                        className="mx-auto max-w-3xl text-xl text-slate-600 leading-relaxed"
+                    >
+                        More than just a store. We are a team dedicated to redefining the shopping landscape in {siteConfig.localization.country} through quality, trust, and excellence.
+                    </motion.p>
+                </div>
             </div>
 
-            {/* Our Story Section */}
-            <section className="mb-16">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="max-w-3xl mx-auto"
-                >
-                    <h2 className="mb-6 text-3xl font-bold text-center">About Us</h2>
-                    <div className="space-y-4 text-gray-600">
-                        <p>
-                            Founded by Tonny Blair Imbwaga, {siteConfig.name} was founded with a simple yet powerful vision: to provide quality products that bring
-                            value and satisfaction to our customers while being accessible to families
-                            across {siteConfig.localization.country}.
-                        </p>
-                        <p>
-                            Our journey started with a dedication to reliability. What began as a
-                            carefully curated collection has grown into a comprehensive range of products
-                            that cater to our customers' diverse needs.
-                        </p>
-                        <p>
-                            Today, {siteConfig.name} is a trusted destination for quality. Our
-                            selection process ensures that each item meets
-                            appropriate standards and contributes to your lifestyle journey.
-                        </p>
+            {/* Founders & Story */}
+            <div className="container px-4 max-w-6xl mb-32">
+                <div className="grid lg:grid-cols-2 gap-16 items-center">
+                    <div className="relative">
+                        <div className="bg-slate-900 rounded-[3rem] p-12 text-white relative z-10">
+                            <h2 className="text-3xl font-black mb-8 tracking-tight">Our Story</h2>
+                            <div className="space-y-6 text-slate-400 leading-relaxed font-medium">
+                                <p>
+                                    Founded by <span className="text-white font-bold">Tonny Blair Imbwaga</span>, {siteConfig.name} was born from a simple realization: high-quality lifestyle products shouldn't be a luxury of the few.
+                                </p>
+                                <p>
+                                    What started as a small, curated collection in Nairobi has evolved into {siteConfig.localization.country}'s premier digital destination for quality goods. We've spent years building a supply chain that prioritizes reliability over shortcuts.
+                                </p>
+                                <p>
+                                    Today, we serve thousands of satisfied customers, bringing value and smiles to homes across the nation with a commitment that never wavers.
+                                </p>
+                            </div>
+                        </div>
+                        {/* Decorative background element */}
+                        <div className="absolute -bottom-6 -right-6 w-full h-full bg-primary rounded-[3rem] -z-10"></div>
                     </div>
-                </motion.div>
-            </section>
-
-            {/* Values Section */}
-            <section className="mb-16">
-                <h2 className="mb-8 text-center text-3xl font-bold">Our Values</h2>
-                <div className="grid gap-8 md:grid-cols-3">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                        className="rounded-lg bg-white p-6 text-center shadow-md"
-                    >
-                        <FaHeart className="mx-auto mb-4 text-4xl text-primary" />
-                        <h3 className="mb-3 text-xl font-semibold">Quality & Care</h3>
-                        <p className="text-gray-600">
-                            We prioritize quality by selecting products
-                            that provide value to our customers.
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="rounded-lg bg-white p-6 text-center shadow-md"
-                    >
-                        <FaStar className="mx-auto mb-4 text-4xl text-primary" />
-                        <h3 className="mb-3 text-xl font-semibold">Customer Value</h3>
-                        <p className="text-gray-600">
-                            Every item in our collection is chosen for its potential to
-                            provide satisfaction to our customers.
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
-                        className="rounded-lg bg-white p-6 text-center shadow-md"
-                    >
-                        <FaHandshake className="mx-auto mb-4 text-4xl text-primary" />
-                        <h3 className="mb-3 text-xl font-semibold">Reliability</h3>
-                        <p className="text-gray-600">
-                            We're committed to being a reliable partner for customers
-                            across {siteConfig.localization.country}.
-                        </p>
-                    </motion.div>
+                    <div>
+                        <div className="space-y-12">
+                            <div className="flex gap-6">
+                                <div className="h-12 w-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-xl flex-shrink-0">
+                                    <FaLightbulb />
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold text-slate-900 mb-2">Our Vision</h3>
+                                    <p className="text-slate-600 leading-relaxed">To be the most trusted and customer-centric lifestyle brand in {siteConfig.localization.country}, setting gold standards in delivery and quality.</p>
+                                </div>
+                            </div>
+                            <div className="flex gap-6">
+                                <div className="h-12 w-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-xl flex-shrink-0">
+                                    <FaBullseye />
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold text-slate-900 mb-2">Our Mission</h3>
+                                    <p className="text-slate-600 leading-relaxed">To deliver premium products with unmatched speed while ensuring accessibility and transparency in every transaction.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </section>
+            </div>
 
-            {/* Mission & Vision */}
-            <section className="mb-16 grid gap-8 md:grid-cols-2">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                    className="rounded-lg bg-primary/5 p-8"
-                >
-                    <h2 className="mb-4 text-2xl font-bold">Our Mission</h2>
-                    <p className="text-gray-600">
-                        To provide quality products that bring joy
-                        to daily life while ensuring accessibility and affordability for
-                        customers across {siteConfig.localization.country}.
-                    </p>
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="rounded-lg bg-primary/5 p-8"
-                >
-                    <h2 className="mb-4 text-2xl font-bold">Our Vision</h2>
-                    <p className="text-gray-600">
-                        To be a trusted provider of quality products in {siteConfig.localization.country},
-                        recognized for our commitment to reliability and the
-                        evolving needs of our customers.
-                    </p>
-                </motion.div>
-            </section>
-
-
-            {/* Our Passion Section */}
-            <section className="mb-16">
-                <h2 className="mb-8 text-center text-3xl font-bold">Our Passion</h2>
-                <div className="max-w-4xl mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                        className="bg-white p-8 rounded-xl shadow-md"
-                    >
-                        <p className="text-lg text-gray-600 mb-6">
-                            At {siteConfig.name}, we believe that quality is essential for every
-                            customer's satisfaction. Our passion drives us to carefully select
-                            products that not only bring joy but also contribute to an improved lifestyle.
-                        </p>
-                        <p className="text-lg text-gray-600 mb-6">
-                            We understand the importance of quality, safety, and value in every
-                            product we offer. Our commitment to providing quality products for our
-                            customers in {siteConfig.localization.country} is what motivates us every day.
-                        </p>
-                        <p className="text-lg text-gray-600">
-                            Through our carefully curated selection, we aim to support our customers
-                            in creating meaningful experiences that enhance their lives every day.
-                        </p>
-                    </motion.div>
+            {/* Core Values */}
+            <div className="bg-slate-50 py-24 mb-24">
+                <div className="container px-4 max-w-6xl">
+                    <h2 className="text-center text-4xl font-black text-slate-900 mb-16 tracking-tight">Core Values</h2>
+                    <div className="grid gap-8 md:grid-cols-3">
+                        {[
+                            { icon: <FaHeart />, title: "Quality & Care", desc: "We handpick every item, ensuring it reflects the high standards our customers deserve." },
+                            { icon: <FaStar />, title: "Customer Value", desc: "Fair pricing and genuine value are at the heart of every decision we make." },
+                            { icon: <FaHandshake />, title: "Integrity", desc: "Honesty in operations and transparency in delivery are our non-negotiables." }
+                        ].map((value, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100 text-center hover:shadow-xl transition-shadow"
+                            >
+                                <div className="text-4xl text-primary mb-6 flex justify-center">{value.icon}</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-4">{value.title}</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">{value.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
-            </section>
+            </div>
 
-            {/* Community Intent */}
-            <section className="rounded-lg bg-gray-50 p-8">
-                <h2 className="mb-6 text-center text-3xl font-bold">Our Commitment</h2>
-                <div>
-                    <p className="mb-4 text-gray-600">
-                        At {siteConfig.name}, we are passionate about bringing quality and
-                        value to our customers. We believe in the power of
-                        excellence to inspire and improve daily life.
-                    </p>
-                    <ul className="list-inside list-disc space-y-3 text-gray-600">
-                        <li>
-                            Provide access to high-quality products for families
-                            across {siteConfig.localization.country}
-                        </li>
-                        <li>
-                            Support sustainable and ethical practices in everything we do
-                        </li>
-                        <li>Make premium resources more accessible to everyone</li>
-                        <li>Promote the value of quality in everyday living</li>
-                        <li>
-                            Ensure every customer has access to safe, reliable, and high-quality items
-                        </li>
-                    </ul>
+            {/* Final Commitment */}
+            <div className="container px-4 max-w-4xl text-center">
+                <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-8 tracking-tight">Our Commitment to You</h2>
+                <div className="grid md:grid-cols-2 gap-4 text-left">
+                    {[
+                        "Premium Quality Assurance",
+                        "24-Hour Return Window",
+                        "Fastest Delivery in Nairobi",
+                        "Secure M-Pesa Integration",
+                        "Verified Business Location",
+                        "Dedicated Customer Support"
+                    ].map((item, i) => (
+                        <div key={i} className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+                            <div className="h-2 w-2 rounded-full bg-primary"></div>
+                            <span className="font-bold text-slate-700 text-sm">{item}</span>
+                        </div>
+                    ))}
                 </div>
-            </section>
+            </div>
         </div>
     );
 }

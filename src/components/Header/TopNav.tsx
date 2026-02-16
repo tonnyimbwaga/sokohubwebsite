@@ -16,7 +16,7 @@ const TopNav = () => {
           </span>
           <span className="h-4 w-px bg-slate-700 hidden sm:block" />
           <span className="hidden sm:flex items-center gap-1.5 text-slate-300">
-            ⚡ Delivery within Nairobi CBD & beyond
+            ⚡ We deliver countrywide
           </span>
         </div>
 

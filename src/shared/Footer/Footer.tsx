@@ -6,27 +6,28 @@ import React from "react";
 
 import { siteConfig } from "@/config/site";
 
+import { FaInstagram, FaTiktok } from "react-icons/fa";
+
 // Define footer data locally or import from content
 const footerData = {
   description: siteConfig.description,
   footerLinks: [
     {
-      title: "Customer Service",
+      title: "Help & Policies",
       links: [
-        { name: "Contact Us", href: "/contact" },
-        { name: "Shipping", href: "/shipping" },
-        { name: "Returns", href: "/returns" },
+        { name: "Refund & Return Policy", href: "/returns" },
+        { name: "Shipping Policy", href: "/shipping" },
+        { name: "Privacy Policy & Terms of Service", href: "/privacy-and-terms" },
+        { name: "Payment Policy", href: "/payment-policy" },
       ],
     },
     {
-      title: "About Us",
+      title: "Company",
       links: [
-        { name: "Our Story", href: "/about" },
-        { name: "Blog", href: "/blog" },
-        { name: "Privacy Policy", href: "/privacy-policy" },
+        { name: "About Us", href: "/about" },
+        { name: "Contact Us", href: "/contact" },
       ],
     },
-
   ],
 };
 import Subscribe from "./Subscribe";
@@ -65,6 +66,26 @@ const Footer: React.FC = () => {
             <p className="mb-6 text-sm text-gray-600">
               {footerData.description}
             </p>
+            <div className="flex space-x-5 mb-6">
+              <a
+                href={siteConfig.links.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-primary transition-colors"
+                aria-label="Follow us on Instagram"
+              >
+                <FaInstagram size={20} />
+              </a>
+              <a
+                href={siteConfig.links.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-primary transition-colors"
+                aria-label="Follow us on TikTok"
+              >
+                <FaTiktok size={20} />
+              </a>
+            </div>
             <Subscribe />
           </div>
 
@@ -94,19 +115,29 @@ const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="mt-12 flex flex-col items-center justify-between border-t border-gray-300 pt-8 md:flex-row">
-          <div className="mb-4 text-sm text-gray-600 md:mb-0">
-            &copy; {currentYear} {siteConfig.name}. All rights reserved.
-          </div>
-          {/* Sitemap Link */}
-          <div className="mb-4 text-sm text-gray-600 md:mb-0">
+          <div className="flex flex-col items-center gap-4 md:flex-row md:gap-8">
+            <div className="text-sm text-gray-600">
+              &copy; {currentYear} {siteConfig.name}. All rights reserved.
+            </div>
             <Link
               href="/sitemap.xml"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:underline"
+              className="text-sm text-gray-600 hover:underline"
             >
               Sitemap
             </Link>
+          </div>
+          {/* Payment Methods */}
+          <div className="flex items-center gap-4 text-sm text-gray-600">
+            <span>Accepted Payments:</span>
+            <div className="flex gap-2">
+              {(siteConfig as any).payment?.acceptedMethods.map((method: string) => (
+                <span key={method} className="rounded border border-gray-300 px-2 py-0.5 bg-white text-[10px] font-medium uppercase tracking-wider">
+                  {method}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -317,15 +317,15 @@ export const footerData = {
       title: "Customer Service",
       links: [
         { href: "/shipping", name: "Shipping Information" },
-        { href: "/returns", name: "Returns & Exchanges" },
-        { href: "/warranty", name: "Warranty" },
+        { href: "/returns", name: "Refund & Return Policy" },
+        { href: "/payment-policy", name: "Payment Policy" },
         { href: "/faqs", name: "FAQs" },
       ],
     },
     {
       title: "About Us",
       links: [
-        { href: "/about", name: "Our Story" },
+        { href: "/about", name: "About Us" },
         { href: "/product-safety", name: "Product Safety" },
         { href: "/blog", name: "Blog" },
         { href: "/contact", name: "Contact Us" },
@@ -335,9 +335,7 @@ export const footerData = {
     {
       title: "Legal",
       links: [
-        { href: "/privacy-policy", name: "Privacy Policy" },
-        { href: "/terms-and-conditions", name: "Terms & Conditions" },
-        { href: "/cookie-policy", name: "Cookie Policy" },
+        { href: "/privacy-and-terms", name: "Privacy Policy & Terms of Service" },
       ],
     },
   ],
@@ -455,7 +453,7 @@ export const faqsData = {
         {
           question: "Can I return or exchange my products?",
           answer:
-            "Returns and exchanges are strictly accepted only for items that are defective, malfunctioning, or if the wrong item was delivered. Please report any issues within 24 hours of delivery.",
+            "Refunds and exchanges are strictly accepted only for items that are defective, malfunctioning, or if the wrong item was delivered. Please report any issues within 24 hours of delivery.",
         },
         {
           question: "Are the colors of the products accurate in the photos?",
@@ -510,7 +508,7 @@ export const faqsData = {
         {
           question: "What is your return policy for defective products?",
           answer:
-            "If you receive a defective product, please contact our customer support within 7 days of receiving the order. We will arrange a replacement or refund.",
+            "If you receive a defective product, please contact our customer support within 24 hours of receiving the order. We will arrange a replacement or refund.",
         },
         {
           question: "Are there any restocking fees for returns?",
@@ -520,7 +518,7 @@ export const faqsData = {
         {
           question: "How long does it take to process a refund?",
           answer:
-            "Refunds are typically processed within 5-7 business days after we receive the returned items and verify their condition.",
+            "Refunds are typically processed within 3-5 business days after we receive the returned items and verify their condition.",
         },
         {
           question: "Can I return products if I've used them?",

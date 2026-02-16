@@ -1,7 +1,7 @@
 export const siteConfig = {
     name: "Sokohub Kenya",
     shortName: "Sokohub",
-    description: "Quality products and fast delivery serving Nairobi CBD and beyond.",
+    description: "Quality products and fast delivery countrywide.",
     url: "https://sokohubkenya.com",
     ogImage: "https://sokohubkenya.com/og.jpg",
     links: {
@@ -11,9 +11,15 @@ export const siteConfig = {
     contact: {
         phone: "+254 707 874 828",
         whatsapp: "+254707874828",
-        email: "info@sokohubkenya.com", // sales@sokohubkenya.com, tonny@sokohubkenya.com
-        address: "CBD, Haile Selassie Avenue, Nairobi 00100, Kenya",
+        email: "info@sokohubkenya.com",
+        alternativeEmail: "sales@sokohubkenya.com",
+        address: "Agip House, Haile Selassie Ave, Nairobi",
         businessHours: "Mon-Sat, 8 AM - 8 PM EAT",
+        googleMapsLink: "https://maps.app.goo.gl/qYm8N4nJ1X3z1Y6p7", // Example link, updated if you provide one
+    },
+    payment: {
+        acceptedMethods: ["M-Pesa", "Visa", "Mastercard", "Cash on Delivery"],
+        paybillNumber: "Please contact us for Paybill instructions",
     },
     localization: {
         currency: "Ksh.",
