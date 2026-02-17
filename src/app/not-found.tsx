@@ -5,7 +5,7 @@ import { constructMetadata } from "@/utils/seo";
 
 export const metadata = constructMetadata({
   title: "404 - Page Not Found",
-  description: "We couldn't find the page you're looking for, but we have some amazing alternatives for you!",
+  description: "We couldn't find the page you're looking for, but we have some high-quality alternatives for you!",
 });
 
 export default async function NotFound() {
@@ -46,7 +46,7 @@ export default async function NotFound() {
           </h1>
           <p className="mb-8 text-xl text-gray-600">
             It seems the page you're looking for is missing! But
-            don't worry, we have plenty of other amazing products waiting to be
+            don't worry, we have plenty of other quality products waiting to be
             discovered.
           </p>
           <Link

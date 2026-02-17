@@ -9,7 +9,7 @@ import type { Product } from "@/data/types";
 
 const SECTION_CONTENT = {
   title: "All Deals",
-  description: "Browse all our amazing deals and save big on these items",
+  description: "Browse our active offers and enjoy significant value on top-rated products.",
 } as const;
 
 interface DatabaseProduct {

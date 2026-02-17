@@ -32,7 +32,7 @@ const SectionCategory = ({
         description={
           (() => {
             if (!description) {
-              return `Discover amazing ${categoryName.toLowerCase()}`;
+              return `Explore our curated selection of ${categoryName.toLowerCase()}`;
             }
             // Match the first sentence including punctuation and trailing space
             const match = description.match(/^.*?[.!?](?:\s|$)/);
@@ -43,13 +43,12 @@ const SectionCategory = ({
       <div className="mt-8">
         {products.length === 0 && (
           <div className="text-center text-gray-500 py-8">
-            <div className="mb-2">🚀 Coming Soon!</div>
+            <div className="mb-2">🚀 New Inventory Pending</div>
             <div>
-              We're adding amazing {categoryName.toLowerCase()} to our
-              collection.
+              Our logistics team is currently updating our {categoryName.toLowerCase()} collection.
             </div>
             <div className="text-sm mt-2">
-              Check back soon for exciting new products!
+              Please check back shortly for our newest arrivals.
             </div>
           </div>
         )}

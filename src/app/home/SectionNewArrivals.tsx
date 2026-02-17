@@ -5,7 +5,7 @@ import { getCachedNewArrivals } from "@/lib/supabase/cached-queries";
 
 const SECTION_CONTENT = {
   title: "New Arrivals",
-  description: "Check out our latest arrivals",
+  description: "Explore our newest additions and latest collection releases.",
 } as const;
 
 export default async function SectionNewArrivals() {

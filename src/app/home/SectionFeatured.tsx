@@ -12,7 +12,7 @@ import { getStaticFeaturedProducts } from "@/lib/static-data-layer";
 
 const SECTION_CONTENT = {
   title: "Featured Products",
-  description: "Handpicked selections just for you",
+  description: "Discover our professionally curated selection of premium items.",
 } as const;
 
 interface DatabaseProduct {

@@ -5,7 +5,7 @@ import { getCachedDeals } from "@/lib/supabase/cached-queries";
 
 const SECTION_CONTENT = {
   title: "Best Deals",
-  description: "Save big on these amazing items",
+  description: "Explore our top-rated offers and curated seasonal discounts.",
 } as const;
 
 export default async function SectionBestDeals() {

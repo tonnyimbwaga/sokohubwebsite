@@ -12,7 +12,7 @@ import { getProductImageUrl } from "@/utils/product-images";
 
 const SECTION_CONTENT = {
   title: "Top Selling Products",
-  description: "Discover the most popular items this season",
+  description: "Shop our most sought-after products based on current customer trends.",
 } as const;
 
 interface DatabaseProduct {
